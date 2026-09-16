@@ -1,0 +1,443 @@
+{
+  "version": "0.7",
+  "mesh_checks": {
+    "solids": 30,
+    "all_closed_connected_positive_volume": true
+  },
+  "interference_mm3": {
+    "shell_top / shell_bottom": 0.0,
+    "shell_top / usb_shell": 0.0,
+    "shell_top / usb_tongue": 0.0,
+    "shell_top / rgb_led": 0.0,
+    "shell_top / light_pipe": 0.0,
+    "shell_top / key_ring": 0.0,
+    "shell_top / key_center": 0.0,
+    "shell_top / key_circle1": 0.0,
+    "shell_top / key_circle2": 0.0,
+    "shell_top / key_circle3": 0.0,
+    "shell_top / switch_key_ring_1": 0.0,
+    "shell_top / actuator_key_ring_1": 0.0,
+    "shell_top / switch_key_ring_2": 0.0,
+    "shell_top / actuator_key_ring_2": 0.0,
+    "shell_top / switch_key_ring_3": 0.0,
+    "shell_top / actuator_key_ring_3": 0.0,
+    "shell_top / switch_key_ring_4": 0.0,
+    "shell_top / actuator_key_ring_4": 0.0,
+    "shell_top / switch_key_center_1": 0.0,
+    "shell_top / actuator_key_center_1": 0.0,
+    "shell_top / switch_key_circle1_1": 0.0,
+    "shell_top / actuator_key_circle1_1": 0.0,
+    "shell_top / switch_key_circle2_1": 0.0,
+    "shell_top / actuator_key_circle2_1": 0.0,
+    "shell_top / switch_key_circle3_1": 0.0,
+    "shell_top / actuator_key_circle3_1": 0.0,
+    "shell_bottom / pcb": 0.0,
+    "shell_bottom / usb_shell": 0.0,
+    "shell_bottom / usb_tongue": 0.0,
+    "shell_bottom / rgb_led": 0.0,
+    "shell_bottom / light_pipe": 0.0,
+    "shell_bottom / switch_key_ring_1": 0.0,
+    "shell_bottom / actuator_key_ring_1": 0.0,
+    "shell_bottom / switch_key_ring_2": 0.0,
+    "shell_bottom / actuator_key_ring_2": 0.0,
+    "shell_bottom / switch_key_ring_3": 0.0,
+    "shell_bottom / actuator_key_ring_3": 0.0,
+    "shell_bottom / switch_key_ring_4": 0.0,
+    "shell_bottom / actuator_key_ring_4": 0.0,
+    "shell_bottom / switch_key_center_1": 0.0,
+    "shell_bottom / actuator_key_center_1": 0.0,
+    "shell_bottom / switch_key_circle1_1": 0.0,
+    "shell_bottom / actuator_key_circle1_1": 0.0,
+    "shell_bottom / switch_key_circle2_1": 0.0,
+    "shell_bottom / actuator_key_circle2_1": 0.0,
+    "shell_bottom / switch_key_circle3_1": 0.0,
+    "shell_bottom / actuator_key_circle3_1": 0.0,
+    "shell_bottom / nrf52832": 0.0,
+    "shell_bottom / battery": 0.0,
+    "pcb / switch_key_center_1": 0.0,
+    "usb_shell / usb_tongue": 0.0,
+    "key_ring / key_center": 0.0,
+    "key_ring / actuator_key_center_1": 0.0
+  },
+  "interference_failures": [],
+  "pressed_key_shell_overlap_mm3": {
+    "key_ring@0.40": 0.0,
+    "key_center@0.45": 0.0,
+    "key_center@0.70": 0.0,
+    "key_circle1@0.40": 0.0,
+    "key_circle2@0.40": 0.0,
+    "key_circle3@0.40": 0.0
+  },
+  "center_travel_overlap_mm3": {
+    "0.00": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.05": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.10": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.15": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.20": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.25": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.30": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.35": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.40": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.45": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.50": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.55": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.60": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.65": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    },
+    "0.70": {
+      "shell_top": 0.0,
+      "key_ring": 0.0,
+      "pcb": 0.0,
+      "switch_key_center_1": 0.0,
+      "actuator / housing": 0.0,
+      "key / actuator": 0.0
+    }
+  },
+  "front_section_boundary_loops": 6,
+  "pcb_bounds": [
+    [
+      -18.3787,
+      -37.0,
+      -9.05
+    ],
+    [
+      18.3787,
+      35.87870000000001,
+      -7.450000000000001
+    ]
+  ],
+  "shell_bounds": [
+    [
+      -21.5,
+      -39.0,
+      -17.35
+    ],
+    [
+      21.5,
+      39.0,
+      0
+    ]
+  ],
+  "keycap_count": 5,
+  "switch_count": 8,
+  "mapping": [
+    {
+      "key": "key_ring",
+      "source": "Directional",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        0,
+        18.689999999999998
+      ],
+      "stem_center": [
+        0,
+        18.689999999999998
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_ring",
+      "source": "Directional",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        -9.69,
+        9.000000000000002
+      ],
+      "stem_center": [
+        -9.69,
+        9.000000000000002
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_ring",
+      "source": "Directional",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        9.69,
+        9.000000000000002
+      ],
+      "stem_center": [
+        9.69,
+        9.000000000000002
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_ring",
+      "source": "Directional",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        0,
+        -0.6899999999999995
+      ],
+      "stem_center": [
+        0,
+        -0.6899999999999995
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_center",
+      "source": "Select",
+      "model": "K2-1831SL-A4SW-01",
+      "switch_center": [
+        0,
+        9.000000000000002
+      ],
+      "stem_center": [
+        0,
+        9.000000000000002
+      ],
+      "stem_bottom_z": -3.5,
+      "gap": 0.15
+    },
+    {
+      "key": "key_circle1",
+      "source": "Back",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        -11.43,
+        -14.0
+      ],
+      "stem_center": [
+        -11.43,
+        -14.0
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_circle2",
+      "source": "Home",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        0,
+        -14.0
+      ],
+      "stem_center": [
+        0,
+        -14.0
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    },
+    {
+      "key": "key_circle3",
+      "source": "Play",
+      "model": "TS-1101-C-W",
+      "switch_center": [
+        11.43,
+        -14.0
+      ],
+      "stem_center": [
+        11.43,
+        -14.0
+      ],
+      "stem_bottom_z": -4.8,
+      "gap": 0.15
+    }
+  ],
+  "usb": {
+    "center_z": -5.870000000000001,
+    "front_y": -39.2,
+    "board_edge_y": -37,
+    "protrusion_mm": 0.2
+  },
+  "battery": {
+    "model": "EEMB LP402535",
+    "capacity_mah": 320,
+    "size": [
+      25.5,
+      36,
+      4.3
+    ],
+    "center_xy": [
+      0,
+      0
+    ],
+    "z_bottom": -15.4,
+    "source": "https://eemb.store/products/lp402535",
+    "allocation": [
+      27,
+      40,
+      5.2
+    ]
+  },
+  "reference_features": {
+    "rear_taper_width_samples": {
+      "-11.35": {
+        "reference_width": 43.0,
+        "new_width": 43.0
+      },
+      "-13": {
+        "reference_width": 40.8,
+        "new_width": 40.800000508626304
+      },
+      "-15": {
+        "reference_width": 38.13333333333333,
+        "new_width": 38.13333384195963
+      },
+      "-17.34": {
+        "reference_width": 35.013333333333335,
+        "new_width": 35.013333841959636
+      }
+    },
+    "rear_face_width": 35.0,
+    "corner_notch_type": "concave_quarter_circle",
+    "corner_fit": [
+      {
+        "center": [
+          -18.3787,
+          35.8787
+        ],
+        "notch_radius": 5.0,
+        "boss_radius": 4.75,
+        "minimum_polygon_clearance": 0.24996653447738904,
+        "ledge_gap": 0.15,
+        "overlap_pcb": 0.0,
+        "overlap_top": 0.0
+      },
+      {
+        "center": [
+          18.3787,
+          35.8787
+        ],
+        "notch_radius": 5.0,
+        "boss_radius": 4.75,
+        "minimum_polygon_clearance": 0.24996653447738612,
+        "ledge_gap": 0.15,
+        "overlap_pcb": 0.0,
+        "overlap_top": 0.0
+      }
+    ],
+    "width_at_former_notches": 36.7574,
+    "mounts": [
+      [
+        0,
+        28
+      ],
+      [
+        -14,
+        -27
+      ],
+      [
+        14,
+        -27
+      ]
+    ],
+    "pcb_holes": 5
+  },
+  "led": {
+    "center": [
+      -11.43,
+      29
+    ],
+    "shift_from_previous": [
+      0,
+      -5
+    ],
+    "ring_center_distance": 23.035730941300734
+  }
+}

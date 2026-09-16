@@ -1,0 +1,18 @@
+.venv/
+node_modules/
+.DS_Store
+__pycache__/
+*.py[cod]
+_site/
+
+# Original purchase exports include shipping addresses and phone numbers.
+reference/jlc-orders/*.xls
+reference/jlc-orders/*.xlsx
+
+# Superseded local experiments and screenshots.
+output/review/archive/
+
+# Local credentials and environment overrides.
+.env
+.env.*
+!.env.example

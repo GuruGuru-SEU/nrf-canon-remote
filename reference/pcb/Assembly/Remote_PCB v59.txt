@@ -1,0 +1,6 @@
+Partlist exported from Fusion Hub: Cubed   Project: ESP32 Universal Remote  Board: Remote_PCB v59 at 2/05/2025 4:13 PM
+
+Qty Value                           Device                          Package                  Parts                                                                                                                                         Description                          PROD_ID     SF_SKU   
+2   10k                             RESISTOR_AXIAL-10.16MM-PITCH    RESAD1016W63L850D250B    R1, R2                                                                                                                                        Resistor Fixed - Generic                                  
+1   LOLIN32LITE_V2                  LOLIN32LITE_V2                  LOLIN32LITE_V2           U$1                                                                                                                                                                                                     
+21  MOMENTARY-SWITCH-SPST-PTH-6.0MM MOMENTARY-SWITCH-SPST-PTH-6.0MM TACTILE_SWITCH_PTH_6.0MM SW_0, SW_2, SW_4, SW_5, SW_12, SW_13, SW_14, SW_15, SW_16, SW_17, SW_18, SW_19, SW_22, SW_23, SW_25, SW_26, SW_27, SW_32, SW_33, SW_34, SW_35 Momentary Switch (Pushbutton) - SPST  SWCH-08441 COM-00097

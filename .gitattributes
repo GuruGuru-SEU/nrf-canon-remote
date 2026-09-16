@@ -1,0 +1,6 @@
+output/preview.html linguist-generated=true -whitespace
+output/model-data.json linguist-generated=true
+output/models/** linguist-generated=true
+output/review/** linguist-generated=true
+# Preserve original reference exports, including their existing formatting.
+reference/** -whitespace

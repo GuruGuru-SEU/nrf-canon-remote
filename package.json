@@ -1,0 +1,18 @@
+{
+  "name": "nrf-canon-remote",
+  "version": "1.0.0",
+  "description": "Reference-derived enclosure and PCB mechanical preview",
+  "scripts": {
+    "build": "node scripts/build_preview.mjs",
+    "check:preview": "node scripts/check_preview.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "^1.63.0",
+    "three": "^0.186.0"
+  },
+  "private": true
+}

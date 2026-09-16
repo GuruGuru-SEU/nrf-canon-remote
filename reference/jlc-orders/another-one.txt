@@ -1,0 +1,3 @@
+0603 47uF mlcc * 100
+LMA2718B381-OA5-2 microphone
+K2-1831SL-A4SW-01

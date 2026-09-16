@@ -1,0 +1,261 @@
+{
+  "version": "0.7",
+  "shell": {
+    "width": 43,
+    "length": 78,
+    "depth": 17.35,
+    "corner_radius": 5,
+    "face_thickness": 1.2,
+    "wall_thickness": 1.7,
+    "seam_gap": 0.2,
+    "rear_taper": {
+      "start_z": -11.35,
+      "inset": 4.0,
+      "inner_start_z": -11.7367,
+      "inner_floor_inset": 4.6422,
+      "source": "reference/enclosure/shell_bottom.3mf, section Y=0"
+    },
+    "corner_locators": {
+      "radial_clearance": 0.25,
+      "height_above_pcb": 0.4,
+      "entry_chamfer": 0.4,
+      "ledge_overlap": 0.6,
+      "ledge_gap": 0.15
+    }
+  },
+  "pcb": {
+    "width": 36.7574,
+    "body_bottom": -32,
+    "top": 35.8787,
+    "tongue_end": -37,
+    "tongue_width": 14,
+    "thickness": 1.6,
+    "z_bottom": -9.05,
+    "corner_notches": {
+      "radius": 5.0,
+      "corners": [
+        "top_left",
+        "top_right"
+      ]
+    }
+  },
+  "mounts": [
+    [
+      0,
+      28
+    ],
+    [
+      -14,
+      -27
+    ],
+    [
+      14,
+      -27
+    ]
+  ],
+  "led": [
+    -11.43,
+    29
+  ],
+  "ring_center": [
+    0,
+    9
+  ],
+  "keys": [
+    {
+      "id": "key_ring",
+      "source": "Directional",
+      "label": "四向圆环",
+      "translation": [
+        0,
+        -9.92
+      ],
+      "switches": [
+        [
+          0,
+          28.61,
+          90
+        ],
+        [
+          -9.69,
+          18.92,
+          0
+        ],
+        [
+          9.69,
+          18.92,
+          0
+        ],
+        [
+          0,
+          9.23,
+          90
+        ]
+      ],
+      "switch_type": "standard"
+    },
+    {
+      "id": "key_center",
+      "source": "Select",
+      "label": "中心两段键",
+      "translation": [
+        0,
+        -9.92
+      ],
+      "switches": [
+        [
+          0,
+          18.92,
+          0
+        ]
+      ],
+      "switch_type": "center"
+    },
+    {
+      "id": "key_circle1",
+      "source": "Back",
+      "label": "下排圆键 1",
+      "translation": [
+        0,
+        -55.55
+      ],
+      "switches": [
+        [
+          -11.43,
+          41.55,
+          0
+        ]
+      ],
+      "switch_type": "standard"
+    },
+    {
+      "id": "key_circle2",
+      "source": "Home",
+      "label": "下排圆键 2",
+      "translation": [
+        0,
+        -55.55
+      ],
+      "switches": [
+        [
+          0,
+          41.55,
+          0
+        ]
+      ],
+      "switch_type": "standard"
+    },
+    {
+      "id": "key_circle3",
+      "source": "Play",
+      "label": "下排圆键 3",
+      "translation": [
+        0,
+        -55.55
+      ],
+      "switches": [
+        [
+          11.43,
+          41.55,
+          0
+        ]
+      ],
+      "switch_type": "standard"
+    }
+  ],
+  "battery": {
+    "model": "EEMB LP402535",
+    "capacity_mah": 320,
+    "size": [
+      25.5,
+      36,
+      4.3
+    ],
+    "center_xy": [
+      0,
+      0
+    ],
+    "z_bottom": -15.4,
+    "source": "https://eemb.store/products/lp402535",
+    "allocation": [
+      27,
+      40,
+      5.2
+    ]
+  },
+  "usb": {
+    "model": "C5187472",
+    "body": [
+      8.94,
+      7.35,
+      3.16
+    ],
+    "front": -39.2,
+    "opening": [
+      9.6,
+      3.9
+    ],
+    "lead_in": [
+      11,
+      5.1
+    ]
+  },
+  "mcu": {
+    "center": [
+      0,
+      21
+    ],
+    "size": [
+      6,
+      6,
+      0.85
+    ]
+  },
+  "switch_types": {
+    "standard": {
+      "model": "TS-1101-C-W",
+      "body": [
+        6.05,
+        3.7,
+        1.8
+      ],
+      "height": 2.5,
+      "travel": [
+        0.25
+      ],
+      "key_gap": 0.15
+    },
+    "center": {
+      "model": "K2-1831SL-A4SW-01",
+      "body": [
+        6.2,
+        6.5,
+        2.0
+      ],
+      "height": 3.8,
+      "actuator_diameter": 2.5,
+      "terminal_span": 8.4,
+      "terminal_pitch": 4.5,
+      "travel": [
+        0.3,
+        0.55
+      ],
+      "key_gap": 0.15,
+      "locating_pins": [
+        [
+          -1,
+          -1.75
+        ],
+        [
+          -1,
+          1.75
+        ]
+      ],
+      "locating_pin_diameter": 1.0,
+      "locating_pin_depth": 0.8,
+      "pcb_hole_diameter": 1.1,
+      "source": "http://omo-oss-file110.thefastfile.com/portal-saas/pg2026081913505947704/cms/file/k2-1831sl(3).pdf",
+      "drawing_part": "K2-1831SL-A4SW-□□"
+    }
+  }
+}

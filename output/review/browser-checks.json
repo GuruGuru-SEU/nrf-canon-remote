@@ -1,0 +1,92 @@
+{
+  "contract": {
+    "version": "0.7",
+    "keys": 5,
+    "switches": 8,
+    "ring": true,
+    "zeroInterference": true,
+    "oldLength": 140
+  },
+  "reference_features": {
+    "rear_taper_width_samples": {
+      "-11.35": {
+        "reference_width": 43,
+        "new_width": 43
+      },
+      "-13": {
+        "reference_width": 40.8,
+        "new_width": 40.800000508626304
+      },
+      "-15": {
+        "reference_width": 38.13333333333333,
+        "new_width": 38.13333384195963
+      },
+      "-17.34": {
+        "reference_width": 35.013333333333335,
+        "new_width": 35.013333841959636
+      }
+    },
+    "rear_face_width": 35,
+    "corner_notch_type": "concave_quarter_circle",
+    "corner_fit": [
+      {
+        "center": [
+          -18.3787,
+          35.8787
+        ],
+        "notch_radius": 5,
+        "boss_radius": 4.75,
+        "minimum_polygon_clearance": 0.24996653447738904,
+        "ledge_gap": 0.15,
+        "overlap_pcb": 0,
+        "overlap_top": 0
+      },
+      {
+        "center": [
+          18.3787,
+          35.8787
+        ],
+        "notch_radius": 5,
+        "boss_radius": 4.75,
+        "minimum_polygon_clearance": 0.24996653447738612,
+        "ledge_gap": 0.15,
+        "overlap_pcb": 0,
+        "overlap_top": 0
+      }
+    ],
+    "width_at_former_notches": 36.7574,
+    "mounts": [
+      [
+        0,
+        28
+      ],
+      [
+        -14,
+        -27
+      ],
+      [
+        14,
+        -27
+      ]
+    ],
+    "pcb_holes": 5
+  },
+  "offline": true,
+  "no_horizontal_overflow": true,
+  "errors": [],
+  "external_requests": [],
+  "stl_download": true,
+  "controls": [
+    "corner_fit",
+    "trapezoid_end",
+    "pcb_outline",
+    "two_stage_center_press",
+    "views",
+    "explode",
+    "ghost",
+    "section",
+    "reference",
+    "layers",
+    "reset"
+  ]
+}
