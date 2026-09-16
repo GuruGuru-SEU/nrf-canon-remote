@@ -1,0 +1,18 @@
+[project]
+name = "nrf-canon-remote"
+version = "0.8.0"
+description = "Reference-derived enclosure and PCB mechanical preview"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "numpy==2.5.3",
+    "trimesh==5.1.0",
+    "manifold3d==3.5.3",
+    "shapely==2.1.2",
+    "mapbox-earcut==2.1.0",
+    "scipy==1.18.1",
+    "networkx==3.6.1",
+    "matplotlib==3.11.2",
+]
+
+[tool.uv]
+package = false

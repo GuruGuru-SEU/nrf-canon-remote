@@ -13,15 +13,15 @@ const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamp
 scene.add(new THREE.HemisphereLight(0xffffff,0x697975,2.6));
 for(const [pos,power,color] of [[[100,160,240],3.4,0xffffff],[[-100,-40,70],1.8,0xe0f2ff],[[50,-150,-100],2,0xffffff]]){const l=new THREE.DirectionalLight(color,power);l.position.set(...pos);scene.add(l)}
 const model=new THREE.Group();scene.add(model);const objects=new Map();
-function geometry(p){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p.positions,3));g.setIndex(p.indices);g.computeVertexNormals();return p.indices.length?toCreasedNormals(g,.55):g}
+function geometry(p){let g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p.positions,3));g.setIndex(p.indices);if(p.face_colors){g=g.toNonIndexed();const colors=[],c=new THREE.Color();for(let i=0;i<p.face_colors.length;i+=3){c.setRGB(p.face_colors[i]/255,p.face_colors[i+1]/255,p.face_colors[i+2]/255,THREE.SRGBColorSpace);for(let j=0;j<3;j++)colors.push(c.r,c.g,c.b)}g.setAttribute('color',new THREE.Float32BufferAttribute(colors,3))}g.computeVertexNormals();return p.indices.length?toCreasedNormals(g,.55):g}
 for(const p of data.parts){
  const g=geometry(p);
- const mat=new THREE.MeshStandardMaterial({color:p.color,roughness:p.group==='shell'?.74:p.group==='electronics'?.43:.65,metalness:p.id==='usb_shell'?.85:p.group==='pcb'?.18:p.group==='battery'?.45:0,side:THREE.DoubleSide});
+ const mat=new THREE.MeshStandardMaterial({color:p.face_colors?'#ffffff':p.color,vertexColors:!!p.face_colors,roughness:p.group==='shell'?.74:p.group==='electronics'?.43:.65,metalness:p.id==='usb_shell'?.6:p.group==='pcb'?.18:p.group==='battery'?.45:0,side:THREE.DoubleSide});
  if(p.group==='light'||p.id==='rgb_emitter'){mat.emissive=new THREE.Color('#42a995');mat.emissiveIntensity=.3}
  const mesh=new THREE.Mesh(g,mat);mesh.userData=p;mesh.fullGeometry=g;mesh.sectionGeometry=p.section?geometry(p.section):g;model.add(mesh);objects.set(p.id,mesh);
 }
 const groupOn={shell:true,pcb:true,electronics:true,buttons:true,switches:true,battery:true,light:true,highlight:true};
-let explode=0,ghost=false,reference=false,section=false,labels=false,press=0,pcbView=false,fitView=false;
+let explode=0,ghost=false,reference=false,section=false,labels=false,press=0,pcbView=false,fitView=false,componentsView=false;
 const markerDefs=[{text:'01  RGB 导光柱',pos:[...data.config.led,.3],exp:26,kind:'led'},{text:'02  USB-C / 主板板舌',pos:[0,data.config.usb.front,data.report.usb.center_z],exp:0,kind:'usb'},{text:'03  '+data.config.battery.model,pos:[12.8,data.config.battery.center_xy[1],-12],exp:-10,kind:'battery'}];
 for(const m of markerDefs){m.el=document.createElement('div');m.el.className='marker '+m.kind;m.el.textContent=m.text;host.append(m.el)}
 function apply(){
@@ -29,12 +29,13 @@ function apply(){
  if(p.group==='reference')visible=reference&&groupOn[p.id.includes('pcb')?'pcb':p.id.startsWith('original_key')?'buttons':'shell'];
  if(reference&&['shell','pcb','buttons','light','highlight','switches','electronics','battery'].includes(p.group))visible=false;
  if(pcbView)visible=reference?id==='original_pcb':['pcb','extension'].includes(id);
+ if(componentsView)visible=visible&&['pcb','highlight','electronics','switches'].includes(p.group);
  if(fitView)visible=visible&&['shell_bottom','pcb','extension','rgb_led','rgb_emitter'].includes(id);
  m.visible=visible&&(!section||m.sectionGeometry.attributes.position.count>0);m.geometry=section?m.sectionGeometry:m.fullGeometry;m.position.z=p.explode*explode*1.8;
  if(press&&!reference&&explode===0){const spec=data.config.switch_types.center;const travel=spec.travel[press-1];if(id==='key_center')m.position.z-=spec.key_gap+travel;if(id==='actuator_key_center_1')m.position.z-=travel}
  const transparent=ghost&&p.group==='shell';m.material.transparent=transparent;m.material.opacity=transparent?.18:1;m.material.depthWrite=!transparent;
  }
- document.querySelector('#state').textContent=reference?'REFERENCE / 原始模型':pcbView?'PCB OUTLINE / 顶角 ¼ 圆凹口':fitView?'CORNER FIT / 凹口与下盖定位台':section?'SECTION / 中心剖切':explode>.1?'EXPLODED / 分解装配':'ASSEMBLY / 完整装配';
+ document.querySelector('#state').textContent=reference?'REFERENCE / 原始模型':componentsView?'PCB ASSEMBLY / 嘉立创器件模型':pcbView?'PCB OUTLINE / 顶角 ¼ 圆凹口':fitView?'CORNER FIT / 凹口与下盖定位台':section?'SECTION / 中心剖切':explode>.1?'EXPLODED / 分解装配':'ASSEMBLY / 完整装配';
  document.querySelector('#explode-value').textContent=Math.round(explode*100)+'%';
  document.querySelector('#ghost').classList.toggle('active',ghost);document.querySelector('#section').classList.toggle('active',section);document.querySelector('#reference').classList.toggle('active',reference);
  document.querySelector('#reference-note').hidden=!reference;
@@ -42,8 +43,8 @@ function apply(){
  document.querySelector('#press-caption').textContent=reference||explode>0?'装配状态下可预览两段按压':'K2-1831SL-A4SW-01 · '+['未按下','一段 0.30 mm · 键帽位移 0.45 mm','二段 0.55 mm · 键帽位移 0.70 mm'][press];
 }
 function view(which){
- pcbView=which==='pcb';fitView=which==='fit';if(fitView){reference=false;ghost=false}if(pcbView||fitView){section=false;explode=0;document.querySelector('#explode').value=0}apply();
- const distance=reference?285:185; const poses={fit:[[15,67,65],[0,29,-8]],iso:[[135,-70,190],[0,0,-5]],front:[[0,0,distance],[0,0,-5]],pcb:[[0,0,distance],[0,0,-5]],back:[[0,0,-distance],[0,0,-8]],usb:[[26,data.config.usb.front-42,16],[0,data.config.usb.front+6,-6]],end:[[0,data.config.usb.front-66,-8.5],[0,data.config.usb.front,-8.5]],led:[[-28,data.config.led[1]+17,43],[...data.config.led,-3]],center:[[34,16,26],[...data.config.ring_center,-4]],side:[[distance,0,0],[0,0,-7]]};
+ pcbView=which==='pcb';fitView=which==='fit';componentsView=which==='components';if(fitView||componentsView){reference=false;ghost=false}if(pcbView||fitView||componentsView){section=false;explode=0;document.querySelector('#explode').value=0}apply();
+ const distance=reference?285:185; const poses={components:[[75,-60,115],[0,0,-7.5]],fit:[[15,67,65],[0,29,-8]],iso:[[135,-70,190],[0,0,-5]],front:[[0,0,distance],[0,0,-5]],pcb:[[0,0,distance],[0,0,-5]],back:[[0,0,-distance],[0,0,-8]],usb:[[26,data.config.usb.front-42,16],[0,data.config.usb.front+6,-6]],end:[[0,data.config.usb.front-66,-8.5],[0,data.config.usb.front,-8.5]],led:[[-28,data.config.led[1]+17,43],[...data.config.led,-3]],center:[[34,16,26],[...data.config.ring_center,-4]],side:[[distance,0,0],[0,0,-7]]};
  const [p,t]=poses[which];camera.position.set(...p);controls.target.set(...t);camera.up.set(...(which==='end'?[0,0,1]:[0,1,0]));controls.update();
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===which));
 }

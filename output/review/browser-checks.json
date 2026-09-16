@@ -1,11 +1,34 @@
 {
   "contract": {
-    "version": "0.7",
+    "version": "0.8",
     "keys": 5,
     "switches": 8,
     "ring": true,
     "zeroInterference": true,
     "oldLength": 140
+  },
+  "imported_models": {
+    "usb": "HX TYPE-C 6P QTWT",
+    "code": "C18357553",
+    "usbFaces": 7114,
+    "colors": 21342,
+    "oldUSB": false,
+    "ordinarySwitches": 7,
+    "centerSource": null,
+    "pins": [
+      "17",
+      "18",
+      "19",
+      "20",
+      "A12",
+      "A5",
+      "A9",
+      "B12",
+      "B5",
+      "B9"
+    ],
+    "edge": 0.4069622999999751,
+    "ledHeight": 1.0200000000000005
   },
   "reference_features": {
     "rear_taper_width_samples": {
@@ -77,6 +100,9 @@
   "external_requests": [],
   "stl_download": true,
   "controls": [
+    "pcb_library_assembly",
+    "source_models",
+    "usb_smt_pads",
     "corner_fit",
     "trapezoid_end",
     "pcb_outline",

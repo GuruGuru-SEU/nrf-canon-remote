@@ -1,5 +1,5 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "shell": {
     "width": 43,
     "length": 78,
@@ -27,7 +27,7 @@
     "width": 36.7574,
     "body_bottom": -32,
     "top": 35.8787,
-    "tongue_end": -37,
+    "tongue_end": -37.55,
     "tongue_width": 14,
     "thickness": 1.6,
     "z_bottom": -9.05,
@@ -184,10 +184,10 @@
     ]
   },
   "usb": {
-    "model": "C5187472",
+    "model": "HX TYPE-C 6P QTWT",
     "body": [
       8.94,
-      7.35,
+      6.8,
       3.16
     ],
     "front": -39.2,
@@ -198,7 +198,12 @@
     "lead_in": [
       11,
       5.1
-    ]
+    ],
+    "lcsc": "C18357553",
+    "purchase": "淘宝自购",
+    "center_height": 1.68,
+    "datasheet_terminal_span": 11.8,
+    "source": "reference/component-models/C18357553.obj"
   },
   "mcu": {
     "center": [

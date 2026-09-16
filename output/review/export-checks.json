@@ -1,58 +1,69 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "stl": {
     "battery.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "shell_bottom.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "key_center.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "key_ring.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "pcb.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "light_pipe.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "usb_shell.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "key_circle1.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "shell_top.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "key_circle2.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     },
     "key_circle3.stl": {
-      "closed_connected": true,
+      "closed_positive_volume": true,
+      "connected": true,
       "bounds_match": true
     }
   },
   "printable_parts.3mf": {
-    "solids": 8,
+    "objects": 8,
     "unit": "mm",
     "roundtrip_valid": true
   },
   "remote_assembly.3mf": {
-    "solids": 44,
+    "objects": 40,
     "unit": "mm",
     "roundtrip_valid": true
   },

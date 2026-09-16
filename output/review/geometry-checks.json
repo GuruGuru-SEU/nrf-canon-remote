@@ -1,13 +1,13 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "mesh_checks": {
-    "solids": 30,
-    "all_closed_connected_positive_volume": true
+    "checked_parts": 29,
+    "all_collision_meshes_closed_positive_volume": true,
+    "printable_parts_connected": true
   },
   "interference_mm3": {
     "shell_top / shell_bottom": 0.0,
     "shell_top / usb_shell": 0.0,
-    "shell_top / usb_tongue": 0.0,
     "shell_top / rgb_led": 0.0,
     "shell_top / light_pipe": 0.0,
     "shell_top / key_ring": 0.0,
@@ -33,7 +33,6 @@
     "shell_top / actuator_key_circle3_1": 0.0,
     "shell_bottom / pcb": 0.0,
     "shell_bottom / usb_shell": 0.0,
-    "shell_bottom / usb_tongue": 0.0,
     "shell_bottom / rgb_led": 0.0,
     "shell_bottom / light_pipe": 0.0,
     "shell_bottom / switch_key_ring_1": 0.0,
@@ -55,9 +54,15 @@
     "shell_bottom / nrf52832": 0.0,
     "shell_bottom / battery": 0.0,
     "pcb / switch_key_center_1": 0.0,
-    "usb_shell / usb_tongue": 0.0,
     "key_ring / key_center": 0.0,
-    "key_ring / actuator_key_center_1": 0.0
+    "key_ring / actuator_key_center_1": 0.0,
+    "switch_key_ring_1 / actuator_key_ring_1": 0.0,
+    "switch_key_ring_2 / actuator_key_ring_2": 0.0,
+    "switch_key_ring_3 / actuator_key_ring_3": 0.0,
+    "switch_key_ring_4 / actuator_key_ring_4": 0.0,
+    "switch_key_circle1_1 / actuator_key_circle1_1": 0.0,
+    "switch_key_circle2_1 / actuator_key_circle2_1": 0.0,
+    "switch_key_circle3_1 / actuator_key_circle3_1": 0.0
   },
   "interference_failures": [],
   "pressed_key_shell_overlap_mm3": {
@@ -194,7 +199,7 @@
   "pcb_bounds": [
     [
       -18.3787,
-      -37.0,
+      -37.55,
       -9.05
     ],
     [
@@ -340,10 +345,140 @@
     }
   ],
   "usb": {
-    "center_z": -5.870000000000001,
+    "model": "HX TYPE-C 6P QTWT",
+    "lcsc": "C18357553",
+    "center_z": -5.770000000000001,
     "front_y": -39.2,
-    "board_edge_y": -37,
-    "protrusion_mm": 0.2
+    "board_edge_y": -37.55,
+    "protrusion_mm": 0.2,
+    "pads": [
+      {
+        "number": "20",
+        "x": 5.325109999999921,
+        "y": -0.593039200000022,
+        "width": 1.499997,
+        "length": 1.499997,
+        "center": [
+          5.325109999999921,
+          -36.393039200000025
+        ],
+        "board_edge_clearance": 0.4069622999999751
+      },
+      {
+        "number": "18",
+        "x": 5.325109999999921,
+        "y": 3.0071567999999727,
+        "width": 1.499997,
+        "length": 1.1999976,
+        "center": [
+          5.325109999999921,
+          -32.79284320000003
+        ],
+        "board_edge_clearance": 1.7904293717500412
+      },
+      {
+        "number": "17",
+        "x": -5.325110000000037,
+        "y": 3.0071567999999727,
+        "width": 1.499997,
+        "length": 1.1999976,
+        "center": [
+          -5.325110000000037,
+          -32.79284320000003
+        ],
+        "board_edge_clearance": 1.7904293717499598
+      },
+      {
+        "number": "19",
+        "x": -5.325110000000037,
+        "y": -0.593039200000022,
+        "width": 1.499997,
+        "length": 1.499997,
+        "center": [
+          -5.325110000000037,
+          -36.393039200000025
+        ],
+        "board_edge_clearance": 0.4069622999999751
+      },
+      {
+        "number": "B12",
+        "x": -2.7500580000000574,
+        "y": 3.3569147999999607,
+        "width": 0.8999982,
+        "length": 1.1999976,
+        "center": [
+          -2.7500580000000574,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.274235168344836
+      },
+      {
+        "number": "B9",
+        "x": -1.519936000000096,
+        "y": 3.3569147999999607,
+        "width": 0.7999984,
+        "length": 1.1999976,
+        "center": [
+          -1.519936000000096,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.506915999999953
+      },
+      {
+        "number": "A5",
+        "x": -0.4998720000000767,
+        "y": 3.3569147999999607,
+        "width": 0.6999986,
+        "length": 1.1999976,
+        "center": [
+          -0.4998720000000767,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.506915999999953
+      },
+      {
+        "number": "B5",
+        "x": 0.500126000000013,
+        "y": 3.3569147999999607,
+        "width": 0.6999986,
+        "length": 1.1999976,
+        "center": [
+          0.500126000000013,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.506915999999953
+      },
+      {
+        "number": "A9",
+        "x": 1.5199359999999806,
+        "y": 3.3569147999999607,
+        "width": 0.7999984,
+        "length": 1.1999976,
+        "center": [
+          1.5199359999999806,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.506915999999953
+      },
+      {
+        "number": "A12",
+        "x": 2.750057999999942,
+        "y": 3.3569147999999607,
+        "width": 0.8999982,
+        "length": 1.1999976,
+        "center": [
+          2.750057999999942,
+          -32.44308520000004
+        ],
+        "board_edge_clearance": 4.274235168344939
+      }
+    ],
+    "minimum_pad_edge_clearance": 0.4069622999999751,
+    "datasheet_wider_envelope_overlap_mm3": {
+      "shell_top": 0.0,
+      "shell_bottom": 0.0,
+      "pcb": 0.0
+    }
   },
   "battery": {
     "model": "EEMB LP402535",
@@ -364,6 +499,79 @@
       40,
       5.2
     ]
+  },
+  "library_models": {
+    "C18357553": {
+      "part": "HX TYPE-C 6P QTWT",
+      "sha256": "a9c03872c6930db31a7ae19131d8dbb27c94c9253ce04143c082769ea6403fef",
+      "model_uuid": "484957ac7c074e9c8fe12519331501ab",
+      "source_bounds": [
+        [
+          -5.72,
+          -3.4,
+          -0.1
+        ],
+        [
+          5.72,
+          3.4,
+          3.16
+        ]
+      ],
+      "source_faces": 7114,
+      "source_watertight": true,
+      "translation": [
+        0,
+        -35.800000000000004,
+        -7.350000000000001
+      ]
+    },
+    "C52212029": {
+      "part": "NH-B1515RGBA-GF",
+      "sha256": "1b73aed654cdb0f40c688c8588834fa23715015a44efc0147d794593eec8175f",
+      "model_uuid": "5a890419e9624fa093ef4d1a9cfb6526",
+      "source_bounds": [
+        [
+          -0.8,
+          -0.75,
+          -0.62
+        ],
+        [
+          0.8,
+          0.75,
+          0.4
+        ]
+      ],
+      "source_faces": 3230,
+      "source_watertight": false,
+      "translation": [
+        -11.43,
+        29,
+        -6.830000000000001
+      ],
+      "collision_method": "conservative_bounding_box",
+      "height_above_pcb": 1.0200000000000005
+    },
+    "C318938": {
+      "part": "TS-1101-C-W",
+      "sha256": "a98a71bfcbd5954100828220ab93448fdec37f52c3b341e3b87213679713a8a1",
+      "model_uuid": "d40d76ae324c41b0b1b57d4fd0c55e23",
+      "source_bounds": [
+        [
+          -4.003457,
+          -1.85,
+          -0.593335
+        ],
+        [
+          4.003457,
+          1.85,
+          1.904381
+        ]
+      ],
+      "source_faces": 2836,
+      "source_watertight": true,
+      "mounting_z_shift": -6.856665000000001,
+      "height_above_pcb": 2.4977159999999996
+    }
   },
   "reference_features": {
     "rear_taper_width_samples": {
@@ -434,10 +642,9 @@
       -11.43,
       29
     ],
-    "shift_from_previous": [
-      0,
-      -5
-    ],
-    "ring_center_distance": 23.035730941300734
+    "ring_center_distance": 23.035730941300734,
+    "library_height": 1.0200000000000005,
+    "light_pipe_bottom_z": -5.98,
+    "optical_gap": 0.45
   }
 }

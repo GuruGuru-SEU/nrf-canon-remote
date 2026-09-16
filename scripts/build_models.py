@@ -8,11 +8,12 @@ import numpy as np,trimesh
 from shapely.geometry import Polygon,box as rect,Point,LineString
 from shapely.affinity import translate
 from inspect_reference import meshes
+from component_models import load_component,solid_union,footprint_pads
 warnings.filterwarnings('ignore',message='.*divide.*',category=RuntimeWarning)
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output'; MODELS=OUT/'models'; REVIEW=OUT/'review'
 C=json.loads((ROOT/'scripts/layout.json').read_text())
-parts=[]; solids={}; print_ids=[]
+parts=[]; solids={}; print_ids=[]; library_checks={}
 
 def box(size,center):
  m=trimesh.creation.box(size);m.apply_translation(center);return m
@@ -41,12 +42,22 @@ def section_outer(m,z=-.6):
  sec=m.section(plane_origin=[0,0,z],plane_normal=[0,0,1]);ps=[Polygon(p[:,:2]) for p in sec.discrete]
  return max(ps,key=lambda p:p.area)
 
-def add(id,label,m,color,group,explode=0,printable=False,**kw):
- assert m.is_watertight and m.is_winding_consistent and m.volume>0,(id,'invalid solid')
- assert len(m.split())==1,(id,'disconnected parts')
- parts.append(dict(id=id,label=label,positions=np.round(m.vertices,6).ravel().tolist(),indices=m.faces.ravel().tolist(),color=color,group=group,explode=explode,**kw));solids[id]=m
+def add(id,label,m,color,group,explode=0,printable=False,collision=None,source=None,**kw):
+ checked=m if collision is None else collision
+ assert checked.is_watertight and checked.is_winding_consistent and checked.volume>0,(id,'invalid solid')
+ if not source:assert len(checked.split())==1,(id,'disconnected parts')
+ if source:
+  assert not printable,'Library electronics are not printable enclosure parts'
+  kw['source']=source
+  kw['face_colors']=m.visual.face_colors[:,:3].ravel().tolist()
+ parts.append(dict(id=id,label=label,positions=np.round(m.vertices,6).ravel().tolist(),indices=m.faces.ravel().tolist(),color=color,group=group,explode=explode,**kw));solids[id]=checked
  if printable:print_ids.append(id)
  return m
+
+def library_part(code):
+ m,source=load_component(code)
+ library_checks[code]={'part':source['part'],'sha256':source['sha256'],'model_uuid':source['model_uuid'],'source_bounds':m.bounds.tolist(),'source_faces':len(m.faces),'source_watertight':m.is_watertight}
+ return m,source
 
 # Load reference without scaling, for true before/after display and rigid key relocation.
 ref_top=list(meshes('shell_top').values())[0];ref_bottom=list(meshes('shell_bottom').values())[0]
@@ -109,10 +120,13 @@ lx,ly=C['led'];top=diff(top,cyl(1.75,-3,1,lx,ly))
 baffle=diff(cyl(3.15,-6.05,-1.15,lx,ly),cyl(2.45,-6.2,-2.4,lx,ly),cyl(1.75,-2.5,.2,lx,ly))
 top=union(top,baffle)
 # USB placement is derived from PCB plane and housing end, in one coordinate system.
-usb_z=pcb1+U['body'][2]/2;usb_front=U['front'];usb_back=usb_front+U['body'][1]
+usb_z=pcb1+U['center_height'];usb_front=U['front'];usb_back=usb_front+U['body'][1]
 opening=yextrude(rr(*U['opening'],1.75,0,usb_z),usb_front-1.8,usb_front+4.2)
 lead=yextrude(rr(*U['lead_in'],2.2,0,usb_z),usb_front-1.8,usb_front+.9)
 top=diff(top,opening,lead);bottom=diff(bottom,opening,lead)
+# The longer tongue supports every SMT pad; a blind inner pocket keeps the front wall.
+pocket=box([P['tongue_width']+.5,7.5,P['thickness']+.4],[0,P['tongue_end']-.25+3.75,(pcb0+pcb1)/2])
+bottom=diff(bottom,pocket)
 for x in [-6.0,6.0]:bottom=union(bottom,inter(box([1.5,5.0,6.95],[x,P['body_bottom']-1.4,-12.675]),bottom_blank))
 # Battery locating stops surround a loose allocation volume; no squeeze preload.
 for x in [B['center_xy'][0]-14.1,B['center_xy'][0]+14.1]:bottom=union(bottom,box([1.0,39,2.1],[x,B['center_xy'][1],-15.2]))
@@ -134,25 +148,44 @@ for x,y in C['mounts']:outline=outline.difference(Point(x,y).buffer(1.15,quad_se
 cs=C['switch_types']['center'];cx,cy=C['ring_center']
 for px,py in cs['locating_pins']:outline=outline.difference(Point(cx+px,cy+py).buffer(cs['pcb_hole_diameter']/2,quad_segs=24))
 pcb=add('pcb',f"PCB · {P['top']-P['tongue_end']} × {P['width']:.2f} × {P['thickness']:.2f} mm",extrude(outline,pcb0,pcb1),'#196452','pcb',0)
-add('extension','USB 板舌 · 相对主板底边延伸 5 mm',extrude(tongue.difference(body),pcb1+.01,pcb1+.02),'#c8863b','highlight',0)
+add('extension',f"USB 板舌 · 延伸 {P['body_bottom']-P['tongue_end']:.2f} mm",extrude(tongue.difference(body),pcb1+.01,pcb1+.02),'#c8863b','highlight',0)
 # Original reference geometry and original unscaled board outline.
 add('original_pcb','原始 Gerber 板框 · 未缩放',extrude(original,pcb0,pcb1),'#196452','reference',0)
 add('original_top','原始上盖 · 140 mm',ref_top,'#d7d9d4','reference',26)
 add('original_bottom','原始下盖 · 140 mm',ref_bottom,'#343c3b','reference',-24)
 for i,(name,m) in enumerate(ref_buttons.items()):add(f'original_key_{i}',name+' · 原型',m,'#ba744a' if name=='Select' else '#53615d','reference',30)
-# Simplified USB shell incl solder lugs, flush to board top.
-usb=diff(yextrude(rr(*[U['body'][0],U['body'][2]],1.35,0,usb_z),usb_front,usb_back),yextrude(rr(8.34,2.56,1.1,0,usb_z),usb_front-.1,usb_back-.55))
-for x in [-4.435,4.435]:
- for y in [usb_back-.5,usb_back-4.2]:usb=union(usb,box([2.87,1.2,.3],[x,y,pcb1+.15]))
-add('usb_shell','USB-C · C5187472 主体与焊耳',usb,'#bbc4c7','electronics',0)
-add('usb_tongue','USB 内舌（示意）',box([6.69,5.7,.6],[0,usb_back-3.45,usb_z]),'#222c32','electronics',0)
-for i in range(12):add(f'usb_contact_{i}','USB 触点（示意）',box([.22,2.5,.06],[(i-5.5)*.5,usb_front+2.5,usb_z+.33]),'#d5b877','electronics',0)
-add('rgb_led','RGB · C52212029，高度待实测',box([1.6,1.5,.7],[lx,ly,pcb1+.35]),'#202b2c','electronics',0)
-add('rgb_emitter','RGB 发光面',box([1.2,1.1,.02],[lx,ly,pcb1+.71]),'#69dcc2','electronics',0)
-light=union(cyl(1.6,-2.4,.15,lx,ly),cyl(2.25,-3.05,-2.4,lx,ly),cyl(1.4,-6.3,-2.95,lx,ly))
+# Original library triangles/materials; transform only, no rescaling or redrawing.
+usb,usb_source=library_part(U['lcsc'])
+usb_shift=[0,usb_front-usb.bounds[0,1],pcb1-usb.bounds[0,2]]
+usb.apply_translation(usb_shift)
+add('usb_shell','HX TYPE-C 6P QTWT · 嘉立创 C18357553 原始模型',usb,'#bbc4c7','electronics',collision=solid_union(usb),source=usb_source)
+library_checks[U['lcsc']]['translation']=usb_shift
+usb_pads=[]
+for pad in footprint_pads(U['lcsc']):
+ x,y=pad['x'],pad['y']+usb_shift[1];w,h=pad['width'],pad['length']
+ shape=rect(x-w/2,y-h/2,x+w/2,y+h/2)
+ assert outline.covers(shape),('Unsupported USB pad',pad['number'])
+ clearance=shape.distance(outline.boundary)
+ assert clearance>.39,('USB pad too close to board edge',pad['number'],clearance)
+ usb_pads.append(dict(pad,center=[x,y],board_edge_clearance=clearance))
+ add('usb_pad_'+pad['number'],'USB-C 库焊盘 '+pad['number'],extrude(shape,pcb1+.001,pcb1+.025),'#cda761','electronics',decorative=True)
+# The LED source contains open coincident faces. Keep the source for display and
+# conservatively check its full bounding box; it is not a printable mesh.
+led,led_source=library_part('C52212029');led_shift=[lx,ly,pcb1-led.bounds[0,2]]
+led.apply_translation(led_shift);led_proxy=box(led.extents,led.bounds.mean(axis=0))
+add('rgb_led','NH-B1515RGBA-GF · 嘉立创模型 / 包络配合检查',led,'#eeeece','electronics',collision=led_proxy,source=led_source)
+library_checks['C52212029'].update(translation=led_shift,collision_method='conservative_bounding_box',height_above_pcb=float(led.bounds[1,2]-pcb1))
+light_bottom=float(led.bounds[1,2]+.45)
+light=union(cyl(1.6,-2.4,.15,lx,ly),cyl(2.25,-3.05,-2.4,lx,ly),cyl(1.4,light_bottom,-2.95,lx,ly))
 add('light_pipe','导光柱 · Ø3.2 / 肩部 Ø4.5',light,'#7adbd0','light',26,True)
 for k in C['keys']:add(k['id'],k['label']+' · 一体顶柱',keys[k['id']],'#ba744a' if k['id']=='key_center' else '#53615d','buttons',30,True)
-# Body, lid and actuator stay aligned; terminal span 8 mm from XKB drawing.
+# Seven standard switches use the original library assembly and actuator.
+standard,standard_source=library_part('C318938')
+standard.apply_translation([0,0,pcb1-standard.bounds[0,2]])
+library_checks['C318938'].update(mounting_z_shift=float(pcb1+.593335),height_above_pcb=float(standard.bounds[1,2]-pcb1))
+standard_chunks=list(standard.split());standard_cap=max(standard_chunks,key=lambda m:m.bounds[1,2])
+standard_body=trimesh.util.concatenate([m for m in standard_chunks if m is not standard_cap])
+standard_collision=solid_union(standard_body)
 for sw in switches:
  x,y,angle=sw['x'],sw['y'],sw['angle']
  spec=C['switch_types'][sw['type']]
@@ -166,12 +199,13 @@ for sw in switches:
   for px,py in spec['locating_pins']:swbody=union(swbody,cyl(.5,pcb1-.8,pcb1+.1,px,py))
   cap=union(cyl(1.45,pcb1+2,pcb1+2.45),cyl(1.25,pcb1+2.4,pcb1+3.8))
  else:
-  swbody=union(swbody,box([8,1,.2],[0,0,pcb1+.1]))
-  cap=box([2.65,1.3,.7],[0,0,pcb1+2.15])
- for obj in [swbody,cap]:
+  swbody=standard_body.copy();cap=standard_cap.copy()
+ checked=standard_collision.copy() if sw['type']=='standard' else swbody.copy()
+ for obj in [swbody,cap,checked]:
   obj.apply_transform(trimesh.transformations.rotation_matrix(np.deg2rad(angle),[0,0,1]));obj.apply_translation([x,y,0])
- add('switch_'+sw['id'],f"{spec['model']} · 高 {spec['height']} mm",swbody,'#929c9d','switches',0)
- add('actuator_'+sw['id'],f"{sw['id']} 柱头",cap,'#e2ddcd','switches',0)
+ source=standard_source if sw['type']=='standard' else None
+ add('switch_'+sw['id'],f"{spec['model']} · "+('嘉立创原始模型' if source else '厂家图纸建模'),swbody,'#929c9d','switches',collision=checked,source=source)
+ add('actuator_'+sw['id'],f"{sw['id']} 柱头",cap,'#e2ddcd','switches',source=source)
 mx,my=C['mcu']['center'];add('nrf52832','nRF52832 · QFN48 包络',box(C['mcu']['size'],[mx,my,pcb0-.425]),'#242d32','electronics',0)
 bw,bl,bt=B['size'];bx,by=B['center_xy'];bz=B['z_bottom']
 add('battery',f"{B['model']} · {B['capacity_mah']} mAh · {bw} × {bl} × {bt}",extrude(rr(bw,bl,.8,bx,by),bz,bz+bt),'#a5b5ba','battery',-10)
@@ -180,7 +214,7 @@ add('battery_tape','电池绝缘带（示意）',box([bw-.6,3,.08],[bx,by-bl/2+1
 
 # Geometric audit: no real part may penetrate an unrelated part.
 # Small decorative faces are excluded; they intentionally lie on their host part surface.
-physical=[p for p in parts if p['group'] not in ['reference','highlight'] and p['id'] not in ['rgb_emitter','battery_tape'] and not p['id'].startswith('usb_contact_')]
+physical=[p for p in parts if p['group'] not in ['reference','highlight'] and p['id']!='battery_tape' and not p.get('decorative')]
 checks={};errors=[]
 for a,b in itertools.combinations(physical,2):
  ma,mb=solids[a['id']],solids[b['id']]
@@ -236,6 +270,11 @@ for (x,y),guide in zip(corner_centers,corner_guides):
  corner_fit.append(fit)
 assert len(outline.interiors)==len(C['mounts'])+len(cs['locating_pins'])
 assert volume(diff(bottom,bottom_blank))<1e-4,'bottom supports protrude through reference taper'
+# The shared library model has 11.44 mm ears, versus 11.80 on the HX drawing.
+# Check an additional wider envelope without changing the downloaded model.
+usb_wide=solids['usb_shell'].copy();usb_wide.apply_scale([U['datasheet_terminal_span']/usb.extents[0],1,1])
+usb_wide_checks={name:volume(inter(usb_wide,solids[name])) for name in ['shell_top','shell_bottom','pcb']}
+assert all(v<1e-4 for v in usb_wide_checks.values()),usb_wide_checks
 # Compare the restored rear side widths to the source at several Z levels.
 taper_check={}
 for z in [-11.35,-13,-15,-17.34]:
@@ -244,9 +283,9 @@ for z in [-11.35,-13,-15,-17.34]:
  ref_width=float(np.ptp(np.vstack(ref_section.discrete)[:,0]));new_width=float(np.ptp(np.vstack(new_section.discrete)[:,0]))
  assert abs(ref_width-new_width)<.002,(z,ref_width,new_width)
  taper_check[str(z)]={'reference_width':ref_width,'new_width':new_width}
-report=dict(version=C['version'],mesh_checks={'solids':len(physical),'all_closed_connected_positive_volume':True},interference_mm3=checks,interference_failures=errors,pressed_key_shell_overlap_mm3=travel,center_travel_overlap_mm3=center_travel,front_section_boundary_loops=face_loops,pcb_bounds=pcb.bounds.tolist(),shell_bounds=[[-W/2,-L/2,-D],[W/2,L/2,0]],keycap_count=len(keys),switch_count=len(switches),mapping=mapping,usb={'center_z':usb_z,'front_y':usb_front,'board_edge_y':P['tongue_end'],'protrusion_mm':round(-L/2-usb_front,3)},battery=B)
+report=dict(version=C['version'],mesh_checks={'checked_parts':len(physical),'all_collision_meshes_closed_positive_volume':True,'printable_parts_connected':True},interference_mm3=checks,interference_failures=errors,pressed_key_shell_overlap_mm3=travel,center_travel_overlap_mm3=center_travel,front_section_boundary_loops=face_loops,pcb_bounds=pcb.bounds.tolist(),shell_bounds=[[-W/2,-L/2,-D],[W/2,L/2,0]],keycap_count=len(keys),switch_count=len(switches),mapping=mapping,usb={'model':U['model'],'lcsc':U['lcsc'],'center_z':usb_z,'front_y':usb_front,'board_edge_y':P['tongue_end'],'protrusion_mm':round(-L/2-usb_front,3),'pads':usb_pads,'minimum_pad_edge_clearance':min(p['board_edge_clearance'] for p in usb_pads),'datasheet_wider_envelope_overlap_mm3':usb_wide_checks},battery=B,library_models=library_checks)
 report['reference_features']={'rear_taper_width_samples':taper_check,'rear_face_width':W-2*T['inset'],'corner_notch_type':'concave_quarter_circle','corner_fit':corner_fit,'width_at_former_notches':restored_width,'mounts':C['mounts'],'pcb_holes':len(outline.interiors)}
-report['led']={'center':C['led'],'shift_from_previous':[0,-5],'ring_center_distance':float(np.linalg.norm(np.array(C['led'])-np.array(C['ring_center'])))}
+report['led']={'center':C['led'],'ring_center_distance':float(np.linalg.norm(np.array(C['led'])-np.array(C['ring_center']))),'library_height':float(led.extents[2]),'light_pipe_bottom_z':light_bottom,'optical_gap':.45}
 REVIEW.mkdir(parents=True,exist_ok=True);(REVIEW/'geometry-checks.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
 if errors:raise RuntimeError('Mechanical interference:\n'+'\n'.join(errors))
 
@@ -268,6 +307,8 @@ dxf+=['0','ENDSEC','0','EOF'];(MODELS/'pcb_outline.dxf').write_text('\n'.join(dx
 def export3mf(path,ids):
  root=ET.Element('model',xmlns='http://schemas.microsoft.com/3dmanufacturing/core/2015/02',unit='millimeter');resources=ET.SubElement(root,'resources');build=ET.SubElement(root,'build')
  for idx,id in enumerate(ids,1):
+  # Electronics in the assembly export use the checked watertight mesh; the LED
+  # uses its explicitly documented box because its source visualization is open.
   m=solids[id];p=next(p for p in parts if p['id']==id);obj=ET.SubElement(resources,'object',id=str(idx),type='model',name=p['label']);mesh=ET.SubElement(obj,'mesh');vs=ET.SubElement(mesh,'vertices');fs=ET.SubElement(mesh,'triangles')
   for v in m.vertices:ET.SubElement(vs,'vertex',**dict(zip('xyz',map(str,v))))
   for f in m.faces:ET.SubElement(fs,'triangle',**dict(zip(['v1','v2','v3'],map(str,f))))

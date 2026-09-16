@@ -1,0 +1,108 @@
+{
+  "C18357553": {
+    "part": "HX TYPE-C 6P QTWT",
+    "component_uuid": "9d68425c22ef4878b26cb1cbc3755ba1",
+    "footprint": "TYPE-C-SMD_USB-TYPE-C-007",
+    "footprint_uuid": "bf14b659169f4500938eb827820d6d0b",
+    "model_uuid": "484957ac7c074e9c8fe12519331501ab",
+    "model_url": "https://easyeda.com/analyzer/api/3dmodel/484957ac7c074e9c8fe12519331501ab",
+    "component_url": "https://easyeda.com/api/products/C18357553/components?version=6.4.19.5",
+    "downloaded": "2026-09-17",
+    "sha256": "a9c03872c6930db31a7ae19131d8dbb27c94c9253ce04143c082769ea6403fef",
+    "unit": "mm",
+    "original_model_bounds": [
+      [
+        -5.72,
+        -3.4,
+        -0.1
+      ],
+      [
+        5.72,
+        3.4,
+        3.16
+      ]
+    ],
+    "files": {
+      "obj": {
+        "url": "https://easyeda.com/analyzer/api/3dmodel/484957ac7c074e9c8fe12519331501ab",
+        "sha256": "a9c03872c6930db31a7ae19131d8dbb27c94c9253ce04143c082769ea6403fef"
+      },
+      "json": {
+        "url": "https://easyeda.com/api/products/C18357553/components?version=6.4.19.5",
+        "sha256": "951ba6634c5375aa36e28cb63cfacfd5241bbd50e93b74a6aec93ec7c38345e2"
+      },
+      "pdf": {
+        "url": "https://atta.szlcsc.com/upload/public/pdf/source/20260318/59CC35ADD12A154739D7D74189D7DA7F.pdf",
+        "sha256": "79dd4094b3954810c6af4475587b733276d96919df7a669cdd6a2ccd1cc4b55a"
+      }
+    }
+  },
+  "C318938": {
+    "part": "TS-1101-C-W",
+    "component_uuid": "8710e6eb28c44416b37b2e373d35a96d",
+    "footprint": "SW-SMD_L6.0-W3.3-LS8.0_TS-1101-C-W",
+    "footprint_uuid": "fd327c409557471a80edef08568d99ae",
+    "model_uuid": "d40d76ae324c41b0b1b57d4fd0c55e23",
+    "model_url": "https://easyeda.com/analyzer/api/3dmodel/d40d76ae324c41b0b1b57d4fd0c55e23",
+    "component_url": "https://easyeda.com/api/products/C318938/components?version=6.4.19.5",
+    "downloaded": "2026-09-17",
+    "sha256": "a98a71bfcbd5954100828220ab93448fdec37f52c3b341e3b87213679713a8a1",
+    "unit": "mm",
+    "original_model_bounds": [
+      [
+        -4.003457,
+        -1.85,
+        -0.593335
+      ],
+      [
+        4.003457,
+        1.85,
+        1.904381
+      ]
+    ],
+    "files": {
+      "obj": {
+        "url": "https://easyeda.com/analyzer/api/3dmodel/d40d76ae324c41b0b1b57d4fd0c55e23",
+        "sha256": "a98a71bfcbd5954100828220ab93448fdec37f52c3b341e3b87213679713a8a1"
+      },
+      "json": {
+        "url": "https://easyeda.com/api/products/C318938/components?version=6.4.19.5",
+        "sha256": "c179d356736b1c661a21ab66eab1779ec5cd7e2eeed52db25e90db1ed50a86c8"
+      }
+    }
+  },
+  "C52212029": {
+    "part": "NH-B1515RGBA-GF",
+    "component_uuid": "5da917e79ee54a848c99b1e04b2e203e",
+    "footprint": "LED-SMD-4P-L1.6-W1.5_NH-B1515RGBA-GF",
+    "footprint_uuid": "74caa5aa49a34b91bf0538e57d65dd50",
+    "model_uuid": "5a890419e9624fa093ef4d1a9cfb6526",
+    "model_url": "https://easyeda.com/analyzer/api/3dmodel/5a890419e9624fa093ef4d1a9cfb6526",
+    "component_url": "https://easyeda.com/api/products/C52212029/components?version=6.4.19.5",
+    "downloaded": "2026-09-17",
+    "sha256": "1b73aed654cdb0f40c688c8588834fa23715015a44efc0147d794593eec8175f",
+    "unit": "mm",
+    "original_model_bounds": [
+      [
+        -0.8,
+        -0.75,
+        -0.62
+      ],
+      [
+        0.8,
+        0.75,
+        0.4
+      ]
+    ],
+    "files": {
+      "obj": {
+        "url": "https://easyeda.com/analyzer/api/3dmodel/5a890419e9624fa093ef4d1a9cfb6526",
+        "sha256": "1b73aed654cdb0f40c688c8588834fa23715015a44efc0147d794593eec8175f"
+      },
+      "json": {
+        "url": "https://easyeda.com/api/products/C52212029/components?version=6.4.19.5",
+        "sha256": "9e9fd372e7e6579e0cb737c3b16ff185b5df9c3b0a9ca05c113e57d31955e934"
+      }
+    }
+  }
+}

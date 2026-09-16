@@ -10,8 +10,22 @@ await page.waitForFunction(()=>window.__viewer?.renderer.info.render.triangles>0
 const contract=await page.evaluate(()=>{
  const v=window.__viewer,d=v.data;return {version:d.config.version,keys:d.parts.filter(p=>p.group==='buttons').length,switches:d.parts.filter(p=>p.id.startsWith('switch_')).length,ring:!!v.objects.get('key_ring'),zeroInterference:d.report.interference_failures.length===0,oldLength:Math.max(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))-Math.min(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))};
 });
-assert.deepEqual(contract,{version:'0.7',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
-assert.match(await page.locator('h1').innerText(),/0\.7/);
+assert.deepEqual(contract,{version:'0.8',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
+assert.match(await page.locator('h1').innerText(),/0\.8/);
+const imported=await page.evaluate(()=>{
+ const d=window.__viewer.data,u=d.parts.find(p=>p.id==='usb_shell');
+ return {usb:u.source.part,code:d.config.usb.lcsc,usbFaces:u.indices.length/3,
+  colors:u.face_colors.length,oldUSB:d.parts.some(p=>p.id==='usb_tongue'),
+  ordinarySwitches:d.parts.filter(p=>p.id.startsWith('switch_')&&p.source?.part==='TS-1101-C-W').length,
+  centerSource:d.parts.find(p=>p.id==='switch_key_center_1').source??null,
+  pins:d.report.usb.pads.map(p=>p.number).sort(),edge:d.report.usb.minimum_pad_edge_clearance,
+  ledHeight:d.report.led.library_height};
+});
+assert.equal(imported.usb,'HX TYPE-C 6P QTWT');assert.equal(imported.code,'C18357553');
+assert.equal(imported.usbFaces,7114);assert.equal(imported.colors,7114*3);assert.equal(imported.oldUSB,false);
+assert.equal(imported.ordinarySwitches,7);assert.equal(imported.centerSource,null);
+assert.deepEqual(imported.pins,['17','18','19','20','A12','A5','A9','B12','B5','B9']);
+assert.ok(imported.edge>.4);assert.ok(Math.abs(imported.ledHeight-1.02)<1e-6);
 await page.screenshot({path:'output/review/preview-assembled.png',fullPage:true});
 await page.locator('#viewport').screenshot({path:'output/review/front-view.png'});
 async function settle(){await page.waitForTimeout(280)}
@@ -31,6 +45,11 @@ assert.equal(await page.evaluate(()=>window.__viewer.objects.get('pcb').visible)
 await page.locator('[data-group="pcb,highlight"]').check();
 await page.locator('[data-view="iso"]').click();await shot('assembly-isometric');
 assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_bottom').visible),true);
+await page.locator('[data-view="components"]').click();await shot('pcb-library-assembly');
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_top').visible),false);
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('usb_shell').visible),true);
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('rgb_led').visible),true);
+await page.locator('[data-view="iso"]').click();
 await page.locator('#explode-preset').click();await settle();assert.equal(await page.evaluate(()=>window.__viewer.getState().explode),1);await page.screenshot({path:'output/review/preview-exploded.png',fullPage:true});
 await page.locator('#reset').click();await page.locator('[data-view="usb"]').click();await shot('usb-opaque');
 await page.locator('#ghost').click();assert.equal(await page.evaluate(()=>window.__viewer.getState().ghost),true);await page.locator('[data-panel="usb-detail"]').click();await settle();await page.screenshot({path:'output/review/preview-usb.png',fullPage:true});
@@ -56,6 +75,6 @@ await page.setViewportSize({width:390,height:844});await page.locator('#reset').
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
 assert.equal(await page.locator('#viewport canvas').count(),1);
 assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-fs.writeFileSync('output/review/browser-checks.json',JSON.stringify({contract,reference_features:features.report,offline:true,no_horizontal_overflow:true,errors,external_requests:external,stl_download:true,controls:['corner_fit','trapezoid_end','pcb_outline','two_stage_center_press','views','explode','ghost','section','reference','layers','reset']},null,2));
+fs.writeFileSync('output/review/browser-checks.json',JSON.stringify({contract,imported_models:imported,reference_features:features.report,offline:true,no_horizontal_overflow:true,errors,external_requests:external,stl_download:true,controls:['pcb_library_assembly','source_models','usb_smt_pads','corner_fit','trapezoid_end','pcb_outline','two_stage_center_press','views','explode','ghost','section','reference','layers','reset']},null,2));
 console.log('PASS: model identity, controls, original scale, offline loading, STL export, desktop/mobile layout.');
 await browser.close();

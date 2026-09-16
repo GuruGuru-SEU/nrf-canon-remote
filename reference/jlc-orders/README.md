@@ -4,13 +4,17 @@
 
 本工程使用或参考的物料：
 
-| 用途 | 型号 | 物料号 | 本版数量 |
+| 用途 | 型号 | 采购来源 / 对应立创物料号 | 本版数量 |
 | --- | --- | --- | --- |
 | 中心两段开关 | K2-1831SL-A4SW-01 | 手工物料记录 | 1 |
 | 圆环与下排开关 | TS-1101-C-W | C318938 | 7 |
-| USB-C 母座 | SHOU HAN TYPE-C 16P QTWT | C5187472 | 1 |
+| USB-C 母座 | hanxia（韩下）HX TYPE-C 6P QTWT，6Pin 全贴、四脚贴片 | 淘宝自购；对应立创 [C18357553](https://item.szlcsc.com/19545723.html) | 1 |
 | RGB LED | NH-B1515RGBA-GF | C52212029 | 1 |
 | 主控占位 | nRF52832 QFN48 | 另行选购 | 1 |
 | 电池候选 | EEMB LP402535 / 320 mAh | 另行选购 | 1 |
 
+USB-C 来自用户在淘宝单独购买，不在本地立创订单中。C18357553 仅用于查找同型号的数据手册、封装及 3D 模型，不代表采购来源。订单中的 SHOU HAN TYPE-C 16P QTWT（C5187472）不作为本工程选用件。
+
 [another-one.txt](another-one.txt) 保留手工补充物料记录。尺寸依据、占位假设及机械验证范围见 [设计说明](../../output/设计说明.md)。
+
+USB-C、TS-1101-C-W 与 RGB 的嘉立创 3D 模型已归档，详见 [器件模型来源与处理](../component-models/README.md)。
