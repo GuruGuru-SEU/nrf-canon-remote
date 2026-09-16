@@ -1,6 +1,6 @@
 # nRF52832 Canon remote — mechanical study v0.7
 
-打开 **[在线 3D 预览](https://tth37.github.io/nrf-canon-remote/preview.html)**，可直接分享这个链接。
+打开 **[在线 3D 预览](https://guruguru-seu.github.io/nrf-canon-remote/preview.html)**，可直接分享这个链接。
 
 也可下载 `output/preview.html` 后用浏览器离线打开，详见 [机械设计说明](output/设计说明.md)。
 
