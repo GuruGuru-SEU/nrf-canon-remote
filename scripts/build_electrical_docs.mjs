@@ -45,6 +45,7 @@ async function renderDiagrams(sources) {
 
 function relativeLink(href, spec) {
   if (/^(?:[a-z][a-z0-9+.-]*:|#)/i.test(href)) return href;
+  if (href === 'schematic-drawing-v0.1.html') return href;
   const hashIndex=href.indexOf('#');
   const file=decodeURIComponent(hashIndex<0?href:href.slice(0,hashIndex));
   const hash=hashIndex<0?'':href.slice(hashIndex);
@@ -82,7 +83,7 @@ function makeHtml(spec, tokens, diagrams) {
   md.renderer.rules.table_close=()=>'</table></div>';
   const content=md.renderer.render(tokens,md.options,{});
   md.renderer.rules.fence=defaultFence;
-  const nav=pages.map(p=>`<a ${p===spec?'aria-current="page"':''} href="${p.file}">${p.label}</a>`).join('');
+  const nav='<a href="schematic-drawing-v0.1.html">图纸</a>'+pages.map(p=>`<a ${p===spec?'aria-current="page"':''} href="${p.file}">${p.label}</a>`).join('');
   const toc=headings.map(h=>`<a class="${h.sub?'sub':''}" href="#${esc(h.id)}">${esc(h.text)}</a>`).join('');
   return `<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">

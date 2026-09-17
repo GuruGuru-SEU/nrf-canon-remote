@@ -15,10 +15,11 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 @media print{body{background:#fff}.topbar,aside,.doc-meta,.skip,footer{display:none!important}.layout{display:block;max-width:none;margin:0;padding:0}main{border:0;box-shadow:none;padding:0}h1{font-size:21pt}h2{break-after:avoid}h3{break-after:avoid}table{font-size:8pt;min-width:0!important}.table-scroll{overflow:visible;border-radius:0}tr{break-inside:avoid}thead{display:table-header-group}pre{white-space:pre-wrap;overflow:visible}pre code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8pt}.diagram svg{min-width:0}.diagram{break-inside:avoid}a{color:inherit}p{orphans:3;widows:3}@page{size:A4 landscape;margin:14mm}}
 </style></head>
 <body><a class="skip" href="#document">跳至正文</a>
-<header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a  href="schematic-v0.1.html">原理图</a><a aria-current="page" href="bom-v0.1.html">BOM</a></nav></header>
+<header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a href="schematic-drawing-v0.1.html">图纸</a><a  href="schematic-v0.1.html">原理图</a><a aria-current="page" href="bom-v0.1.html">BOM</a></nav></header>
 <div class="layout"><aside><div class="toc-label">文档目录 <span>v0.1</span></div><details open class="toc"><summary>查看目录</summary><nav aria-label="文档目录"><a class="" href="#usb-c-接口与静电保护">USB-C 接口与静电保护</a><a class="" href="#电池与充电">电池与充电</a><a class="" href="#电源切换与-33-v-稳压">电源切换与 3.3 V 稳压</a><a class="" href="#usb-检测与电池电压检测">USB 检测与电池电压检测</a><a class="" href="#主控内部电源及复位">主控、内部电源及复位</a><a class="" href="#时钟">时钟</a><a class="" href="#按键">按键</a><a class="" href="#rgb-指示灯">RGB 指示灯</a><a class="" href="#射频与天线">射频与天线</a><a class="" href="#调试接口">调试接口</a><a class="" href="#不装元件和-pcb-自带焊盘">不装元件和 PCB 自带焊盘</a><a class="" href="#采购汇总与取舍">采购汇总与取舍</a></nav></details><a class="source" href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/electrical/BOM-v0.1.md">查看 Markdown 源文件 ↗</a></aside>
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-遥控器完整电气-bom-v01">nRF52832 遥控器完整电气 BOM v0.1</h1>
 <p>整理日期：2026-09-18。对应 <a href="schematic-v0.1.html">文字原理图 v0.1</a>，按单台用量统计。相同规格、相同作用的元件合并列出，所有装配位号均覆盖；同一料号用于不同电路时分行说明。</p>
+<p><a href="schematic-drawing-v0.1.html">查看图形原理图 v0.1</a>，图中位号与本表一致。</p>
 <p>“已有”指本地订单、补充物料记录或用户确认自购，实际剩余数量以实物为准。“待采购”指现有记录中没有合适选件。射频／晶体数值是首版初值，本文不更改原理图。</p>
 <h2 id="usb-c-接口与静电保护">USB-C 接口与静电保护</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
@@ -169,7 +170,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td style="text-align:right">1</td>
 <td>待采购</td>
 <td>USB 供电通路</td>
-<td>USB→VSYS 单向导通，阻止电池电源反灌 USB</td>
+<td>USB→VSYS 单向导通，阻止电池电源反灌 USB；2=A 接 VBUS，1=K 接 VSYS</td>
 </tr>
 <tr>
 <td>R102</td>

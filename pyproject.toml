@@ -12,6 +12,7 @@ dependencies = [
     "scipy==1.18.1",
     "networkx==3.6.1",
     "matplotlib==3.11.2",
+    "schemdraw==0.23",
 ]
 
 [tool.uv]

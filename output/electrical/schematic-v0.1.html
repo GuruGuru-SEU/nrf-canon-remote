@@ -15,10 +15,11 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 @media print{body{background:#fff}.topbar,aside,.doc-meta,.skip,footer{display:none!important}.layout{display:block;max-width:none;margin:0;padding:0}main{border:0;box-shadow:none;padding:0}h1{font-size:21pt}h2{break-after:avoid}h3{break-after:avoid}table{font-size:8pt;min-width:0!important}.table-scroll{overflow:visible;border-radius:0}tr{break-inside:avoid}thead{display:table-header-group}pre{white-space:pre-wrap;overflow:visible}pre code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8pt}.diagram svg{min-width:0}.diagram{break-inside:avoid}a{color:inherit}p{orphans:3;widows:3}@page{size:A4 landscape;margin:14mm}}
 </style></head>
 <body><a class="skip" href="#document">跳至正文</a>
-<header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a aria-current="page" href="schematic-v0.1.html">原理图</a><a  href="bom-v0.1.html">BOM</a></nav></header>
+<header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a href="schematic-drawing-v0.1.html">图纸</a><a aria-current="page" href="schematic-v0.1.html">原理图</a><a  href="bom-v0.1.html">BOM</a></nav></header>
 <div class="layout"><aside><div class="toc-label">文档目录 <span>v0.1</span></div><details open class="toc"><summary>查看目录</summary><nav aria-label="文档目录"><a class="" href="#1-总体结构与电源网络">1. 总体结构与电源网络</a><a class="" href="#2-usb-c充电与供电切换">2. USB-C、充电与供电切换</a><a class="sub" href="#21-j100hx-type-c-6p-qtwt">2.1 J100：HX TYPE-C 6P QTWT</a><a class="sub" href="#22-u100mstp4054-42sot23-5l">2.2 U100：MSTP4054-42，SOT23-5L</a><a class="sub" href="#23-usb电池自动切换">2.3 USB／电池自动切换</a><a class="sub" href="#24-u101me6211c33m5g-n33-v-ldo">2.4 U101：ME6211C33M5G-N，3.3 V LDO</a><a class="sub" href="#25-usb-检测与电池测量">2.5 USB 检测与电池测量</a><a class="" href="#3-nrf52832-主控最小系统">3. nRF52832 主控最小系统</a><a class="sub" href="#31-电源内部稳压及复位">3.1 电源、内部稳压及复位</a><a class="sub" href="#32-32-mhz-与-32768-khz-时钟">3.2 32 MHz 与 32.768 kHz 时钟</a><a class="" href="#4-按键">4. 按键</a><a class="" href="#5-rgb-lednh-b1515rgba-gf">5. RGB LED：NH-B1515RGBA-GF</a><a class="" href="#6-rf-与陶瓷天线">6. RF 与陶瓷天线</a><a class="" href="#7-j2004pin-swd">7. J200：4Pin SWD</a><a class="" href="#8-u200-完整引脚分配表">8. U200 完整引脚分配表</a><a class="" href="#9-首版-bom-与库存对应">9. 首版 BOM 与库存对应</a><a class="" href="#10-转绘及首次调试顺序">10. 转绘及首次调试顺序</a></nav></details><a class="source" href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/electrical/%E5%8E%9F%E7%90%86%E5%9B%BE-v0.1.md">查看 Markdown 源文件 ↗</a></aside>
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-canon-遥控器文字原理图-v01">nRF52832 Canon 遥控器：文字原理图 v0.1</h1>
 <p>日期：2026-09-17。用于转绘原理图和开始 PCB 规划；尚未完成 EDA ERC、PCB layout、射频调试或样机验证。</p>
+<p><a href="schematic-drawing-v0.1.html">查看 7 页图形原理图</a>：2026-09-18 按本版连接绘制，含元件符号、引脚编号、数值和 layout 注释。本次补齐 BAT54H 的厂商脚号：2=阳极、1=阴极，电路拓扑不变。</p>
 <p>本版对应目前的机械方案：四向圆环、中心 K2-1831SL-A4SW-01 两段键、下排三个圆键、NH-B1515RGBA-GF RGB、HX TYPE-C 6P QTWT 和单节软包锂电池。7 个普通开关 + 1 个两段开关，共 <strong>9 路按键信号</strong>。主控选 <strong>nRF52832-QFAA，QFN48，6 × 6 mm</strong>，不使用 WLCSP 的引脚表。</p>
 <p>建议转绘为五页：① USB／充电／电源；② MCU／时钟；③ 按键／RGB；④ RF／天线；⑤ SWD／测试点。相同网络名直接相连。下文所有 <code>GND</code> 属于同一电气网络，<code>NC</code> 是不连接，<code>DNP</code> 是保留焊盘但首版不装。</p>
 <h2 id="1-总体结构与电源网络">1. 总体结构与电源网络</h2>
@@ -143,8 +144,8 @@ CHG_N                : U100.1 — U200.21/P0.18
 <p><strong>Layout 注释：</strong> C101 放 U100.4 旁，C102 放 U100.3 旁；PROG 电阻紧邻 U100.5，其地回到 U100.2 附近。充电电流路径留足线宽并铺地散热，远离晶体、天线和 ADC。100 mA、VBAT=3 V、VBUS=5 V 时芯片发热约 0.2 W；仍需装壳充电测温，不能用内部芯片热调节替代电池温度管理。</p>
 <h3 id="23-usb电池自动切换">2.3 USB／电池自动切换</h3>
 <pre><code class="language-text">D100  BAT54H，Nexperia，SOD123F，新增：
-      A/阳极 = VBUS_5V
-      K/阴极 = VSYS
+      2/A/阳极 = VBUS_5V
+      1/K/阴极 = VSYS（器件标记条一侧）
 
 Q100  AO3401A，P-MOS，SOT23，新增：
       1/G = BAT_PATH_GATE

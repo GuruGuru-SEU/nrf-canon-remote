@@ -5,6 +5,8 @@
   "scripts": {
     "build": "node scripts/build_preview.mjs",
     "build:docs": "node scripts/build_electrical_docs.mjs",
+    "build:schematics": "uv run python scripts/draw_schematics.py && uv run python scripts/check_electrical.py && npm run build:docs",
+    "check:schematics": "uv run python scripts/check_electrical.py && node scripts/check_schematics.mjs",
     "check:preview": "node scripts/check_preview.mjs"
   },
   "keywords": [],

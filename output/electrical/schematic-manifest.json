@@ -1,0 +1,3928 @@
+{
+  "version": "0.1",
+  "tool": "Schemdraw 0.23",
+  "source_sha256": {
+    "原理图-v0.1.md": "fe7c5bb2be26dc211b52c9a5bd8e7d0b8a5323470677b1fa2b75fa9cc900b528",
+    "BOM-v0.1.md": "7941029a0edcdb0bffd4b1aeff88e80fc2d22bcc9fbf4855ab916f218e73eabe"
+  },
+  "parts": {
+    "J100": {
+      "value": "HX TYPE-C 6P QTWT",
+      "pins": {
+        "A9": "VBUS_5V",
+        "B9": "VBUS_5V",
+        "A12": "GND",
+        "B12": "GND",
+        "A5": "USB_CC1",
+        "B5": "USB_CC2",
+        "17": "GND",
+        "18": "GND",
+        "19": "GND",
+        "20": "GND"
+      },
+      "kind": "J",
+      "fitted": true
+    },
+    "R100": {
+      "value": "5.1k",
+      "pins": {
+        "1": "USB_CC1",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R101": {
+      "value": "5.1k",
+      "pins": {
+        "1": "USB_CC2",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C100": {
+      "value": "100nF / 16V",
+      "pins": {
+        "1": "VBUS_5V",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "D101": {
+      "value": "PESDNC2FD5VB",
+      "pins": {
+        "1": "VBUS_5V",
+        "2": "GND"
+      },
+      "kind": "TVS",
+      "fitted": true
+    },
+    "D102": {
+      "value": "PESDNC2FD5VB",
+      "pins": {
+        "1": "USB_CC1",
+        "2": "GND"
+      },
+      "kind": "TVS",
+      "fitted": true
+    },
+    "D103": {
+      "value": "PESDNC2FD5VB",
+      "pins": {
+        "1": "USB_CC2",
+        "2": "GND"
+      },
+      "kind": "TVS",
+      "fitted": true
+    },
+    "U100": {
+      "value": "MSTP4054-42",
+      "pins": {
+        "1": "CHG_N",
+        "2": "GND",
+        "3": "VBAT",
+        "4": "VBUS_5V",
+        "5": "CHG_PROG"
+      },
+      "kind": "U",
+      "fitted": true
+    },
+    "C101": {
+      "value": "2.2uF / 6.3V",
+      "pins": {
+        "1": "VBUS_5V",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C102": {
+      "value": "1uF / 16V",
+      "pins": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "R105": {
+      "value": "10k",
+      "pins": {
+        "1": "CHG_PROG",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R106": {
+      "value": "10k",
+      "pins": {
+        "1": "VDD",
+        "2": "CHG_N"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "J101": {
+      "value": "Battery wire pads",
+      "pins": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "kind": "J",
+      "fitted": false
+    },
+    "BAT1": {
+      "value": "1S protected LiPo / ~320mAh",
+      "pins": {
+        "+": "VBAT",
+        "-": "GND"
+      },
+      "kind": "battery",
+      "fitted": true,
+      "external": true
+    },
+    "D100": {
+      "value": "BAT54H / SOD123F",
+      "pins": {
+        "2": "VBUS_5V",
+        "1": "VSYS"
+      },
+      "kind": "schottky",
+      "fitted": true
+    },
+    "Q100": {
+      "value": "AO3401A",
+      "pins": {
+        "1": "BAT_PATH_GATE",
+        "2": "VSYS",
+        "3": "VBAT"
+      },
+      "kind": "PMOS",
+      "fitted": true
+    },
+    "R102": {
+      "value": "0R",
+      "pins": {
+        "1": "VBUS_5V",
+        "2": "BAT_PATH_GATE"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R103": {
+      "value": "10k",
+      "pins": {
+        "1": "BAT_PATH_GATE",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "U101": {
+      "value": "ME6211C33M5G-N",
+      "pins": {
+        "1": "VSYS",
+        "2": "GND",
+        "3": "VSYS",
+        "4": null,
+        "5": "VREG_3V3"
+      },
+      "kind": "U",
+      "fitted": true
+    },
+    "C103": {
+      "value": "1uF / 16V",
+      "pins": {
+        "1": "VSYS",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C104": {
+      "value": "1uF / 16V",
+      "pins": {
+        "1": "VREG_3V3",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "R104": {
+      "value": "0R",
+      "pins": {
+        "1": "VREG_3V3",
+        "2": "VDD"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "Q101": {
+      "value": "SI2302",
+      "pins": {
+        "1": "USB_GATE",
+        "2": "GND",
+        "3": "USB_PRESENT_N"
+      },
+      "kind": "NMOS",
+      "fitted": true
+    },
+    "R107": {
+      "value": "10k",
+      "pins": {
+        "1": "VBUS_5V",
+        "2": "USB_GATE"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R108": {
+      "value": "1M",
+      "pins": {
+        "1": "USB_GATE",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R109": {
+      "value": "10k",
+      "pins": {
+        "1": "VDD",
+        "2": "USB_PRESENT_N"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R110": {
+      "value": "1M",
+      "pins": {
+        "1": "VBAT",
+        "2": "VBAT_SENSE"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R111": {
+      "value": "1M",
+      "pins": {
+        "1": "VBAT_SENSE",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C105": {
+      "value": "100nF",
+      "pins": {
+        "1": "VBAT_SENSE",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "U200": {
+      "value": "nRF52832-QFAA",
+      "pins": {
+        "1": "DEC1",
+        "2": "XL1",
+        "3": "XL2",
+        "4": "VBAT_SENSE",
+        "5": null,
+        "6": "KEY_UP",
+        "7": "KEY_DOWN",
+        "8": "KEY_LEFT",
+        "9": "KEY_RIGHT",
+        "10": "KEY_AUX1",
+        "11": null,
+        "12": null,
+        "13": "VDD",
+        "14": "KEY_AUX2",
+        "15": "KEY_AUX3",
+        "16": "LED_R_PWM",
+        "17": "LED_G_PWM",
+        "18": "LED_B_PWM",
+        "19": "KEY_HALF",
+        "20": "KEY_FULL",
+        "21": "CHG_N",
+        "22": "USB_PRESENT_N",
+        "23": null,
+        "24": "RESET_N",
+        "25": "SWDCLK",
+        "26": "SWDIO",
+        "27": null,
+        "28": null,
+        "29": null,
+        "30": "RF_ANT",
+        "31": "GND",
+        "32": null,
+        "33": "DEC3",
+        "34": "XC1",
+        "35": "XC2",
+        "36": "VDD",
+        "37": "P025_FILTER",
+        "38": "P026_FILTER",
+        "39": null,
+        "40": null,
+        "41": null,
+        "42": null,
+        "43": null,
+        "44": null,
+        "45": "GND",
+        "46": "DEC4",
+        "47": "DCC",
+        "48": "VDD",
+        "EP": "GND"
+      },
+      "kind": "U",
+      "fitted": true
+    },
+    "C200": {
+      "value": "100nF",
+      "pins": {
+        "1": "DEC1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C201": {
+      "value": "100pF / C0G",
+      "pins": {
+        "1": "DEC3",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C202": {
+      "value": "1uF / X5R",
+      "pins": {
+        "1": "DEC4",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C203": {
+      "value": "100nF",
+      "pins": {
+        "1": "VDD",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C204": {
+      "value": "100nF",
+      "pins": {
+        "1": "VDD",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C205": {
+      "value": "4.7uF / 10V",
+      "pins": {
+        "1": "VDD",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C206": {
+      "value": "100nF",
+      "pins": {
+        "1": "VDD",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C218": {
+      "value": "12pF / C0G",
+      "pins": {
+        "1": "P025_FILTER",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C219": {
+      "value": "12pF / C0G",
+      "pins": {
+        "1": "P026_FILTER",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "L200": {
+      "value": "10uH",
+      "pins": {
+        "1": "DCC",
+        "2": "DCDC_MID"
+      },
+      "kind": "L",
+      "fitted": true
+    },
+    "L201": {
+      "value": "15nH",
+      "pins": {
+        "1": "DCDC_MID",
+        "2": "DEC4"
+      },
+      "kind": "L",
+      "fitted": true
+    },
+    "R200": {
+      "value": "10k",
+      "pins": {
+        "1": "VDD",
+        "2": "RESET_N"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "X200": {
+      "value": "YE32MDBCD2X / 32MHz",
+      "pins": {
+        "1": "XC1",
+        "2": "GND",
+        "3": "XC2",
+        "4": "GND"
+      },
+      "kind": "X",
+      "fitted": true
+    },
+    "X201": {
+      "value": "KFC3276812520T / 32.768kHz",
+      "pins": {
+        "1": "XL1",
+        "2": "XL2"
+      },
+      "kind": "X",
+      "fitted": true
+    },
+    "C210": {
+      "value": "12pF",
+      "pins": {
+        "1": "XC1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C211": {
+      "value": "2.4pF",
+      "pins": {
+        "1": "XC1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C212": {
+      "value": "12pF",
+      "pins": {
+        "1": "XC2",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C213": {
+      "value": "2.4pF",
+      "pins": {
+        "1": "XC2",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C214": {
+      "value": "10pF",
+      "pins": {
+        "1": "XL1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C215": {
+      "value": "10pF",
+      "pins": {
+        "1": "XL1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C216": {
+      "value": "10pF",
+      "pins": {
+        "1": "XL2",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "C217": {
+      "value": "10pF",
+      "pins": {
+        "1": "XL2",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "R300": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_UP",
+        "2": "SW_UP"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C300": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_UP",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S300": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_UP",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R301": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_DOWN",
+        "2": "SW_DOWN"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C301": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_DOWN",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S301": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_DOWN",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R302": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_LEFT",
+        "2": "SW_LEFT"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C302": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_LEFT",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S302": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_LEFT",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R303": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_RIGHT",
+        "2": "SW_RIGHT"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C303": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_RIGHT",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S303": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_RIGHT",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R304": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_AUX1",
+        "2": "SW_AUX1"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C304": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_AUX1",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S304": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_AUX1",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R305": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_AUX2",
+        "2": "SW_AUX2"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C305": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_AUX2",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S305": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_AUX2",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R306": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_AUX3",
+        "2": "SW_AUX3"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C306": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_AUX3",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S306": {
+      "value": "TS-1101-C-W",
+      "pins": {
+        "1": "SW_AUX3",
+        "2": "GND"
+      },
+      "kind": "switch",
+      "fitted": true
+    },
+    "R307": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_HALF",
+        "2": "SW_HALF"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C307": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_HALF",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "R308": {
+      "value": "1k",
+      "pins": {
+        "1": "KEY_FULL",
+        "2": "SW_FULL"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C308": {
+      "value": "1nF",
+      "pins": {
+        "1": "KEY_FULL",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "S307": {
+      "value": "K2-1831SL-A4SW-01",
+      "pins": {
+        "a": "SW_HALF",
+        "b": "SW_FULL",
+        "c1": "GND",
+        "c2": "GND"
+      },
+      "kind": "dual-switch",
+      "fitted": true
+    },
+    "D400": {
+      "value": "NH-B1515RGBA-GF",
+      "pins": {
+        "2": "VSYS",
+        "1": "LED_R_K",
+        "4": "LED_G_K",
+        "3": "LED_B_K"
+      },
+      "kind": "RGB",
+      "fitted": true
+    },
+    "C400": {
+      "value": "100nF / 16V",
+      "pins": {
+        "1": "VSYS",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "R400": {
+      "value": "1.2k",
+      "pins": {
+        "1": "LED_R_K",
+        "2": "LED_R_D"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "Q400": {
+      "value": "SI2302",
+      "pins": {
+        "1": "LED_R_G",
+        "2": "GND",
+        "3": "LED_R_D"
+      },
+      "kind": "NMOS",
+      "fitted": true
+    },
+    "R403": {
+      "value": "1k",
+      "pins": {
+        "1": "LED_R_PWM",
+        "2": "LED_R_G"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R406": {
+      "value": "1M",
+      "pins": {
+        "1": "LED_R_G",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R401": {
+      "value": "1k",
+      "pins": {
+        "1": "LED_G_K",
+        "2": "LED_G_D"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "Q401": {
+      "value": "SI2302",
+      "pins": {
+        "1": "LED_G_G",
+        "2": "GND",
+        "3": "LED_G_D"
+      },
+      "kind": "NMOS",
+      "fitted": true
+    },
+    "R404": {
+      "value": "1k",
+      "pins": {
+        "1": "LED_G_PWM",
+        "2": "LED_G_G"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R407": {
+      "value": "1M",
+      "pins": {
+        "1": "LED_G_G",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R402": {
+      "value": "1k",
+      "pins": {
+        "1": "LED_B_K",
+        "2": "LED_B_D"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "Q402": {
+      "value": "SI2302",
+      "pins": {
+        "1": "LED_B_G",
+        "2": "GND",
+        "3": "LED_B_D"
+      },
+      "kind": "NMOS",
+      "fitted": true
+    },
+    "R405": {
+      "value": "1k",
+      "pins": {
+        "1": "LED_B_PWM",
+        "2": "LED_B_G"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "R408": {
+      "value": "1M",
+      "pins": {
+        "1": "LED_B_G",
+        "2": "GND"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C220": {
+      "value": "0.8pF / C0G",
+      "pins": {
+        "1": "RF_ANT",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": true
+    },
+    "L220": {
+      "value": "3.9nH / RF",
+      "pins": {
+        "1": "RF_ANT",
+        "2": "RF_50"
+      },
+      "kind": "L",
+      "fitted": true
+    },
+    "C221": {
+      "value": "DNP / TBD",
+      "pins": {
+        "1": "RF_50",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": false
+    },
+    "R221": {
+      "value": "0R",
+      "pins": {
+        "1": "RF_50",
+        "2": "ANT_FEED"
+      },
+      "kind": "R",
+      "fitted": true
+    },
+    "C222": {
+      "value": "DNP / TBD",
+      "pins": {
+        "1": "ANT_FEED",
+        "2": "GND"
+      },
+      "kind": "C",
+      "fitted": false
+    },
+    "ANT200": {
+      "value": "KH-2012-HM1",
+      "pins": {
+        "1": "ANT_FEED",
+        "2": null
+      },
+      "kind": "antenna",
+      "fitted": true
+    },
+    "J200": {
+      "value": "1x4 / 2.54mm",
+      "pins": {
+        "1": "VDD",
+        "2": "GND",
+        "3": "SWDIO",
+        "4": "SWDCLK"
+      },
+      "kind": "J",
+      "fitted": true
+    },
+    "TP200": {
+      "value": "VDD",
+      "pins": {
+        "1": "VDD"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP201": {
+      "value": "GND",
+      "pins": {
+        "1": "GND"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP202": {
+      "value": "VBUS_5V",
+      "pins": {
+        "1": "VBUS_5V"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP203": {
+      "value": "VBAT",
+      "pins": {
+        "1": "VBAT"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP204": {
+      "value": "VSYS",
+      "pins": {
+        "1": "VSYS"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP205": {
+      "value": "RESET_N",
+      "pins": {
+        "1": "RESET_N"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP206": {
+      "value": "CHG_N",
+      "pins": {
+        "1": "CHG_N"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    },
+    "TP207": {
+      "value": "USB_PRESENT_N",
+      "pins": {
+        "1": "USB_PRESENT_N"
+      },
+      "kind": "testpoint",
+      "fitted": false
+    }
+  },
+  "drawn_terminals": {
+    "J100.A9": {
+      "ref": "J100",
+      "pin": "A9",
+      "net": "VBUS_5V",
+      "p": [
+        8.65,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "J100.B9": {
+      "ref": "J100",
+      "pin": "B9",
+      "net": "VBUS_5V",
+      "p": [
+        8.65,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "J100.A5": {
+      "ref": "J100",
+      "pin": "A5",
+      "net": "USB_CC1",
+      "p": [
+        8.65,
+        21.9
+      ],
+      "sheet": 1
+    },
+    "J100.B5": {
+      "ref": "J100",
+      "pin": "B5",
+      "net": "USB_CC2",
+      "p": [
+        8.65,
+        20.3
+      ],
+      "sheet": 1
+    },
+    "J100.A12": {
+      "ref": "J100",
+      "pin": "A12",
+      "net": "GND",
+      "p": [
+        3.7,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "J100.B12": {
+      "ref": "J100",
+      "pin": "B12",
+      "net": "GND",
+      "p": [
+        3.7,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "J100.17": {
+      "ref": "J100",
+      "pin": "17",
+      "net": "GND",
+      "p": [
+        6.6,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "J100.18": {
+      "ref": "J100",
+      "pin": "18",
+      "net": "GND",
+      "p": [
+        6.6,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "J100.19": {
+      "ref": "J100",
+      "pin": "19",
+      "net": "GND",
+      "p": [
+        6.6,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "J100.20": {
+      "ref": "J100",
+      "pin": "20",
+      "net": "GND",
+      "p": [
+        6.6,
+        18.35
+      ],
+      "sheet": 1
+    },
+    "C100.1": {
+      "ref": "C100",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        14.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "C100.2": {
+      "ref": "C100",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        14.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "D101.1": {
+      "ref": "D101",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        18.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "D101.2": {
+      "ref": "D101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "R100.1": {
+      "ref": "R100",
+      "pin": "1",
+      "net": "USB_CC1",
+      "p": [
+        25.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "R100.2": {
+      "ref": "R100",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        25.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "D102.1": {
+      "ref": "D102",
+      "pin": "1",
+      "net": "USB_CC1",
+      "p": [
+        29.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "D102.2": {
+      "ref": "D102",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        29.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "R101.1": {
+      "ref": "R101",
+      "pin": "1",
+      "net": "USB_CC2",
+      "p": [
+        37.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "R101.2": {
+      "ref": "R101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        37.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "D103.1": {
+      "ref": "D103",
+      "pin": "1",
+      "net": "USB_CC2",
+      "p": [
+        41.0,
+        23.5
+      ],
+      "sheet": 1
+    },
+    "D103.2": {
+      "ref": "D103",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        41.0,
+        20.8
+      ],
+      "sheet": 1
+    },
+    "U100.4": {
+      "ref": "U100",
+      "pin": "4",
+      "net": "VBUS_5V",
+      "p": [
+        9.35,
+        14.3
+      ],
+      "sheet": 1
+    },
+    "U100.5": {
+      "ref": "U100",
+      "pin": "5",
+      "net": "CHG_PROG",
+      "p": [
+        9.35,
+        11.3
+      ],
+      "sheet": 1
+    },
+    "U100.2": {
+      "ref": "U100",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        14,
+        8.45
+      ],
+      "sheet": 1
+    },
+    "U100.3": {
+      "ref": "U100",
+      "pin": "3",
+      "net": "VBAT",
+      "p": [
+        18.65,
+        14.3
+      ],
+      "sheet": 1
+    },
+    "U100.1": {
+      "ref": "U100",
+      "pin": "1",
+      "net": "CHG_N",
+      "p": [
+        18.65,
+        11.3
+      ],
+      "sheet": 1
+    },
+    "C101.1": {
+      "ref": "C101",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        6.0,
+        14.3
+      ],
+      "sheet": 1
+    },
+    "C101.2": {
+      "ref": "C101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.0,
+        11.9
+      ],
+      "sheet": 1
+    },
+    "R105.1": {
+      "ref": "R105",
+      "pin": "1",
+      "net": "CHG_PROG",
+      "p": [
+        8.0,
+        10.8
+      ],
+      "sheet": 1
+    },
+    "R105.2": {
+      "ref": "R105",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        8.0,
+        8.3
+      ],
+      "sheet": 1
+    },
+    "C102.1": {
+      "ref": "C102",
+      "pin": "1",
+      "net": "VBAT",
+      "p": [
+        23.0,
+        14.3
+      ],
+      "sheet": 1
+    },
+    "C102.2": {
+      "ref": "C102",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        23.0,
+        11.9
+      ],
+      "sheet": 1
+    },
+    "R106.1": {
+      "ref": "R106",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        28.0,
+        11.5
+      ],
+      "sheet": 1
+    },
+    "R106.2": {
+      "ref": "R106",
+      "pin": "2",
+      "net": "CHG_N",
+      "p": [
+        28.0,
+        8.5
+      ],
+      "sheet": 1
+    },
+    "J101.1": {
+      "ref": "J101",
+      "pin": "1",
+      "net": "VBAT",
+      "p": [
+        34.35,
+        14.5
+      ],
+      "sheet": 1
+    },
+    "J101.2": {
+      "ref": "J101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        34.35,
+        12.5
+      ],
+      "sheet": 1
+    },
+    "BAT1.+": {
+      "ref": "BAT1",
+      "pin": "+",
+      "net": "VBAT",
+      "p": [
+        43.0,
+        14.5
+      ],
+      "sheet": 1
+    },
+    "BAT1.-": {
+      "ref": "BAT1",
+      "pin": "-",
+      "net": "GND",
+      "p": [
+        43.0,
+        11.7
+      ],
+      "sheet": 1
+    },
+    "D100.2": {
+      "ref": "D100",
+      "pin": "2",
+      "net": "VBUS_5V",
+      "p": [
+        6.0,
+        24.0
+      ],
+      "sheet": 2
+    },
+    "D100.1": {
+      "ref": "D100",
+      "pin": "1",
+      "net": "VSYS",
+      "p": [
+        9.0,
+        24.0
+      ],
+      "sheet": 2
+    },
+    "Q100.1": {
+      "ref": "Q100",
+      "pin": "1",
+      "net": "BAT_PATH_GATE",
+      "p": [
+        20.166666666666668,
+        22.3
+      ],
+      "sheet": 2
+    },
+    "Q100.2": {
+      "ref": "Q100",
+      "pin": "2",
+      "net": "VSYS",
+      "p": [
+        21.0,
+        22.8
+      ],
+      "sheet": 2
+    },
+    "Q100.3": {
+      "ref": "Q100",
+      "pin": "3",
+      "net": "VBAT",
+      "p": [
+        21.0,
+        21.133333333333333
+      ],
+      "sheet": 2
+    },
+    "R102.1": {
+      "ref": "R102",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        12.0,
+        22.3
+      ],
+      "sheet": 2
+    },
+    "R102.2": {
+      "ref": "R102",
+      "pin": "2",
+      "net": "BAT_PATH_GATE",
+      "p": [
+        15.0,
+        22.3
+      ],
+      "sheet": 2
+    },
+    "R103.1": {
+      "ref": "R103",
+      "pin": "1",
+      "net": "BAT_PATH_GATE",
+      "p": [
+        17.6,
+        21.7
+      ],
+      "sheet": 2
+    },
+    "R103.2": {
+      "ref": "R103",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        17.6,
+        18.1
+      ],
+      "sheet": 2
+    },
+    "U101.1": {
+      "ref": "U101",
+      "pin": "1",
+      "net": "VSYS",
+      "p": [
+        29.35,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "U101.3": {
+      "ref": "U101",
+      "pin": "3",
+      "net": "VSYS",
+      "p": [
+        29.35,
+        21
+      ],
+      "sheet": 2
+    },
+    "U101.2": {
+      "ref": "U101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        33,
+        18.150000000000002
+      ],
+      "sheet": 2
+    },
+    "U101.5": {
+      "ref": "U101",
+      "pin": "5",
+      "net": "VREG_3V3",
+      "p": [
+        36.65,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "U101.4": {
+      "ref": "U101",
+      "pin": "4",
+      "net": null,
+      "p": [
+        36.65,
+        21
+      ],
+      "sheet": 2
+    },
+    "C103.1": {
+      "ref": "C103",
+      "pin": "1",
+      "net": "VSYS",
+      "p": [
+        27.0,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "C103.2": {
+      "ref": "C103",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        27.0,
+        19.7
+      ],
+      "sheet": 2
+    },
+    "C104.1": {
+      "ref": "C104",
+      "pin": "1",
+      "net": "VREG_3V3",
+      "p": [
+        38.5,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "C104.2": {
+      "ref": "C104",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        38.5,
+        19.7
+      ],
+      "sheet": 2
+    },
+    "R104.1": {
+      "ref": "R104",
+      "pin": "1",
+      "net": "VREG_3V3",
+      "p": [
+        40.0,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "R104.2": {
+      "ref": "R104",
+      "pin": "2",
+      "net": "VDD",
+      "p": [
+        43.0,
+        23.2
+      ],
+      "sheet": 2
+    },
+    "Q101.1": {
+      "ref": "Q101",
+      "pin": "1",
+      "net": "USB_GATE",
+      "p": [
+        11.166666666666666,
+        11.333333333333334
+      ],
+      "sheet": 2
+    },
+    "Q101.2": {
+      "ref": "Q101",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        12.0,
+        10.833333333333334
+      ],
+      "sheet": 2
+    },
+    "Q101.3": {
+      "ref": "Q101",
+      "pin": "3",
+      "net": "USB_PRESENT_N",
+      "p": [
+        12.0,
+        12.5
+      ],
+      "sheet": 2
+    },
+    "R109.1": {
+      "ref": "R109",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        12.0,
+        15.7
+      ],
+      "sheet": 2
+    },
+    "R109.2": {
+      "ref": "R109",
+      "pin": "2",
+      "net": "USB_PRESENT_N",
+      "p": [
+        12.0,
+        12.5
+      ],
+      "sheet": 2
+    },
+    "R107.1": {
+      "ref": "R107",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        5.0,
+        11.333333333333334
+      ],
+      "sheet": 2
+    },
+    "R107.2": {
+      "ref": "R107",
+      "pin": "2",
+      "net": "USB_GATE",
+      "p": [
+        8.0,
+        11.333333333333334
+      ],
+      "sheet": 2
+    },
+    "R108.1": {
+      "ref": "R108",
+      "pin": "1",
+      "net": "USB_GATE",
+      "p": [
+        9.2,
+        11.333333333333334
+      ],
+      "sheet": 2
+    },
+    "R108.2": {
+      "ref": "R108",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        9.2,
+        7.6
+      ],
+      "sheet": 2
+    },
+    "R110.1": {
+      "ref": "R110",
+      "pin": "1",
+      "net": "VBAT",
+      "p": [
+        29.0,
+        15.0
+      ],
+      "sheet": 2
+    },
+    "R110.2": {
+      "ref": "R110",
+      "pin": "2",
+      "net": "VBAT_SENSE",
+      "p": [
+        29.0,
+        12.0
+      ],
+      "sheet": 2
+    },
+    "R111.1": {
+      "ref": "R111",
+      "pin": "1",
+      "net": "VBAT_SENSE",
+      "p": [
+        29.0,
+        12.0
+      ],
+      "sheet": 2
+    },
+    "R111.2": {
+      "ref": "R111",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        29.0,
+        8.7
+      ],
+      "sheet": 2
+    },
+    "C105.1": {
+      "ref": "C105",
+      "pin": "1",
+      "net": "VBAT_SENSE",
+      "p": [
+        35.0,
+        12.0
+      ],
+      "sheet": 2
+    },
+    "C105.2": {
+      "ref": "C105",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        35.0,
+        8.7
+      ],
+      "sheet": 2
+    },
+    "U200.13": {
+      "ref": "U200",
+      "pin": "13",
+      "net": "VDD",
+      "p": [
+        16.35,
+        23.5
+      ],
+      "sheet": 3
+    },
+    "U200.36": {
+      "ref": "U200",
+      "pin": "36",
+      "net": "VDD",
+      "p": [
+        16.35,
+        19.5
+      ],
+      "sheet": 3
+    },
+    "U200.48": {
+      "ref": "U200",
+      "pin": "48",
+      "net": "VDD",
+      "p": [
+        16.35,
+        15.5
+      ],
+      "sheet": 3
+    },
+    "U200.32": {
+      "ref": "U200",
+      "pin": "32",
+      "net": null,
+      "p": [
+        16.35,
+        12
+      ],
+      "sheet": 3
+    },
+    "U200.44": {
+      "ref": "U200",
+      "pin": "44",
+      "net": null,
+      "p": [
+        16.35,
+        10.5
+      ],
+      "sheet": 3
+    },
+    "U200.1": {
+      "ref": "U200",
+      "pin": "1",
+      "net": "DEC1",
+      "p": [
+        27.65,
+        23.5
+      ],
+      "sheet": 3
+    },
+    "U200.33": {
+      "ref": "U200",
+      "pin": "33",
+      "net": "DEC3",
+      "p": [
+        27.65,
+        19.5
+      ],
+      "sheet": 3
+    },
+    "U200.46": {
+      "ref": "U200",
+      "pin": "46",
+      "net": "DEC4",
+      "p": [
+        27.65,
+        15.5
+      ],
+      "sheet": 3
+    },
+    "U200.47": {
+      "ref": "U200",
+      "pin": "47",
+      "net": "DCC",
+      "p": [
+        27.65,
+        11
+      ],
+      "sheet": 3
+    },
+    "U200.31": {
+      "ref": "U200",
+      "pin": "31",
+      "net": "GND",
+      "p": [
+        19,
+        8.45
+      ],
+      "sheet": 3
+    },
+    "U200.45": {
+      "ref": "U200",
+      "pin": "45",
+      "net": "GND",
+      "p": [
+        22,
+        8.45
+      ],
+      "sheet": 3
+    },
+    "U200.EP": {
+      "ref": "U200",
+      "pin": "EP",
+      "net": "GND",
+      "p": [
+        25,
+        8.45
+      ],
+      "sheet": 3
+    },
+    "C203.1": {
+      "ref": "C203",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        10.0,
+        23.5
+      ],
+      "sheet": 3
+    },
+    "C203.2": {
+      "ref": "C203",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        10.0,
+        21.0
+      ],
+      "sheet": 3
+    },
+    "C204.1": {
+      "ref": "C204",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        10.0,
+        19.5
+      ],
+      "sheet": 3
+    },
+    "C204.2": {
+      "ref": "C204",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        10.0,
+        17.0
+      ],
+      "sheet": 3
+    },
+    "C205.1": {
+      "ref": "C205",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        5.0,
+        15.5
+      ],
+      "sheet": 3
+    },
+    "C205.2": {
+      "ref": "C205",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        5.0,
+        13.0
+      ],
+      "sheet": 3
+    },
+    "C206.1": {
+      "ref": "C206",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        10.0,
+        15.5
+      ],
+      "sheet": 3
+    },
+    "C206.2": {
+      "ref": "C206",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        10.0,
+        13.0
+      ],
+      "sheet": 3
+    },
+    "C200.1": {
+      "ref": "C200",
+      "pin": "1",
+      "net": "DEC1",
+      "p": [
+        34.0,
+        23.5
+      ],
+      "sheet": 3
+    },
+    "C200.2": {
+      "ref": "C200",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        34.0,
+        20.9
+      ],
+      "sheet": 3
+    },
+    "C201.1": {
+      "ref": "C201",
+      "pin": "1",
+      "net": "DEC3",
+      "p": [
+        34.0,
+        19.5
+      ],
+      "sheet": 3
+    },
+    "C201.2": {
+      "ref": "C201",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        34.0,
+        16.9
+      ],
+      "sheet": 3
+    },
+    "C202.1": {
+      "ref": "C202",
+      "pin": "1",
+      "net": "DEC4",
+      "p": [
+        34.0,
+        15.5
+      ],
+      "sheet": 3
+    },
+    "C202.2": {
+      "ref": "C202",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        34.0,
+        12.9
+      ],
+      "sheet": 3
+    },
+    "L200.1": {
+      "ref": "L200",
+      "pin": "1",
+      "net": "DCC",
+      "p": [
+        30.0,
+        9.8
+      ],
+      "sheet": 3
+    },
+    "L200.2": {
+      "ref": "L200",
+      "pin": "2",
+      "net": "DCDC_MID",
+      "p": [
+        34.0,
+        9.800000000000004
+      ],
+      "sheet": 3
+    },
+    "L201.1": {
+      "ref": "L201",
+      "pin": "1",
+      "net": "DCDC_MID",
+      "p": [
+        35.5,
+        9.8
+      ],
+      "sheet": 3
+    },
+    "L201.2": {
+      "ref": "L201",
+      "pin": "2",
+      "net": "DEC4",
+      "p": [
+        39.5,
+        9.800000000000004
+      ],
+      "sheet": 3
+    },
+    "X200.1": {
+      "ref": "X200",
+      "pin": "1",
+      "net": "XC1",
+      "p": [
+        9.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "X200.3": {
+      "ref": "X200",
+      "pin": "3",
+      "net": "XC2",
+      "p": [
+        15.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C210.1": {
+      "ref": "C210",
+      "pin": "1",
+      "net": "XC1",
+      "p": [
+        3.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C210.2": {
+      "ref": "C210",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        3.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C211.1": {
+      "ref": "C211",
+      "pin": "1",
+      "net": "XC1",
+      "p": [
+        7.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C211.2": {
+      "ref": "C211",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        7.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C212.1": {
+      "ref": "C212",
+      "pin": "1",
+      "net": "XC2",
+      "p": [
+        18.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C212.2": {
+      "ref": "C212",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C213.1": {
+      "ref": "C213",
+      "pin": "1",
+      "net": "XC2",
+      "p": [
+        22.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C213.2": {
+      "ref": "C213",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        22.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "X200.2": {
+      "ref": "X200",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        11.3,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "X200.4": {
+      "ref": "X200",
+      "pin": "4",
+      "net": "GND",
+      "p": [
+        12.7,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "X201.1": {
+      "ref": "X201",
+      "pin": "1",
+      "net": "XL1",
+      "p": [
+        33.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "X201.2": {
+      "ref": "X201",
+      "pin": "2",
+      "net": "XL2",
+      "p": [
+        39.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C214.1": {
+      "ref": "C214",
+      "pin": "1",
+      "net": "XL1",
+      "p": [
+        27.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C214.2": {
+      "ref": "C214",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        27.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C215.1": {
+      "ref": "C215",
+      "pin": "1",
+      "net": "XL1",
+      "p": [
+        31.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C215.2": {
+      "ref": "C215",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        31.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C216.1": {
+      "ref": "C216",
+      "pin": "1",
+      "net": "XL2",
+      "p": [
+        41.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C216.2": {
+      "ref": "C216",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        41.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "C217.1": {
+      "ref": "C217",
+      "pin": "1",
+      "net": "XL2",
+      "p": [
+        45.0,
+        23.0
+      ],
+      "sheet": 4
+    },
+    "C217.2": {
+      "ref": "C217",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        45.0,
+        20.5
+      ],
+      "sheet": 4
+    },
+    "U200.34": {
+      "ref": "U200",
+      "pin": "34",
+      "net": "XC1",
+      "p": [
+        4.35,
+        15.7
+      ],
+      "sheet": 4
+    },
+    "U200.35": {
+      "ref": "U200",
+      "pin": "35",
+      "net": "XC2",
+      "p": [
+        4.35,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "U200.2": {
+      "ref": "U200",
+      "pin": "2",
+      "net": "XL1",
+      "p": [
+        4.35,
+        12.5
+      ],
+      "sheet": 4
+    },
+    "U200.3": {
+      "ref": "U200",
+      "pin": "3",
+      "net": "XL2",
+      "p": [
+        4.35,
+        10.9
+      ],
+      "sheet": 4
+    },
+    "U200.30": {
+      "ref": "U200",
+      "pin": "30",
+      "net": "RF_ANT",
+      "p": [
+        13.65,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "C220.1": {
+      "ref": "C220",
+      "pin": "1",
+      "net": "RF_ANT",
+      "p": [
+        16.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "C220.2": {
+      "ref": "C220",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        16.0,
+        11.3
+      ],
+      "sheet": 4
+    },
+    "L220.1": {
+      "ref": "L220",
+      "pin": "1",
+      "net": "RF_ANT",
+      "p": [
+        18.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "L220.2": {
+      "ref": "L220",
+      "pin": "2",
+      "net": "RF_50",
+      "p": [
+        23.0,
+        14.100000000000003
+      ],
+      "sheet": 4
+    },
+    "C221.1": {
+      "ref": "C221",
+      "pin": "1",
+      "net": "RF_50",
+      "p": [
+        26.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "C221.2": {
+      "ref": "C221",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        26.0,
+        11.3
+      ],
+      "sheet": 4
+    },
+    "R221.1": {
+      "ref": "R221",
+      "pin": "1",
+      "net": "RF_50",
+      "p": [
+        29.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "R221.2": {
+      "ref": "R221",
+      "pin": "2",
+      "net": "ANT_FEED",
+      "p": [
+        33.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "C222.1": {
+      "ref": "C222",
+      "pin": "1",
+      "net": "ANT_FEED",
+      "p": [
+        35.0,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "C222.2": {
+      "ref": "C222",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        35.0,
+        11.3
+      ],
+      "sheet": 4
+    },
+    "ANT200.1": {
+      "ref": "ANT200",
+      "pin": "1",
+      "net": "ANT_FEED",
+      "p": [
+        39.35,
+        14.1
+      ],
+      "sheet": 4
+    },
+    "ANT200.2": {
+      "ref": "ANT200",
+      "pin": "2",
+      "net": null,
+      "p": [
+        44,
+        11.75
+      ],
+      "sheet": 4
+    },
+    "C300.1": {
+      "ref": "C300",
+      "pin": "1",
+      "net": "KEY_UP",
+      "p": [
+        6.5,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "C300.2": {
+      "ref": "C300",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.5,
+        22.4
+      ],
+      "sheet": 5
+    },
+    "R300.1": {
+      "ref": "R300",
+      "pin": "1",
+      "net": "KEY_UP",
+      "p": [
+        9.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "R300.2": {
+      "ref": "R300",
+      "pin": "2",
+      "net": "SW_UP",
+      "p": [
+        12.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "S300.1": {
+      "ref": "S300",
+      "pin": "1",
+      "net": "SW_UP",
+      "p": [
+        15.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "S300.2": {
+      "ref": "S300",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "C301.1": {
+      "ref": "C301",
+      "pin": "1",
+      "net": "KEY_DOWN",
+      "p": [
+        6.5,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "C301.2": {
+      "ref": "C301",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.5,
+        19.0
+      ],
+      "sheet": 5
+    },
+    "R301.1": {
+      "ref": "R301",
+      "pin": "1",
+      "net": "KEY_DOWN",
+      "p": [
+        9.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "R301.2": {
+      "ref": "R301",
+      "pin": "2",
+      "net": "SW_DOWN",
+      "p": [
+        12.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "S301.1": {
+      "ref": "S301",
+      "pin": "1",
+      "net": "SW_DOWN",
+      "p": [
+        15.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "S301.2": {
+      "ref": "S301",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "C302.1": {
+      "ref": "C302",
+      "pin": "1",
+      "net": "KEY_LEFT",
+      "p": [
+        6.5,
+        17.2
+      ],
+      "sheet": 5
+    },
+    "C302.2": {
+      "ref": "C302",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.5,
+        15.6
+      ],
+      "sheet": 5
+    },
+    "R302.1": {
+      "ref": "R302",
+      "pin": "1",
+      "net": "KEY_LEFT",
+      "p": [
+        9.0,
+        17.2
+      ],
+      "sheet": 5
+    },
+    "R302.2": {
+      "ref": "R302",
+      "pin": "2",
+      "net": "SW_LEFT",
+      "p": [
+        12.0,
+        17.2
+      ],
+      "sheet": 5
+    },
+    "S302.1": {
+      "ref": "S302",
+      "pin": "1",
+      "net": "SW_LEFT",
+      "p": [
+        15.0,
+        17.2
+      ],
+      "sheet": 5
+    },
+    "S302.2": {
+      "ref": "S302",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        17.2
+      ],
+      "sheet": 5
+    },
+    "C303.1": {
+      "ref": "C303",
+      "pin": "1",
+      "net": "KEY_RIGHT",
+      "p": [
+        6.5,
+        13.8
+      ],
+      "sheet": 5
+    },
+    "C303.2": {
+      "ref": "C303",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.5,
+        12.200000000000001
+      ],
+      "sheet": 5
+    },
+    "R303.1": {
+      "ref": "R303",
+      "pin": "1",
+      "net": "KEY_RIGHT",
+      "p": [
+        9.0,
+        13.8
+      ],
+      "sheet": 5
+    },
+    "R303.2": {
+      "ref": "R303",
+      "pin": "2",
+      "net": "SW_RIGHT",
+      "p": [
+        12.0,
+        13.8
+      ],
+      "sheet": 5
+    },
+    "S303.1": {
+      "ref": "S303",
+      "pin": "1",
+      "net": "SW_RIGHT",
+      "p": [
+        15.0,
+        13.8
+      ],
+      "sheet": 5
+    },
+    "S303.2": {
+      "ref": "S303",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        13.8
+      ],
+      "sheet": 5
+    },
+    "C304.1": {
+      "ref": "C304",
+      "pin": "1",
+      "net": "KEY_AUX1",
+      "p": [
+        6.5,
+        10.4
+      ],
+      "sheet": 5
+    },
+    "C304.2": {
+      "ref": "C304",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        6.5,
+        8.8
+      ],
+      "sheet": 5
+    },
+    "R304.1": {
+      "ref": "R304",
+      "pin": "1",
+      "net": "KEY_AUX1",
+      "p": [
+        9.0,
+        10.4
+      ],
+      "sheet": 5
+    },
+    "R304.2": {
+      "ref": "R304",
+      "pin": "2",
+      "net": "SW_AUX1",
+      "p": [
+        12.0,
+        10.4
+      ],
+      "sheet": 5
+    },
+    "S304.1": {
+      "ref": "S304",
+      "pin": "1",
+      "net": "SW_AUX1",
+      "p": [
+        15.0,
+        10.4
+      ],
+      "sheet": 5
+    },
+    "S304.2": {
+      "ref": "S304",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        18.0,
+        10.4
+      ],
+      "sheet": 5
+    },
+    "C305.1": {
+      "ref": "C305",
+      "pin": "1",
+      "net": "KEY_AUX2",
+      "p": [
+        30.5,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "C305.2": {
+      "ref": "C305",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        30.5,
+        22.4
+      ],
+      "sheet": 5
+    },
+    "R305.1": {
+      "ref": "R305",
+      "pin": "1",
+      "net": "KEY_AUX2",
+      "p": [
+        33.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "R305.2": {
+      "ref": "R305",
+      "pin": "2",
+      "net": "SW_AUX2",
+      "p": [
+        36.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "S305.1": {
+      "ref": "S305",
+      "pin": "1",
+      "net": "SW_AUX2",
+      "p": [
+        39.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "S305.2": {
+      "ref": "S305",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        42.0,
+        24.0
+      ],
+      "sheet": 5
+    },
+    "C306.1": {
+      "ref": "C306",
+      "pin": "1",
+      "net": "KEY_AUX3",
+      "p": [
+        30.5,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "C306.2": {
+      "ref": "C306",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        30.5,
+        19.0
+      ],
+      "sheet": 5
+    },
+    "R306.1": {
+      "ref": "R306",
+      "pin": "1",
+      "net": "KEY_AUX3",
+      "p": [
+        33.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "R306.2": {
+      "ref": "R306",
+      "pin": "2",
+      "net": "SW_AUX3",
+      "p": [
+        36.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "S306.1": {
+      "ref": "S306",
+      "pin": "1",
+      "net": "SW_AUX3",
+      "p": [
+        39.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "S306.2": {
+      "ref": "S306",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        42.0,
+        20.6
+      ],
+      "sheet": 5
+    },
+    "C307.1": {
+      "ref": "C307",
+      "pin": "1",
+      "net": "KEY_HALF",
+      "p": [
+        30.5,
+        14.0
+      ],
+      "sheet": 5
+    },
+    "C307.2": {
+      "ref": "C307",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        30.5,
+        12.4
+      ],
+      "sheet": 5
+    },
+    "R307.1": {
+      "ref": "R307",
+      "pin": "1",
+      "net": "KEY_HALF",
+      "p": [
+        33.0,
+        14.0
+      ],
+      "sheet": 5
+    },
+    "R307.2": {
+      "ref": "R307",
+      "pin": "2",
+      "net": "SW_HALF",
+      "p": [
+        36.0,
+        14.0
+      ],
+      "sheet": 5
+    },
+    "S307.a": {
+      "ref": "S307",
+      "pin": "a",
+      "net": "SW_HALF",
+      "p": [
+        39.0,
+        14.0
+      ],
+      "sheet": 5
+    },
+    "S307.c1": {
+      "ref": "S307",
+      "pin": "c1",
+      "net": "GND",
+      "p": [
+        42.0,
+        14.0
+      ],
+      "sheet": 5
+    },
+    "C308.1": {
+      "ref": "C308",
+      "pin": "1",
+      "net": "KEY_FULL",
+      "p": [
+        30.5,
+        10.5
+      ],
+      "sheet": 5
+    },
+    "C308.2": {
+      "ref": "C308",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        30.5,
+        8.9
+      ],
+      "sheet": 5
+    },
+    "R308.1": {
+      "ref": "R308",
+      "pin": "1",
+      "net": "KEY_FULL",
+      "p": [
+        33.0,
+        10.5
+      ],
+      "sheet": 5
+    },
+    "R308.2": {
+      "ref": "R308",
+      "pin": "2",
+      "net": "SW_FULL",
+      "p": [
+        36.0,
+        10.5
+      ],
+      "sheet": 5
+    },
+    "S307.b": {
+      "ref": "S307",
+      "pin": "b",
+      "net": "SW_FULL",
+      "p": [
+        39.0,
+        10.5
+      ],
+      "sheet": 5
+    },
+    "S307.c2": {
+      "ref": "S307",
+      "pin": "c2",
+      "net": "GND",
+      "p": [
+        42.0,
+        10.5
+      ],
+      "sheet": 5
+    },
+    "D400.2": {
+      "ref": "D400",
+      "pin": "2",
+      "net": "VSYS",
+      "p": [
+        8.5,
+        24
+      ],
+      "sheet": 6
+    },
+    "C400.1": {
+      "ref": "C400",
+      "pin": "1",
+      "net": "VSYS",
+      "p": [
+        43.5,
+        24.0
+      ],
+      "sheet": 6
+    },
+    "C400.2": {
+      "ref": "C400",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        43.5,
+        21.0
+      ],
+      "sheet": 6
+    },
+    "D400.1": {
+      "ref": "D400",
+      "pin": "1",
+      "net": "LED_R_K",
+      "p": [
+        10.0,
+        21.0
+      ],
+      "sheet": 6
+    },
+    "R400.1": {
+      "ref": "R400",
+      "pin": "1",
+      "net": "LED_R_K",
+      "p": [
+        10.0,
+        19.3
+      ],
+      "sheet": 6
+    },
+    "R400.2": {
+      "ref": "R400",
+      "pin": "2",
+      "net": "LED_R_D",
+      "p": [
+        10.0,
+        16.3
+      ],
+      "sheet": 6
+    },
+    "Q400.1": {
+      "ref": "Q400",
+      "pin": "1",
+      "net": "LED_R_G",
+      "p": [
+        9.166666666666666,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "Q400.2": {
+      "ref": "Q400",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        10.0,
+        12.933333333333334
+      ],
+      "sheet": 6
+    },
+    "Q400.3": {
+      "ref": "Q400",
+      "pin": "3",
+      "net": "LED_R_D",
+      "p": [
+        10.0,
+        14.6
+      ],
+      "sheet": 6
+    },
+    "R403.1": {
+      "ref": "R403",
+      "pin": "1",
+      "net": "LED_R_PWM",
+      "p": [
+        3.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R403.2": {
+      "ref": "R403",
+      "pin": "2",
+      "net": "LED_R_G",
+      "p": [
+        6.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R406.1": {
+      "ref": "R406",
+      "pin": "1",
+      "net": "LED_R_G",
+      "p": [
+        7.7,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R406.2": {
+      "ref": "R406",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        7.7,
+        8.9
+      ],
+      "sheet": 6
+    },
+    "D400.4": {
+      "ref": "D400",
+      "pin": "4",
+      "net": "LED_G_K",
+      "p": [
+        24.0,
+        21.0
+      ],
+      "sheet": 6
+    },
+    "R401.1": {
+      "ref": "R401",
+      "pin": "1",
+      "net": "LED_G_K",
+      "p": [
+        24.0,
+        19.3
+      ],
+      "sheet": 6
+    },
+    "R401.2": {
+      "ref": "R401",
+      "pin": "2",
+      "net": "LED_G_D",
+      "p": [
+        24.0,
+        16.3
+      ],
+      "sheet": 6
+    },
+    "Q401.1": {
+      "ref": "Q401",
+      "pin": "1",
+      "net": "LED_G_G",
+      "p": [
+        23.166666666666668,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "Q401.2": {
+      "ref": "Q401",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        24.0,
+        12.933333333333334
+      ],
+      "sheet": 6
+    },
+    "Q401.3": {
+      "ref": "Q401",
+      "pin": "3",
+      "net": "LED_G_D",
+      "p": [
+        24.0,
+        14.6
+      ],
+      "sheet": 6
+    },
+    "R404.1": {
+      "ref": "R404",
+      "pin": "1",
+      "net": "LED_G_PWM",
+      "p": [
+        17.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R404.2": {
+      "ref": "R404",
+      "pin": "2",
+      "net": "LED_G_G",
+      "p": [
+        20.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R407.1": {
+      "ref": "R407",
+      "pin": "1",
+      "net": "LED_G_G",
+      "p": [
+        21.7,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R407.2": {
+      "ref": "R407",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        21.7,
+        8.9
+      ],
+      "sheet": 6
+    },
+    "D400.3": {
+      "ref": "D400",
+      "pin": "3",
+      "net": "LED_B_K",
+      "p": [
+        38.0,
+        21.0
+      ],
+      "sheet": 6
+    },
+    "R402.1": {
+      "ref": "R402",
+      "pin": "1",
+      "net": "LED_B_K",
+      "p": [
+        38.0,
+        19.3
+      ],
+      "sheet": 6
+    },
+    "R402.2": {
+      "ref": "R402",
+      "pin": "2",
+      "net": "LED_B_D",
+      "p": [
+        38.0,
+        16.3
+      ],
+      "sheet": 6
+    },
+    "Q402.1": {
+      "ref": "Q402",
+      "pin": "1",
+      "net": "LED_B_G",
+      "p": [
+        37.166666666666664,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "Q402.2": {
+      "ref": "Q402",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        38.0,
+        12.933333333333334
+      ],
+      "sheet": 6
+    },
+    "Q402.3": {
+      "ref": "Q402",
+      "pin": "3",
+      "net": "LED_B_D",
+      "p": [
+        38.0,
+        14.6
+      ],
+      "sheet": 6
+    },
+    "R405.1": {
+      "ref": "R405",
+      "pin": "1",
+      "net": "LED_B_PWM",
+      "p": [
+        31.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R405.2": {
+      "ref": "R405",
+      "pin": "2",
+      "net": "LED_B_G",
+      "p": [
+        34.5,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R408.1": {
+      "ref": "R408",
+      "pin": "1",
+      "net": "LED_B_G",
+      "p": [
+        35.7,
+        13.433333333333334
+      ],
+      "sheet": 6
+    },
+    "R408.2": {
+      "ref": "R408",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        35.7,
+        8.9
+      ],
+      "sheet": 6
+    },
+    "U200.6": {
+      "ref": "U200",
+      "pin": "6",
+      "net": "KEY_UP",
+      "p": [
+        6.35,
+        31.0
+      ],
+      "sheet": 7
+    },
+    "U200.7": {
+      "ref": "U200",
+      "pin": "7",
+      "net": "KEY_DOWN",
+      "p": [
+        6.35,
+        29.9
+      ],
+      "sheet": 7
+    },
+    "U200.8": {
+      "ref": "U200",
+      "pin": "8",
+      "net": "KEY_LEFT",
+      "p": [
+        6.35,
+        28.8
+      ],
+      "sheet": 7
+    },
+    "U200.9": {
+      "ref": "U200",
+      "pin": "9",
+      "net": "KEY_RIGHT",
+      "p": [
+        6.35,
+        27.7
+      ],
+      "sheet": 7
+    },
+    "U200.10": {
+      "ref": "U200",
+      "pin": "10",
+      "net": "KEY_AUX1",
+      "p": [
+        6.35,
+        26.6
+      ],
+      "sheet": 7
+    },
+    "U200.14": {
+      "ref": "U200",
+      "pin": "14",
+      "net": "KEY_AUX2",
+      "p": [
+        6.35,
+        25.5
+      ],
+      "sheet": 7
+    },
+    "U200.15": {
+      "ref": "U200",
+      "pin": "15",
+      "net": "KEY_AUX3",
+      "p": [
+        6.35,
+        24.4
+      ],
+      "sheet": 7
+    },
+    "U200.19": {
+      "ref": "U200",
+      "pin": "19",
+      "net": "KEY_HALF",
+      "p": [
+        6.35,
+        23.299999999999997
+      ],
+      "sheet": 7
+    },
+    "U200.20": {
+      "ref": "U200",
+      "pin": "20",
+      "net": "KEY_FULL",
+      "p": [
+        6.35,
+        22.2
+      ],
+      "sheet": 7
+    },
+    "U200.16": {
+      "ref": "U200",
+      "pin": "16",
+      "net": "LED_R_PWM",
+      "p": [
+        6.35,
+        21.1
+      ],
+      "sheet": 7
+    },
+    "U200.17": {
+      "ref": "U200",
+      "pin": "17",
+      "net": "LED_G_PWM",
+      "p": [
+        6.35,
+        20.0
+      ],
+      "sheet": 7
+    },
+    "U200.18": {
+      "ref": "U200",
+      "pin": "18",
+      "net": "LED_B_PWM",
+      "p": [
+        6.35,
+        18.9
+      ],
+      "sheet": 7
+    },
+    "U200.4": {
+      "ref": "U200",
+      "pin": "4",
+      "net": "VBAT_SENSE",
+      "p": [
+        19.65,
+        31.0
+      ],
+      "sheet": 7
+    },
+    "U200.21": {
+      "ref": "U200",
+      "pin": "21",
+      "net": "CHG_N",
+      "p": [
+        19.65,
+        29.5
+      ],
+      "sheet": 7
+    },
+    "U200.22": {
+      "ref": "U200",
+      "pin": "22",
+      "net": "USB_PRESENT_N",
+      "p": [
+        19.65,
+        28.0
+      ],
+      "sheet": 7
+    },
+    "U200.24": {
+      "ref": "U200",
+      "pin": "24",
+      "net": "RESET_N",
+      "p": [
+        19.65,
+        26.5
+      ],
+      "sheet": 7
+    },
+    "U200.26": {
+      "ref": "U200",
+      "pin": "26",
+      "net": "SWDIO",
+      "p": [
+        19.65,
+        25.0
+      ],
+      "sheet": 7
+    },
+    "U200.25": {
+      "ref": "U200",
+      "pin": "25",
+      "net": "SWDCLK",
+      "p": [
+        19.65,
+        23.5
+      ],
+      "sheet": 7
+    },
+    "U200.37": {
+      "ref": "U200",
+      "pin": "37",
+      "net": "P025_FILTER",
+      "p": [
+        19.65,
+        22.0
+      ],
+      "sheet": 7
+    },
+    "U200.38": {
+      "ref": "U200",
+      "pin": "38",
+      "net": "P026_FILTER",
+      "p": [
+        19.65,
+        20.5
+      ],
+      "sheet": 7
+    },
+    "U200.5": {
+      "ref": "U200",
+      "pin": "5",
+      "net": null,
+      "p": [
+        3.5,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.11": {
+      "ref": "U200",
+      "pin": "11",
+      "net": null,
+      "p": [
+        7.0,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.12": {
+      "ref": "U200",
+      "pin": "12",
+      "net": null,
+      "p": [
+        10.5,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.23": {
+      "ref": "U200",
+      "pin": "23",
+      "net": null,
+      "p": [
+        14.0,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.27": {
+      "ref": "U200",
+      "pin": "27",
+      "net": null,
+      "p": [
+        17.5,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.28": {
+      "ref": "U200",
+      "pin": "28",
+      "net": null,
+      "p": [
+        21.0,
+        14.65
+      ],
+      "sheet": 7
+    },
+    "U200.29": {
+      "ref": "U200",
+      "pin": "29",
+      "net": null,
+      "p": [
+        3.5,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "U200.39": {
+      "ref": "U200",
+      "pin": "39",
+      "net": null,
+      "p": [
+        7.0,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "U200.40": {
+      "ref": "U200",
+      "pin": "40",
+      "net": null,
+      "p": [
+        10.5,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "U200.41": {
+      "ref": "U200",
+      "pin": "41",
+      "net": null,
+      "p": [
+        14.0,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "U200.42": {
+      "ref": "U200",
+      "pin": "42",
+      "net": null,
+      "p": [
+        17.5,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "U200.43": {
+      "ref": "U200",
+      "pin": "43",
+      "net": null,
+      "p": [
+        21.0,
+        7.549999999999999
+      ],
+      "sheet": 7
+    },
+    "J200.1": {
+      "ref": "J200",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        34.35,
+        31.5
+      ],
+      "sheet": 7
+    },
+    "J200.2": {
+      "ref": "J200",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        34.35,
+        29.9
+      ],
+      "sheet": 7
+    },
+    "J200.3": {
+      "ref": "J200",
+      "pin": "3",
+      "net": "SWDIO",
+      "p": [
+        34.35,
+        28.3
+      ],
+      "sheet": 7
+    },
+    "J200.4": {
+      "ref": "J200",
+      "pin": "4",
+      "net": "SWDCLK",
+      "p": [
+        34.35,
+        26.7
+      ],
+      "sheet": 7
+    },
+    "R200.1": {
+      "ref": "R200",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        29.0,
+        22.3
+      ],
+      "sheet": 7
+    },
+    "R200.2": {
+      "ref": "R200",
+      "pin": "2",
+      "net": "RESET_N",
+      "p": [
+        29.0,
+        19.3
+      ],
+      "sheet": 7
+    },
+    "C218.1": {
+      "ref": "C218",
+      "pin": "1",
+      "net": "P025_FILTER",
+      "p": [
+        36.0,
+        22.3
+      ],
+      "sheet": 7
+    },
+    "C218.2": {
+      "ref": "C218",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        36.0,
+        19.3
+      ],
+      "sheet": 7
+    },
+    "C219.1": {
+      "ref": "C219",
+      "pin": "1",
+      "net": "P026_FILTER",
+      "p": [
+        43.0,
+        22.3
+      ],
+      "sheet": 7
+    },
+    "C219.2": {
+      "ref": "C219",
+      "pin": "2",
+      "net": "GND",
+      "p": [
+        43.0,
+        19.3
+      ],
+      "sheet": 7
+    },
+    "TP200.1": {
+      "ref": "TP200",
+      "pin": "1",
+      "net": "VDD",
+      "p": [
+        29,
+        15.6
+      ],
+      "sheet": 7
+    },
+    "TP201.1": {
+      "ref": "TP201",
+      "pin": "1",
+      "net": "GND",
+      "p": [
+        29,
+        13.35
+      ],
+      "sheet": 7
+    },
+    "TP202.1": {
+      "ref": "TP202",
+      "pin": "1",
+      "net": "VBUS_5V",
+      "p": [
+        29,
+        11.1
+      ],
+      "sheet": 7
+    },
+    "TP203.1": {
+      "ref": "TP203",
+      "pin": "1",
+      "net": "VBAT",
+      "p": [
+        29,
+        8.85
+      ],
+      "sheet": 7
+    },
+    "TP204.1": {
+      "ref": "TP204",
+      "pin": "1",
+      "net": "VSYS",
+      "p": [
+        39,
+        15.6
+      ],
+      "sheet": 7
+    },
+    "TP205.1": {
+      "ref": "TP205",
+      "pin": "1",
+      "net": "RESET_N",
+      "p": [
+        39,
+        13.35
+      ],
+      "sheet": 7
+    },
+    "TP206.1": {
+      "ref": "TP206",
+      "pin": "1",
+      "net": "CHG_N",
+      "p": [
+        39,
+        11.1
+      ],
+      "sheet": 7
+    },
+    "TP207.1": {
+      "ref": "TP207",
+      "pin": "1",
+      "net": "USB_PRESENT_N",
+      "p": [
+        39,
+        8.85
+      ],
+      "sheet": 7
+    }
+  },
+  "sheets": [
+    {
+      "number": 1,
+      "slug": "usb-charge",
+      "title": "USB-C 输入与电池充电",
+      "file": "01-usb-charge.svg",
+      "notes": [
+        "ESD 紧邻接口；线路先经过保护连接点再入板，地端就近落过孔。CC1、CC2 不短接。",
+        "C101 紧邻 U100.4，C102 紧邻 U100.3；R105 靠 PROG，回地靠 U100.2，充电区铺地散热。",
+        "J101 只接带保护电池包 P+/P−。MSTP4054 不含电芯保护或 NTC；最终电池须允许 100 mA 充电。",
+        "CHG_N 低表示充电中；高电平需结合 USB_PRESENT_N 判断。D101～D103 为双向 ESD，不是持续过压保护。"
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "power-sense",
+      "title": "供电切换、稳压与检测",
+      "file": "02-power-sense.svg",
+      "notes": [
+        "Q100：1=G、2=S→VSYS、3=D→VBAT；体二极管为 VBAT→VSYS。D100：2=A→VBUS、1=K→VSYS。",
+        "D100、Q100、C103 与 LDO 靠近；C103 靠 VIN，C104 靠 VOUT/GND。充电支路与系统支路在电池入口分开。",
+        "R110/R111/C105 靠 ADC，避开 RF、DCC、PWM；SAADC 内部参考 0.6V、增益 1/6、采集 40µs，上电等 ≥250ms。",
+        "R104 用于测 MCU 支路电流，不隔离整机；RGB 取电 VSYS。电池低压时 VDD 会低于 3.3V。"
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "mcu-power",
+      "title": "nRF52832 电源与内部 DC/DC",
+      "file": "03-mcu-power.svg",
+      "notes": [
+        "C200/C201/C202 紧贴对应 DEC 引脚；就近接地，三个 DEC 不互连，不用于外部供电。DEC2 / pin 32 不接。",
+        "C203 靠 pin 13；C204 靠 pin 36；C205/C206 靠 pin 48。EP 必须连接完整地平面并设置接地过孔。",
+        "DCC → 10µH → 15nH → DEC4，紧凑布局；DCC 节点避开晶体/RF。L200 采用 MLZ1608M100WT000（≥50mA）。",
+        "默认装 L200/L201，固件开启 DC/DC；内部 LDO 调试时两电感 DNP、DCC 悬空、C202 保留。核对 C202/C205 的替代规格。"
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "clock-rf",
+      "title": "时钟与 2.4 GHz 射频",
+      "file": "04-clock-rf.svg",
+      "notes": [
+        "晶体及负载电容紧贴对应 MCU 脚、短线/少过孔；下方不走 DCC/PWM/SWD。X200 的 2/4 为外壳接地。",
+        "HF 每侧 12pF + 2.4pF 并联，LF 每侧 10pF + 10pF 并联。是初调值，需实板校准，不是晶体 CL 本身。",
+        "C220 在 ANT 引脚一侧，地端紧靠 U200.31/EP；C220/L220 局部布局复制 Nordic。RF_50 以后按实际叠层定 50Ω。",
+        "C221/C222 首版 DNP；装壳后调匹配。ANT200.2 为 NC；按厂家净空图放置，远离电池铝膜、USB 壳和金属件。"
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "switches",
+      "title": "按键与两段快门",
+      "file": "05-switches.svg",
+      "notes": [
+        "GPIO 开内部上拉，可配置 SENSE 唤醒；1k / 1nF 用于尖峰抑制，固件仍需约 5–15ms 去抖。",
+        "每路 1nF 位于电阻的 MCU 侧，R/C 靠近 MCU；开关与键帽顶柱对齐，长线避开 RF/晶体。",
+        "S307 是一颗器件：a=第一段、b=第二段、两个 c 公共焊脚都接地；定位孔为 NPTH，不作电气连接。",
+        "按厂家焊盘视图映射 a/b/c，避免顶/底视图镜像；半按/全按闭合时序在实物上确认后用于固件。"
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "rgb",
+      "title": "RGB 指示灯与 MOS 驱动",
+      "file": "06-rgb.svg",
+      "notes": [
+        "D400：2=共阳，1=红阴极，4=绿阴极，3=蓝阴极；三个 LED 在同一封装内，不能共用限流电阻。",
+        "C400 靠近 LED 的 VSYS；MOS 与限流电阻靠 LED，栅极下拉靠 MOS，复位时保持熄灭。",
+        "PWM 走线和 LED 回流避开晶体/射频局部地；建议先用几百 Hz～1kHz，空闲关闭。",
+        "VSYS 随 USB/电池变化，亮度并非恒流；低电量时绿/蓝会变暗，限流初值与混色需结合导光件实测。"
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "gpio-swd",
+      "title": "GPIO、SWD 与测试点",
+      "file": "07-gpio-swd.svg",
+      "notes": [
+        "U200 在第 3/4/7 页拆分显示，合计 48 个封装引脚 + EP，仍然只有一颗 MCU。同名网络相连。",
+        "C218/C219 紧贴 pin 37/38，沿用 Nordic errata 138 处理；不要混淆 GPIO P0.25/P0.26 与封装 pin 25/26。",
+        "J200：1=VDD、2=GND、3=IO、4=CLK；VDD 仅供调试器电压参考，板子自行供电，不接 5V。RESET 配置 UICR.PSELRESET。",
+        "SWD 短线带地参考；pin 1 用方焊盘/三角标记。测试点避开天线，不在晶体、DEC、ANT 节点增加长支路。"
+      ]
+    }
+  ]
+}

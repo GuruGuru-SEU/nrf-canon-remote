@@ -126,6 +126,7 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/19/cc/1d43a4b48df6cb147289078188713ee7d9b3da94a54dc31867478ec269cc/manifold3d-3.5.3-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c25d1fe3a9fb92bdf3a74c38023c3d52d3339a3d5d9675ab20b0c4adeb79ac32", size = 1319037, upload-time = "2026-09-07T09:38:34.651Z" },
     { url = "https://files.pythonhosted.org/packages/22/51/e055a158d735e4d740538662c22679017bde0506e9a1a05353f7d7d5841c/manifold3d-3.5.3-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2e180b74120550207823f107f8cfa6c14a1a037b4413d0d8865a4fe2768dca34", size = 1427464, upload-time = "2026-09-07T09:38:36.407Z" },
     { url = "https://files.pythonhosted.org/packages/a7/5e/9a7b588ff2dce12284f3cc782a078af0c088bd36ce5d7f90c4efff9b80aa/manifold3d-3.5.3-cp314-cp314-win_amd64.whl", hash = "sha256:6a1f7a8451c861c6bb210c6af09c86c0c92882881c12bc0f354aef9c65771814", size = 1068394, upload-time = "2026-09-07T09:38:37.901Z" },
+    { url = "https://files.pythonhosted.org/packages/3c/cb/050bccd1d4556e767a4df2d3b43e969fa6f27bbf156969392ccc5b0a1ae6/manifold3d-3.5.3-cp314-cp314-win_arm64.whl", hash = "sha256:5af66ea7943f551ce7e866aeab56ad870714a75ddd97a0596e065e2760bd8304", size = 1158008, upload-time = "2026-09-17T00:23:00.218Z" },
     { url = "https://files.pythonhosted.org/packages/33/3c/66568912904716ad2f0741172bf7d987f955f0cc27355064f0bedb7c02b6/manifold3d-3.5.3-cp314-cp314t-macosx_10_15_universal2.whl", hash = "sha256:a90ec84d0fa8672a7b6f70b4b87a436b1e762f92da4dcfe26ab96afb633c12ab", size = 1853604, upload-time = "2026-09-07T09:38:39.293Z" },
     { url = "https://files.pythonhosted.org/packages/cf/d2/6717eae4bad231133cb0b9b45cdefe9eb34b9f1dd8df216122dc5e11acd0/manifold3d-3.5.3-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:b6d913645a0b823ed93e70fd8ec5b82486c6295e2fdb81e892fb04d7ba972324", size = 1011077, upload-time = "2026-09-07T09:38:40.896Z" },
     { url = "https://files.pythonhosted.org/packages/23/c2/3b52cccf32b7f7b183831d77ecce3ac291ea905208cd68c0fed272844dae/manifold3d-3.5.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:7307839242f4ceaacbaccf01672b09c2f1750a17ee708bcef2d1f884160419eb", size = 890400, upload-time = "2026-09-07T09:38:42.311Z" },
@@ -214,6 +215,7 @@ dependencies = [
     { name = "matplotlib" },
     { name = "networkx" },
     { name = "numpy" },
+    { name = "schemdraw" },
     { name = "scipy" },
     { name = "shapely" },
     { name = "trimesh" },
@@ -226,6 +228,7 @@ requires-dist = [
     { name = "matplotlib", specifier = "==3.11.2" },
     { name = "networkx", specifier = "==3.6.1" },
     { name = "numpy", specifier = "==2.5.3" },
+    { name = "schemdraw", specifier = "==0.23" },
     { name = "scipy", specifier = "==1.18.1" },
     { name = "shapely", specifier = "==2.1.2" },
     { name = "trimesh", specifier = "==5.1.0" },
@@ -317,6 +320,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3", size = 342432, upload-time = "2024-03-01T18:36:20.211Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427", size = 229892, upload-time = "2024-03-01T18:36:18.57Z" },
+]
+
+[[package]]
+name = "schemdraw"
+version = "0.23"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/e0/5f1a5c6a7651ae0325708ead4020446ab8146bf11316f0d35bf7e26f6ee0/schemdraw-0.23.tar.gz", hash = "sha256:e71afd5ec84edfd9b707331c5bcb49ed7133af85bd17dae461de3fc260b0132f", size = 4773368, upload-time = "2026-05-29T18:10:40.713Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/97/f6/7efb3798e44868e09e8ce8a4329ac21acd134a3d5fd59792f97a7feccc2a/schemdraw-0.23-py3-none-any.whl", hash = "sha256:b6af33cf175fb7692ed3f71b5d2702c400e009ae26efe76c6fa4f85d34e0fac5", size = 152475, upload-time = "2026-05-29T18:10:12.268Z" },
 ]
 
 [[package]]
