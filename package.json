@@ -4,6 +4,7 @@
   "description": "Reference-derived enclosure and PCB mechanical preview",
   "scripts": {
     "build": "node scripts/build_preview.mjs",
+    "build:docs": "node scripts/build_electrical_docs.mjs",
     "check:preview": "node scripts/check_preview.mjs"
   },
   "keywords": [],
@@ -14,5 +15,9 @@
     "playwright": "^1.63.0",
     "three": "^0.186.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "markdown-it": "^15.0.2",
+    "mermaid": "^11.17.2"
+  }
 }

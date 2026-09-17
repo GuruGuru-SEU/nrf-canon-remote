@@ -1,4 +1,4 @@
-name: Deploy mechanical preview to GitHub Pages
+name: Deploy preview and documents to GitHub Pages
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - output/preview.html
       - output/models/**
+      - output/electrical/*.html
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -33,12 +34,14 @@ jobs:
         with:
           enablement: true
 
-      - name: Prepare standalone preview and model downloads
+      - name: Prepare preview, model downloads, and electrical documents
         run: |
           mkdir -p _site
           cp output/preview.html _site/index.html
           cp output/preview.html _site/preview.html
           cp -R output/models _site/models
+          mkdir -p _site/electrical
+          cp output/electrical/*.html _site/electrical/
           touch _site/.nojekyll
 
       - name: Upload Pages artifact

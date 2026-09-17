@@ -18,3 +18,5 @@ USB-C 来自用户在淘宝单独购买，不在本地立创订单中。C1835755
 [another-one.txt](another-one.txt) 保留手工补充物料记录。尺寸依据、占位假设及机械验证范围见 [设计说明](../../output/设计说明.md)。
 
 USB-C、TS-1101-C-W 与 RGB 的嘉立创 3D 模型已归档，详见 [器件模型来源与处理](../component-models/README.md)。
+
+电气 v0.1 的完整库存对应、单板数量和新增物料见 [文字原理图 BOM](../../output/electrical/原理图-v0.1.md#9-首版-bom-与库存对应)。首版优先使用订单中的 MSTP4054-42、ME6211C33M5G-N、SI2302、KH-2012-HM1、两种晶体及阻容；新增的 AO3401A、BAT54H、合适的 10 µH 电感与 RF 参考网络器件属于设计选型，尚不代表已采购。库存 SCL1608S100KSP 的额定电流不足，不用于 MCU DC/DC。

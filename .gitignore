@@ -4,6 +4,7 @@ node_modules/
 __pycache__/
 *.py[cod]
 _site/
+tmp/docs/
 
 # Original purchase exports include shipping addresses and phone numbers.
 reference/jlc-orders/*.xls
