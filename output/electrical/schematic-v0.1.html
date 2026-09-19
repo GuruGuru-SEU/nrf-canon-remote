@@ -20,6 +20,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-canon-遥控器文字原理图-v01">nRF52832 Canon 遥控器：文字原理图 v0.1</h1>
 <p>日期：2026-09-17。用于转绘原理图和开始 PCB 规划；尚未完成 EDA ERC、PCB layout、射频调试或样机验证。</p>
 <p><a href="schematic-drawing-v0.1.html">查看 7 页图形原理图</a>：2026-09-18 按本版连接绘制，含元件符号、引脚编号、数值和 layout 注释。本次补齐 BAT54H 的厂商脚号：2=阳极、1=阴极，电路拓扑不变。</p>
+<p>2026-09-19：图纸已逐器件补充 <code>JLC C…</code> 物料编号，未确定编号的器件、DNP 位置与自带焊盘也分别标注。编号及采购状态见 <a href="bom-v0.1.html">完整 BOM</a>。</p>
 <p>本版对应目前的机械方案：四向圆环、中心 K2-1831SL-A4SW-01 两段键、下排三个圆键、NH-B1515RGBA-GF RGB、HX TYPE-C 6P QTWT 和单节软包锂电池。7 个普通开关 + 1 个两段开关，共 <strong>9 路按键信号</strong>。主控选 <strong>nRF52832-QFAA，QFN48，6 × 6 mm</strong>，不使用 WLCSP 的引脚表。</p>
 <p>建议转绘为五页：① USB／充电／电源；② MCU／时钟；③ 按键／RGB；④ RF／天线；⑤ SWD／测试点。相同网络名直接相连。下文所有 <code>GND</code> 属于同一电气网络，<code>NC</code> 是不连接，<code>DNP</code> 是保留焊盘但首版不装。</p>
 <h2 id="1-总体结构与电源网络">1. 总体结构与电源网络</h2>
@@ -764,8 +765,8 @@ ANT200.2 = NC
 </thead>
 <tbody>
 <tr>
-<td>新增</td>
-<td>nRF52832-QFAA</td>
+<td>C77540，待采购</td>
+<td>nRF52832-QFAA / NRF52832-QFAA-R</td>
 <td style="text-align:right">1</td>
 <td>U200</td>
 </tr>
@@ -800,14 +801,14 @@ ANT200.2 = NC
 <td>J200</td>
 </tr>
 <tr>
-<td>新增</td>
-<td>AO3401A / P-MOS / SOT23</td>
+<td>C15127，待采购</td>
+<td>AOS AO3401A / P-MOS / SOT23</td>
 <td style="text-align:right">1</td>
 <td>Q100</td>
 </tr>
 <tr>
-<td>新增</td>
-<td>Nexperia BAT54H / SOD123F</td>
+<td>C426769，待采购</td>
+<td>Nexperia BAT54H,115 / SOD123F</td>
 <td style="text-align:right">1</td>
 <td>D100</td>
 </tr>
@@ -836,7 +837,7 @@ ANT200.2 = NC
 <td>X201</td>
 </tr>
 <tr>
-<td>新增</td>
+<td>C76798，待采购</td>
 <td>10 µH / MLZ1608M100WT000 / 0603</td>
 <td style="text-align:right">1</td>
 <td>L200</td>

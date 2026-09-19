@@ -2,8 +2,8 @@
   "version": "0.1",
   "tool": "Schemdraw 0.23",
   "source_sha256": {
-    "原理图-v0.1.md": "fe7c5bb2be26dc211b52c9a5bd8e7d0b8a5323470677b1fa2b75fa9cc900b528",
-    "BOM-v0.1.md": "7941029a0edcdb0bffd4b1aeff88e80fc2d22bcc9fbf4855ab916f218e73eabe"
+    "原理图-v0.1.md": "a22b746219b6dde1b0b5aaf28dd3cf1377daf60a18e3e651b70f34cca11e323d",
+    "BOM-v0.1.md": "9331aab4c39db8ac62ce92da8b711bc892ee2512a2ca33a21accf5a403ebe54d"
   },
   "parts": {
     "J100": {
@@ -21,7 +21,9 @@
         "20": "GND"
       },
       "kind": "J",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C18357553",
+      "supplier_label": "JLC C18357553"
     },
     "R100": {
       "value": "5.1k",
@@ -30,7 +32,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C25905",
+      "supplier_label": "JLC C25905"
     },
     "R101": {
       "value": "5.1k",
@@ -39,7 +43,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C25905",
+      "supplier_label": "JLC C25905"
     },
     "C100": {
       "value": "100nF / 16V",
@@ -48,7 +54,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "D101": {
       "value": "PESDNC2FD5VB",
@@ -57,7 +65,9 @@
         "2": "GND"
       },
       "kind": "TVS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C5356109",
+      "supplier_label": "JLC C5356109"
     },
     "D102": {
       "value": "PESDNC2FD5VB",
@@ -66,7 +76,9 @@
         "2": "GND"
       },
       "kind": "TVS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C5356109",
+      "supplier_label": "JLC C5356109"
     },
     "D103": {
       "value": "PESDNC2FD5VB",
@@ -75,7 +87,9 @@
         "2": "GND"
       },
       "kind": "TVS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C5356109",
+      "supplier_label": "JLC C5356109"
     },
     "U100": {
       "value": "MSTP4054-42",
@@ -87,7 +101,9 @@
         "5": "CHG_PROG"
       },
       "kind": "U",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49208527",
+      "supplier_label": "JLC C49208527"
     },
     "C101": {
       "value": "2.2uF / 6.3V",
@@ -96,7 +112,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C5137560",
+      "supplier_label": "JLC C5137560"
     },
     "C102": {
       "value": "1uF / 16V",
@@ -105,7 +123,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C1592",
+      "supplier_label": "JLC C1592"
     },
     "R105": {
       "value": "10k",
@@ -114,7 +134,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "R106": {
       "value": "10k",
@@ -123,7 +145,9 @@
         "2": "CHG_N"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "J101": {
       "value": "Battery wire pads",
@@ -132,7 +156,9 @@
         "2": "GND"
       },
       "kind": "J",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "BAT1": {
       "value": "1S protected LiPo / ~320mAh",
@@ -142,7 +168,9 @@
       },
       "kind": "battery",
       "fitted": true,
-      "external": true
+      "external": true,
+      "lcsc": null,
+      "supplier_label": "电池待选型"
     },
     "D100": {
       "value": "BAT54H / SOD123F",
@@ -151,7 +179,9 @@
         "1": "VSYS"
       },
       "kind": "schottky",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C426769",
+      "supplier_label": "JLC C426769"
     },
     "Q100": {
       "value": "AO3401A",
@@ -161,7 +191,9 @@
         "3": "VBAT"
       },
       "kind": "PMOS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C15127",
+      "supplier_label": "JLC C15127"
     },
     "R102": {
       "value": "0R",
@@ -170,7 +202,9 @@
         "2": "BAT_PATH_GATE"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906858",
+      "supplier_label": "JLC C2906858"
     },
     "R103": {
       "value": "10k",
@@ -179,7 +213,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "U101": {
       "value": "ME6211C33M5G-N",
@@ -191,7 +227,9 @@
         "5": "VREG_3V3"
       },
       "kind": "U",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C82942",
+      "supplier_label": "JLC C82942"
     },
     "C103": {
       "value": "1uF / 16V",
@@ -200,7 +238,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C1592",
+      "supplier_label": "JLC C1592"
     },
     "C104": {
       "value": "1uF / 16V",
@@ -209,7 +249,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C1592",
+      "supplier_label": "JLC C1592"
     },
     "R104": {
       "value": "0R",
@@ -218,7 +260,9 @@
         "2": "VDD"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906858",
+      "supplier_label": "JLC C2906858"
     },
     "Q101": {
       "value": "SI2302",
@@ -228,7 +272,9 @@
         "3": "USB_PRESENT_N"
       },
       "kind": "NMOS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2891732",
+      "supplier_label": "JLC C2891732"
     },
     "R107": {
       "value": "10k",
@@ -237,7 +283,9 @@
         "2": "USB_GATE"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "R108": {
       "value": "1M",
@@ -246,7 +294,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "R109": {
       "value": "10k",
@@ -255,7 +305,9 @@
         "2": "USB_PRESENT_N"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "R110": {
       "value": "1M",
@@ -264,7 +316,9 @@
         "2": "VBAT_SENSE"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "R111": {
       "value": "1M",
@@ -273,7 +327,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "C105": {
       "value": "100nF",
@@ -282,7 +338,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "U200": {
       "value": "nRF52832-QFAA",
@@ -338,7 +396,9 @@
         "EP": "GND"
       },
       "kind": "U",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C77540",
+      "supplier_label": "JLC C77540"
     },
     "C200": {
       "value": "100nF",
@@ -347,7 +407,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "C201": {
       "value": "100pF / C0G",
@@ -356,7 +418,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C46614473",
+      "supplier_label": "JLC C46614473"
     },
     "C202": {
       "value": "1uF / X5R",
@@ -365,7 +429,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C1592",
+      "supplier_label": "JLC C1592"
     },
     "C203": {
       "value": "100nF",
@@ -374,7 +440,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "C204": {
       "value": "100nF",
@@ -383,7 +451,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "C205": {
       "value": "4.7uF / 10V",
@@ -392,7 +462,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C46635918",
+      "supplier_label": "JLC C46635918"
     },
     "C206": {
       "value": "100nF",
@@ -401,7 +473,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "C218": {
       "value": "12pF / C0G",
@@ -410,7 +484,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359894",
+      "supplier_label": "JLC C45359894"
     },
     "C219": {
       "value": "12pF / C0G",
@@ -419,7 +495,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359894",
+      "supplier_label": "JLC C45359894"
     },
     "L200": {
       "value": "10uH",
@@ -428,7 +506,9 @@
         "2": "DCDC_MID"
       },
       "kind": "L",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C76798",
+      "supplier_label": "JLC C76798"
     },
     "L201": {
       "value": "15nH",
@@ -437,7 +517,9 @@
         "2": "DEC4"
       },
       "kind": "L",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C370189",
+      "supplier_label": "JLC C370189"
     },
     "R200": {
       "value": "10k",
@@ -446,7 +528,9 @@
         "2": "RESET_N"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906861",
+      "supplier_label": "JLC C2906861"
     },
     "X200": {
       "value": "YE32MDBCD2X / 32MHz",
@@ -457,7 +541,9 @@
         "4": "GND"
       },
       "kind": "X",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C54427949",
+      "supplier_label": "JLC C54427949"
     },
     "X201": {
       "value": "KFC3276812520T / 32.768kHz",
@@ -466,7 +552,9 @@
         "2": "XL2"
       },
       "kind": "X",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C18209174",
+      "supplier_label": "JLC C18209174"
     },
     "C210": {
       "value": "12pF",
@@ -475,7 +563,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359894",
+      "supplier_label": "JLC C45359894"
     },
     "C211": {
       "value": "2.4pF",
@@ -484,7 +574,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359903",
+      "supplier_label": "JLC C45359903"
     },
     "C212": {
       "value": "12pF",
@@ -493,7 +585,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359894",
+      "supplier_label": "JLC C45359894"
     },
     "C213": {
       "value": "2.4pF",
@@ -502,7 +596,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C45359903",
+      "supplier_label": "JLC C45359903"
     },
     "C214": {
       "value": "10pF",
@@ -511,7 +607,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C32949",
+      "supplier_label": "JLC C32949"
     },
     "C215": {
       "value": "10pF",
@@ -520,7 +618,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C32949",
+      "supplier_label": "JLC C32949"
     },
     "C216": {
       "value": "10pF",
@@ -529,7 +629,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C32949",
+      "supplier_label": "JLC C32949"
     },
     "C217": {
       "value": "10pF",
@@ -538,7 +640,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C32949",
+      "supplier_label": "JLC C32949"
     },
     "R300": {
       "value": "1k",
@@ -547,7 +651,9 @@
         "2": "SW_UP"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C300": {
       "value": "1nF",
@@ -556,7 +662,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S300": {
       "value": "TS-1101-C-W",
@@ -565,7 +673,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R301": {
       "value": "1k",
@@ -574,7 +684,9 @@
         "2": "SW_DOWN"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C301": {
       "value": "1nF",
@@ -583,7 +695,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S301": {
       "value": "TS-1101-C-W",
@@ -592,7 +706,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R302": {
       "value": "1k",
@@ -601,7 +717,9 @@
         "2": "SW_LEFT"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C302": {
       "value": "1nF",
@@ -610,7 +728,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S302": {
       "value": "TS-1101-C-W",
@@ -619,7 +739,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R303": {
       "value": "1k",
@@ -628,7 +750,9 @@
         "2": "SW_RIGHT"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C303": {
       "value": "1nF",
@@ -637,7 +761,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S303": {
       "value": "TS-1101-C-W",
@@ -646,7 +772,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R304": {
       "value": "1k",
@@ -655,7 +783,9 @@
         "2": "SW_AUX1"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C304": {
       "value": "1nF",
@@ -664,7 +794,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S304": {
       "value": "TS-1101-C-W",
@@ -673,7 +805,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R305": {
       "value": "1k",
@@ -682,7 +816,9 @@
         "2": "SW_AUX2"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C305": {
       "value": "1nF",
@@ -691,7 +827,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S305": {
       "value": "TS-1101-C-W",
@@ -700,7 +838,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R306": {
       "value": "1k",
@@ -709,7 +849,9 @@
         "2": "SW_AUX3"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C306": {
       "value": "1nF",
@@ -718,7 +860,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S306": {
       "value": "TS-1101-C-W",
@@ -727,7 +871,9 @@
         "2": "GND"
       },
       "kind": "switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C318938",
+      "supplier_label": "JLC C318938"
     },
     "R307": {
       "value": "1k",
@@ -736,7 +882,9 @@
         "2": "SW_HALF"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C307": {
       "value": "1nF",
@@ -745,7 +893,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "R308": {
       "value": "1k",
@@ -754,7 +904,9 @@
         "2": "SW_FULL"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "C308": {
       "value": "1nF",
@@ -763,7 +915,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C22435949",
+      "supplier_label": "JLC C22435949"
     },
     "S307": {
       "value": "K2-1831SL-A4SW-01",
@@ -774,7 +928,9 @@
         "c2": "GND"
       },
       "kind": "dual-switch",
-      "fitted": true
+      "fitted": true,
+      "lcsc": null,
+      "supplier_label": "JLC 未核实"
     },
     "D400": {
       "value": "NH-B1515RGBA-GF",
@@ -785,7 +941,9 @@
         "3": "LED_B_K"
       },
       "kind": "RGB",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C52212029",
+      "supplier_label": "JLC C52212029"
     },
     "C400": {
       "value": "100nF / 16V",
@@ -794,7 +952,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C60474",
+      "supplier_label": "JLC C60474"
     },
     "R400": {
       "value": "1.2k",
@@ -803,7 +963,9 @@
         "2": "LED_R_D"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2909307",
+      "supplier_label": "JLC C2909307"
     },
     "Q400": {
       "value": "SI2302",
@@ -813,7 +975,9 @@
         "3": "LED_R_D"
       },
       "kind": "NMOS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2891732",
+      "supplier_label": "JLC C2891732"
     },
     "R403": {
       "value": "1k",
@@ -822,7 +986,9 @@
         "2": "LED_R_G"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "R406": {
       "value": "1M",
@@ -831,7 +997,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "R401": {
       "value": "1k",
@@ -840,7 +1008,9 @@
         "2": "LED_G_D"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "Q401": {
       "value": "SI2302",
@@ -850,7 +1020,9 @@
         "3": "LED_G_D"
       },
       "kind": "NMOS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2891732",
+      "supplier_label": "JLC C2891732"
     },
     "R404": {
       "value": "1k",
@@ -859,7 +1031,9 @@
         "2": "LED_G_G"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "R407": {
       "value": "1M",
@@ -868,7 +1042,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "R402": {
       "value": "1k",
@@ -877,7 +1053,9 @@
         "2": "LED_B_D"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "Q402": {
       "value": "SI2302",
@@ -887,7 +1065,9 @@
         "3": "LED_B_D"
       },
       "kind": "NMOS",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2891732",
+      "supplier_label": "JLC C2891732"
     },
     "R405": {
       "value": "1k",
@@ -896,7 +1076,9 @@
         "2": "LED_B_G"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C106235",
+      "supplier_label": "JLC C106235"
     },
     "R408": {
       "value": "1M",
@@ -905,7 +1087,9 @@
         "2": "GND"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C49196763",
+      "supplier_label": "JLC C49196763"
     },
     "C220": {
       "value": "0.8pF / C0G",
@@ -914,7 +1098,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": true
+      "fitted": true,
+      "lcsc": null,
+      "supplier_label": "JLC 待选型"
     },
     "L220": {
       "value": "3.9nH / RF",
@@ -923,7 +1109,9 @@
         "2": "RF_50"
       },
       "kind": "L",
-      "fitted": true
+      "fitted": true,
+      "lcsc": null,
+      "supplier_label": "JLC 待选型"
     },
     "C221": {
       "value": "DNP / TBD",
@@ -932,7 +1120,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "DNP / 无料号"
     },
     "R221": {
       "value": "0R",
@@ -941,7 +1131,9 @@
         "2": "ANT_FEED"
       },
       "kind": "R",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2906858",
+      "supplier_label": "JLC C2906858"
     },
     "C222": {
       "value": "DNP / TBD",
@@ -950,7 +1142,9 @@
         "2": "GND"
       },
       "kind": "C",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "DNP / 无料号"
     },
     "ANT200": {
       "value": "KH-2012-HM1",
@@ -959,7 +1153,9 @@
         "2": null
       },
       "kind": "antenna",
-      "fitted": true
+      "fitted": true,
+      "lcsc": "C2925419",
+      "supplier_label": "JLC C2925419"
     },
     "J200": {
       "value": "1x4 / 2.54mm",
@@ -970,7 +1166,9 @@
         "4": "SWDCLK"
       },
       "kind": "J",
-      "fitted": true
+      "fitted": true,
+      "lcsc": null,
+      "supplier_label": "JLC 待选型"
     },
     "TP200": {
       "value": "VDD",
@@ -978,7 +1176,9 @@
         "1": "VDD"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP201": {
       "value": "GND",
@@ -986,7 +1186,9 @@
         "1": "GND"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP202": {
       "value": "VBUS_5V",
@@ -994,7 +1196,9 @@
         "1": "VBUS_5V"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP203": {
       "value": "VBAT",
@@ -1002,7 +1206,9 @@
         "1": "VBAT"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP204": {
       "value": "VSYS",
@@ -1010,7 +1216,9 @@
         "1": "VSYS"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP205": {
       "value": "RESET_N",
@@ -1018,7 +1226,9 @@
         "1": "RESET_N"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP206": {
       "value": "CHG_N",
@@ -1026,7 +1236,9 @@
         "1": "CHG_N"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     },
     "TP207": {
       "value": "USB_PRESENT_N",
@@ -1034,7 +1246,9 @@
         "1": "USB_PRESENT_N"
       },
       "kind": "testpoint",
-      "fitted": false
+      "fitted": false,
+      "lcsc": null,
+      "supplier_label": "PCB 焊盘 / 无料号"
     }
   },
   "drawn_terminals": {
@@ -3850,6 +4064,120 @@
         "C101 紧邻 U100.4，C102 紧邻 U100.3；R105 靠 PROG，回地靠 U100.2，充电区铺地散热。",
         "J101 只接带保护电池包 P+/P−。MSTP4054 不含电芯保护或 NTC；最终电池须允许 100 mA 充电。",
         "CHG_N 低表示充电中；高电平需结合 USB_PRESENT_N 判断。D101～D103 为双向 ESD，不是持续过压保护。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "J100",
+          "text": "JLC C18357553",
+          "p": [
+            5.0,
+            20.779999999999998
+          ]
+        },
+        {
+          "ref": "C100",
+          "text": "JLC C60474",
+          "p": [
+            14.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "D101",
+          "text": "JLC C5356109",
+          "p": [
+            18.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "R100",
+          "text": "JLC C25905",
+          "p": [
+            25.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "D102",
+          "text": "JLC C5356109",
+          "p": [
+            29.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "R101",
+          "text": "JLC C25905",
+          "p": [
+            37.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "D103",
+          "text": "JLC C5356109",
+          "p": [
+            41.5,
+            21.209999999999997
+          ]
+        },
+        {
+          "ref": "U100",
+          "text": "JLC C49208527",
+          "p": [
+            14.0,
+            11.23
+          ]
+        },
+        {
+          "ref": "C101",
+          "text": "JLC C5137560",
+          "p": [
+            5.5,
+            12.160000000000002
+          ]
+        },
+        {
+          "ref": "R105",
+          "text": "JLC C2906861",
+          "p": [
+            7.5,
+            8.610000000000001
+          ]
+        },
+        {
+          "ref": "C102",
+          "text": "JLC C1592",
+          "p": [
+            23.5,
+            12.160000000000002
+          ]
+        },
+        {
+          "ref": "R106",
+          "text": "JLC C2906861",
+          "p": [
+            28.5,
+            9.06
+          ]
+        },
+        {
+          "ref": "J101",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            37.35,
+            12.379999999999999
+          ]
+        },
+        {
+          "ref": "BAT1",
+          "text": "电池待选型",
+          "p": [
+            43,
+            8.9
+          ]
+        }
       ]
     },
     {
@@ -3862,6 +4190,128 @@
         "D100、Q100、C103 与 LDO 靠近；C103 靠 VIN，C104 靠 VOUT/GND。充电支路与系统支路在电池入口分开。",
         "R110/R111/C105 靠 ADC，避开 RF、DCC、PWM；SAADC 内部参考 0.6V、增益 1/6、采集 40µs，上电等 ≥250ms。",
         "R104 用于测 MCU 支路电流，不隔离整机；RGB 取电 VSYS。电池低压时 VDD 会低于 3.3V。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "D100",
+          "text": "JLC C426769",
+          "p": [
+            7.5,
+            25.05
+          ]
+        },
+        {
+          "ref": "Q100",
+          "text": "JLC C15127",
+          "p": [
+            22.2,
+            20.400000000000002
+          ]
+        },
+        {
+          "ref": "R102",
+          "text": "JLC C2906858",
+          "p": [
+            13.5,
+            21.55
+          ]
+        },
+        {
+          "ref": "R103",
+          "text": "JLC C2906861",
+          "p": [
+            17.1,
+            18.959999999999997
+          ]
+        },
+        {
+          "ref": "U101",
+          "text": "JLC C82942",
+          "p": [
+            33.0,
+            20.63
+          ]
+        },
+        {
+          "ref": "C103",
+          "text": "JLC C1592",
+          "p": [
+            26.5,
+            20.509999999999998
+          ]
+        },
+        {
+          "ref": "C104",
+          "text": "JLC C1592",
+          "p": [
+            39.0,
+            20.509999999999998
+          ]
+        },
+        {
+          "ref": "R104",
+          "text": "JLC C2906858",
+          "p": [
+            41.5,
+            24.25
+          ]
+        },
+        {
+          "ref": "Q101",
+          "text": "JLC C2891732",
+          "p": [
+            13.2,
+            10.1
+          ]
+        },
+        {
+          "ref": "R109",
+          "text": "JLC C2906861",
+          "p": [
+            12.5,
+            13.16
+          ]
+        },
+        {
+          "ref": "R107",
+          "text": "JLC C2906861",
+          "p": [
+            6.5,
+            12.383333333333335
+          ]
+        },
+        {
+          "ref": "R108",
+          "text": "JLC C49196763",
+          "p": [
+            8.7,
+            8.526666666666667
+          ]
+        },
+        {
+          "ref": "R110",
+          "text": "JLC C49196763",
+          "p": [
+            29.5,
+            12.56
+          ]
+        },
+        {
+          "ref": "R111",
+          "text": "JLC C49196763",
+          "p": [
+            29.5,
+            9.41
+          ]
+        },
+        {
+          "ref": "C105",
+          "text": "JLC C60474",
+          "p": [
+            35.5,
+            9.41
+          ]
+        }
       ]
     },
     {
@@ -3874,6 +4324,88 @@
         "C203 靠 pin 13；C204 靠 pin 36；C205/C206 靠 pin 48。EP 必须连接完整地平面并设置接地过孔。",
         "DCC → 10µH → 15nH → DEC4，紧凑布局；DCC 节点避开晶体/RF。L200 采用 MLZ1608M100WT000（≥50mA）。",
         "默认装 L200/L201，固件开启 DC/DC；内部 LDO 调试时两电感 DNP、DCC 悬空、C202 保留。核对 C202/C205 的替代规格。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "U200",
+          "text": "JLC C77540",
+          "p": [
+            22.0,
+            16.23
+          ]
+        },
+        {
+          "ref": "C203",
+          "text": "JLC C60474",
+          "p": [
+            10.5,
+            21.31
+          ]
+        },
+        {
+          "ref": "C204",
+          "text": "JLC C60474",
+          "p": [
+            10.5,
+            17.31
+          ]
+        },
+        {
+          "ref": "C205",
+          "text": "JLC C46635918",
+          "p": [
+            5.5,
+            13.31
+          ]
+        },
+        {
+          "ref": "C206",
+          "text": "JLC C60474",
+          "p": [
+            10.5,
+            13.31
+          ]
+        },
+        {
+          "ref": "C200",
+          "text": "JLC C60474",
+          "p": [
+            34.5,
+            21.259999999999998
+          ]
+        },
+        {
+          "ref": "C201",
+          "text": "JLC C46614473",
+          "p": [
+            34.5,
+            17.259999999999998
+          ]
+        },
+        {
+          "ref": "C202",
+          "text": "JLC C1592",
+          "p": [
+            34.5,
+            13.26
+          ]
+        },
+        {
+          "ref": "L200",
+          "text": "JLC C76798",
+          "p": [
+            32.0,
+            11.3
+          ]
+        },
+        {
+          "ref": "L201",
+          "text": "JLC C370189",
+          "p": [
+            37.5,
+            11.3
+          ]
+        }
       ]
     },
     {
@@ -3886,6 +4418,144 @@
         "HF 每侧 12pF + 2.4pF 并联，LF 每侧 10pF + 10pF 并联。是初调值，需实板校准，不是晶体 CL 本身。",
         "C220 在 ANT 引脚一侧，地端紧靠 U200.31/EP；C220/L220 局部布局复制 Nordic。RF_50 以后按实际叠层定 50Ω。",
         "C221/C222 首版 DNP；装壳后调匹配。ANT200.2 为 NC；按厂家净空图放置，远离电池铝膜、USB 壳和金属件。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "X200",
+          "text": "JLC C54427949",
+          "p": [
+            12.0,
+            24.05
+          ]
+        },
+        {
+          "ref": "C210",
+          "text": "JLC C45359894",
+          "p": [
+            3.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C211",
+          "text": "JLC C45359903",
+          "p": [
+            7.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C212",
+          "text": "JLC C45359894",
+          "p": [
+            17.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C213",
+          "text": "JLC C45359903",
+          "p": [
+            21.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "X201",
+          "text": "JLC C18209174",
+          "p": [
+            36.0,
+            24.05
+          ]
+        },
+        {
+          "ref": "C214",
+          "text": "JLC C32949",
+          "p": [
+            27.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C215",
+          "text": "JLC C32949",
+          "p": [
+            31.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C216",
+          "text": "JLC C32949",
+          "p": [
+            40.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "C217",
+          "text": "JLC C32949",
+          "p": [
+            44.5,
+            20.81
+          ]
+        },
+        {
+          "ref": "U200",
+          "text": "JLC C77540",
+          "p": [
+            9.0,
+            11.830000000000002
+          ]
+        },
+        {
+          "ref": "C220",
+          "text": "JLC 待选型",
+          "p": [
+            16.5,
+            11.76
+          ]
+        },
+        {
+          "ref": "L220",
+          "text": "JLC 待选型",
+          "p": [
+            20.5,
+            15.6
+          ]
+        },
+        {
+          "ref": "C221",
+          "text": "DNP / 无料号",
+          "p": [
+            26.5,
+            11.76
+          ]
+        },
+        {
+          "ref": "R221",
+          "text": "JLC C2906858",
+          "p": [
+            31.0,
+            15.15
+          ]
+        },
+        {
+          "ref": "C222",
+          "text": "DNP / 无料号",
+          "p": [
+            35.5,
+            11.76
+          ]
+        },
+        {
+          "ref": "ANT200",
+          "text": "JLC C2925419",
+          "p": [
+            43.0,
+            13.279999999999998
+          ]
+        }
       ]
     },
     {
@@ -3898,6 +4568,216 @@
         "每路 1nF 位于电阻的 MCU 侧，R/C 靠近 MCU；开关与键帽顶柱对齐，长线避开 RF/晶体。",
         "S307 是一颗器件：a=第一段、b=第二段、两个 c 公共焊脚都接地；定位孔为 NPTH，不作电气连接。",
         "按厂家焊盘视图映射 a/b/c，避免顶/底视图镜像；半按/全按闭合时序在实物上确认后用于固件。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "C300",
+          "text": "JLC C22435949",
+          "p": [
+            6.0,
+            22.259999999999998
+          ]
+        },
+        {
+          "ref": "R300",
+          "text": "JLC C106235",
+          "p": [
+            10.5,
+            25.05
+          ]
+        },
+        {
+          "ref": "S300",
+          "text": "JLC C318938",
+          "p": [
+            16.5,
+            25.5
+          ]
+        },
+        {
+          "ref": "C301",
+          "text": "JLC C22435949",
+          "p": [
+            6.0,
+            18.86
+          ]
+        },
+        {
+          "ref": "R301",
+          "text": "JLC C106235",
+          "p": [
+            10.5,
+            21.650000000000002
+          ]
+        },
+        {
+          "ref": "S301",
+          "text": "JLC C318938",
+          "p": [
+            16.5,
+            22.1
+          ]
+        },
+        {
+          "ref": "C302",
+          "text": "JLC C22435949",
+          "p": [
+            6.0,
+            15.459999999999999
+          ]
+        },
+        {
+          "ref": "R302",
+          "text": "JLC C106235",
+          "p": [
+            10.5,
+            18.25
+          ]
+        },
+        {
+          "ref": "S302",
+          "text": "JLC C318938",
+          "p": [
+            16.5,
+            18.7
+          ]
+        },
+        {
+          "ref": "C303",
+          "text": "JLC C22435949",
+          "p": [
+            6.0,
+            12.06
+          ]
+        },
+        {
+          "ref": "R303",
+          "text": "JLC C106235",
+          "p": [
+            10.5,
+            14.850000000000001
+          ]
+        },
+        {
+          "ref": "S303",
+          "text": "JLC C318938",
+          "p": [
+            16.5,
+            15.3
+          ]
+        },
+        {
+          "ref": "C304",
+          "text": "JLC C22435949",
+          "p": [
+            6.0,
+            8.660000000000002
+          ]
+        },
+        {
+          "ref": "R304",
+          "text": "JLC C106235",
+          "p": [
+            10.5,
+            11.450000000000001
+          ]
+        },
+        {
+          "ref": "S304",
+          "text": "JLC C318938",
+          "p": [
+            16.5,
+            11.9
+          ]
+        },
+        {
+          "ref": "C305",
+          "text": "JLC C22435949",
+          "p": [
+            30.0,
+            22.259999999999998
+          ]
+        },
+        {
+          "ref": "R305",
+          "text": "JLC C106235",
+          "p": [
+            34.5,
+            25.05
+          ]
+        },
+        {
+          "ref": "S305",
+          "text": "JLC C318938",
+          "p": [
+            40.5,
+            25.5
+          ]
+        },
+        {
+          "ref": "C306",
+          "text": "JLC C22435949",
+          "p": [
+            30.0,
+            18.86
+          ]
+        },
+        {
+          "ref": "R306",
+          "text": "JLC C106235",
+          "p": [
+            34.5,
+            21.650000000000002
+          ]
+        },
+        {
+          "ref": "S306",
+          "text": "JLC C318938",
+          "p": [
+            40.5,
+            22.1
+          ]
+        },
+        {
+          "ref": "C307",
+          "text": "JLC C22435949",
+          "p": [
+            30.0,
+            12.26
+          ]
+        },
+        {
+          "ref": "R307",
+          "text": "JLC C106235",
+          "p": [
+            34.5,
+            15.05
+          ]
+        },
+        {
+          "ref": "C308",
+          "text": "JLC C22435949",
+          "p": [
+            30.0,
+            8.76
+          ]
+        },
+        {
+          "ref": "R308",
+          "text": "JLC C106235",
+          "p": [
+            34.5,
+            11.55
+          ]
+        },
+        {
+          "ref": "S307",
+          "text": "JLC 未核实",
+          "p": [
+            35.5,
+            16.8
+          ]
+        }
       ]
     },
     {
@@ -3910,6 +4790,120 @@
         "C400 靠近 LED 的 VSYS；MOS 与限流电阻靠 LED，栅极下拉靠 MOS，复位时保持熄灭。",
         "PWM 走线和 LED 回流避开晶体/射频局部地；建议先用几百 Hz～1kHz，空闲关闭。",
         "VSYS 随 USB/电池变化，亮度并非恒流；低电量时绿/蓝会变暗，限流初值与混色需结合导光件实测。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "D400",
+          "text": "JLC C52212029",
+          "p": [
+            24.5,
+            25.15
+          ]
+        },
+        {
+          "ref": "C400",
+          "text": "JLC C60474",
+          "p": [
+            43.0,
+            21.56
+          ]
+        },
+        {
+          "ref": "R400",
+          "text": "JLC C2909307",
+          "p": [
+            10.5,
+            16.86
+          ]
+        },
+        {
+          "ref": "Q400",
+          "text": "JLC C2891732",
+          "p": [
+            11.2,
+            12.2
+          ]
+        },
+        {
+          "ref": "R403",
+          "text": "JLC C106235",
+          "p": [
+            5.0,
+            14.483333333333334
+          ]
+        },
+        {
+          "ref": "R406",
+          "text": "JLC C49196763",
+          "p": [
+            7.2,
+            10.226666666666668
+          ]
+        },
+        {
+          "ref": "R401",
+          "text": "JLC C106235",
+          "p": [
+            24.5,
+            16.86
+          ]
+        },
+        {
+          "ref": "Q401",
+          "text": "JLC C2891732",
+          "p": [
+            25.2,
+            12.2
+          ]
+        },
+        {
+          "ref": "R404",
+          "text": "JLC C106235",
+          "p": [
+            19.0,
+            14.483333333333334
+          ]
+        },
+        {
+          "ref": "R407",
+          "text": "JLC C49196763",
+          "p": [
+            21.2,
+            10.226666666666668
+          ]
+        },
+        {
+          "ref": "R402",
+          "text": "JLC C106235",
+          "p": [
+            38.5,
+            16.86
+          ]
+        },
+        {
+          "ref": "Q402",
+          "text": "JLC C2891732",
+          "p": [
+            39.2,
+            12.2
+          ]
+        },
+        {
+          "ref": "R405",
+          "text": "JLC C106235",
+          "p": [
+            33.0,
+            14.483333333333334
+          ]
+        },
+        {
+          "ref": "R408",
+          "text": "JLC C49196763",
+          "p": [
+            35.2,
+            10.226666666666668
+          ]
+        }
       ]
     },
     {
@@ -3922,6 +4916,120 @@
         "C218/C219 紧贴 pin 37/38，沿用 Nordic errata 138 处理；不要混淆 GPIO P0.25/P0.26 与封装 pin 25/26。",
         "J200：1=VDD、2=GND、3=IO、4=CLK；VDD 仅供调试器电压参考，板子自行供电，不接 5V。RESET 配置 UICR.PSELRESET。",
         "SWD 短线带地参考；pin 1 用方焊盘/三角标记。测试点避开天线，不在晶体、DEC、ANT 节点增加长支路。"
+      ],
+      "supplier_labels": [
+        {
+          "ref": "U200",
+          "text": "JLC C77540",
+          "p": [
+            13.0,
+            23.779999999999998
+          ]
+        },
+        {
+          "ref": "U200",
+          "text": "JLC C77540",
+          "p": [
+            12.5,
+            9.98
+          ]
+        },
+        {
+          "ref": "J200",
+          "text": "JLC 待选型",
+          "p": [
+            39.5,
+            27.98
+          ]
+        },
+        {
+          "ref": "R200",
+          "text": "JLC C2906861",
+          "p": [
+            29.5,
+            19.86
+          ]
+        },
+        {
+          "ref": "C218",
+          "text": "JLC C45359894",
+          "p": [
+            36.5,
+            19.86
+          ]
+        },
+        {
+          "ref": "C219",
+          "text": "JLC C45359894",
+          "p": [
+            43.5,
+            19.86
+          ]
+        },
+        {
+          "ref": "TP200",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            28.7,
+            14.95
+          ]
+        },
+        {
+          "ref": "TP201",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            28.7,
+            12.7
+          ]
+        },
+        {
+          "ref": "TP202",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            28.7,
+            10.45
+          ]
+        },
+        {
+          "ref": "TP203",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            28.7,
+            8.2
+          ]
+        },
+        {
+          "ref": "TP204",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            38.7,
+            14.95
+          ]
+        },
+        {
+          "ref": "TP205",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            38.7,
+            12.7
+          ]
+        },
+        {
+          "ref": "TP206",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            38.7,
+            10.45
+          ]
+        },
+        {
+          "ref": "TP207",
+          "text": "PCB 焊盘 / 无料号",
+          "p": [
+            38.7,
+            8.2
+          ]
+        }
       ]
     }
   ]

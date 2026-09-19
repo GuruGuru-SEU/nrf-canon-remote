@@ -30,19 +30,25 @@ def magnitude(value, kind):
     return float(m[1])*{'':1,'p':1e-12,'n':1e-9,'u':1e-6,'m':1e-3,'k':1e3,'M':1e6}[m[2]]
 
 
-refs=set();values=0
+refs=set();values=0;supplier_refs=set()
 for line in bom.splitlines():
     if not line.startswith('|'):continue
     cells=[c.strip() for c in line.split('|')[1:-1]]
     if len(cells)<2:continue
     for ref in references(cells[0]):
         refs.add(ref)
+        if len(cells)==6 and ref in PARTS and not cells[0].startswith('电池'):
+            codes=set(re.findall(r'\bC\d{4,}\b',cells[3]))
+            expected={PARTS[ref]['lcsc']} if PARTS[ref]['lcsc'] else set()
+            assert codes==expected,(ref,codes,expected)
+            supplier_refs.add(ref)
         if ref[0] in 'RCL' and ref in PARTS and PARTS[ref]['fitted']:
             a=magnitude(cells[1],ref[0]);b=magnitude(PARTS[ref]['value'],ref[0])
             assert a is not None and b is not None and abs(a-b)<=abs(a)*1e-9,(ref,cells[1],PARTS[ref])
             values+=1
 assert refs==set(PARTS)-{'BAT1'},(refs-set(PARTS),set(PARTS)-refs-{'BAT1'})
 assert sum(p['fitted'] for p in PARTS.values())==96
+assert {r for r,p in PARTS.items() if p['lcsc']} <= supplier_refs
 
 # Independently recover the MCU's connections from the complete prose pin table.
 pin_table=source.split('## 8. U200 完整引脚分配表')[1].split('## 9.')[0]
@@ -119,6 +125,9 @@ for i,ch in enumerate('RGB'):
 
 report=json.loads((OUT/'schematic-checks.json').read_text())
 report.update(bom_references=len(refs),passive_values_checked=values,prose_mcu_pins_checked=len(checked),
+              supplier_bom_rows_checked=len(supplier_refs),
+              components_with_jlc_code=sum(bool(p['lcsc']) for p in PARTS.values()),
+              distinct_jlc_codes=len({p['lcsc'] for p in PARTS.values() if p['lcsc']}),
               direct_prose_connections_checked=direct,key_channels_checked=key_rows,
               scope='Drawing/source consistency only; not EDA ERC, RF validation, or prototype testing.')
 (OUT/'schematic-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

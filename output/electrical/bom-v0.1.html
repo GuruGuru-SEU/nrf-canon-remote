@@ -18,8 +18,9 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a href="schematic-drawing-v0.1.html">图纸</a><a  href="schematic-v0.1.html">原理图</a><a aria-current="page" href="bom-v0.1.html">BOM</a></nav></header>
 <div class="layout"><aside><div class="toc-label">文档目录 <span>v0.1</span></div><details open class="toc"><summary>查看目录</summary><nav aria-label="文档目录"><a class="" href="#usb-c-接口与静电保护">USB-C 接口与静电保护</a><a class="" href="#电池与充电">电池与充电</a><a class="" href="#电源切换与-33-v-稳压">电源切换与 3.3 V 稳压</a><a class="" href="#usb-检测与电池电压检测">USB 检测与电池电压检测</a><a class="" href="#主控内部电源及复位">主控、内部电源及复位</a><a class="" href="#时钟">时钟</a><a class="" href="#按键">按键</a><a class="" href="#rgb-指示灯">RGB 指示灯</a><a class="" href="#射频与天线">射频与天线</a><a class="" href="#调试接口">调试接口</a><a class="" href="#不装元件和-pcb-自带焊盘">不装元件和 PCB 自带焊盘</a><a class="" href="#采购汇总与取舍">采购汇总与取舍</a></nav></details><a class="source" href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/electrical/BOM-v0.1.md">查看 Markdown 源文件 ↗</a></aside>
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-遥控器完整电气-bom-v01">nRF52832 遥控器完整电气 BOM v0.1</h1>
-<p>整理日期：2026-09-18。对应 <a href="schematic-v0.1.html">文字原理图 v0.1</a>，按单台用量统计。相同规格、相同作用的元件合并列出，所有装配位号均覆盖；同一料号用于不同电路时分行说明。</p>
+<p>整理日期：2026-09-19。对应 <a href="schematic-v0.1.html">文字原理图 v0.1</a>，按单台用量统计。相同规格、相同作用的元件合并列出，所有装配位号均覆盖；同一料号用于不同电路时分行说明。</p>
 <p><a href="schematic-drawing-v0.1.html">查看图形原理图 v0.1</a>，图中位号与本表一致。</p>
+<p>图中每个器件旁均标注立创物料编号（<code>JLC C…</code>）或未分配编号的原因，可在嘉立创EDA中按编号搜索。2026-09-19 补核 U200、Q100、D100、L200 的供应商编号，采购状态仍为待采购；J100 为淘宝自购物料，对应编号仅用于查找同型号。S307 的立创编号尚未核实；L220、C220、J200 和电池尚待最终选型；DNP 位置及 PCB 自带焊盘没有采购编号。</p>
 <p>“已有”指本地订单、补充物料记录或用户确认自购，实际剩余数量以实物为准。“待采购”指现有记录中没有合适选件。射频／晶体数值是首版初值，本文不更改原理图。</p>
 <h2 id="usb-c-接口与静电保护">USB-C 接口与静电保护</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
@@ -158,17 +159,17 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <tbody>
 <tr>
 <td>Q100</td>
-<td>AO3401A，P-MOS，SOT23</td>
+<td>AOS AO3401A，P-MOS，SOT23</td>
 <td style="text-align:right">1</td>
-<td>待采购</td>
+<td>待采购：<a href="https://www.lcsc.com/product-detail/MOSFET_Alpha-Omega-Semicon-AO3401A_C15127.html">C15127</a></td>
 <td>电池供电通路</td>
 <td>无 USB 时接通电池；USB 供电时关闭，阻止 VSYS 直接灌入电池</td>
 </tr>
 <tr>
 <td>D100</td>
-<td>Nexperia BAT54H，肖特基，SOD123F</td>
+<td>Nexperia BAT54H,115，肖特基，SOD123F</td>
 <td style="text-align:right">1</td>
-<td>待采购</td>
+<td>待采购：<a href="https://www.lcsc.com/es/product-detail/Schottky-Barrier-Diodes-SBD_Nexperia_C426769.html">C426769</a></td>
 <td>USB 供电通路</td>
 <td>USB→VSYS 单向导通，阻止电池电源反灌 USB；2=A 接 VBUS，1=K 接 VSYS</td>
 </tr>
@@ -296,9 +297,9 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <tbody>
 <tr>
 <td>U200</td>
-<td>nRF52832-QFAA，QFN48，6×6 mm</td>
+<td>nRF52832-QFAA（订购型号 NRF52832-QFAA-R），QFN48，6×6 mm</td>
 <td style="text-align:right">1</td>
-<td>待采购</td>
+<td>待采购：<a href="https://www.lcsc.com/product-detail/RF-Transceiver-ICs_NORDIC-NRF52832-QFAA-R_C77540.html">C77540</a></td>
 <td>主控／BLE</td>
 <td>读取按键、控制 RGB、运行蓝牙协议与遥控逻辑</td>
 </tr>
@@ -346,7 +347,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>L200</td>
 <td>MLZ1608M100WT000，10 µH，±20%，0603</td>
 <td style="text-align:right">1</td>
-<td>待采购</td>
+<td>待采购：<a href="https://item.szlcsc.com/77925.html">C76798</a></td>
 <td>MCU DC/DC</td>
 <td>降压转换的储能电感；库存同感值电感额定电流不足</td>
 </tr>
@@ -460,7 +461,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>S307</td>
 <td>K2-1831SL-A4SW-01，两段轻触</td>
 <td style="text-align:right">1</td>
-<td>已有：手工物料记录</td>
+<td>已有：手工物料记录，JLC 编号未核实</td>
 <td>中心按键</td>
 <td>提供半按／全按两路触点</td>
 </tr>
@@ -677,22 +678,22 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <tr>
 <td>nRF52832-QFAA</td>
 <td style="text-align:right">1</td>
-<td>QFN48 主控</td>
+<td>C77540；QFN48 主控</td>
 </tr>
 <tr>
 <td>AO3401A</td>
 <td style="text-align:right">1</td>
-<td>P-MOS，库存 SI2302 为 N-MOS，不能替代</td>
+<td>C15127；P-MOS，库存 SI2302 为 N-MOS，不能替代</td>
 </tr>
 <tr>
 <td>Nexperia BAT54H</td>
 <td style="text-align:right">1</td>
-<td>SOD123F 肖特基，库存 1N4148WS 不直接替代</td>
+<td>C426769；SOD123F 肖特基，库存 1N4148WS 不直接替代</td>
 </tr>
 <tr>
 <td>MLZ1608M100WT000</td>
 <td style="text-align:right">1</td>
-<td>10 µH 电源电感，库存 C411950 额定电流不足</td>
+<td>C76798；10 µH 电源电感，库存 C411950 额定电流不足</td>
 </tr>
 <tr>
 <td>3.9 nH 射频电感</td>

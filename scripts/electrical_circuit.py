@@ -117,3 +117,58 @@ for i, net in enumerate(['VDD', 'GND', 'VBUS_5V', 'VBAT', 'VSYS', 'RESET_N', 'CH
 # These are display-only names for otherwise unnamed local nets in the prose.
 LOCAL_NETS = ['USB_GATE', 'BAT_PATH_GATE', 'CHG_PROG', 'DCDC_MID',
               'P025_FILTER', 'P026_FILTER'] + [f'LED_{c}_{p}' for c in 'RGB' for p in 'KDG']
+
+# Supplier identifiers are annotations only; they do not change this circuit or
+# procurement status. Existing stock IDs follow BOM-v0.1.md. Four exact-MPN
+# additions were verified on the supplier's own pages on 2026-09-19.
+JLC_GROUPS = {
+    'C18357553': ['J100'],
+    'C25905': ['R100', 'R101'],
+    'C60474': ['C100', 'C105', 'C200', 'C203', 'C204', 'C206', 'C400'],
+    'C5356109': ['D101', 'D102', 'D103'],
+    'C49208527': ['U100'],
+    'C5137560': ['C101'],
+    'C1592': ['C102', 'C103', 'C104', 'C202'],
+    'C2906861': ['R103', 'R105', 'R106', 'R107', 'R109', 'R200'],
+    'C2906858': ['R102', 'R104', 'R221'],
+    'C82942': ['U101'],
+    'C2891732': ['Q101', 'Q400', 'Q401', 'Q402'],
+    'C49196763': ['R108', 'R110', 'R111', 'R406', 'R407', 'R408'],
+    'C46614473': ['C201'],
+    'C46635918': ['C205'],
+    'C45359894': ['C210', 'C212', 'C218', 'C219'],
+    'C370189': ['L201'],
+    'C54427949': ['X200'],
+    'C18209174': ['X201'],
+    'C45359903': ['C211', 'C213'],
+    'C32949': ['C214', 'C215', 'C216', 'C217'],
+    'C106235': [*[f'R{i}' for i in range(300, 309)], *[f'R{i}' for i in range(401, 406)]],
+    'C22435949': [f'C{i}' for i in range(300, 309)],
+    'C318938': [f'S{i}' for i in range(300, 307)],
+    'C52212029': ['D400'],
+    'C2909307': ['R400'],
+    'C2925419': ['ANT200'],
+    'C77540': ['U200'],
+    'C15127': ['Q100'],
+    'C426769': ['D100'],
+    'C76798': ['L200'],
+}
+NO_JLC = {
+    'S307': 'JLC 未核实',
+    'L220': 'JLC 待选型',
+    'C220': 'JLC 待选型',
+    'J200': 'JLC 待选型',
+    'BAT1': '电池待选型',
+    'C221': 'DNP / 无料号',
+    'C222': 'DNP / 无料号',
+    'J101': 'PCB 焊盘 / 无料号',
+    **{f'TP{i}': 'PCB 焊盘 / 无料号' for i in range(200, 208)},
+}
+for code, refs in JLC_GROUPS.items():
+    for ref in refs:
+        assert 'lcsc' not in PARTS[ref], ref
+        PARTS[ref].update(lcsc=code, supplier_label=f'JLC {code}')
+for ref, label in NO_JLC.items():
+    assert 'lcsc' not in PARTS[ref], ref
+    PARTS[ref].update(lcsc=None, supplier_label=label)
+assert all('lcsc' in part for part in PARTS.values())

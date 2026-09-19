@@ -16,6 +16,12 @@ try {
   for(const sheet of manifest.sheets){
     await page.goto(pathToFileURL(path.join(out,'schematic-assets',sheet.file)).href);
     await page.evaluate(()=>{const svg=document.querySelector('svg');svg.style.width='1680px';svg.style.height='auto';});
+    const supplierTexts=await page.locator('svg text').allTextContents();
+    const expectedLabels=sheet.supplier_labels.map(l=>l.text);
+    for(const label of new Set(expectedLabels)){
+      assert.equal(supplierTexts.filter(t=>t===label).length,expectedLabels.filter(t=>t===label).length,
+        sheet.file+' supplier label coverage: '+label);
+    }
     const quality=await page.evaluate(()=>{
       const svg=document.querySelector('svg'), bounds=svg.getBoundingClientRect();
       const texts=[...svg.querySelectorAll('text')].map(t=>({text:t.textContent,r:t.getBoundingClientRect().toJSON()}));

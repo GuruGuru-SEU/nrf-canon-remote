@@ -29,6 +29,7 @@ WIRE = '#267365'
 MUTED = '#687b83'
 RULE = '#d5e1df'
 AMBER = '#a47731'
+SUPPLIER = '#4c718a'
 FONT = 'Arial, PingFang SC, Microsoft YaHei, sans-serif'
 SHEETS = []
 DRAWN = {}
@@ -39,20 +40,21 @@ class Sheet:
         self.number, self.slug, self.title = number, slug, title
         self.notes, self.height = notes, height
         self.wires, self.ports, self.terminals, self.ncs = [], [], [], []
+        self.supplier_labels = []
         self.d = schemdraw.Drawing(show=False, canvas='svg', inches_per_unit=.43,
                                   fontsize=11, font=FONT, color=INK, lw=1.35)
         self.box((.15, .15), (47.85, height-.15), color=RULE, fill='white', lw=.8)
         self.text(1.3, height-1.15, f'{number:02d} / 07', size=11, color=WIRE)
         self.text(5.0, height-1.2, title, size=21)
         self.text(46.6, height-1.1, 'nRF CANON REMOTE', size=11, align='right')
-        self.text(46.6, height-1.9, 'SCHEMATIC v0.1  /  2026-09-18', size=9, color=MUTED, align='right')
+        self.text(46.6, height-1.9, 'SCHEMATIC v0.1  /  JLC 2026-09-19', size=9, color=MUTED, align='right')
         self.text(5.0, height-2.15, subtitle, size=10, color=MUTED)
         self.rule((1.3, height-2.9), (46.7, height-2.9))
         self.box((1.3, 1.65), (46.7, 6.35), color=RULE, fill='#f7faf9', lw=.7)
         self.text(2, 5.6, '连接与 LAYOUT', size=11, color=WIRE)
         for i, note in enumerate(notes):
             self.text(2, 4.65-i*.78, note, size=10, color=INK)
-        self.text(1.3, .85, '同名网络跨页相连  ·  实心点为连接  ·  × 为 NC  ·  DNP 为不装', size=9, color=MUTED)
+        self.text(1.3, .85, '同名网络跨页相连  ·  实心点为连接  ·  × 为 NC  ·  DNP 为不装  ·  JLC C… 为立创物料编号', size=9, color=MUTED)
         self.text(46.7, .85, f'设计审阅稿  /  {number:02d}', size=9, color=MUTED, align='right')
         SHEETS.append(self)
 
@@ -76,6 +78,11 @@ class Sheet:
 
     def section(self, x, y, label):
         self.text(x, y, label, size=11, color=WIRE)
+
+    def supplier(self, ref, x, y, align='left'):
+        self.text(x, y, PARTS[ref]['supplier_label'], size=8.5,
+                  color=SUPPLIER if PARTS[ref]['lcsc'] else MUTED, align=align)
+        self.supplier_labels.append(dict(ref=ref, text=PARTS[ref]['supplier_label'], p=[x,y]))
 
     def wire(self, net, *points):
         assert net is not None
@@ -134,10 +141,12 @@ class Sheet:
                 sign=-1 if side=='left' else 1
                 self.text(x+sign*.5,y+.3,ref,size=11,color=col,align='right' if sign<0 else 'left')
                 self.text(x+sign*.5,y-.35,val,size=9,color=col,align='right' if sign<0 else 'left')
+                self.supplier(ref,x+sign*.5,y-.94,align='right' if sign<0 else 'left')
             else:
                 sign=-1 if side=='below' else 1
                 raised = .45 if kind in ('L','switch') else 0
-                self.text(x,y+sign*(1.05+raised),ref,size=11,color=col,align='center')
+                self.text(x,y+sign*(1.65+raised),ref,size=11,color=col,align='center')
+                self.supplier(ref,x,y+sign*(1.05+raised),align='center')
                 self.text(x,y+sign*(.45+raised),val,size=9,color=col,align='center')
         return element
 
@@ -152,6 +161,7 @@ class Sheet:
         x1,y1=a; x2,y2=b
         self.text((x1+x2)/2,(y1+y2)/2+.4,title or ref,size=13,align='center')
         self.text((x1+x2)/2,(y1+y2)/2-.45,subtitle or PARTS[ref]['value'],size=9,align='center',color=MUTED)
+        self.supplier(ref,(x1+x2)/2,(y1+y2)/2-1.12,align='center')
         anchors={}
         for numbers,name,side,pos in pins:
             nums=str(numbers).split(',')
@@ -187,6 +197,7 @@ class Sheet:
                       align='left' if name!='G' else 'right',color=MUTED)
         self.text(drain_or_source[0]+1.2,drain_or_source[1]-1.1,ref,size=11)
         self.text(drain_or_source[0]+1.2,drain_or_source[1]-1.75,PARTS[ref]['value'],size=9)
+        self.supplier(ref,drain_or_source[0]+1.2,drain_or_source[1]-2.4)
         return e
 
     def testpoint(self, ref, p):
@@ -194,6 +205,7 @@ class Sheet:
         self.terminal(ref,'1',p)
         self.text(p[0],p[1]+.6,ref,size=10,align='center')
         self.port(PARTS[ref]['pins']['1'],p,'right')
+        self.supplier(ref,p[0]-.3,p[1]-.65)
 
     def finish(self):
         # Add junction dots at physical wire branches and component tees.
@@ -253,7 +265,8 @@ def sheet_usb():
     s.wire('CHG_N',p['1'],(20.5,11.3),(20.5,8.6));s.port('CHG_N',(20.5,8.6),'right')
     s.text(10,7.5,'RPROG = 10k → ICHG ≈ 100mA',size=10,color=MUTED)
     s.port('VDD',(28,11.5),'up')
-    e=s.two('R106',(28,11.5),(28,8.5));s.port('CHG_N',e.end,'right')
+    e=s.two('R106',(28,11.5),(28,8.5))
+    s.wire('CHG_N',e.end,(31.5,8.5));s.port('CHG_N',(31.5,8.5),'right')
     p=s.ic('J101',(35,11.5),(39.7,15.5),[('1','P+','L',14.5),('2','P−','L',12.5)],subtitle='焊线焊盘')
     s.port('VBAT',p['1'],'left');s.ground(p['2'])
     e=s.d.add(elm.BatteryCell().at((43,14.5)).to((43,11.7)))
@@ -262,6 +275,7 @@ def sheet_usb():
     s.port('VBAT',e.start,'up');s.ground(e.end)
     s.text(43,10.5,'1S / 4.2V',size=10,align='center')
     s.text(43,9.7,'带保护 / ~320mAh',size=9,align='center')
+    s.supplier('BAT1',43,8.9,align='center')
     return s
 
 
@@ -281,7 +295,11 @@ def sheet_power():
     s.wire('VBAT',q.drain,(21,18.7),(22,18.7));s.port('VBAT',(22,18.7),'right')
     gy=q.gate.y
     s.port('VBUS_5V',(10.5,gy),'left');s.wire('VBUS_5V',(10.5,gy),(12,gy))
-    e=s.two('R102',(12,gy),(15,gy))
+    e=s.two('R102',(12,gy),(15,gy),label=False)
+    # Keep the ref below the VSYS wire; place the supplier ID below the resistor.
+    s.text(13.5,gy+1.05,'R102',size=11,align='center')
+    s.text(13.5,gy+.45,PARTS['R102']['value'],size=9,align='center')
+    s.supplier('R102',13.5,gy-.75,align='center')
     s.wire('BAT_PATH_GATE',e.end,q.gate)
     s.wire('BAT_PATH_GATE',(17.6,gy),(17.6,gy-.6))
     e=s.two('R103',(17.6,gy-.6),(17.6,18.1),side='left');s.ground(e.end)
@@ -358,7 +376,7 @@ def sheet_clock_rf():
     s.wire('XC2',e.end,(18,23),(21,23));s.port('XC2',(21,23),'up')
     for ref,x in [('C210',3),('C211',7),('C212',18),('C213',22)]:
         if x==22:s.wire('XC2',(21,23),(22,23))
-        s.cap(ref,x,23,2.5,side='left' if x==22 else 'right')
+        s.cap(ref,x,23,2.5,side='left' if x in (18,22) else 'right')
     # The crystal's two case pads are separate from the resonant terminals.
     s.box((10.6,21.4),(13.4,23.8),color=RULE,ls='--',lw=.8)
     for pin,x in [('2',11.3),('4',12.7)]:
@@ -371,7 +389,7 @@ def sheet_clock_rf():
     s.wire('XL1',e.start,(31,23),(27,23));s.port('XL1',(27,23),'up')
     s.wire('XL2',e.end,(41,23),(45,23));s.port('XL2',(45,23),'up')
     for ref,x in [('C214',27),('C215',31),('C216',41),('C217',45)]:
-        s.cap(ref,x,23,2.5,side='left' if x==45 else 'right')
+        s.cap(ref,x,23,2.5,side='left' if x in (41,45) else 'right')
     s.section(2,18.5,'C / 主控时钟与 RF 单元')
     p=s.ic('U200',(5,8.8),(13,17.1),[
         ('34','XC1','L',15.7),('35','XC2','L',14.1),('2','P0.00 / XL1','L',12.5),('3','P0.01 / XL2','L',10.9),
@@ -428,6 +446,7 @@ def sheet_keys():
     s.box((38,8.4),(43,16.0),color=RULE,ls='--',lw=.9)
     s.rule((40.5,13.5),(40.5,12.0),color=MUTED,ls='--')
     s.text(35.5,17.5,'S307 · K2-1831SL-A4SW-01',size=11,align='center')
+    s.supplier('S307',35.5,16.8,align='center')
     s.text(14,7.5,'S300–S306：TS-1101-C-W',size=10,color=MUTED,align='center')
     return s
 
@@ -440,6 +459,7 @@ def sheet_rgb():
         'VSYS 随 USB/电池变化，亮度并非恒流；低电量时绿/蓝会变暗，限流初值与混色需结合导光件实测。'])
     s.box((8.5,20),(40.5,25.5),color=RULE,ls='--',lw=.9)
     s.text(24.5,26,'D400 · NH-B1515RGBA-GF · 单一 RGB 封装',size=12,align='center')
+    s.supplier('D400',24.5,25.15,align='center')
     s.port('VSYS',(5,24),'left');s.terminal('D400','2',(8.5,24))
     s.wire('VSYS',(5,24),(8.5,24),(10,24),(24,24),(38,24),(43.5,24))
     s.text(8.2,24.5,'2 / A',size=9,color=MUTED,align='right')
@@ -488,7 +508,7 @@ def sheet_gpio():
         if pin=='2':s.ground(point)
         else:s.port(PARTS['J200']['pins'][pin],point,'left')
     s.section(28,24,'复位上拉与 errata 138 电容')
-    e=s.two('R200',(29,22.3),(29,19.3));s.port('VDD',e.start,'up');s.port('RESET_N',e.end,'right')
+    e=s.two('R200',(29,22.3),(29,19.3));s.port('VDD',e.start,'up');s.port('RESET_N',e.end,'left')
     for ref,net,x in [('C218','P025_FILTER',36),('C219','P026_FILTER',43)]:
         s.port(net,(x,22.3),'up');s.cap(ref,x,22.3,3)
     s.section(28,17.4,'可接触测试焊盘')
@@ -504,6 +524,7 @@ def audit_geometry():
     expected={f'{r}.{p}' for r,d in PARTS.items() for p in d['pins']}
     if expected!=set(DRAWN):errors.append(f'Terminal coverage missing={expected-set(DRAWN)}, extra={set(DRAWN)-expected}')
     for s in SHEETS:
+        assert {t['ref'] for t in s.terminals} == {l['ref'] for l in s.supplier_labels}, f'Sheet {s.number}: missing supplier annotations'
         segs=[LineString([w['a'],w['b']]) for w in s.wires]
         for i,(w,seg) in enumerate(zip(s.wires,segs)):
             for w2,seg2 in zip(s.wires[i+1:],segs[i+1:]):
@@ -547,7 +568,8 @@ def main():
     report=audit_geometry()
     manifest=dict(version='0.1',tool=f'Schemdraw {schemdraw.__version__}',
         source_sha256={f:hashlib.sha256((OUT/f).read_bytes()).hexdigest() for f in ['原理图-v0.1.md','BOM-v0.1.md']},
-        parts=PARTS,drawn_terminals=DRAWN,sheets=[dict(number=s.number,slug=s.slug,title=s.title,file=s.file,notes=s.notes) for s in SHEETS])
+        parts=PARTS,drawn_terminals=DRAWN,sheets=[dict(number=s.number,slug=s.slug,title=s.title,file=s.file,notes=s.notes,
+                                                  supplier_labels=s.supplier_labels) for s in SHEETS])
     (OUT/'schematic-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     ref_sheets={ref:sorted({t['sheet']-1 for t in DRAWN.values() if t['ref']==ref})
                 for ref in PARTS if not PARTS[ref].get('external')}
