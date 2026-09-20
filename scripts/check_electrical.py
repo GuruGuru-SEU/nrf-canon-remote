@@ -47,7 +47,7 @@ for line in bom.splitlines():
             assert a is not None and b is not None and abs(a-b)<=abs(a)*1e-9,(ref,cells[1],PARTS[ref])
             values+=1
 assert refs==set(PARTS)-{'BAT1'},(refs-set(PARTS),set(PARTS)-refs-{'BAT1'})
-assert sum(p['fitted'] for p in PARTS.values())==96
+assert sum(p['fitted'] for p in PARTS.values())==92
 assert {r for r,p in PARTS.items() if p['lcsc']} <= supplier_refs
 
 # Independently recover the MCU's connections from the complete prose pin table.
@@ -112,11 +112,17 @@ assert key_rows==9
 
 for ref,nets in {
     'L200':('DCC','DCDC_MID'),'L201':('DCDC_MID','DEC4'),
-    'C220':('RF_ANT','GND'),'L220':('RF_ANT','RF_50'),
-    'C221':('RF_50','GND'),'R221':('RF_50','ANT_FEED'),'C222':('ANT_FEED','GND'),
-    **{f'C{i}':('XC1' if i<212 else 'XC2','GND') for i in range(210,214)},
-    **{f'C{i}':('XL1' if i<216 else 'XL2','GND') for i in range(214,218)},
+    'C216':('RF_ANT','GND'),'L220':('RF_ANT','RF_50'),
+    'C217':('RF_50','GND'),'R221':('RF_50','ANT_FEED'),'C218':('ANT_FEED','GND'),
+    'C214':('P025_FILTER','GND'),'C215':('P026_FILTER','GND'),
 }.items():assert PARTS[ref]['pins']==dict(zip(['1','2'],nets)),ref
+# Exactly one 12 pF load on each oscillator terminal; no residual extra branch.
+for ref,net in [('C210','XC1'),('C211','XC2'),('C212','XL1'),('C213','XL2')]:
+    caps={r for r,p in PARTS.items() if p['kind']=='C' and net in p['pins'].values()}
+    assert caps=={ref},(net,caps)
+    assert PARTS[ref]['pins']=={'1':net,'2':'GND'}
+    assert abs(magnitude(PARTS[ref]['value'],'C')-12e-12)<1e-20
+    assert PARTS[ref]['lcsc']=='C45359894'
 for i,ch in enumerate('RGB'):
     assert PARTS[f'Q{400+i}']['pins']=={'1':f'LED_{ch}_G','2':'GND','3':f'LED_{ch}_D'}
     assert PARTS[f'R{400+i}']['pins']=={'1':f'LED_{ch}_K','2':f'LED_{ch}_D'}

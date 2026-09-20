@@ -18,10 +18,10 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a href="schematic-drawing-v0.1.html">图纸</a><a  href="schematic-v0.1.html">原理图</a><a aria-current="page" href="bom-v0.1.html">BOM</a></nav></header>
 <div class="layout"><aside><div class="toc-label">文档目录 <span>v0.1</span></div><details open class="toc"><summary>查看目录</summary><nav aria-label="文档目录"><a class="" href="#usb-c-接口与静电保护">USB-C 接口与静电保护</a><a class="" href="#电池与充电">电池与充电</a><a class="" href="#电源切换与-33-v-稳压">电源切换与 3.3 V 稳压</a><a class="" href="#usb-检测与电池电压检测">USB 检测与电池电压检测</a><a class="" href="#主控内部电源及复位">主控、内部电源及复位</a><a class="" href="#时钟">时钟</a><a class="" href="#按键">按键</a><a class="" href="#rgb-指示灯">RGB 指示灯</a><a class="" href="#射频与天线">射频与天线</a><a class="" href="#调试接口">调试接口</a><a class="" href="#不装元件和-pcb-自带焊盘">不装元件和 PCB 自带焊盘</a><a class="" href="#采购汇总与取舍">采购汇总与取舍</a></nav></details><a class="source" href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/electrical/BOM-v0.1.md">查看 Markdown 源文件 ↗</a></aside>
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-遥控器完整电气-bom-v01">nRF52832 遥控器完整电气 BOM v0.1</h1>
-<p>整理日期：2026-09-19。对应 <a href="schematic-v0.1.html">文字原理图 v0.1</a>，按单台用量统计。相同规格、相同作用的元件合并列出，所有装配位号均覆盖；同一料号用于不同电路时分行说明。</p>
+<p>整理日期：2026-09-20。对应 <a href="schematic-v0.1.html">文字原理图 v0.1</a>，按单台用量统计。相同规格、相同作用的元件合并列出，所有装配位号均覆盖；同一料号用于不同电路时分行说明。</p>
 <p><a href="schematic-drawing-v0.1.html">查看图形原理图 v0.1</a>，图中位号与本表一致。</p>
-<p>图中每个器件旁均标注立创物料编号（<code>JLC C…</code>）或未分配编号的原因，可在嘉立创EDA中按编号搜索。2026-09-19 补核 U200、Q100、D100、L200 的供应商编号，采购状态仍为待采购；J100 为淘宝自购物料，对应编号仅用于查找同型号。S307 的立创编号尚未核实；L220、C220、J200 和电池尚待最终选型；DNP 位置及 PCB 自带焊盘没有采购编号。</p>
-<p>“已有”指本地订单、补充物料记录或用户确认自购，实际剩余数量以实物为准。“待采购”指现有记录中没有合适选件。射频／晶体数值是首版初值，本文不更改原理图。</p>
+<p>图中每个器件旁均标注立创物料编号（<code>JLC C…</code>）或未分配编号的原因，可在嘉立创EDA中按编号搜索。2026-09-19 补核 U200、Q100、D100、L200 的供应商编号，采购状态仍为待采购；J100 为淘宝自购物料，对应编号仅用于查找同型号。S307 的立创编号尚未核实；L220、C216、J200 和电池尚待最终选型；DNP 位置及 PCB 自带焊盘没有采购编号。</p>
+<p>“已有”指本地订单、补充物料记录或用户确认自购，实际剩余数量以实物为准。“待采购”指现有记录中没有合适选件。晶振负载按用户已有开发板反馈改为每侧一颗 12 pF，位号与原理图同步调整；射频数值仍为首版初值。</p>
 <h2 id="usb-c-接口与静电保护">USB-C 接口与静电保护</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
@@ -368,7 +368,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>RESET_N 上拉</td>
 </tr>
 <tr>
-<td>C218、C219</td>
+<td>C214、C215</td>
 <td>12 pF，C0G，0402</td>
 <td style="text-align:right">2</td>
 <td>已有：C45359894</td>
@@ -397,20 +397,12 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>为射频与系统提供精确高频时钟基准</td>
 </tr>
 <tr>
-<td>C210、C212</td>
+<td>C210、C211</td>
 <td>12 pF，C0G，0402</td>
 <td style="text-align:right">2</td>
 <td>已有：C45359894</td>
 <td>高频晶体负载</td>
-<td>分别接 XC1、XC2 到地</td>
-</tr>
-<tr>
-<td>C211、C213</td>
-<td>2.4 pF，C0G，0402</td>
-<td style="text-align:right">2</td>
-<td>已有：C45359903</td>
-<td>高频晶体负载</td>
-<td>与上述 12 pF 并联，每侧合计 14.4 pF，待实板校准</td>
+<td>XC1、XC2 各一颗到地，采用已有开发板用值</td>
 </tr>
 <tr>
 <td>X201</td>
@@ -421,12 +413,12 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>低功耗计时与 BLE 连接时序基准</td>
 </tr>
 <tr>
-<td>C214～C217</td>
-<td>10 pF，C0G，0402</td>
-<td style="text-align:right">4</td>
-<td>已有：C32949</td>
+<td>C212、C213</td>
+<td>12 pF，C0G，0402</td>
+<td style="text-align:right">2</td>
+<td>已有：C45359894</td>
 <td>低频晶体负载</td>
-<td>每侧两颗并联，共 20 pF／侧，待实板校准</td>
+<td>XL1、XL2 各一颗到地，采用已有开发板用值</td>
 </tr>
 </tbody>
 </table></div><h2 id="按键">按键</h2>
@@ -569,10 +561,10 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td style="text-align:right">1</td>
 <td>待采购：完整型号待定</td>
 <td>芯片端 RF 网络</td>
-<td>与 C220 配合完成射频匹配和滤波</td>
+<td>与 C216 配合完成射频匹配和滤波</td>
 </tr>
 <tr>
-<td>C220</td>
+<td>C216</td>
 <td>0.8 pF，C0G/NP0，±5%（或不差于此的绝对误差），0402</td>
 <td style="text-align:right">1</td>
 <td>待采购：完整型号待定</td>
@@ -630,7 +622,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 </thead>
 <tbody>
 <tr>
-<td>C221、C222</td>
+<td>C217、C218</td>
 <td>0402，2 个位置</td>
 <td>DNP／待调，暂不采购</td>
 <td>天线匹配</td>
@@ -666,7 +658,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 </tr>
 </tbody>
 </table></div><h2 id="采购汇总与取舍">采购汇总与取舍</h2>
-<p>默认装配共 <strong>96 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>88 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
+<p>默认装配共 <strong>92 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>84 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>待采购项</th>
@@ -718,7 +710,8 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 </tbody>
 </table></div><ul>
 <li>已有 0.7 pF（C48986284）和 1.5 pF（C5448836）可作为天线调谐备料，但未分配默认装配位号，不额外计数。</li>
-<li>晶体负载电容为库存凑值的初值；C202/C205 的参考规格差异已标明，后续验证若不满足再更新采购状态。</li>
+<li>12 pF（C45359894）共六颗：HF 两颗、LF 两颗、P0.25/P0.26 杂散抑制两颗。本版不再装配原晶振支路的 2.4 pF（C45359903）与 10 pF（C32949）。</li>
+<li>C202/C205 的参考规格差异已标明，后续验证若不满足再更新采购状态。</li>
 <li>若选择内部 LDO 模式，可不装 L200/L201，并在固件中关闭 DC/DC；当前统计仍按默认装配两颗电感计算。</li>
 <li>本表列出原理图使用的电气物料；电池保护以电池包集成为前提。若改成裸电芯，保护芯片和保护 MOS 等必须另行设计并加入 BOM。</li>
 </ul>

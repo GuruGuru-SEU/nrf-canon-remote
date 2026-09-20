@@ -47,7 +47,7 @@ class Sheet:
         self.text(1.3, height-1.15, f'{number:02d} / 07', size=11, color=WIRE)
         self.text(5.0, height-1.2, title, size=21)
         self.text(46.6, height-1.1, 'nRF CANON REMOTE', size=11, align='right')
-        self.text(46.6, height-1.9, 'SCHEMATIC v0.1  /  JLC 2026-09-19', size=9, color=MUTED, align='right')
+        self.text(46.6, height-1.9, 'SCHEMATIC v0.1  /  2026-09-20', size=9, color=MUTED, align='right')
         self.text(5.0, height-2.15, subtitle, size=10, color=MUTED)
         self.rule((1.3, height-2.9), (46.7, height-2.9))
         self.box((1.3, 1.65), (46.7, 6.35), color=RULE, fill='#f7faf9', lw=.7)
@@ -366,47 +366,46 @@ def sheet_mcu_power():
 def sheet_clock_rf():
     s=Sheet(4,'clock-rf','时钟与 2.4 GHz 射频','两组晶体负载 · Nordic 芯片端参考网络 · 陶瓷天线匹配预留',[
         '晶体及负载电容紧贴对应 MCU 脚、短线/少过孔；下方不走 DCC/PWM/SWD。X200 的 2/4 为外壳接地。',
-        'HF 每侧 12pF + 2.4pF 并联，LF 每侧 10pF + 10pF 并联。是初调值，需实板校准，不是晶体 CL 本身。',
-        'C220 在 ANT 引脚一侧，地端紧靠 U200.31/EP；C220/L220 局部布局复制 Nordic。RF_50 以后按实际叠层定 50Ω。',
-        'C221/C222 首版 DNP；装壳后调匹配。ANT200.2 为 NC；按厂家净空图放置，远离电池铝膜、USB 壳和金属件。'])
-    s.section(2,26,'A / 32 MHz  ·  CL = 10 pF  ·  每侧 14.4 pF')
+        '按已有开发板用值：HF、LF 每侧各一颗 12pF 到地，共 C210–C213 四颗；电容靠对应晶体端放置。',
+        'C216 在 ANT 引脚一侧，地端紧靠 U200.31/EP；C216/L220 局部布局复制 Nordic。RF_50 以后按实际叠层定 50Ω。',
+        'C217/C218 首版 DNP；装壳后调匹配。ANT200.2 为 NC；按厂家净空图放置，远离电池铝膜、USB 壳和金属件。'])
+    s.section(2,26,'A / 32 MHz  ·  CL = 10 pF  ·  每侧 1 × 12 pF')
     e=s.two('X200',(9,23),(15,23),pin1='1',pin2='3',kind='crystal',value='32MHz / YE32MDBCD2X')
     s.text(9,22.55,'1',size=8,color=MUTED);s.text(15,22.55,'3',size=8,color=MUTED)
-    s.wire('XC1',e.start,(7,23),(3,23));s.port('XC1',(3,23),'up')
-    s.wire('XC2',e.end,(18,23),(21,23));s.port('XC2',(21,23),'up')
-    for ref,x in [('C210',3),('C211',7),('C212',18),('C213',22)]:
-        if x==22:s.wire('XC2',(21,23),(22,23))
-        s.cap(ref,x,23,2.5,side='left' if x in (18,22) else 'right')
+    s.wire('XC1',e.start,(5,23));s.port('XC1',(5,23),'up')
+    s.wire('XC2',e.end,(19,23));s.port('XC2',(19,23),'up')
+    for ref,x in [('C210',5),('C211',19)]:
+        s.cap(ref,x,23,2.5,side='left' if x==19 else 'right')
     # The crystal's two case pads are separate from the resonant terminals.
     s.box((10.6,21.4),(13.4,23.8),color=RULE,ls='--',lw=.8)
     for pin,x in [('2',11.3),('4',12.7)]:
         s.rule((x,21.4),(x,20.5),color=INK)
         s.terminal('X200',pin,(x,20.5));s.ground((x,20.5))
         s.text(x,21, pin,size=8,color=MUTED)
-    s.section(26,26,'B / 32.768 kHz  ·  CL = 12.5 pF  ·  每侧 20 pF')
+    s.section(26,26,'B / 32.768 kHz  ·  CL = 12.5 pF  ·  每侧 1 × 12 pF')
     e=s.two('X201',(33,23),(39,23),kind='crystal',value='32.768kHz / KFC3276812520T')
     s.text(33,22.55,'1',size=8,color=MUTED);s.text(39,22.55,'2',size=8,color=MUTED)
-    s.wire('XL1',e.start,(31,23),(27,23));s.port('XL1',(27,23),'up')
-    s.wire('XL2',e.end,(41,23),(45,23));s.port('XL2',(45,23),'up')
-    for ref,x in [('C214',27),('C215',31),('C216',41),('C217',45)]:
-        s.cap(ref,x,23,2.5,side='left' if x in (41,45) else 'right')
+    s.wire('XL1',e.start,(29,23));s.port('XL1',(29,23),'up')
+    s.wire('XL2',e.end,(43,23));s.port('XL2',(43,23),'up')
+    for ref,x in [('C212',29),('C213',43)]:
+        s.cap(ref,x,23,2.5,side='left' if x==43 else 'right')
     s.section(2,18.5,'C / 主控时钟与 RF 单元')
     p=s.ic('U200',(5,8.8),(13,17.1),[
         ('34','XC1','L',15.7),('35','XC2','L',14.1),('2','P0.00 / XL1','L',12.5),('3','P0.01 / XL2','L',10.9),
         ('30','ANT','R',14.1)],title='U200 · RF / CLK',subtitle='nRF52832-QFAA')
     for pin in ['34','35','2','3']:s.port(PARTS['U200']['pins'][pin],p[pin],'left')
-    s.wire('RF_ANT',p['30'],(16,14.1),(18,14.1));s.cap('C220',16,14.1,2.8)
+    s.wire('RF_ANT',p['30'],(16,14.1),(18,14.1));s.cap('C216',16,14.1,2.8)
     e=s.two('L220',(18,14.1),(23,14.1))
-    s.wire('RF_50',e.end,(26,14.1),(29,14.1));s.cap('C221',26,14.1,2.8)
+    s.wire('RF_50',e.end,(26,14.1),(29,14.1));s.cap('C217',26,14.1,2.8)
     e=s.two('R221',(29,14.1),(33,14.1))
-    s.wire('ANT_FEED',e.end,(35,14.1),(39.35,14.1));s.cap('C222',35,14.1,2.8)
+    s.wire('ANT_FEED',e.end,(35,14.1),(39.35,14.1));s.cap('C218',35,14.1,2.8)
     p=s.ic('ANT200',(40,12.4),(46,16.4),[('1','INPUT','L',14.1),('2','NC','B',44)],subtitle='KH-2012-HM1')
     s.nc(p['2'])
     s.text(16,16.4,'Nordic QFN48 参考初值',size=10,color=WIRE)
     s.text(26,16.4,'天线 π 匹配预留',size=10,color=AMBER)
     s.text(24,13.5,'RF_50',size=9,color=WIRE)
     s.text(34,13.5,'ANT_FEED',size=9,color=WIRE)
-    s.text(16,9.2,'ANT 侧 → C220 → L220 这一段不按普通 50Ω 长线处理',size=10,color=MUTED)
+    s.text(16,9.2,'ANT 侧 → C216 → L220 这一段不按普通 50Ω 长线处理',size=10,color=MUTED)
     return s
 
 
@@ -486,7 +485,7 @@ def sheet_rgb():
 def sheet_gpio():
     s=Sheet(7,'gpio-swd','GPIO、SWD 与测试点','U200 的信号分单元 · 全部未用脚显式 NC · SWD 固定顺序',[
         'U200 在第 3/4/7 页拆分显示，合计 48 个封装引脚 + EP，仍然只有一颗 MCU。同名网络相连。',
-        'C218/C219 紧贴 pin 37/38，沿用 Nordic errata 138 处理；不要混淆 GPIO P0.25/P0.26 与封装 pin 25/26。',
+        'C214/C215 紧贴 pin 37/38，沿用 Nordic errata 138 处理；不要混淆 GPIO P0.25/P0.26 与封装 pin 25/26。',
         'J200：1=VDD、2=GND、3=IO、4=CLK；VDD 仅供调试器电压参考，板子自行供电，不接 5V。RESET 配置 UICR.PSELRESET。',
         'SWD 短线带地参考；pin 1 用方焊盘/三角标记。测试点避开天线，不在晶体、DEC、ANT 节点增加长支路。'],height=36)
     left=[6,7,8,9,10,14,15,19,20,16,17,18]
@@ -509,7 +508,7 @@ def sheet_gpio():
         else:s.port(PARTS['J200']['pins'][pin],point,'left')
     s.section(28,24,'复位上拉与 errata 138 电容')
     e=s.two('R200',(29,22.3),(29,19.3));s.port('VDD',e.start,'up');s.port('RESET_N',e.end,'left')
-    for ref,net,x in [('C218','P025_FILTER',36),('C219','P026_FILTER',43)]:
+    for ref,net,x in [('C214','P025_FILTER',36),('C215','P026_FILTER',43)]:
         s.port(net,(x,22.3),'up');s.cap(ref,x,22.3,3)
     s.section(28,17.4,'可接触测试焊盘')
     for i in range(8):

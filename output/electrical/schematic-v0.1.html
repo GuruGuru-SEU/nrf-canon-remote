@@ -18,9 +18,10 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <header class="topbar"><a class="project" href="../preview.html"><span class="project-mark">nRF</span><span>CANON REMOTE<small>GuruGuru-SEU / 电气设计</small></span></a><nav aria-label="设计文档"><a href="schematic-drawing-v0.1.html">图纸</a><a aria-current="page" href="schematic-v0.1.html">原理图</a><a  href="bom-v0.1.html">BOM</a></nav></header>
 <div class="layout"><aside><div class="toc-label">文档目录 <span>v0.1</span></div><details open class="toc"><summary>查看目录</summary><nav aria-label="文档目录"><a class="" href="#1-总体结构与电源网络">1. 总体结构与电源网络</a><a class="" href="#2-usb-c充电与供电切换">2. USB-C、充电与供电切换</a><a class="sub" href="#21-j100hx-type-c-6p-qtwt">2.1 J100：HX TYPE-C 6P QTWT</a><a class="sub" href="#22-u100mstp4054-42sot23-5l">2.2 U100：MSTP4054-42，SOT23-5L</a><a class="sub" href="#23-usb电池自动切换">2.3 USB／电池自动切换</a><a class="sub" href="#24-u101me6211c33m5g-n33-v-ldo">2.4 U101：ME6211C33M5G-N，3.3 V LDO</a><a class="sub" href="#25-usb-检测与电池测量">2.5 USB 检测与电池测量</a><a class="" href="#3-nrf52832-主控最小系统">3. nRF52832 主控最小系统</a><a class="sub" href="#31-电源内部稳压及复位">3.1 电源、内部稳压及复位</a><a class="sub" href="#32-32-mhz-与-32768-khz-时钟">3.2 32 MHz 与 32.768 kHz 时钟</a><a class="" href="#4-按键">4. 按键</a><a class="" href="#5-rgb-lednh-b1515rgba-gf">5. RGB LED：NH-B1515RGBA-GF</a><a class="" href="#6-rf-与陶瓷天线">6. RF 与陶瓷天线</a><a class="" href="#7-j2004pin-swd">7. J200：4Pin SWD</a><a class="" href="#8-u200-完整引脚分配表">8. U200 完整引脚分配表</a><a class="" href="#9-首版-bom-与库存对应">9. 首版 BOM 与库存对应</a><a class="" href="#10-转绘及首次调试顺序">10. 转绘及首次调试顺序</a></nav></details><a class="source" href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/electrical/%E5%8E%9F%E7%90%86%E5%9B%BE-v0.1.md">查看 Markdown 源文件 ↗</a></aside>
 <main id="document"><div class="doc-meta"><span class="draft">设计草案</span><span>版本 v0.1</span><span>用于团队审阅</span></div><article><h1 id="nrf52832-canon-遥控器文字原理图-v01">nRF52832 Canon 遥控器：文字原理图 v0.1</h1>
-<p>日期：2026-09-17。用于转绘原理图和开始 PCB 规划；尚未完成 EDA ERC、PCB layout、射频调试或样机验证。</p>
-<p><a href="schematic-drawing-v0.1.html">查看 7 页图形原理图</a>：2026-09-18 按本版连接绘制，含元件符号、引脚编号、数值和 layout 注释。本次补齐 BAT54H 的厂商脚号：2=阳极、1=阴极，电路拓扑不变。</p>
+<p>更新日期：2026-09-20。用于转绘原理图和开始 PCB 规划；遥控器本板尚未完成 EDA ERC、PCB layout、射频调试或样机验证。</p>
+<p><a href="schematic-drawing-v0.1.html">查看 7 页图形原理图</a>：含元件符号、引脚编号、数值和 layout 注释，与本文同步更新。BAT54H 厂商脚号为 2=阳极、1=阴极。</p>
 <p>2026-09-19：图纸已逐器件补充 <code>JLC C…</code> 物料编号，未确定编号的器件、DNP 位置与自带焊盘也分别标注。编号及采购状态见 <a href="bom-v0.1.html">完整 BOM</a>。</p>
+<p>2026-09-20：按用户已有开发板的用值反馈，HF、LF 晶振两侧均采用各一颗 12 pF 对地电容，合计四颗；后续 200 段电容位号顺延，具体对应见 3.2 节。</p>
 <p>本版对应目前的机械方案：四向圆环、中心 K2-1831SL-A4SW-01 两段键、下排三个圆键、NH-B1515RGBA-GF RGB、HX TYPE-C 6P QTWT 和单节软包锂电池。7 个普通开关 + 1 个两段开关，共 <strong>9 路按键信号</strong>。主控选 <strong>nRF52832-QFAA，QFN48，6 × 6 mm</strong>，不使用 WLCSP 的引脚表。</p>
 <p>建议转绘为五页：① USB／充电／电源；② MCU／时钟；③ 按键／RGB；④ RF／天线；⑤ SWD／测试点。相同网络名直接相连。下文所有 <code>GND</code> 属于同一电气网络，<code>NC</code> 是不连接，<code>DNP</code> 是保留焊盘但首版不装。</p>
 <h2 id="1-总体结构与电源网络">1. 总体结构与电源网络</h2>
@@ -244,10 +245,10 @@ U200.24/P0.21/nRESET = RESET_N
 R200 10k 0402 : VDD — RESET_N [C2906861]
 TP205 = RESET_N，单独测试焊盘
 
-U200.37/P0.25 — C218(12pF C0G 0402) — GND [C45359894]
-U200.38/P0.26 — C219(12pF C0G 0402) — GND [C45359894]
+U200.37/P0.25 — C214(12pF C0G 0402) — GND [C45359894]
+U200.38/P0.26 — C215(12pF C0G 0402) — GND [C45359894]
 </code></pre>
-<p>C218/C219 沿用 v1.1 参考图对 errata 138 的处理，这两脚本版不分配其他功能。不要把 <strong>GPIO P0.25/P0.26</strong> 与 <strong>封装 pin 25/26（SWD）</strong> 混淆。<a href="https://devzone.nordicsemi.com/guides/hardware-design-test-and-measuring/b/nrf5x/posts/nrf52832-specific-pcb-guidelines">Nordic PCB 指南</a>。复位功能需要固件正确配置 <code>UICR.PSELRESET</code>。</p>
+<p>C214/C215 沿用 v1.1 参考图对 errata 138 的处理，这两脚本版不分配其他功能。不要把 <strong>GPIO P0.25/P0.26</strong> 与 <strong>封装 pin 25/26（SWD）</strong> 混淆。<a href="https://devzone.nordicsemi.com/guides/hardware-design-test-and-measuring/b/nrf5x/posts/nrf52832-specific-pcb-guidelines">Nordic PCB 指南</a>。复位功能需要固件正确配置 <code>UICR.PSELRESET</code>。</p>
 <p><strong>DC/DC 选件：</strong> Nordic 要求 10 µH 电感额定电流至少 50 mA；库存 C411950 / SCL1608S100KSP 的规格只有 3 mA，不采用。L200 选用额定电感变化电流 90 mA 的 <a href="https://product.tdk.com/en/search/inductor/inductor/smd/info?part_no=MLZ1608M100WT000">TDK MLZ1608M100WT000</a>。装好 L200/L201 后固件开启 DC/DC。若先用内部 LDO 调试，两颗电感均 DNP、DCC 悬空，C202 保留，并保持 <code>DCDCEN=0</code>；不要把 DCC 短接到 VDD。</p>
 <p>库存去耦有两处与参考 BOM 不同：C205 为 0402/±20%，Nordic 原版是 0603/±10%；C202 库存为 X5R，原版为 X7R。首版可以先按上述库存画图，但采购／投板前核对有效容量、温度范围及封装，必要时换回参考规格；<strong>不能仅因容量字样相同就认为完全等效</strong>。</p>
 <p><strong>Layout 注释：</strong></p>
@@ -256,7 +257,7 @@ U200.38/P0.26 — C219(12pF C0G 0402) — GND [C45359894]
 <li>C203/C204 不共享一条长去耦支线。电源先到对应电容连接点，再到 VDD 脚；参考布局优先于机械式套用“必须某个方向进线”。</li>
 <li>L200/L201/C202 形成紧凑回路，DCC 开关节点不铺大铜、不绕到晶体或天线下面。10 µH → 15 nH 的顺序保持参考电路。</li>
 <li>裸露焊盘与 GND 平面可靠连接，使用适量接地过孔并按装配能力处理阻焊／塞孔，避免焊锡被过孔吸走。</li>
-<li>C218/C219 紧邻 pin 37/38，不延长到板外测试点。</li>
+<li>C214/C215 紧邻 pin 37/38，不延长到板外测试点。</li>
 </ul>
 <h3 id="32-32-mhz-与-32768-khz-时钟">3.2 32 MHz 与 32.768 kHz 时钟</h3>
 <pre><code class="language-text">X200 = YE32MDBCD2X，32MHz，CL=10pF，2016-4P [C54427949]
@@ -264,21 +265,69 @@ X200.1 — U200.34/XC1
 X200.3 — U200.35/XC2
 X200.2、X200.4 — GND
 
-C210 12pF  C0G 0402 : XC1 — GND [C45359894]
-C211 2.4pF C0G 0402 : XC1 — GND [C45359903]
-C212 12pF  C0G 0402 : XC2 — GND [C45359894]
-C213 2.4pF C0G 0402 : XC2 — GND [C45359903]
-每侧合计 14.4pF，初调值，需校准；不是两个电容串联。
+C210 12pF C0G 0402 : XC1 — GND [C45359894]
+C211 12pF C0G 0402 : XC2 — GND [C45359894]
 
 X201 = KFC3276812520T，32.768kHz，CL=12.5pF，3215-2P [C18209174]
 X201.1 — U200.2/P0.00/XL1
 X201.2 — U200.3/P0.01/XL2
 
-C214、C215 各10pF C0G 0402 : XL1 — GND [C32949]，并联共20pF
-C216、C217 各10pF C0G 0402 : XL2 — GND [C32949]，并联共20pF
+C212 12pF C0G 0402 : XL1 — GND [C45359894]
+C213 12pF C0G 0402 : XL2 — GND [C45359894]
 </code></pre>
-<p>这里为优先使用库存而采用并联凑值；量产可合并成每侧一颗经过验证的负载电容。<strong>CL 是晶体要求的等效负载，不是两颗对地电容各自的数值。</strong> 对称布局可近似写为 <code>CL ≈ Cext/2 + Cpar,eff</code>，其中寄生项已包含两个 MCU 引脚电容折算与 PCB 寄生，不能重复计算。Nordic 给出的引脚电容典型约 4 pF/脚。</p>
-<p>本版高频 14.4 pF/侧对应暂估 <code>Cpar,eff=2.8 pF</code>，低频 20 pF/侧对应暂估 <code>2.5 pF</code>；这些是布局前估计，须用实板频率／起振检查修正。不能照搬 Nordic 原图两侧 12 pF：原图晶体 CL 为 8 pF／9 pF，而库存是 10 pF／12.5 pF。<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/clock.html">Nordic 时钟规格</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/YE32MDBCD2X.pdf">X200 手册</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/KFC3276812520T.pdf">X201 手册</a>。</p>
+<p>两组晶振各有两颗负载电容，每个晶振端各接一颗 12 pF 到地，全部使用库存 C45359894。用值依据是用户已有开发板的反馈；原有的额外负载电容已删除。</p>
+<p>晶体的标称 CL 保持原型号参数，外接电容值为每侧 12 pF，两者含义不同。遥控器 PCB 的起振与频偏在本板验证。参考：<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/clock.html">Nordic 时钟规格</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/YE32MDBCD2X.pdf">X200 手册</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/KFC3276812520T.pdf">X201 手册</a>。</p>
+<p>本次位号调整如下（“旧位号”指 2026-09-19 图纸）：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
+<tr>
+<th>用途</th>
+<th>旧位号</th>
+<th>当前位号／数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HF，XC1 对地</td>
+<td>C210</td>
+<td>C210，12 pF</td>
+</tr>
+<tr>
+<td>HF，XC2 对地</td>
+<td>C212</td>
+<td>C211，12 pF</td>
+</tr>
+<tr>
+<td>LF，XL1 对地</td>
+<td>C214</td>
+<td>C212，改为 12 pF</td>
+</tr>
+<tr>
+<td>LF，XL2 对地</td>
+<td>C216</td>
+<td>C213，改为 12 pF</td>
+</tr>
+<tr>
+<td>P0.25 杂散抑制</td>
+<td>C218</td>
+<td>C214，12 pF</td>
+</tr>
+<tr>
+<td>P0.26 杂散抑制</td>
+<td>C219</td>
+<td>C215，12 pF</td>
+</tr>
+<tr>
+<td>芯片端 RF 对地</td>
+<td>C220</td>
+<td>C216，0.8 pF</td>
+</tr>
+<tr>
+<td>天线匹配预留</td>
+<td>C221、C222</td>
+<td>C217、C218，DNP</td>
+</tr>
+</tbody>
+</table></div><p>旧 C211、C213、C215、C217 四个额外负载电容位置删除；C300～C308、C400 沿用按键和 RGB 电路的分组编号。</p>
 <p>X200 的库存条目指定 10 pF，所附厂商 PDF 是系列通用表；其 1/3 晶体端、2/4 接地的引脚图已核对。量产前锁定完整订购参数，检查初始误差、温漂、老化及电容拉偏的总误差满足 BLE ±40 ppm。X201 的 ±20 ppm 是室温初始值，固件 LFCLK 精度配置须包含工作温度漂移，不能直接填 20 ppm。</p>
 <p><strong>Layout 注释：</strong> 晶体和负载电容紧贴对应引脚，同层、短线、少过孔，晶体回路下不走 DCC/PWM/SWD 等信号。接地环与地平面按 Nordic 参考布局组织，避免新增大寄生。不要在晶体线上放长支路测试点，也不要直接用普通高电容示波器探头判断其工作频率；采用时钟输出或射频频偏测试。</p>
 <h2 id="4-按键">4. 按键</h2>
@@ -412,7 +461,7 @@ R406～R408 = 1M 0603 / C49196763
 <pre><code class="language-text">                         L220 3.9nH
 U200.30/ANT ── RF_ANT ─────LLLL───── RF_50 ── R221(0Ω) ── ANT_FEED ── ANT200.1
                   │                   │                      │
-              C220 0.8pF          C221 DNP               C222 DNP
+              C216 0.8pF          C217 DNP               C218 DNP
                   │                   │                      │
                  GND                 GND                    GND
 
@@ -427,7 +476,7 @@ ANT200.2 = NC
 </thead>
 <tbody>
 <tr>
-<td>C220</td>
+<td>C216</td>
 <td>0.8 pF，C0G/NP0，0402，精度按参考要求选</td>
 <td>新增，<strong>位于 MCU ANT 侧</strong>，不是电感远端</td>
 </tr>
@@ -437,7 +486,7 @@ ANT200.2 = NC
 <td>新增；库存 3.0 nH 不直接替换</td>
 </tr>
 <tr>
-<td>C221、C222</td>
+<td>C217、C218</td>
 <td>DNP，0402，预留 C0G 电容或高频电感</td>
 <td>天线调谐并联臂，数值 TBD</td>
 </tr>
@@ -452,10 +501,10 @@ ANT200.2 = NC
 <td>库存 C2925419</td>
 </tr>
 </tbody>
-</table></div><p><strong>分清两个网络：</strong> C220/L220 是 Nordic QFN48 的参考射频网络，本版先保留参考初值；C221/R221/C222 才是陶瓷天线的匹配预留，按你的要求暂不计算。厂商天线示例板为 90 × 50 mm，不能把它的 1.5 pF／0.7 pF 数值当作本遥控器最终匹配；库存这两种值可留作调试备料。<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/ref_circuitry.html">Nordic 参考电路</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/KH-2012-HM1.pdf">天线手册第 2～3 页</a>。</p>
+</table></div><p><strong>分清两个网络：</strong> C216/L220 是 Nordic QFN48 的参考射频网络，本版先保留参考初值；C217/R221/C218 才是陶瓷天线的匹配预留，按你的要求暂不计算。厂商天线示例板为 90 × 50 mm，不能把它的 1.5 pF／0.7 pF 数值当作本遥控器最终匹配；库存这两种值可留作调试备料。<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/ref_circuitry.html">Nordic 参考电路</a>、<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/KH-2012-HM1.pdf">天线手册第 2～3 页</a>。</p>
 <p><strong>Layout 注释：</strong></p>
 <ul>
-<li>C220/L220 与 U200 的相对位置、接地方式尽量照参考 PCB；ANT → C220 → L220 这段不是可以随意拉长的 50 Ω 线。C220 地端紧靠 U200.31/VSS 与中心接地，采用短、低电感回路。</li>
+<li>C216/L220 与 U200 的相对位置、接地方式尽量照参考 PCB；ANT → C216 → L220 这段不是可以随意拉长的 50 Ω 线。C216 地端紧靠 U200.31/VSS 与中心接地，采用短、低电感回路。</li>
 <li>从 <code>RF_50</code> 开始到天线匹配区，按实际板厚／叠层计算 50 Ω 馈线；不要先指定一个通用线宽。地参考连续，不跨分割或开槽，旁边地过孔围栏不能侵入天线净空。</li>
 <li>天线朝板边放置，按厂家第 2 页的焊盘、馈入方向和地开窗复刻其局部布局。该图含毫米级地开窗（约 5 × 4 mm 量级），不是仅给 2 × 1.2 mm 器件本体留空。最终 keepout 尺寸需在 PCB 图中按厂家坐标明确标注。</li>
 <li>天线辐射净空区各层不铺铜、不走线，只有厂家规定的馈线／焊盘结构；馈线区则需要参考地，两者不要混淆。NC 焊盘保持孤立。</li>
@@ -513,12 +562,12 @@ ANT200.2 = NC
 <tr>
 <td>2</td>
 <td>P0.00/XL1</td>
-<td>X201.1，C214/C215 到地</td>
+<td>X201.1，C212 12 pF 到地</td>
 </tr>
 <tr>
 <td>3</td>
 <td>P0.01/XL2</td>
-<td>X201.2，C216/C217 到地</td>
+<td>X201.2，C213 12 pF 到地</td>
 </tr>
 <tr>
 <td>4</td>
@@ -673,12 +722,12 @@ ANT200.2 = NC
 <tr>
 <td>34</td>
 <td>XC1</td>
-<td>X200.1，C210/C211 到地</td>
+<td>X200.1，C210 12 pF 到地</td>
 </tr>
 <tr>
 <td>35</td>
 <td>XC2</td>
-<td>X200.3，C212/C213 到地</td>
+<td>X200.3，C211 12 pF 到地</td>
 </tr>
 <tr>
 <td>36</td>
@@ -688,12 +737,12 @@ ANT200.2 = NC
 <tr>
 <td>37</td>
 <td>P0.25</td>
-<td>C218 12 pF 到地，无其他负载</td>
+<td>C214 12 pF 到地，无其他负载</td>
 </tr>
 <tr>
 <td>38</td>
 <td>P0.26</td>
-<td>C219 12 pF 到地，无其他负载</td>
+<td>C215 12 pF 到地，无其他负载</td>
 </tr>
 <tr>
 <td>39</td>
@@ -754,7 +803,7 @@ ANT200.2 = NC
 </table></div><p>未使用 GPIO 保持输入断开、无上拉／下拉，不输出快速信号。尤其靠 RF 一侧的空闲 GPIO 不随意改成高速接口。<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/pin.html">引脚依据</a>。</p>
 <h2 id="9-首版-bom-与库存对应">9. 首版 BOM 与库存对应</h2>
 <p>按所属电路、具体作用和已有／待采购状态拆分的完整表格见 <strong><a href="bom-v0.1.html">完整电气 BOM v0.1</a></strong>。下面保留按料号合并的单板用量汇总。</p>
-<p>下表数量是单板默认装配数，包含并联晶体电容，不含 DNP 和测试焊盘。原始订单是购入记录，实际剩余库存仍以实物为准。</p>
+<p>下表数量是单板默认装配数，晶体负载电容共四颗，不含 DNP 和测试焊盘。原始订单是购入记录，实际剩余库存仍以实物为准。</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>物料号／来源</th>
@@ -858,7 +907,7 @@ ANT200.2 = NC
 <td>新增</td>
 <td>0.8 pF C0G，0402，精度按 Nordic 要求</td>
 <td style="text-align:right">1</td>
-<td>C220</td>
+<td>C216</td>
 </tr>
 <tr>
 <td>C2925419</td>
@@ -953,20 +1002,8 @@ ANT200.2 = NC
 <tr>
 <td>C45359894</td>
 <td>12 pF C0G 0402</td>
-<td style="text-align:right">4</td>
-<td>C210、C212、C218、C219</td>
-</tr>
-<tr>
-<td>C45359903</td>
-<td>2.4 pF C0G 0402</td>
-<td style="text-align:right">2</td>
-<td>C211、C213</td>
-</tr>
-<tr>
-<td>C32949</td>
-<td>10 pF C0G 0402</td>
-<td style="text-align:right">4</td>
-<td>C214～C217</td>
+<td style="text-align:right">6</td>
+<td>C210～C215</td>
 </tr>
 <tr>
 <td>C22435949</td>
@@ -978,7 +1015,7 @@ ANT200.2 = NC
 <td>DNP／待调</td>
 <td>天线并联匹配 0402</td>
 <td style="text-align:right">0（留 2 位）</td>
-<td>C221、C222</td>
+<td>C217、C218</td>
 </tr>
 </tbody>
 </table></div><p><strong>明确不直接替换：</strong> C411950 的 10 µH 电感、C52109822 的 3.0 nH 电感、C48986284 的 0.7 pF 电容分别不能直接视为这里的 10 µH 电源电感、3.9 nH RF 电感、0.8 pF RF 电容。0.7 pF 与 1.5 pF 库存留作天线调谐。</p>

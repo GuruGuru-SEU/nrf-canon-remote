@@ -72,19 +72,18 @@ part('U200', 'nRF52832-QFAA', {k: v[1] for k, v in MCU.items()})
 for ref, val, net in [('C200', '100nF', 'DEC1'), ('C201', '100pF / C0G', 'DEC3'),
                       ('C202', '1uF / X5R', 'DEC4'), ('C203', '100nF', 'VDD'),
                       ('C204', '100nF', 'VDD'), ('C205', '4.7uF / 10V', 'VDD'),
-                      ('C206', '100nF', 'VDD'), ('C218', '12pF / C0G', 'P025_FILTER'),
-                      ('C219', '12pF / C0G', 'P026_FILTER')]:
+                      ('C206', '100nF', 'VDD'), ('C214', '12pF / C0G', 'P025_FILTER'),
+                      ('C215', '12pF / C0G', 'P026_FILTER')]:
     passive(ref, val, net, 'GND')
 passive('L200', '10uH', 'DCC', 'DCDC_MID')
 passive('L201', '15nH', 'DCDC_MID', 'DEC4')
 passive('R200', '10k', 'VDD', 'RESET_N')
 part('X200', 'YE32MDBCD2X / 32MHz', {1: 'XC1', 2: 'GND', 3: 'XC2', 4: 'GND'})
 part('X201', 'KFC3276812520T / 32.768kHz', {1: 'XL1', 2: 'XL2'})
-for i, val, net in [(210, '12pF', 'XC1'), (211, '2.4pF', 'XC1'),
-                     (212, '12pF', 'XC2'), (213, '2.4pF', 'XC2'),
-                     (214, '10pF', 'XL1'), (215, '10pF', 'XL1'),
-                     (216, '10pF', 'XL2'), (217, '10pF', 'XL2')]:
-    passive(f'C{i}', val, net, 'GND')
+# One 12 pF capacitor to ground per crystal terminal, per the user's
+# development-board feedback on 2026-09-20.
+for i, net in enumerate(['XC1', 'XC2', 'XL1', 'XL2'], start=210):
+    passive(f'C{i}', '12pF', net, 'GND')
 
 KEYS = [('UP', 6, '圆环上'), ('DOWN', 7, '圆环下'), ('LEFT', 8, '圆环左'),
         ('RIGHT', 9, '圆环右'), ('AUX1', 10, '下排左'), ('AUX2', 14, '下排中'),
@@ -104,11 +103,11 @@ for i, channel in enumerate('RGB'):
     passive(f'R{403+i}', '1k', f'LED_{channel}_PWM', f'LED_{channel}_G')
     passive(f'R{406+i}', '1M', f'LED_{channel}_G', 'GND')
 
-passive('C220', '0.8pF / C0G', 'RF_ANT', 'GND')
+passive('C216', '0.8pF / C0G', 'RF_ANT', 'GND')
 passive('L220', '3.9nH / RF', 'RF_ANT', 'RF_50')
-passive('C221', 'DNP / TBD', 'RF_50', 'GND', fitted=False)
+passive('C217', 'DNP / TBD', 'RF_50', 'GND', fitted=False)
 passive('R221', '0R', 'RF_50', 'ANT_FEED')
-passive('C222', 'DNP / TBD', 'ANT_FEED', 'GND', fitted=False)
+passive('C218', 'DNP / TBD', 'ANT_FEED', 'GND', fitted=False)
 part('ANT200', 'KH-2012-HM1', {1: 'ANT_FEED', 2: None}, kind='antenna')
 part('J200', '1x4 / 2.54mm', {1: 'VDD', 2: 'GND', 3: 'SWDIO', 4: 'SWDCLK'})
 for i, net in enumerate(['VDD', 'GND', 'VBUS_5V', 'VBAT', 'VSYS', 'RESET_N', 'CHG_N', 'USB_PRESENT_N']):
@@ -136,12 +135,10 @@ JLC_GROUPS = {
     'C49196763': ['R108', 'R110', 'R111', 'R406', 'R407', 'R408'],
     'C46614473': ['C201'],
     'C46635918': ['C205'],
-    'C45359894': ['C210', 'C212', 'C218', 'C219'],
+    'C45359894': [f'C{i}' for i in range(210, 216)],
     'C370189': ['L201'],
     'C54427949': ['X200'],
     'C18209174': ['X201'],
-    'C45359903': ['C211', 'C213'],
-    'C32949': ['C214', 'C215', 'C216', 'C217'],
     'C106235': [*[f'R{i}' for i in range(300, 309)], *[f'R{i}' for i in range(401, 406)]],
     'C22435949': [f'C{i}' for i in range(300, 309)],
     'C318938': [f'S{i}' for i in range(300, 307)],
@@ -156,11 +153,11 @@ JLC_GROUPS = {
 NO_JLC = {
     'S307': 'JLC 未核实',
     'L220': 'JLC 待选型',
-    'C220': 'JLC 待选型',
+    'C216': 'JLC 待选型',
     'J200': 'JLC 待选型',
     'BAT1': '电池待选型',
-    'C221': 'DNP / 无料号',
-    'C222': 'DNP / 无料号',
+    'C217': 'DNP / 无料号',
+    'C218': 'DNP / 无料号',
     'J101': 'PCB 焊盘 / 无料号',
     **{f'TP{i}': 'PCB 焊盘 / 无料号' for i in range(200, 208)},
 }
