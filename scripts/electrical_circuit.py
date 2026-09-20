@@ -89,11 +89,9 @@ KEYS = [('UP', 6, '圆环上'), ('DOWN', 7, '圆环下'), ('LEFT', 8, '圆环左
         ('RIGHT', 9, '圆环右'), ('AUX1', 10, '下排左'), ('AUX2', 14, '下排中'),
         ('AUX3', 15, '下排右'), ('HALF', 19, '中心半按'), ('FULL', 20, '中心全按')]
 for i, (name, pin, desc) in enumerate(KEYS):
-    passive(f'R{300+i}', '1k', f'KEY_{name}', f'SW_{name}')
-    passive(f'C{300+i}', '1nF', f'KEY_{name}', 'GND')
     if i < 7:
-        part(f'S{300+i}', 'TS-1101-C-W', {1: f'SW_{name}', 2: 'GND'}, kind='switch')
-part('S307', 'K2-1831SL-A4SW-01', {'a': 'SW_HALF', 'b': 'SW_FULL', 'c1': 'GND', 'c2': 'GND'}, kind='dual-switch')
+        part(f'S{300+i}', 'TS-1101-C-W', {1: f'KEY_{name}', 2: 'GND'}, kind='switch')
+part('S307', 'K2-1831SL-A4SW-01', {'a': 'KEY_HALF', 'b': 'KEY_FULL', 'c1': 'GND', 'c2': 'GND'}, kind='dual-switch')
 
 part('D400', 'NH-B1515RGBA-GF', {2: 'VSYS', 1: 'LED_R_K', 4: 'LED_G_K', 3: 'LED_B_K'}, kind='RGB')
 passive('C400', '100nF / 16V', 'VSYS', 'GND')
@@ -139,8 +137,7 @@ JLC_GROUPS = {
     'C370189': ['L201'],
     'C54427949': ['X200'],
     'C18209174': ['X201'],
-    'C106235': [*[f'R{i}' for i in range(300, 309)], *[f'R{i}' for i in range(401, 406)]],
-    'C22435949': [f'C{i}' for i in range(300, 309)],
+    'C106235': [f'R{i}' for i in range(401, 406)],
     'C318938': [f'S{i}' for i in range(300, 307)],
     'C52212029': ['D400'],
     'C2909307': ['R400'],

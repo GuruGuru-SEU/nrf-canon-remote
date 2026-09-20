@@ -410,9 +410,9 @@ def sheet_clock_rf():
 
 
 def sheet_keys():
-    s=Sheet(5,'switches','按键与两段快门','7 颗普通轻触 + 1 颗两段轻触 · 9 路独立 GPIO · 按下为低',[
-        'GPIO 开内部上拉，可配置 SENSE 唤醒；1k / 1nF 用于尖峰抑制，固件仍需约 5–15ms 去抖。',
-        '每路 1nF 位于电阻的 MCU 侧，R/C 靠近 MCU；开关与键帽顶柱对齐，长线避开 RF/晶体。',
+    s=Sheet(5,'switches','按键与两段快门','7 颗普通轻触 + 1 颗两段轻触 · GPIO 直连 · 内部上拉 / 按下为低',[
+        '9 路 GPIO 均配置为输入并开启内部上拉；可配置低电平 SENSE 唤醒，固件按 5–15ms 初值做去抖。',
+        '每个触点直接连接对应 KEY 网络与 GND；开关对齐键帽顶柱，走线尽量短，避开 RF/晶体并保持地参考。',
         'S307 是一颗器件：a=第一段、b=第二段、两个 c 公共焊脚都接地；定位孔为 NPTH，不作电气连接。',
         '按厂家焊盘视图映射 a/b/c，避免顶/底视图镜像；半按/全按闭合时序在实物上确认后用于固件。'])
     s.section(2,26,'A / 圆环与下排按键')
@@ -421,14 +421,10 @@ def sheet_keys():
         if i<5: x=2; y=24-i*3.4
         elif i<7: x=26;y=24-(i-5)*3.4
         else: x=26;y=14-(i-7)*3.5
-        net=f'KEY_{name}';sw=f'SW_{name}'
-        # The label sits over a short external lead, all RC branches are explicit.
+        net=f'KEY_{name}'
+        # The switch and MCU share one net; no external RC components.
         s.port(net,(x+3,y),'left')
-        s.wire(net,(x+3,y),(x+4.5,y),(x+7,y))
-        s.cap(f'C{300+i}',x+4.5,y,1.6,side='left')
-        e=s.two(f'R{300+i}',(x+7,y),(x+10,y))
-        s.wire(sw,e.end,(x+13,y))
-        s.text(x+10.7,y-.55,sw,size=8,color=WIRE)
+        s.wire(net,(x+3,y),(x+13,y))
         if i<7:
             e=s.two(f'S{300+i}',(x+13,y),(x+16,y),value=desc)
             s.wire('GND',e.end,(x+18,y));s.ground((x+18,y))
@@ -440,7 +436,7 @@ def sheet_keys():
             s.text(x+13,y-.6,'a' if i==7 else 'b',size=9,color=MUTED)
             s.text(x+16,y-.6,'c',size=9,color=MUTED)
             s.wire('GND',e.end,(44,y))
-        s.text(x+.3,y-1.05,f'U200.{pin} / {MCU[pin][0]}',size=8,color=MUTED)
+        s.text(x+3,y-.8,f'U200.{pin} / {MCU[pin][0]} · 内部上拉',size=9,color=MUTED)
     s.wire('GND',(44,14),(44,10.5),(44,9.2));s.ground((44,9.2))
     s.box((38,8.4),(43,16.0),color=RULE,ls='--',lw=.9)
     s.rule((40.5,13.5),(40.5,12.0),color=MUTED,ls='--')

@@ -47,7 +47,7 @@ for line in bom.splitlines():
             assert a is not None and b is not None and abs(a-b)<=abs(a)*1e-9,(ref,cells[1],PARTS[ref])
             values+=1
 assert refs==set(PARTS)-{'BAT1'},(refs-set(PARTS),set(PARTS)-refs-{'BAT1'})
-assert sum(p['fitted'] for p in PARTS.values())==92
+assert sum(p['fitted'] for p in PARTS.values())==74
 assert {r for r,p in PARTS.items() if p['lcsc']} <= supplier_refs
 
 # Independently recover the MCU's connections from the complete prose pin table.
@@ -88,7 +88,7 @@ for ref,expected in {
     'U100':{'1':'CHG_N','2':'GND','3':'VBAT','4':'VBUS_5V','5':'CHG_PROG'},
     'U101':{'1':'VSYS','2':'GND','3':'VSYS','4':None,'5':'VREG_3V3'},
     'D400':{'1':'LED_R_K','2':'VSYS','3':'LED_B_K','4':'LED_G_K'},
-    'S307':{'a':'SW_HALF','b':'SW_FULL','c1':'GND','c2':'GND'},
+    'S307':{'a':'KEY_HALF','b':'KEY_FULL','c1':'GND','c2':'GND'},
     'ANT200':{'1':'ANT_FEED','2':None},
     'J200':{'1':'VDD','2':'GND','3':'SWDIO','4':'SWDCLK'},
 }.items():assert PARTS[ref]['pins']==expected,ref
@@ -97,18 +97,23 @@ key_rows=0
 key_table=source.split('| 开关／触点 |')[1].split('S300～S306 为')[0]
 for line in key_table.splitlines():
     cells=[c.strip() for c in line.split('|')[1:-1]]
-    if len(cells)!=6 or not cells[0].startswith('S3'):continue
-    switch,_,sw,key,gpio,rc=cells
-    resistor,capacitor=references(rc)
+    if len(cells)!=4 or not cells[0].startswith('S3'):continue
+    switch,_,key,gpio=cells
     pin=re.search(r'/\s*(\d+)\s*$',gpio)[1]
     assert PARTS['U200']['pins'][pin]==key
-    assert PARTS[resistor]['pins']=={'1':key,'2':sw}
-    assert PARTS[capacitor]['pins']=={'1':key,'2':'GND'}
     if switch.startswith('S307'):
-        assert PARTS['S307']['pins']['a' if 'SW1' in switch else 'b']==sw
-    else:assert PARTS[switch]['pins']=={'1':sw,'2':'GND'}
+        switch_ref='S307';switch_pin='a' if 'SW1' in switch else 'b'
+        assert PARTS[switch_ref]['pins'][switch_pin]==key
+    else:
+        switch_ref=switch;switch_pin='1'
+        assert PARTS[switch]['pins']=={'1':key,'2':'GND'}
+    # Every KEY net joins exactly the intended MCU pin and switch contact.
+    connected={(r,pin_name) for r,p in PARTS.items() for pin_name,n in p['pins'].items() if n==key}
+    assert connected=={('U200',pin),(switch_ref,switch_pin)},(key,connected)
     key_rows+=1
 assert key_rows==9
+assert not any(re.fullmatch(r'[RC]30[0-8]',r) for r in PARTS)
+assert not any(n.startswith('SW_') for n in all_nets)
 
 for ref,nets in {
     'L200':('DCC','DCDC_MID'),'L201':('DCDC_MID','DEC4'),

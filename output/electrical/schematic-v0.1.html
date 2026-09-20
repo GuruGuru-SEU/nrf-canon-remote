@@ -22,6 +22,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <p><a href="schematic-drawing-v0.1.html">查看 7 页图形原理图</a>：含元件符号、引脚编号、数值和 layout 注释，与本文同步更新。BAT54H 厂商脚号为 2=阳极、1=阴极。</p>
 <p>2026-09-19：图纸已逐器件补充 <code>JLC C…</code> 物料编号，未确定编号的器件、DNP 位置与自带焊盘也分别标注。编号及采购状态见 <a href="bom-v0.1.html">完整 BOM</a>。</p>
 <p>2026-09-20：按用户已有开发板的用值反馈，HF、LF 晶振两侧均采用各一颗 12 pF 对地电容，合计四颗；后续 200 段电容位号顺延，具体对应见 3.2 节。</p>
+<p>2026-09-20 按键简化：删除 R300～R308、C300～C308 共 18 个元件，9 路触点直接连接 GPIO，使用内部上拉与固件去抖；连接统一使用 <code>KEY_*</code> 网络名。</p>
 <p>本版对应目前的机械方案：四向圆环、中心 K2-1831SL-A4SW-01 两段键、下排三个圆键、NH-B1515RGBA-GF RGB、HX TYPE-C 6P QTWT 和单节软包锂电池。7 个普通开关 + 1 个两段开关，共 <strong>9 路按键信号</strong>。主控选 <strong>nRF52832-QFAA，QFN48，6 × 6 mm</strong>，不使用 WLCSP 的引脚表。</p>
 <p>建议转绘为五页：① USB／充电／电源；② MCU／时钟；③ 按键／RGB；④ RF／天线；⑤ SWD／测试点。相同网络名直接相连。下文所有 <code>GND</code> 属于同一电气网络，<code>NC</code> 是不连接，<code>DNP</code> 是保留焊盘但首版不装。</p>
 <h2 id="1-总体结构与电源网络">1. 总体结构与电源网络</h2>
@@ -327,111 +328,87 @@ C213 12pF C0G 0402 : XL2 — GND [C45359894]
 <td>C217、C218，DNP</td>
 </tr>
 </tbody>
-</table></div><p>旧 C211、C213、C215、C217 四个额外负载电容位置删除；C300～C308、C400 沿用按键和 RGB 电路的分组编号。</p>
+</table></div><p>旧 C211、C213、C215、C217 四个额外负载电容位置删除。C300～C308 已随按键直连修改删除；RGB 电路电容保留分组编号 C400。</p>
 <p>X200 的库存条目指定 10 pF，所附厂商 PDF 是系列通用表；其 1/3 晶体端、2/4 接地的引脚图已核对。量产前锁定完整订购参数，检查初始误差、温漂、老化及电容拉偏的总误差满足 BLE ±40 ppm。X201 的 ±20 ppm 是室温初始值，固件 LFCLK 精度配置须包含工作温度漂移，不能直接填 20 ppm。</p>
 <p><strong>Layout 注释：</strong> 晶体和负载电容紧贴对应引脚，同层、短线、少过孔，晶体回路下不走 DCC/PWM/SWD 等信号。接地环与地平面按 Nordic 参考布局组织，避免新增大寄生。不要在晶体线上放长支路测试点，也不要直接用普通高电容示波器探头判断其工作频率；采用时钟输出或射频频偏测试。</p>
 <h2 id="4-按键">4. 按键</h2>
-<p>全部采用独立 GPIO 输入，低电平有效，使用 MCU 内部上拉；可配置 GPIO SENSE 唤醒。没有矩阵扫描，中心两段可以独立检测。</p>
-<p>每路通用接法如下，<code>KEY_*</code> 为 MCU 侧，<code>SW_*</code> 为开关侧：</p>
-<pre><code class="language-text">U200.GPIO ── KEY_* ── R30x(1k) ── SW_* ── 开关触点 ── GND
-               │
-             C30x(1nF)
-               │
-              GND
+<p>全部采用独立 GPIO 输入，低电平有效，使用 MCU 内部上拉；可配置低电平 GPIO SENSE 唤醒。没有矩阵扫描，中心两段可以独立检测。</p>
+<p>每路通用接法如下，GPIO 与触点属于同一个 <code>KEY_*</code> 网络：</p>
+<pre><code class="language-text">U200.GPIO（输入，开启内部上拉）── KEY_* ── 开关触点 ── GND
 </code></pre>
-<p>R300～R308 全部 1 kΩ 0402（C106235），C300～C308 全部 1 nF 0402（C22435949）。这里的 RC 用于抑制尖峰和高频干扰；<strong>仍需固件约 5～15 ms 去抖</strong>，不是硬件长时间去抖。</p>
+<p>R300～R308 和 C300～C308 已删除，不保留为 DNP。松开为高电平，按下为低电平。固件必须开启每路内部上拉，并对按下、松开各自去抖；先采用 <strong>5～15 ms</strong> 的稳定时间，再根据实物调整。中断／唤醒后重新采样确认状态，半按与全按分别处理。<a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/gpio.html">nRF52832 GPIO 依据</a>。</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>开关／触点</th>
 <th>功能</th>
-<th>开关侧网络</th>
-<th>MCU 侧网络</th>
+<th>直连网络</th>
 <th>GPIO／QFN 脚</th>
-<th>串阻／电容</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>S300</td>
 <td>圆环上</td>
-<td>SW_UP</td>
 <td>KEY_UP</td>
 <td>P0.04 / 6</td>
-<td>R300 / C300</td>
 </tr>
 <tr>
 <td>S301</td>
 <td>圆环下</td>
-<td>SW_DOWN</td>
 <td>KEY_DOWN</td>
 <td>P0.05 / 7</td>
-<td>R301 / C301</td>
 </tr>
 <tr>
 <td>S302</td>
 <td>圆环左</td>
-<td>SW_LEFT</td>
 <td>KEY_LEFT</td>
 <td>P0.06 / 8</td>
-<td>R302 / C302</td>
 </tr>
 <tr>
 <td>S303</td>
 <td>圆环右</td>
-<td>SW_RIGHT</td>
 <td>KEY_RIGHT</td>
 <td>P0.07 / 9</td>
-<td>R303 / C303</td>
 </tr>
 <tr>
 <td>S304</td>
 <td>下排左圆键</td>
-<td>SW_AUX1</td>
 <td>KEY_AUX1</td>
 <td>P0.08 / 10</td>
-<td>R304 / C304</td>
 </tr>
 <tr>
 <td>S305</td>
 <td>下排中圆键</td>
-<td>SW_AUX2</td>
 <td>KEY_AUX2</td>
 <td>P0.11 / 14</td>
-<td>R305 / C305</td>
 </tr>
 <tr>
 <td>S306</td>
 <td>下排右圆键</td>
-<td>SW_AUX3</td>
 <td>KEY_AUX3</td>
 <td>P0.12 / 15</td>
-<td>R306 / C306</td>
 </tr>
 <tr>
 <td>S307.a / SW1</td>
 <td>中心半按</td>
-<td>SW_HALF</td>
 <td>KEY_HALF</td>
 <td>P0.16 / 19</td>
-<td>R307 / C307</td>
 </tr>
 <tr>
 <td>S307.b / SW2</td>
 <td>中心全按</td>
-<td>SW_FULL</td>
 <td>KEY_FULL</td>
 <td>P0.17 / 20</td>
-<td>R308 / C308</td>
 </tr>
 </tbody>
-</table></div><p>S300～S306 为 TS-1101-C-W（C318938），两电气端分别接对应 <code>SW_*</code> 与 GND。S307 是 <strong>一颗 K2-1831SL-A4SW-01</strong>，不是两颗普通开关：</p>
+</table></div><p>S300～S306 为 TS-1101-C-W（C318938），两电气端分别接对应 <code>KEY_*</code> 与 GND。S307 是 <strong>一颗 K2-1831SL-A4SW-01</strong>，不是两颗普通开关：</p>
 <pre><code class="language-text">S307 的 c 公共端（两个 c 焊脚） → GND
-S307 的 a / 第一段触点         → SW_HALF
-S307 的 b / 第二段触点         → SW_FULL
+S307 的 a / 第一段触点         → KEY_HALF
+S307 的 b / 第二段触点         → KEY_FULL
 两个定位孔                    → NPTH，无电气连接
 </code></pre>
 <p>按 <a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/output/review/k2-1831sl-datasheet.pdf">HRO 图纸</a> 的 <code>a/b/c</code> 标识建符号；若库符号使用数字脚号，须明确填写数字与字母对应，不按普通四脚轻触的“两两短接”方式猜测。预计半按第一段闭合、全按两段闭合；用实物通断测试确认时序后再确定固件事件处理。板上 a/b 的方向以厂家焊盘视图为准，注意与顶视图的镜像关系。</p>
-<p><strong>Layout 注释：</strong> 开关首先服从键帽顶柱和中心开关定位孔的机械位置。串阻和小电容靠 MCU；开关长线与 RF 馈线保持距离，并保证连续地参考。不要让开关回地跨过晶体或 RF 的局部接地区。按键持续按住时内部上拉会耗电，休眠策略需处理被压住的按键。</p>
+<p><strong>Layout 注释：</strong> 开关首先服从键帽顶柱和中心开关定位孔的机械位置。按键走线尽量短，与 RF 馈线、晶体和 DCC 保持距离，并保证连续地参考。不要让开关回地跨过晶体或 RF 的局部接地区。按键持续按住时内部上拉会耗电，休眠策略需处理被压住的按键。</p>
 <h2 id="5-rgb-lednh-b1515rgba-gf">5. RGB LED：NH-B1515RGBA-GF</h2>
 <p>D400 选库存 C52212029。厂家引脚为 <strong>2 共阳、1 红阴极、3 蓝阴极、4 绿阴极</strong>，不是按 R/G/B 顺序依次编号。<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/electrical/NH-B1515RGBA-GF.pdf">引脚依据：手册第 6 页</a>。</p>
 <p>RGB 共阳接 VSYS，三个通道由库存 SI2302 低边驱动。这样 GPIO 只驱动栅极，不直接承受 VSYS，绿色／蓝色也比直接挂 3.3 V 有更多电压余量。</p>
@@ -960,8 +937,8 @@ ANT200.2 = NC
 <tr>
 <td>C106235</td>
 <td>1 kΩ 1% 0402</td>
-<td style="text-align:right">14</td>
-<td>R300～R308、R401～R405</td>
+<td style="text-align:right">5</td>
+<td>R401～R405</td>
 </tr>
 <tr>
 <td>C2909307</td>
@@ -1004,12 +981,6 @@ ANT200.2 = NC
 <td>12 pF C0G 0402</td>
 <td style="text-align:right">6</td>
 <td>C210～C215</td>
-</tr>
-<tr>
-<td>C22435949</td>
-<td>1 nF 25 V 0402</td>
-<td style="text-align:right">9</td>
-<td>C300～C308</td>
 </tr>
 <tr>
 <td>DNP／待调</td>

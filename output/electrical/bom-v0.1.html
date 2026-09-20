@@ -457,24 +457,9 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>中心按键</td>
 <td>提供半按／全按两路触点</td>
 </tr>
-<tr>
-<td>R300～R308</td>
-<td>1 kΩ，1%，0402</td>
-<td style="text-align:right">9</td>
-<td>已有：C106235</td>
-<td>按键输入</td>
-<td>9 路 GPIO 的串联电阻，配合电容抑制尖峰</td>
-</tr>
-<tr>
-<td>C300～C308</td>
-<td>1 nF，25 V，0402</td>
-<td style="text-align:right">9</td>
-<td>已有：C22435949</td>
-<td>按键输入</td>
-<td>9 路输入滤波，仍需固件去抖</td>
-</tr>
 </tbody>
-</table></div><h2 id="rgb-指示灯">RGB 指示灯</h2>
+</table></div><p>9 路触点直接连接对应 GPIO 与 GND，使用 MCU 内部上拉和固件去抖。R300～R308、C300～C308 已从设计删除；不计入装配或 DNP 位置。</p>
+<h2 id="rgb-指示灯">RGB 指示灯</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>位号</th>
@@ -658,7 +643,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 </tr>
 </tbody>
 </table></div><h2 id="采购汇总与取舍">采购汇总与取舍</h2>
-<p>默认装配共 <strong>92 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>84 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
+<p>默认装配共 <strong>74 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>66 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>待采购项</th>

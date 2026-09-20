@@ -2,8 +2,8 @@
   "version": "0.1",
   "tool": "Schemdraw 0.23",
   "source_sha256": {
-    "原理图-v0.1.md": "2bd81842fec4800f9a53df5b61e5491aabfd688e9ca15619f405e93a04e9a1d6",
-    "BOM-v0.1.md": "5fe24617892ce322e5365cfbd88b388167ca3171e61cfb3328261353d803b0d7"
+    "原理图-v0.1.md": "46351e6845da6128c29f6dc8c533e003fb6c2806c64d7ffcec6364b6e462dd0a",
+    "BOM-v0.1.md": "fdd4d1c41532999a1c300f780f7114f6c2a8c64e02180bb8f2e21b2a84b684f6"
   },
   "parts": {
     "J100": {
@@ -600,230 +600,76 @@
       "lcsc": "C45359894",
       "supplier_label": "JLC C45359894"
     },
-    "R300": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_UP",
-        "2": "SW_UP"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C300": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_UP",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
-    },
     "S300": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_UP",
+        "1": "KEY_UP",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R301": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_DOWN",
-        "2": "SW_DOWN"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C301": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_DOWN",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S301": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_DOWN",
+        "1": "KEY_DOWN",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R302": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_LEFT",
-        "2": "SW_LEFT"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C302": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_LEFT",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S302": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_LEFT",
+        "1": "KEY_LEFT",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R303": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_RIGHT",
-        "2": "SW_RIGHT"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C303": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_RIGHT",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S303": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_RIGHT",
+        "1": "KEY_RIGHT",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R304": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_AUX1",
-        "2": "SW_AUX1"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C304": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_AUX1",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S304": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_AUX1",
+        "1": "KEY_AUX1",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R305": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_AUX2",
-        "2": "SW_AUX2"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C305": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_AUX2",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S305": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_AUX2",
+        "1": "KEY_AUX2",
         "2": "GND"
       },
       "kind": "switch",
       "fitted": true,
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
-    },
-    "R306": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_AUX3",
-        "2": "SW_AUX3"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C306": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_AUX3",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
     },
     "S306": {
       "value": "TS-1101-C-W",
       "pins": {
-        "1": "SW_AUX3",
+        "1": "KEY_AUX3",
         "2": "GND"
       },
       "kind": "switch",
@@ -831,55 +677,11 @@
       "lcsc": "C318938",
       "supplier_label": "JLC C318938"
     },
-    "R307": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_HALF",
-        "2": "SW_HALF"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C307": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_HALF",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
-    },
-    "R308": {
-      "value": "1k",
-      "pins": {
-        "1": "KEY_FULL",
-        "2": "SW_FULL"
-      },
-      "kind": "R",
-      "fitted": true,
-      "lcsc": "C106235",
-      "supplier_label": "JLC C106235"
-    },
-    "C308": {
-      "value": "1nF",
-      "pins": {
-        "1": "KEY_FULL",
-        "2": "GND"
-      },
-      "kind": "C",
-      "fitted": true,
-      "lcsc": "C22435949",
-      "supplier_label": "JLC C22435949"
-    },
     "S307": {
       "value": "K2-1831SL-A4SW-01",
       "pins": {
-        "a": "SW_HALF",
-        "b": "SW_FULL",
+        "a": "KEY_HALF",
+        "b": "KEY_FULL",
         "c1": "GND",
         "c2": "GND"
       },
@@ -2558,50 +2360,10 @@
       ],
       "sheet": 4
     },
-    "C300.1": {
-      "ref": "C300",
-      "pin": "1",
-      "net": "KEY_UP",
-      "p": [
-        6.5,
-        24.0
-      ],
-      "sheet": 5
-    },
-    "C300.2": {
-      "ref": "C300",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        6.5,
-        22.4
-      ],
-      "sheet": 5
-    },
-    "R300.1": {
-      "ref": "R300",
-      "pin": "1",
-      "net": "KEY_UP",
-      "p": [
-        9.0,
-        24.0
-      ],
-      "sheet": 5
-    },
-    "R300.2": {
-      "ref": "R300",
-      "pin": "2",
-      "net": "SW_UP",
-      "p": [
-        12.0,
-        24.0
-      ],
-      "sheet": 5
-    },
     "S300.1": {
       "ref": "S300",
       "pin": "1",
-      "net": "SW_UP",
+      "net": "KEY_UP",
       "p": [
         15.0,
         24.0
@@ -2618,50 +2380,10 @@
       ],
       "sheet": 5
     },
-    "C301.1": {
-      "ref": "C301",
-      "pin": "1",
-      "net": "KEY_DOWN",
-      "p": [
-        6.5,
-        20.6
-      ],
-      "sheet": 5
-    },
-    "C301.2": {
-      "ref": "C301",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        6.5,
-        19.0
-      ],
-      "sheet": 5
-    },
-    "R301.1": {
-      "ref": "R301",
-      "pin": "1",
-      "net": "KEY_DOWN",
-      "p": [
-        9.0,
-        20.6
-      ],
-      "sheet": 5
-    },
-    "R301.2": {
-      "ref": "R301",
-      "pin": "2",
-      "net": "SW_DOWN",
-      "p": [
-        12.0,
-        20.6
-      ],
-      "sheet": 5
-    },
     "S301.1": {
       "ref": "S301",
       "pin": "1",
-      "net": "SW_DOWN",
+      "net": "KEY_DOWN",
       "p": [
         15.0,
         20.6
@@ -2678,50 +2400,10 @@
       ],
       "sheet": 5
     },
-    "C302.1": {
-      "ref": "C302",
-      "pin": "1",
-      "net": "KEY_LEFT",
-      "p": [
-        6.5,
-        17.2
-      ],
-      "sheet": 5
-    },
-    "C302.2": {
-      "ref": "C302",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        6.5,
-        15.6
-      ],
-      "sheet": 5
-    },
-    "R302.1": {
-      "ref": "R302",
-      "pin": "1",
-      "net": "KEY_LEFT",
-      "p": [
-        9.0,
-        17.2
-      ],
-      "sheet": 5
-    },
-    "R302.2": {
-      "ref": "R302",
-      "pin": "2",
-      "net": "SW_LEFT",
-      "p": [
-        12.0,
-        17.2
-      ],
-      "sheet": 5
-    },
     "S302.1": {
       "ref": "S302",
       "pin": "1",
-      "net": "SW_LEFT",
+      "net": "KEY_LEFT",
       "p": [
         15.0,
         17.2
@@ -2738,50 +2420,10 @@
       ],
       "sheet": 5
     },
-    "C303.1": {
-      "ref": "C303",
-      "pin": "1",
-      "net": "KEY_RIGHT",
-      "p": [
-        6.5,
-        13.8
-      ],
-      "sheet": 5
-    },
-    "C303.2": {
-      "ref": "C303",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        6.5,
-        12.200000000000001
-      ],
-      "sheet": 5
-    },
-    "R303.1": {
-      "ref": "R303",
-      "pin": "1",
-      "net": "KEY_RIGHT",
-      "p": [
-        9.0,
-        13.8
-      ],
-      "sheet": 5
-    },
-    "R303.2": {
-      "ref": "R303",
-      "pin": "2",
-      "net": "SW_RIGHT",
-      "p": [
-        12.0,
-        13.8
-      ],
-      "sheet": 5
-    },
     "S303.1": {
       "ref": "S303",
       "pin": "1",
-      "net": "SW_RIGHT",
+      "net": "KEY_RIGHT",
       "p": [
         15.0,
         13.8
@@ -2798,50 +2440,10 @@
       ],
       "sheet": 5
     },
-    "C304.1": {
-      "ref": "C304",
-      "pin": "1",
-      "net": "KEY_AUX1",
-      "p": [
-        6.5,
-        10.4
-      ],
-      "sheet": 5
-    },
-    "C304.2": {
-      "ref": "C304",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        6.5,
-        8.8
-      ],
-      "sheet": 5
-    },
-    "R304.1": {
-      "ref": "R304",
-      "pin": "1",
-      "net": "KEY_AUX1",
-      "p": [
-        9.0,
-        10.4
-      ],
-      "sheet": 5
-    },
-    "R304.2": {
-      "ref": "R304",
-      "pin": "2",
-      "net": "SW_AUX1",
-      "p": [
-        12.0,
-        10.4
-      ],
-      "sheet": 5
-    },
     "S304.1": {
       "ref": "S304",
       "pin": "1",
-      "net": "SW_AUX1",
+      "net": "KEY_AUX1",
       "p": [
         15.0,
         10.4
@@ -2858,50 +2460,10 @@
       ],
       "sheet": 5
     },
-    "C305.1": {
-      "ref": "C305",
-      "pin": "1",
-      "net": "KEY_AUX2",
-      "p": [
-        30.5,
-        24.0
-      ],
-      "sheet": 5
-    },
-    "C305.2": {
-      "ref": "C305",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        30.5,
-        22.4
-      ],
-      "sheet": 5
-    },
-    "R305.1": {
-      "ref": "R305",
-      "pin": "1",
-      "net": "KEY_AUX2",
-      "p": [
-        33.0,
-        24.0
-      ],
-      "sheet": 5
-    },
-    "R305.2": {
-      "ref": "R305",
-      "pin": "2",
-      "net": "SW_AUX2",
-      "p": [
-        36.0,
-        24.0
-      ],
-      "sheet": 5
-    },
     "S305.1": {
       "ref": "S305",
       "pin": "1",
-      "net": "SW_AUX2",
+      "net": "KEY_AUX2",
       "p": [
         39.0,
         24.0
@@ -2918,50 +2480,10 @@
       ],
       "sheet": 5
     },
-    "C306.1": {
-      "ref": "C306",
-      "pin": "1",
-      "net": "KEY_AUX3",
-      "p": [
-        30.5,
-        20.6
-      ],
-      "sheet": 5
-    },
-    "C306.2": {
-      "ref": "C306",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        30.5,
-        19.0
-      ],
-      "sheet": 5
-    },
-    "R306.1": {
-      "ref": "R306",
-      "pin": "1",
-      "net": "KEY_AUX3",
-      "p": [
-        33.0,
-        20.6
-      ],
-      "sheet": 5
-    },
-    "R306.2": {
-      "ref": "R306",
-      "pin": "2",
-      "net": "SW_AUX3",
-      "p": [
-        36.0,
-        20.6
-      ],
-      "sheet": 5
-    },
     "S306.1": {
       "ref": "S306",
       "pin": "1",
-      "net": "SW_AUX3",
+      "net": "KEY_AUX3",
       "p": [
         39.0,
         20.6
@@ -2978,50 +2500,10 @@
       ],
       "sheet": 5
     },
-    "C307.1": {
-      "ref": "C307",
-      "pin": "1",
-      "net": "KEY_HALF",
-      "p": [
-        30.5,
-        14.0
-      ],
-      "sheet": 5
-    },
-    "C307.2": {
-      "ref": "C307",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        30.5,
-        12.4
-      ],
-      "sheet": 5
-    },
-    "R307.1": {
-      "ref": "R307",
-      "pin": "1",
-      "net": "KEY_HALF",
-      "p": [
-        33.0,
-        14.0
-      ],
-      "sheet": 5
-    },
-    "R307.2": {
-      "ref": "R307",
-      "pin": "2",
-      "net": "SW_HALF",
-      "p": [
-        36.0,
-        14.0
-      ],
-      "sheet": 5
-    },
     "S307.a": {
       "ref": "S307",
       "pin": "a",
-      "net": "SW_HALF",
+      "net": "KEY_HALF",
       "p": [
         39.0,
         14.0
@@ -3038,50 +2520,10 @@
       ],
       "sheet": 5
     },
-    "C308.1": {
-      "ref": "C308",
-      "pin": "1",
-      "net": "KEY_FULL",
-      "p": [
-        30.5,
-        10.5
-      ],
-      "sheet": 5
-    },
-    "C308.2": {
-      "ref": "C308",
-      "pin": "2",
-      "net": "GND",
-      "p": [
-        30.5,
-        8.9
-      ],
-      "sheet": 5
-    },
-    "R308.1": {
-      "ref": "R308",
-      "pin": "1",
-      "net": "KEY_FULL",
-      "p": [
-        33.0,
-        10.5
-      ],
-      "sheet": 5
-    },
-    "R308.2": {
-      "ref": "R308",
-      "pin": "2",
-      "net": "SW_FULL",
-      "p": [
-        36.0,
-        10.5
-      ],
-      "sheet": 5
-    },
     "S307.b": {
       "ref": "S307",
       "pin": "b",
-      "net": "SW_FULL",
+      "net": "KEY_FULL",
       "p": [
         39.0,
         10.5
@@ -4408,50 +3850,18 @@
       "title": "按键与两段快门",
       "file": "05-switches.svg",
       "notes": [
-        "GPIO 开内部上拉，可配置 SENSE 唤醒；1k / 1nF 用于尖峰抑制，固件仍需约 5–15ms 去抖。",
-        "每路 1nF 位于电阻的 MCU 侧，R/C 靠近 MCU；开关与键帽顶柱对齐，长线避开 RF/晶体。",
+        "9 路 GPIO 均配置为输入并开启内部上拉；可配置低电平 SENSE 唤醒，固件按 5–15ms 初值做去抖。",
+        "每个触点直接连接对应 KEY 网络与 GND；开关对齐键帽顶柱，走线尽量短，避开 RF/晶体并保持地参考。",
         "S307 是一颗器件：a=第一段、b=第二段、两个 c 公共焊脚都接地；定位孔为 NPTH，不作电气连接。",
         "按厂家焊盘视图映射 a/b/c，避免顶/底视图镜像；半按/全按闭合时序在实物上确认后用于固件。"
       ],
       "supplier_labels": [
-        {
-          "ref": "C300",
-          "text": "JLC C22435949",
-          "p": [
-            6.0,
-            22.259999999999998
-          ]
-        },
-        {
-          "ref": "R300",
-          "text": "JLC C106235",
-          "p": [
-            10.5,
-            25.05
-          ]
-        },
         {
           "ref": "S300",
           "text": "JLC C318938",
           "p": [
             16.5,
             25.5
-          ]
-        },
-        {
-          "ref": "C301",
-          "text": "JLC C22435949",
-          "p": [
-            6.0,
-            18.86
-          ]
-        },
-        {
-          "ref": "R301",
-          "text": "JLC C106235",
-          "p": [
-            10.5,
-            21.650000000000002
           ]
         },
         {
@@ -4463,43 +3873,11 @@
           ]
         },
         {
-          "ref": "C302",
-          "text": "JLC C22435949",
-          "p": [
-            6.0,
-            15.459999999999999
-          ]
-        },
-        {
-          "ref": "R302",
-          "text": "JLC C106235",
-          "p": [
-            10.5,
-            18.25
-          ]
-        },
-        {
           "ref": "S302",
           "text": "JLC C318938",
           "p": [
             16.5,
             18.7
-          ]
-        },
-        {
-          "ref": "C303",
-          "text": "JLC C22435949",
-          "p": [
-            6.0,
-            12.06
-          ]
-        },
-        {
-          "ref": "R303",
-          "text": "JLC C106235",
-          "p": [
-            10.5,
-            14.850000000000001
           ]
         },
         {
@@ -4511,43 +3889,11 @@
           ]
         },
         {
-          "ref": "C304",
-          "text": "JLC C22435949",
-          "p": [
-            6.0,
-            8.660000000000002
-          ]
-        },
-        {
-          "ref": "R304",
-          "text": "JLC C106235",
-          "p": [
-            10.5,
-            11.450000000000001
-          ]
-        },
-        {
           "ref": "S304",
           "text": "JLC C318938",
           "p": [
             16.5,
             11.9
-          ]
-        },
-        {
-          "ref": "C305",
-          "text": "JLC C22435949",
-          "p": [
-            30.0,
-            22.259999999999998
-          ]
-        },
-        {
-          "ref": "R305",
-          "text": "JLC C106235",
-          "p": [
-            34.5,
-            25.05
           ]
         },
         {
@@ -4559,59 +3905,11 @@
           ]
         },
         {
-          "ref": "C306",
-          "text": "JLC C22435949",
-          "p": [
-            30.0,
-            18.86
-          ]
-        },
-        {
-          "ref": "R306",
-          "text": "JLC C106235",
-          "p": [
-            34.5,
-            21.650000000000002
-          ]
-        },
-        {
           "ref": "S306",
           "text": "JLC C318938",
           "p": [
             40.5,
             22.1
-          ]
-        },
-        {
-          "ref": "C307",
-          "text": "JLC C22435949",
-          "p": [
-            30.0,
-            12.26
-          ]
-        },
-        {
-          "ref": "R307",
-          "text": "JLC C106235",
-          "p": [
-            34.5,
-            15.05
-          ]
-        },
-        {
-          "ref": "C308",
-          "text": "JLC C22435949",
-          "p": [
-            30.0,
-            8.76
-          ]
-        },
-        {
-          "ref": "R308",
-          "text": "JLC C106235",
-          "p": [
-            34.5,
-            11.55
           ]
         },
         {
