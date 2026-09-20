@@ -12,7 +12,7 @@ USB-C 选用淘宝自购的 **HX TYPE-C 6P QTWT（6Pin 全贴）**，对应立�
 
 用于分享审阅的 HTML 页面：**[7 页原理图图纸](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-drawing-v0.1.html)**、**[原理图说明](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-v0.1.html)**、**[完整 BOM](https://guruguru-seu.github.io/nrf-canon-remote/electrical/bom-v0.1.html)**。图纸用 Schemdraw 绘制，支持切页、缩放、位号定位和 SVG 下载，每页附连接与 layout 注释；网站首页不增加文档入口。
 
-图纸逐器件标注 `JLC C…` 物料编号，可在嘉立创EDA直接搜索；69 个元件对应 27 种立创物料。未核实或待选型的器件、DNP 和 PCB 自带焊盘分别注明。物料编号与完整 BOM 一致；2026-09-19 新核实的四项供应商链接见 BOM，采购状态仍为待采购。
+图纸逐器件标注 `JLC C…` 物料编号，可在嘉立创EDA直接搜索；60 个元件对应 27 种立创物料。RGB 已改为共阳接 VDD、三个 GPIO 经各自限流电阻低有效直驱。未核实或待选型的器件、DNP 和 PCB 自带焊盘分别注明。物料编号与完整 BOM 一致；2026-09-19 新核实的四项供应商链接见 BOM，采购状态仍为待采购。
 
 2026-09-20 按已有开发板用值更新晶振负载：HF、LF 每侧各一颗 12 pF（C210～C213，C45359894），后续电容顺延为 C214～C218；旧／新位号对照见文字原理图 3.2 节。
 
@@ -58,7 +58,7 @@ npm run check:schematics
 
 物料编号及无编号原因维护在 `electrical_circuit.py` 的 `JLC_GROUPS` / `NO_JLC` 中。构建检查每页的器件标注覆盖，校验脚本比对 BOM 编号并确认 SVG 中实际显示了各条标注。
 
-检查覆盖 84 个 BOM 位号/焊盘位置、74 件默认装配物料、47 件电阻/电容/电感的数值、49 个 MCU 引脚、9 路按键直连，以及图中全部 236 个端子的实际连线。浏览器检查包含文字重叠/裁切、移动页面、切页、缩放和位号定位；这些属于文档与绘图一致性检查，不能替代电气 ERC 和样机测试。网页可离线浏览，SVG 下载依赖同目录的 `schematic-assets/`。
+检查覆盖 75 个 BOM 位号/焊盘位置、65 件默认装配物料、41 件电阻/电容/电感的数值、49 个 MCU 引脚、9 路按键直连、3 路 RGB 直驱，以及图中全部 215 个端子的实际连线。浏览器检查包含文字重叠/裁切、移动页面、切页、缩放和位号定位；这些属于文档与绘图一致性检查，不能替代电气 ERC 和样机测试。网页可离线浏览，SVG 下载依赖同目录的 `schematic-assets/`。
 
 布局及开关尺寸统一定义于 `scripts/layout.json`。建模脚本使用 trimesh / manifold，打印件出现非封闭、非连通实体或已检查部件穿透时会终止导出；库模型的检查方式与例外在器件模型记录中列明。浏览器检查使用已安装的 Google Chrome，包含离线加载、视图、两段键运动、STL 导出和移动屏幕排版。
 

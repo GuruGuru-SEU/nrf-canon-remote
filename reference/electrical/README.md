@@ -11,6 +11,7 @@
 | Product Specification：参考电路 | [Reference circuitry](https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/ref_circuitry.html) | 3.9 nH / 0.8 pF RF 网络、DC/DC 和去耦 BOM |
 | Product Specification：时钟 | [CLOCK](https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/clock.html) | 晶体负载、引脚电容、ESR、精度要求 |
 | Product Specification：ADC | [SAADC](https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/saadc.html) | 电池分压的采集时间与输入范围 |
+| Product Specification：GPIO | [GPIO](https://docs.nordicsemi.com/r/bundle/ps_nrf52832/page/gpio.html) | RGB 直驱采用 H0S1；驱动电流、低电平压降与初始化配置 |
 | Errata 138 | [Rev.3 anomaly 138](https://docs.nordicsemi.com/r/bundle/errata_nrf52832_rev3/page/err/nrf52832/rev3/latest/anomaly_832_138.html) | P0.25/P0.26 的参考电容处理 |
 | PCB 指南 | [nRF52832 Specific PCB Guidelines](https://devzone.nordicsemi.com/guides/hardware-design-test-and-measuring/b/nrf5x/posts/nrf52832-specific-pcb-guidelines) | 补充解释 DEC2 的封装差异、C13/C14 和局部布局；该页面标为旧指南，结合当前规格及官方参考文件使用 |
 

@@ -93,13 +93,10 @@ for i, (name, pin, desc) in enumerate(KEYS):
         part(f'S{300+i}', 'TS-1101-C-W', {1: f'KEY_{name}', 2: 'GND'}, kind='switch')
 part('S307', 'K2-1831SL-A4SW-01', {'a': 'KEY_HALF', 'b': 'KEY_FULL', 'c1': 'GND', 'c2': 'GND'}, kind='dual-switch')
 
-part('D400', 'NH-B1515RGBA-GF', {2: 'VSYS', 1: 'LED_R_K', 4: 'LED_G_K', 3: 'LED_B_K'}, kind='RGB')
-passive('C400', '100nF / 16V', 'VSYS', 'GND')
+part('D400', 'NH-B1515RGBA-GF', {2: 'VDD', 1: 'LED_R_K', 4: 'LED_G_K', 3: 'LED_B_K'}, kind='RGB')
+passive('C400', '100nF / 16V', 'VDD', 'GND')
 for i, channel in enumerate('RGB'):
-    passive(f'R{400+i}', '1.2k' if i == 0 else '1k', f'LED_{channel}_K', f'LED_{channel}_D')
-    part(f'Q{400+i}', 'SI2302', {1: f'LED_{channel}_G', 2: 'GND', 3: f'LED_{channel}_D'}, kind='NMOS')
-    passive(f'R{403+i}', '1k', f'LED_{channel}_PWM', f'LED_{channel}_G')
-    passive(f'R{406+i}', '1M', f'LED_{channel}_G', 'GND')
+    passive(f'R{400+i}', '1.2k' if i == 0 else '1k', f'LED_{channel}_K', f'LED_{channel}_PWM')
 
 passive('C216', '0.8pF / C0G', 'RF_ANT', 'GND')
 passive('L220', '3.9nH / RF', 'RF_ANT', 'RF_50')
@@ -113,7 +110,7 @@ for i, net in enumerate(['VDD', 'GND', 'VBUS_5V', 'VBAT', 'VSYS', 'RESET_N', 'CH
 
 # These are display-only names for otherwise unnamed local nets in the prose.
 LOCAL_NETS = ['USB_GATE', 'BAT_PATH_GATE', 'CHG_PROG', 'DCDC_MID',
-              'P025_FILTER', 'P026_FILTER'] + [f'LED_{c}_{p}' for c in 'RGB' for p in 'KDG']
+              'P025_FILTER', 'P026_FILTER'] + [f'LED_{c}_K' for c in 'RGB']
 
 # Supplier identifiers are annotations only; they do not change this circuit or
 # procurement status. Existing stock IDs follow BOM-v0.1.md. Four exact-MPN
@@ -129,15 +126,15 @@ JLC_GROUPS = {
     'C2906861': ['R103', 'R105', 'R106', 'R107', 'R109', 'R200'],
     'C2906858': ['R102', 'R104', 'R221'],
     'C82942': ['U101'],
-    'C2891732': ['Q101', 'Q400', 'Q401', 'Q402'],
-    'C49196763': ['R108', 'R110', 'R111', 'R406', 'R407', 'R408'],
+    'C2891732': ['Q101'],
+    'C49196763': ['R108', 'R110', 'R111'],
     'C46614473': ['C201'],
     'C46635918': ['C205'],
     'C45359894': [f'C{i}' for i in range(210, 216)],
     'C370189': ['L201'],
     'C54427949': ['X200'],
     'C18209174': ['X201'],
-    'C106235': [f'R{i}' for i in range(401, 406)],
+    'C106235': ['R401', 'R402'],
     'C318938': [f'S{i}' for i in range(300, 307)],
     'C52212029': ['D400'],
     'C2909307': ['R400'],

@@ -47,7 +47,7 @@ for line in bom.splitlines():
             assert a is not None and b is not None and abs(a-b)<=abs(a)*1e-9,(ref,cells[1],PARTS[ref])
             values+=1
 assert refs==set(PARTS)-{'BAT1'},(refs-set(PARTS),set(PARTS)-refs-{'BAT1'})
-assert sum(p['fitted'] for p in PARTS.values())==74
+assert sum(p['fitted'] for p in PARTS.values())==65
 assert {r for r,p in PARTS.items() if p['lcsc']} <= supplier_refs
 
 # Independently recover the MCU's connections from the complete prose pin table.
@@ -87,7 +87,7 @@ for ref,expected in {
     'Q100':{'1':'BAT_PATH_GATE','2':'VSYS','3':'VBAT'},
     'U100':{'1':'CHG_N','2':'GND','3':'VBAT','4':'VBUS_5V','5':'CHG_PROG'},
     'U101':{'1':'VSYS','2':'GND','3':'VSYS','4':None,'5':'VREG_3V3'},
-    'D400':{'1':'LED_R_K','2':'VSYS','3':'LED_B_K','4':'LED_G_K'},
+    'D400':{'1':'LED_R_K','2':'VDD','3':'LED_B_K','4':'LED_G_K'},
     'S307':{'a':'KEY_HALF','b':'KEY_FULL','c1':'GND','c2':'GND'},
     'ANT200':{'1':'ANT_FEED','2':None},
     'J200':{'1':'VDD','2':'GND','3':'SWDIO','4':'SWDCLK'},
@@ -128,18 +128,24 @@ for ref,net in [('C210','XC1'),('C211','XC2'),('C212','XL1'),('C213','XL2')]:
     assert PARTS[ref]['pins']=={'1':net,'2':'GND'}
     assert abs(magnitude(PARTS[ref]['value'],'C')-12e-12)<1e-20
     assert PARTS[ref]['lcsc']=='C45359894'
-for i,ch in enumerate('RGB'):
-    assert PARTS[f'Q{400+i}']['pins']=={'1':f'LED_{ch}_G','2':'GND','3':f'LED_{ch}_D'}
-    assert PARTS[f'R{400+i}']['pins']=={'1':f'LED_{ch}_K','2':f'LED_{ch}_D'}
-    assert PARTS[f'R{403+i}']['pins']=={'1':f'LED_{ch}_PWM','2':f'LED_{ch}_G'}
-    assert PARTS[f'R{406+i}']['pins']=={'1':f'LED_{ch}_G','2':'GND'}
+# Each LED cathode reaches exactly its own GPIO through one limiting resistor.
+for i,(ch,led_pin) in enumerate(zip('RGB',('1','4','3'))):
+    ref=f'R{400+i}';net=f'LED_{ch}_PWM';cathode=f'LED_{ch}_K'
+    assert PARTS[ref]['pins']=={'1':cathode,'2':net}
+    for name,expected in [(net,{('U200',str(16+i)),(ref,'2')}),
+                          (cathode,{('D400',led_pin),(ref,'1')})]:
+        connected={(r,pin) for r,p in PARTS.items() for pin,n in p['pins'].items() if n==name}
+        assert connected==expected,(name,connected)
+assert PARTS['C400']['pins']=={'1':'VDD','2':'GND'}
+assert not any(re.fullmatch(r'Q40[0-2]|R40[3-8]',r) for r in PARTS)
+assert not any(re.fullmatch(r'LED_[RGB]_[GD]',n) for n in all_nets)
 
 report=json.loads((OUT/'schematic-checks.json').read_text())
 report.update(bom_references=len(refs),passive_values_checked=values,prose_mcu_pins_checked=len(checked),
               supplier_bom_rows_checked=len(supplier_refs),
               components_with_jlc_code=sum(bool(p['lcsc']) for p in PARTS.values()),
               distinct_jlc_codes=len({p['lcsc'] for p in PARTS.values() if p['lcsc']}),
-              direct_prose_connections_checked=direct,key_channels_checked=key_rows,
+              direct_prose_connections_checked=direct,key_channels_checked=key_rows,rgb_channels_checked=3,
               scope='Drawing/source consistency only; not EDA ERC, RF validation, or prototype testing.')
 (OUT/'schematic-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False))

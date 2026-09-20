@@ -195,7 +195,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td style="text-align:right">1</td>
 <td>已有：C82942</td>
 <td>系统稳压</td>
-<td>将 VSYS 稳压为 MCU 使用的 VDD</td>
+<td>将 VSYS 稳压为 MCU 与 RGB 使用的 VDD</td>
 </tr>
 <tr>
 <td>C103</td>
@@ -218,8 +218,8 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>0 Ω，0402</td>
 <td style="text-align:right">1</td>
 <td>已有：C2906858</td>
-<td>MCU 电源支路</td>
-<td>连接 VREG_3V3 与 VDD，可拆下串入电流表</td>
+<td>VDD 电源支路</td>
+<td>连接 VREG_3V3 与 VDD，可串入电流表测 MCU 和 RGB 电流</td>
 </tr>
 </tbody>
 </table></div><h2 id="usb-检测与电池电压检测">USB 检测与电池电压检测</h2>
@@ -477,15 +477,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td style="text-align:right">1</td>
 <td>已有：C52212029</td>
 <td>状态指示</td>
-<td>配对、连接、电量和充电等状态显示</td>
-</tr>
-<tr>
-<td>Q400～Q402</td>
-<td>SI2302，N-MOS，SOT23</td>
-<td style="text-align:right">3</td>
-<td>已有：C2891732</td>
-<td>RGB 驱动</td>
-<td>分别开关红、绿、蓝通道，支持 PWM 调光</td>
+<td>共阳接 VDD，GPIO 低有效驱动，显示配对、连接、电量和充电状态</td>
 </tr>
 <tr>
 <td>R400</td>
@@ -504,31 +496,16 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 <td>分别限制绿色、蓝色 LED 电流</td>
 </tr>
 <tr>
-<td>R403～R405</td>
-<td>1 kΩ，1%，0402</td>
-<td style="text-align:right">3</td>
-<td>已有：C106235</td>
-<td>RGB 栅极驱动</td>
-<td>限制 MOS 栅极充放电瞬态电流，缓和开关边沿</td>
-</tr>
-<tr>
-<td>R406～R408</td>
-<td>1 MΩ，1%，0603</td>
-<td style="text-align:right">3</td>
-<td>已有：C49196763</td>
-<td>RGB 栅极驱动</td>
-<td>栅极下拉，使 MCU 高阻时 LED 保持关闭</td>
-</tr>
-<tr>
 <td>C400</td>
 <td>100 nF，16 V，X7R，0402</td>
 <td style="text-align:right">1</td>
 <td>已有：C60474</td>
 <td>RGB 供电</td>
-<td>VSYS 在 LED 附近的本地旁路</td>
+<td>VDD 在 LED 附近的本地旁路</td>
 </tr>
 </tbody>
-</table></div><h2 id="射频与天线">射频与天线</h2>
+</table></div><p>三路 GPIO 经 R400～R402 分别接 LED 阴极，使用 H0S1 高灌电流模式；共阳接 VDD（R104 后），不能接 VSYS。Q400～Q402、R403～R408 已删除，共减少 9 件已有物料，不保留 DNP。限流值沿用库存，亮度和低电量表现配合导光件实测；固件初始化及低有效 PWM 要求见文字原理图第 5 节。</p>
+<h2 id="射频与天线">射频与天线</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>位号</th>
@@ -643,7 +620,7 @@ main{min-width:0;background:var(--paper);border:1px solid var(--line);border-rad
 </tr>
 </tbody>
 </table></div><h2 id="采购汇总与取舍">采购汇总与取舍</h2>
-<p>默认装配共 <strong>74 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>66 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
+<p>默认装配共 <strong>65 件</strong>（含 1 块外接电池和 1 个 SWD 排针），其中已有物料对应 <strong>57 件</strong>，待采购 <strong>8 类、各 1 件</strong>。不装排针时减 1 件；这不是独立料号种类数，也不含焊盘、PCB、外壳、螺丝和装配耗材。</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table><thead>
 <tr>
 <th>待采购项</th>

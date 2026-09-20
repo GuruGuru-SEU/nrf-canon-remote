@@ -280,11 +280,11 @@ def sheet_usb():
 
 
 def sheet_power():
-    s=Sheet(2,'power-sense','供电切换、稳压与检测','USB / 电池自动切换 · 3.3 V MCU 电源 · 低有效 USB 检测',[
+    s=Sheet(2,'power-sense','供电切换、稳压与检测','USB / 电池自动切换 · 3.3 V MCU / RGB 电源 · 低有效 USB 检测',[
         'Q100：1=G、2=S→VSYS、3=D→VBAT；体二极管为 VBAT→VSYS。D100：2=A→VBUS、1=K→VSYS。',
         'D100、Q100、C103 与 LDO 靠近；C103 靠 VIN，C104 靠 VOUT/GND。充电支路与系统支路在电池入口分开。',
         'R110/R111/C105 靠 ADC，避开 RF、DCC、PWM；SAADC 内部参考 0.6V、增益 1/6、采集 40µs，上电等 ≥250ms。',
-        'R104 用于测 MCU 支路电流，不隔离整机；RGB 取电 VSYS。电池低压时 VDD 会低于 3.3V。'])
+        'R104 测量 VDD 支路电流，包含 MCU 与 RGB；不隔离整机。电池低压时 VDD 会低于 3.3V。'])
     s.section(2,26,'A / USB 与电池通路')
     s.port('VBUS_5V',(4.5,24),'left')
     s.wire('VBUS_5V',(4.5,24),(6,24))
@@ -447,16 +447,16 @@ def sheet_keys():
 
 
 def sheet_rgb():
-    s=Sheet(6,'rgb','RGB 指示灯与 MOS 驱动','NH-B1515RGBA-GF · 共阳 VSYS · 三路独立限流 · GPIO 高电平点亮',[
+    s=Sheet(6,'rgb','RGB 指示灯 · GPIO 直驱','NH-B1515RGBA-GF · 共阳 VDD · 三路独立限流 · GPIO 低电平点亮',[
         'D400：2=共阳，1=红阴极，4=绿阴极，3=蓝阴极；三个 LED 在同一封装内，不能共用限流电阻。',
-        'C400 靠近 LED 的 VSYS；MOS 与限流电阻靠 LED，栅极下拉靠 MOS，复位时保持熄灭。',
-        'PWM 走线和 LED 回流避开晶体/射频局部地；建议先用几百 Hz～1kHz，空闲关闭。',
-        'VSYS 随 USB/电池变化，亮度并非恒流；低电量时绿/蓝会变暗，限流初值与混色需结合导光件实测。'])
+        '共阳和 C400 接 VDD，不能接 VSYS；C400 与限流电阻靠近 LED，PWM 回流避开晶体与射频局部地。',
+        'GPIO：H0S1、无上下拉；先预置输出 1 再启用输出。PWM 低有效，停止 PWM / 休眠前恢复输出 1。',
+        '3.3V 下粗估 R/G/B ≈ 1.1/0.6/0.5mA，非保证值；低电量绿蓝会变暗，配合导光件实测亮度。'])
     s.box((8.5,20),(40.5,25.5),color=RULE,ls='--',lw=.9)
     s.text(24.5,26,'D400 · NH-B1515RGBA-GF · 单一 RGB 封装',size=12,align='center')
     s.supplier('D400',24.5,25.15,align='center')
-    s.port('VSYS',(5,24),'left');s.terminal('D400','2',(8.5,24))
-    s.wire('VSYS',(5,24),(8.5,24),(10,24),(24,24),(38,24),(43.5,24))
+    s.port('VDD',(5,24),'left');s.terminal('D400','2',(8.5,24))
+    s.wire('VDD',(5,24),(8.5,24),(10,24),(24,24),(38,24),(43.5,24))
     s.text(8.2,24.5,'2 / A',size=9,color=MUTED,align='right')
     s.cap('C400',43.5,24,3.0,side='left')
     for i,(ch,pin,x,col) in enumerate([('R','1',10,'#ae5050'),('G','4',24,'#397e61'),('B','3',38,'#4a74a0')]):
@@ -467,14 +467,12 @@ def sheet_rgb():
         s.text(x+.5,20.65,f'{pin} / K',size=9,color=MUTED)
         s.wire(f'LED_{ch}_K',led.end,(x,19.3))
         e=s.two(f'R{400+i}',(x,19.3),(x,16.3))
-        q=s.fet(f'Q{400+i}',(x,14.6))
-        s.wire(f'LED_{ch}_D',e.end,q.drain);s.ground(q.source)
-        gy=q.gate.y
-        e=s.two(f'R{403+i}',(x-6.5,gy),(x-3.5,gy))
-        s.port(f'LED_{ch}_PWM',e.start,'left')
-        s.wire(f'LED_{ch}_G',e.end,q.gate)
-        e=s.two(f'R{406+i}',(x-2.3,gy),(x-2.3,8.9),side='left');s.ground(e.end)
-        s.text(x-6.8,gy-1.1,f'U200.{16+i} / P0.{13+i}',size=9,color=MUTED)
+        s.wire(f'LED_{ch}_PWM',e.end,(x,13.5))
+        s.port(f'LED_{ch}_PWM',(x,13.5),'left')
+        s.text(x,12.3,f'U200.{16+i} / P0.{13+i}',size=10,color=MUTED,align='center')
+    s.box((8.5,8),(40.5,10.8),color=RULE,fill='#f5f9f8',lw=.9)
+    s.text(24.5,9.95,'GPIO = 0 → 点亮    ·    GPIO = 1 → 熄灭',size=12,align='center')
+    s.text(24.5,8.85,'H0S1：高灌电流 / 标准拉电流  ·  PWM 先用几百 Hz～1 kHz',size=10,color=MUTED,align='center')
     return s
 
 
