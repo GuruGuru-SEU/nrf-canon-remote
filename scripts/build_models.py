@@ -120,25 +120,35 @@ lx,ly=C['led'];top=diff(top,cyl(1.75,-3,1,lx,ly))
 baffle=diff(cyl(3.15,-6.05,-1.15,lx,ly),cyl(2.45,-6.2,-2.4,lx,ly),cyl(1.75,-2.5,.2,lx,ly))
 top=union(top,baffle)
 # USB placement is derived from PCB plane and housing end, in one coordinate system.
-# J100 is on the PCB bottom layer in the current EasyEDA layout, so its body and
-# solder pads sit below the board instead of above it.
 usb_front=U['front'];usb_back=usb_front+U['body'][1]
 usb_side=U.get('mount_side','top')
 usb_z=(pcb1+U['center_height']) if usb_side=='top' else (pcb0-U['center_height'])
 opening=yextrude(rr(*U['opening'],1.75,0,usb_z),usb_front-1.8,usb_back+.6)
-lead=yextrude(rr(*U['lead_in'],2.2,0,usb_z),usb_front-1.8,usb_back+1.0)
+lead=yextrude(rr(*U['lead_in'],2.2,0,usb_z),usb_front-1.8,-L/2+U['lead_in_depth'])
+ear_relief=box([U['ear_relief_width'],6.6,1.0],[0,-34.5,pcb0-.3])
 if usb_side=='top':
  top=diff(top,opening,lead)
-bottom=diff(bottom,opening,lead)
-# U600 is a bottom-port microphone. Cut a case opening under the actual PCB
-# position and add a shallow inner relief for the acoustic gasket/cavity.
+bottom=diff(bottom,opening,lead,ear_relief)
 M=C['microphone'];mic_x,mic_y=M['center'];mic_r=M['case_hole_diameter']/2
 mic_relief_r=M['inner_relief_diameter']/2
 bottom=diff(bottom,cyl(mic_r,-18,-5.0,mic_x,mic_y),cyl(mic_relief_r,-16.2,-14.8,mic_x,mic_y))
 # The longer tongue supports every SMT pad; a blind inner pocket keeps the front wall.
 pocket=box([P['tongue_width']+.5,7.5,P['thickness']+.4],[0,P['tongue_end']-.25+3.75,(pcb0+pcb1)/2])
 bottom=diff(bottom,pocket)
-for x in [-6.0,6.0]:bottom=union(bottom,inter(box([1.5,5.0,6.95],[x,P['body_bottom']-1.4,-12.675]),bottom_blank))
+for x in U['support_centers_x']:bottom=union(bottom,inter(box([1.0,5.0,6.95],[x,P['body_bottom']-1.4,-12.675]),bottom_blank))
+end_latches=S['usb_end_latches'];latch_front,latch_back=end_latches['y_span']
+latch_profile=Polygon([(15.3,-1.1),(19.4479,-1.1),(19.5,-6.1),(19.5,-7.8958),(20.7021,-9.0979),(19.5,-10.3),(18.3,-10.3),(18.3,-4.2)])
+latch_checks=[]
+for side in [-1,1]:
+ profile=Polygon([(side*point_x,point_z) for point_x,point_z in latch_profile.exterior.coords])
+ latch=yextrude(profile,latch_front,latch_back)
+ board_relief=box([P['width']+2*end_latches['pcb_clearance'],80,P['thickness']+.4],[0,0,(pcb0+pcb1)/2])
+ latch=diff(latch,board_relief)
+ flex_slot=box([2.3,latch_back-latch_front+.4,5.0],[side*19.1,(latch_front+latch_back)/2,-4.1])
+ top=union(diff(top,flex_slot),latch)
+ socket=yextrude(profile.buffer(end_latches['socket_clearance'],join_style=2),latch_front-.2,latch_back+.2)
+ bottom=diff(bottom,socket)
+ latch_checks.append({'side':side,'bounds':latch.bounds.tolist(),'socket_clearance':end_latches['socket_clearance'],'pcb_clearance':end_latches['pcb_clearance'],'bottom_overlap':volume(inter(latch,bottom))})
 # Battery locating stops surround a loose allocation volume; no squeeze preload.
 for x in [B['center_xy'][0]-14.1,B['center_xy'][0]+14.1]:bottom=union(bottom,box([1.0,39,2.1],[x,B['center_xy'][1],-15.2]))
 for y in [B['center_xy'][1]-20.2,B['center_xy'][1]+20.2]:
@@ -157,7 +167,10 @@ tongue=Polygon([(-9,y0+.5),(-9,y0-1),(-7,y0-3),(-7,y1+.6),(-6.4,y1),(6.4,y1),(7,
 outline=body.union(tongue)
 for x,y in C['mounts']:outline=outline.difference(Point(x,y).buffer(1.15,quad_segs=24))
 cs=C['switch_types']['center'];cx,cy=C['ring_center']
-for px,py in cs['locating_pins']:outline=outline.difference(Point(cx+px,cy+py).buffer(cs['pcb_hole_diameter']/2,quad_segs=24))
+center_switch=next(switch for switch in switches if switch['type']=='center')
+center_rotation=trimesh.transformations.rotation_matrix(np.deg2rad(center_switch['angle']),[0,0,1])[:2,:2]
+center_holes=[(center_rotation@np.array(pin)+[cx,cy]).tolist() for pin in cs['locating_pins']]
+for hole_x,hole_y in center_holes:outline=outline.difference(Point(hole_x,hole_y).buffer(cs['pcb_hole_diameter']/2,quad_segs=24))
 pcb=add('pcb',f"PCB · {P['top']-P['tongue_end']} × {P['width']:.2f} × {P['thickness']:.2f} mm",extrude(outline,pcb0,pcb1),'#196452','pcb',0)
 add('extension',f"USB 板舌 · 延伸 {P['body_bottom']-P['tongue_end']:.2f} mm",extrude(tongue.difference(body),pcb1+.01,pcb1+.02),'#c8863b','highlight',0)
 # Original reference geometry and original unscaled board outline.
@@ -167,14 +180,18 @@ add('original_bottom','原始下盖 · 140 mm',ref_bottom,'#343c3b','reference',
 for i,(name,m) in enumerate(ref_buttons.items()):add(f'original_key_{i}',name+' · 原型',m,'#ba744a' if name=='Select' else '#53615d','reference',30)
 # Original library triangles/materials; transform only, no rescaling or redrawing.
 usb,usb_source=library_part(U['lcsc'])
-usb_center_z=(usb.bounds[0,2]+usb.bounds[1,2])/2
-usb_shift=[0,usb_front-usb.bounds[0,1],usb_z-usb_center_z]
+usb_rotation=np.diag([-1,1,-1,1]) if usb_side=='bottom' else np.eye(4)
+usb.apply_transform(usb_rotation)
+usb_mount_z=pcb0 if usb_side=='bottom' else pcb1
+usb_source_plane=U['solder_plane_source_z']*usb_rotation[2,2]
+usb_origin_x,usb_origin_y=U['pcb_origin']
+usb_shift=[usb_origin_x,usb_origin_y,usb_mount_z-usb_source_plane]
 usb.apply_translation(usb_shift)
 add('usb_shell','HX TYPE-C 6P QTWT · 嘉立创 C18357553 原始模型',usb,'#bbc4c7','electronics',collision=solid_union(usb),source=usb_source)
-library_checks[U['lcsc']]['translation']=usb_shift
+library_checks[U['lcsc']].update(translation=usb_shift,rotation_matrix=usb_rotation.tolist(),solder_plane_z=usb_mount_z)
 usb_pads=[]
 for pad in footprint_pads(U['lcsc']):
- x,y=pad['x'],pad['y']+usb_shift[1];w,h=pad['width'],pad['length']
+ x,y=pad['x']*usb_rotation[0,0],pad['y']*usb_rotation[1,1]+usb_shift[1];w,h=pad['width'],pad['length']
  shape=rect(x-w/2,y-h/2,x+w/2,y+h/2)
  assert outline.covers(shape),('Unsupported USB pad',pad['number'])
  clearance=shape.distance(outline.boundary)
@@ -182,6 +199,16 @@ for pad in footprint_pads(U['lcsc']):
  usb_pads.append(dict(pad,center=[x,y],board_edge_clearance=clearance))
  pad_z0,pad_z1=(pcb1+.001,pcb1+.025) if usb_side=='top' else (pcb0-.025,pcb0-.001)
  add('usb_pad_'+pad['number'],'USB-C 库焊盘 '+pad['number'],extrude(shape,pad_z0,pad_z1),'#cda761','electronics',decorative=True)
+usb_contact_checks=[]
+for pad in usb_pads:
+ pad_x,pad_y=pad['center']
+ contact_region=rect(pad_x-pad['width']/2,pad_y-pad['length']/2,pad_x+pad['width']/2,pad_y+pad['length']/2)
+ contact_z0,contact_z1=(pcb0-.15,pcb0+.001) if usb_side=='bottom' else (pcb1-.001,pcb1+.15)
+ contact_volume=volume(inter(solids['usb_shell'],extrude(contact_region,contact_z0,contact_z1)))
+ assert contact_volume>.005,('USB terminal does not meet PCB pad',pad['number'],contact_volume)
+ usb_contact_checks.append({'pad':pad['number'],'contact_region_depth':.15,'metal_volume_mm3':round(contact_volume,6)})
+assert abs((usb.bounds[1,2] if usb_side=='bottom' else usb.bounds[0,2])-usb_mount_z)<1e-6,'USB solder face is not at PCB surface'
+assert usb.bounds[0,1]<P['tongue_end']<usb.bounds[1,1],'USB mouth must face out of the board'
 # The LED source contains open coincident faces. Keep the source for display and
 # conservatively check its full bounding box; it is not a printable mesh.
 led,led_source=library_part('C52212029');led_shift=[lx,ly,pcb1-led.bounds[0,2]]
@@ -234,11 +261,7 @@ for a,b in itertools.combinations(physical,2):
  overlap=np.minimum(ma.bounds[1],mb.bounds[1])-np.maximum(ma.bounds[0],mb.bounds[0])
  if np.any(overlap<=1e-5):continue
  v=volume(inter(ma,mb));checks[a['id']+' / '+b['id']]=round(v,7)
-  # The physical USB body is allowed to seat through the bottom-shell port;
-  # its mounting overlap is intentional and is represented by the dedicated
-  # shell cut above. Other component intersections remain hard failures.
- intentional={frozenset(['shell_bottom','usb_shell']),frozenset(['pcb','switch_key_center_1'])}
- if v>1e-4 and frozenset([a['id'],b['id']]) not in intentional:errors.append(f"{a['id']} / {b['id']}: {v:.6f} mm3")
+ if v>1e-4:errors.append(f"{a['id']} / {b['id']}: {v:.6f} mm3")
 # Hole separation and required front-panel openings, not merely watertightness.
 for (an,ap),(bn,bp) in itertools.combinations(keyholes.items(),2):
  assert ap.distance(bp)>.5,('overlapping/too-close holes',an,bn)
@@ -291,10 +314,7 @@ assert volume(diff(bottom,bottom_blank))<1e-4,'bottom supports protrude through 
 # Check an additional wider envelope without changing the downloaded model.
 usb_wide=solids['usb_shell'].copy();usb_wide.apply_scale([U['datasheet_terminal_span']/usb.extents[0],1,1])
 usb_wide_checks={name:volume(inter(usb_wide,solids[name])) for name in ['shell_top','shell_bottom','pcb']}
-# The downloaded JLC model is the geometry used for the assembly. The wider
-# 11.80 mm envelope is a datasheet tolerance check only; it may touch the
-# inner side relief by a fraction of a cubic millimetre and is reported rather
-# than treated as a model collision.
+assert all(value<1e-4 for value in usb_wide_checks.values()),usb_wide_checks
 # Compare the restored rear side widths to the source at several Z levels.
 taper_check={}
 for z in [-11.35,-13,-15,-17.34]:
@@ -306,6 +326,9 @@ for z in [-11.35,-13,-15,-17.34]:
 report=dict(version=C['version'],mesh_checks={'checked_parts':len(physical),'all_collision_meshes_closed_positive_volume':True,'printable_parts_connected':True},interference_mm3=checks,interference_failures=errors,pressed_key_shell_overlap_mm3=travel,center_travel_overlap_mm3=center_travel,front_section_boundary_loops=face_loops,pcb_bounds=pcb.bounds.tolist(),shell_bounds=[[-W/2,-L/2,-D],[W/2,L/2,0]],keycap_count=len(keys),switch_count=len(switches),mapping=mapping,usb={'model':U['model'],'lcsc':U['lcsc'],'mount_side':usb_side,'center_z':usb_z,'front_y':usb_front,'board_edge_y':P['tongue_end'],'protrusion_mm':round(-L/2-usb_front,3),'pads':usb_pads,'minimum_pad_edge_clearance':min(p['board_edge_clearance'] for p in usb_pads),'datasheet_wider_envelope_overlap_mm3':usb_wide_checks},microphone={'center':M['center'],'mount_side':M['side'],'case_hole_diameter':M['case_hole_diameter'],'inner_relief_diameter':M['inner_relief_diameter']},battery=B,library_models=library_checks)
 report['reference_features']={'rear_taper_width_samples':taper_check,'rear_face_width':W-2*T['inset'],'corner_notch_type':'concave_quarter_circle','corner_fit':corner_fit,'width_at_former_notches':restored_width,'mounts':C['mounts'],'pcb_holes':len(outline.interiors)}
 report['led']={'center':C['led'],'ring_center_distance':float(np.linalg.norm(np.array(C['led'])-np.array(C['ring_center']))),'library_height':float(led.extents[2]),'light_pipe_bottom_z':light_bottom,'optical_gap':.45}
+report['reference_features']['usb_end_latches']=latch_checks
+report['center_switch']={'rotation_deg':center_switch['angle'],'locating_holes':center_holes}
+report['usb'].update(rotation_matrix=usb_rotation.tolist(),solder_plane_z=usb_mount_z,pad_contact_checks=usb_contact_checks)
 REVIEW.mkdir(parents=True,exist_ok=True);(REVIEW/'geometry-checks.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
 if errors:raise RuntimeError('Mechanical interference:\n'+'\n'.join(errors))
 

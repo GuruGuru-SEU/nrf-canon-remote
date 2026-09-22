@@ -1,5 +1,5 @@
 {
-  "version": "0.9",
+  "version": "0.10",
   "shell": {
     "width": 43,
     "length": 78,
@@ -14,6 +14,12 @@
       "inner_start_z": -11.7367,
       "inner_floor_inset": 4.6422,
       "source": "reference/enclosure/shell_bottom.3mf, section Y=0"
+    },
+    "usb_end_latches": {
+      "source": "reference/enclosure/shell_top.3mf and shell_bottom.3mf, Y=-65 to -58",
+      "y_span": [-34, -27],
+      "socket_clearance": 0.15,
+      "pcb_clearance": 0.25
     },
     "corner_locators": {
       "radial_clearance": 0.25,
@@ -200,15 +206,22 @@
       6.8,
       3.16
     ],
-    "front": -39.2,
+    "front": -37.82,
     "opening": [
       9.6,
       3.9
     ],
     "lead_in": [
-      12.4,
+      11,
       5.1
     ],
+    "lead_in_depth": 0.3,
+    "ear_relief_width": 12.4,
+    "support_centers_x": [-6.6, 6.6],
+    "solder_plane_source_z": -0.1,
+    "rotation_y_deg": 180,
+    "model_xy_compensation_deg": 180,
+    "pcb_origin": [0, -34.4181],
     "lcsc": "C18357553",
     "purchase": "淘宝自购",
     "mount_side": "bottom",

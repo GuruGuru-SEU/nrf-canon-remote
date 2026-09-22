@@ -1,6 +1,6 @@
 {
   "contract": {
-    "version": "0.9",
+    "version": "0.10",
     "keys": 5,
     "switches": 8,
     "ring": true,
@@ -27,7 +27,7 @@
       "B5",
       "B9"
     ],
-    "edge": 0.4069622999999751,
+    "edge": 0.9248914999999629,
     "ledHeight": 1.0200000000000005,
     "mountSide": "bottom",
     "microphone": {
@@ -102,7 +102,45 @@
         -27
       ]
     ],
-    "pcb_holes": 5
+    "pcb_holes": 5,
+    "usb_end_latches": [
+      {
+        "side": -1,
+        "bounds": [
+          [
+            -20.70210075378418,
+            -34,
+            -10.300000190734863
+          ],
+          [
+            -15.300000190734863,
+            -27,
+            -1.100000023841858
+          ]
+        ],
+        "socket_clearance": 0.15,
+        "pcb_clearance": 0.25,
+        "bottom_overlap": 0
+      },
+      {
+        "side": 1,
+        "bounds": [
+          [
+            15.300000190734863,
+            -34,
+            -10.300000190734863
+          ],
+          [
+            20.70210075378418,
+            -27,
+            -1.100000023841858
+          ]
+        ],
+        "socket_clearance": 0.15,
+        "pcb_clearance": 0.25,
+        "bottom_overlap": 0
+      }
+    ]
   },
   "offline": true,
   "no_horizontal_overflow": true,

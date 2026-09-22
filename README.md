@@ -1,4 +1,4 @@
-# nRF52832 Canon remote — mechanical study v0.9
+# nRF52832 Canon remote — mechanical study v0.10
 
 打开 **[在线 3D 预览](https://guruguru-seu.github.io/nrf-canon-remote/preview.html)**，可直接分享这个链接。
 
@@ -7,6 +7,8 @@
 机身为 **78 × 43 × 17.35 mm**：保留四向圆环、中心两段键和下方三个圆键，删除长条键及底部五个矩形键。中心开关采用 **K2-1831SL-A4SW-01**，其余七个开关采用 TS-1101-C-W。外壳、PCB 外形、固定孔、USB-C 板舌与开孔配套重建；软包电池候选为 EEMB LP402535 / 320 mAh。
 
 USB-C 选用淘宝自购的 **HX TYPE-C 6P QTWT（6Pin 全贴）**，对应立创 C18357553，按当前 PCB 改为底面安装。USB-C、TS-1101-C-W 和 RGB 的预览使用嘉立创下载模型，原始文件与来源见 [器件模型记录](reference/component-models/README.md)。中心两段开关采用界面显示角度 180°，仍按厂家图纸建模；nRF52832 与电池为外形包络。U600 底部声学端口增加 Ø1.2 mm 外壳声孔与 Ø2.2 mm 内侧 relief。
+
+v0.10 修正 USB-C 底面安装的翻转：焊脚朝 PCB，母座主体朝背盖，焊盘同步翻转。恢复参考外壳 USB 端两侧的上盖楔形卡扣和下盖凹槽，托筋避开固定焊耳。中心开关的两个定位孔也随 180° 方向旋转；模型碰撞检查不再豁免 USB / 外壳或开关 / PCB 穿插。预览新增“USB-C 端部配合”和“端部上盖卡扣”。
 
 新增 **[文字原理图 v0.1](output/electrical/原理图-v0.1.md)**：包含 nRF52832 最小系统、9 路按键信号、RGB 驱动、USB／电池供电与充电、4Pin SWD、陶瓷天线、库存 BOM 和布局注释。依据见 [电气参考资料](reference/electrical/README.md)。目前为待转绘和验证的电路草案，不含 EDA 原理图工程、PCB 铜层布局或固件；新增电路器件尚未回填到 3D 模型。
 

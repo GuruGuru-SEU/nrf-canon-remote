@@ -21,7 +21,7 @@ for(const p of data.parts){
  const mesh=new THREE.Mesh(g,mat);mesh.userData=p;mesh.fullGeometry=g;mesh.sectionGeometry=p.section?geometry(p.section):g;model.add(mesh);objects.set(p.id,mesh);
 }
 const groupOn={shell:true,pcb:true,electronics:true,buttons:true,switches:true,battery:true,light:true,highlight:true};
-let explode=0,ghost=false,reference=false,section=false,labels=false,press=0,pcbView=false,fitView=false,componentsView=false;
+let explode=0,ghost=false,reference=false,section=false,labels=false,press=0,pcbView=false,fitView=false,componentsView=false,usbFitView=false,latchView=false;
 const markerDefs=[{text:'01  RGB 导光柱',pos:[...data.config.led,.3],exp:26,kind:'led'},{text:'02  USB-C / 主板板舌',pos:[0,data.config.usb.front,data.report.usb.center_z],exp:0,kind:'usb'},{text:'03  '+data.config.battery.model,pos:[12.8,data.config.battery.center_xy[1],-12],exp:-10,kind:'battery'}];
 for(const m of markerDefs){m.el=document.createElement('div');m.el.className='marker '+m.kind;m.el.textContent=m.text;host.append(m.el)}
 function apply(){
@@ -31,11 +31,13 @@ function apply(){
  if(pcbView)visible=reference?id==='original_pcb':['pcb','extension'].includes(id);
  if(componentsView)visible=visible&&['pcb','highlight','electronics','switches'].includes(p.group);
  if(fitView)visible=visible&&['shell_bottom','pcb','extension','rgb_led','rgb_emitter'].includes(id);
+ if(usbFitView)visible=visible&&(id==='shell_bottom'||id==='pcb'||id==='usb_shell'||id.startsWith('usb_pad_'));
+ if(latchView)visible=visible&&id==='shell_top';
  m.visible=visible&&(!section||m.sectionGeometry.attributes.position.count>0);m.geometry=section?m.sectionGeometry:m.fullGeometry;m.position.z=p.explode*explode*1.8;
  if(press&&!reference&&explode===0){const spec=data.config.switch_types.center;const travel=spec.travel[press-1];if(id==='key_center')m.position.z-=spec.key_gap+travel;if(id==='actuator_key_center_1')m.position.z-=travel}
  const transparent=ghost&&p.group==='shell';m.material.transparent=transparent;m.material.opacity=transparent?.18:1;m.material.depthWrite=!transparent;
  }
- document.querySelector('#state').textContent=reference?'REFERENCE / 原始模型':componentsView?'PCB ASSEMBLY / 嘉立创器件模型':pcbView?'PCB OUTLINE / 顶角 ¼ 圆凹口':fitView?'CORNER FIT / 凹口与下盖定位台':section?'SECTION / 中心剖切':explode>.1?'EXPLODED / 分解装配':'ASSEMBLY / 完整装配';
+ document.querySelector('#state').textContent=reference?'REFERENCE / 原始模型':latchView?'USB END / 上盖楔形卡扣':usbFitView?'USB END / 下盖凹槽与板舌':componentsView?'PCB ASSEMBLY / 嘉立创器件模型':pcbView?'PCB OUTLINE / 顶角 ¼ 圆凹口':fitView?'CORNER FIT / 凹口与下盖定位台':section?'SECTION / 中心剖切':explode>.1?'EXPLODED / 分解装配':'ASSEMBLY / 完整装配';
  document.querySelector('#explode-value').textContent=Math.round(explode*100)+'%';
  document.querySelector('#ghost').classList.toggle('active',ghost);document.querySelector('#section').classList.toggle('active',section);document.querySelector('#reference').classList.toggle('active',reference);
  document.querySelector('#reference-note').hidden=!reference;
@@ -43,8 +45,11 @@ function apply(){
  document.querySelector('#press-caption').textContent=reference||explode>0?'装配状态下可预览两段按压':'K2-1831SL-A4SW-01 · '+['未按下','一段 0.30 mm · 键帽位移 0.45 mm','二段 0.55 mm · 键帽位移 0.70 mm'][press];
 }
 function view(which){
- pcbView=which==='pcb';fitView=which==='fit';componentsView=which==='components';if(fitView||componentsView){reference=false;ghost=false}if(pcbView||fitView||componentsView){section=false;explode=0;document.querySelector('#explode').value=0}apply();
+ pcbView=which==='pcb';fitView=which==='fit';componentsView=which==='components';usbFitView=which==='usb-fit';latchView=which==='usb-latches';if(fitView||componentsView||usbFitView||latchView){reference=false;ghost=usbFitView}if(pcbView||fitView||componentsView||usbFitView||latchView){section=false;explode=0;document.querySelector('#explode').value=0}apply();
  const distance=reference?285:185; const poses={components:[[75,-60,115],[0,0,-7.5]],fit:[[15,67,65],[0,29,-8]],iso:[[135,-70,190],[0,0,-5]],front:[[0,0,distance],[0,0,-5]],pcb:[[0,0,distance],[0,0,-5]],back:[[0,0,-distance],[0,0,-8]],usb:[[26,data.config.usb.front-42,16],[0,data.config.usb.front+6,-6]],end:[[0,data.config.usb.front-66,-8.5],[0,data.config.usb.front,-8.5]],led:[[-28,data.config.led[1]+17,43],[...data.config.led,-3]],center:[[34,16,26],[...data.config.ring_center,-4]],side:[[distance,0,0],[0,0,-7]]};
+ poses['usb-fit']=[[24,data.config.usb.front+16,-48],[0,data.config.usb.front+8,-10]];
+ poses['usb-latches']=[[24,data.config.usb.front+18,-48],[0,data.config.usb.front+8,-4]];
+ poses.usb=[[24,data.config.usb.front-42,10],[0,data.config.usb.front+5,data.report.usb.center_z]];
  const [p,t]=poses[which];camera.position.set(...p);controls.target.set(...t);camera.up.set(...(which==='end'?[0,0,1]:[0,1,0]));controls.update();
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===which));
 }

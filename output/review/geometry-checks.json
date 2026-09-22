@@ -1,5 +1,5 @@
 {
-  "version": "0.9",
+  "version": "0.10",
   "mesh_checks": {
     "checked_parts": 29,
     "all_collision_meshes_closed_positive_volume": true,
@@ -7,6 +7,8 @@
   },
   "interference_mm3": {
     "shell_top / shell_bottom": 0.0,
+    "shell_top / pcb": 0.0,
+    "shell_top / usb_shell": 0.0,
     "shell_top / rgb_led": 0.0,
     "shell_top / light_pipe": 0.0,
     "shell_top / key_ring": 0.0,
@@ -30,8 +32,9 @@
     "shell_top / actuator_key_circle2_1": 0.0,
     "shell_top / switch_key_circle3_1": 0.0,
     "shell_top / actuator_key_circle3_1": 0.0,
+    "shell_top / nrf52832": 0.0,
     "shell_bottom / pcb": 0.0,
-    "shell_bottom / usb_shell": 0.2497768,
+    "shell_bottom / usb_shell": 0.0,
     "shell_bottom / rgb_led": 0.0,
     "shell_bottom / light_pipe": 0.0,
     "shell_bottom / switch_key_ring_1": 0.0,
@@ -52,7 +55,7 @@
     "shell_bottom / actuator_key_circle3_1": 0.0,
     "shell_bottom / nrf52832": 0.0,
     "shell_bottom / battery": 0.0,
-    "pcb / switch_key_center_1": 1.2557405,
+    "pcb / switch_key_center_1": 0.0,
     "key_ring / key_center": 0.0,
     "key_ring / actuator_key_center_1": 0.0,
     "switch_key_ring_1 / actuator_key_ring_1": 0.0,
@@ -348,9 +351,9 @@
     "lcsc": "C18357553",
     "mount_side": "bottom",
     "center_z": -10.73,
-    "front_y": -39.2,
+    "front_y": -37.82,
     "board_edge_y": -37.55,
-    "protrusion_mm": 0.2,
+    "protrusion_mm": -1.18,
     "pads": [
       {
         "number": "20",
@@ -359,10 +362,10 @@
         "width": 1.499997,
         "length": 1.499997,
         "center": [
-          5.325109999999921,
-          -36.393039200000025
+          -5.325109999999921,
+          -35.011139200000024
         ],
-        "board_edge_clearance": 0.4069622999999751
+        "board_edge_clearance": 0.9248915000000785
       },
       {
         "number": "18",
@@ -371,10 +374,10 @@
         "width": 1.499997,
         "length": 1.1999976,
         "center": [
-          5.325109999999921,
-          -32.79284320000003
+          -5.325109999999921,
+          -31.41094320000003
         ],
-        "board_edge_clearance": 1.7904293717500412
+        "board_edge_clearance": 2.7675802326717327
       },
       {
         "number": "17",
@@ -383,10 +386,10 @@
         "width": 1.499997,
         "length": 1.1999976,
         "center": [
-          -5.325110000000037,
-          -32.79284320000003
+          5.325110000000037,
+          -31.41094320000003
         ],
-        "board_edge_clearance": 1.7904293717499598
+        "board_edge_clearance": 2.767580232671651
       },
       {
         "number": "19",
@@ -395,10 +398,10 @@
         "width": 1.499997,
         "length": 1.499997,
         "center": [
-          -5.325110000000037,
-          -36.393039200000025
+          5.325110000000037,
+          -35.011139200000024
         ],
-        "board_edge_clearance": 0.4069622999999751
+        "board_edge_clearance": 0.9248914999999629
       },
       {
         "number": "B12",
@@ -407,10 +410,10 @@
         "width": 0.8999982,
         "length": 1.1999976,
         "center": [
-          -2.7500580000000574,
-          -32.44308520000004
+          2.7500580000000574,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.274235168344836
+        "board_edge_clearance": 5.058384952246683
       },
       {
         "number": "B9",
@@ -419,10 +422,10 @@
         "width": 0.7999984,
         "length": 1.1999976,
         "center": [
-          -1.519936000000096,
-          -32.44308520000004
+          1.519936000000096,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.506915999999953
+        "board_edge_clearance": 5.888815999999951
       },
       {
         "number": "A5",
@@ -431,10 +434,10 @@
         "width": 0.6999986,
         "length": 1.1999976,
         "center": [
-          -0.4998720000000767,
-          -32.44308520000004
+          0.4998720000000767,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.506915999999953
+        "board_edge_clearance": 5.888815999999951
       },
       {
         "number": "B5",
@@ -443,10 +446,10 @@
         "width": 0.6999986,
         "length": 1.1999976,
         "center": [
-          0.500126000000013,
-          -32.44308520000004
+          -0.500126000000013,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.506915999999953
+        "board_edge_clearance": 5.888815999999951
       },
       {
         "number": "A9",
@@ -455,10 +458,10 @@
         "width": 0.7999984,
         "length": 1.1999976,
         "center": [
-          1.5199359999999806,
-          -32.44308520000004
+          -1.5199359999999806,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.506915999999953
+        "board_edge_clearance": 5.888815999999951
       },
       {
         "number": "A12",
@@ -467,18 +470,97 @@
         "width": 0.8999982,
         "length": 1.1999976,
         "center": [
-          2.750057999999942,
-          -32.44308520000004
+          -2.750057999999942,
+          -31.061185200000043
         ],
-        "board_edge_clearance": 4.274235168344939
+        "board_edge_clearance": 5.05838495224677
       }
     ],
-    "minimum_pad_edge_clearance": 0.4069622999999751,
+    "minimum_pad_edge_clearance": 0.9248914999999629,
     "datasheet_wider_envelope_overlap_mm3": {
       "shell_top": 0.0,
-      "shell_bottom": 0.34689848474662605,
+      "shell_bottom": 0.0,
       "pcb": 0.0
-    }
+    },
+    "rotation_matrix": [
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "solder_plane_z": -9.05,
+    "pad_contact_checks": [
+      {
+        "pad": "20",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.095857
+      },
+      {
+        "pad": "18",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.0638
+      },
+      {
+        "pad": "17",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.0638
+      },
+      {
+        "pad": "19",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.095857
+      },
+      {
+        "pad": "B12",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.051064
+      },
+      {
+        "pad": "B9",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.046507
+      },
+      {
+        "pad": "A5",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.04244
+      },
+      {
+        "pad": "B5",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.04244
+      },
+      {
+        "pad": "A9",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.046507
+      },
+      {
+        "pad": "A12",
+        "contact_region_depth": 0.15,
+        "metal_volume_mm3": 0.051064
+      }
+    ]
   },
   "microphone": {
     "center": [
@@ -530,9 +612,36 @@
       "source_watertight": true,
       "translation": [
         0,
-        -35.800000000000004,
-        -12.26
-      ]
+        -34.4181,
+        -9.15
+      ],
+      "rotation_matrix": [
+        [
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "solder_plane_z": -9.05
     },
     "C52212029": {
       "part": "NH-B1515RGBA-GF",
@@ -644,7 +753,45 @@
         -27
       ]
     ],
-    "pcb_holes": 5
+    "pcb_holes": 5,
+    "usb_end_latches": [
+      {
+        "side": -1,
+        "bounds": [
+          [
+            -20.70210075378418,
+            -34.0,
+            -10.300000190734863
+          ],
+          [
+            -15.300000190734863,
+            -27.0,
+            -1.100000023841858
+          ]
+        ],
+        "socket_clearance": 0.15,
+        "pcb_clearance": 0.25,
+        "bottom_overlap": 0.0
+      },
+      {
+        "side": 1,
+        "bounds": [
+          [
+            15.300000190734863,
+            -34.0,
+            -10.300000190734863
+          ],
+          [
+            20.70210075378418,
+            -27.0,
+            -1.100000023841858
+          ]
+        ],
+        "socket_clearance": 0.15,
+        "pcb_clearance": 0.25,
+        "bottom_overlap": 0.0
+      }
+    ]
   },
   "led": {
     "center": [
@@ -655,5 +802,18 @@
     "library_height": 1.0200000000000005,
     "light_pipe_bottom_z": -5.98,
     "optical_gap": 0.45
+  },
+  "center_switch": {
+    "rotation_deg": 180,
+    "locating_holes": [
+      [
+        1.0000000000000002,
+        10.75
+      ],
+      [
+        0.9999999999999998,
+        7.25
+      ]
+    ]
   }
 }

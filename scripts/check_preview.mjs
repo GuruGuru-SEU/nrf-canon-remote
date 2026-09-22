@@ -10,8 +10,8 @@ await page.waitForFunction(()=>window.__viewer?.renderer.info.render.triangles>0
 const contract=await page.evaluate(()=>{
  const v=window.__viewer,d=v.data;return {version:d.config.version,keys:d.parts.filter(p=>p.group==='buttons').length,switches:d.parts.filter(p=>p.id.startsWith('switch_')).length,ring:!!v.objects.get('key_ring'),zeroInterference:d.report.interference_failures.length===0,oldLength:Math.max(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))-Math.min(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))};
 });
-assert.deepEqual(contract,{version:'0.9',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
-assert.match(await page.locator('h1').innerText(),/0\.9/);
+assert.deepEqual(contract,{version:'0.10',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
+assert.match(await page.locator('h1').innerText(),/0\.10/);
 const imported=await page.evaluate(()=>{
  const d=window.__viewer.data,u=d.parts.find(p=>p.id==='usb_shell');
  return {usb:u.source.part,code:d.config.usb.lcsc,usbFaces:u.indices.length/3,
@@ -27,6 +27,19 @@ assert.equal(imported.ordinarySwitches,7);assert.equal(imported.centerSource,nul
 assert.deepEqual(imported.pins,['17','18','19','20','A12','A5','A9','B12','B5','B9']);
 assert.ok(imported.edge>.4);assert.ok(Math.abs(imported.ledHeight-1.02)<1e-6);
 assert.equal(imported.mountSide,'bottom');assert.deepEqual(imported.microphone.center,[-11.25,15.45]);
+const mating=await page.evaluate(()=>{
+ const data=window.__viewer.data;
+ return {usb:data.report.usb,latches:data.report.reference_features.usb_end_latches,holes:data.report.center_switch.locating_holes,overlaps:Object.values(data.report.interference_mm3)};
+});
+assert.ok(mating.overlaps.every(volume=>volume<1e-4));
+assert.deepEqual(mating.usb.rotation_matrix,[[-1,0,0,0],[0,1,0,0],[0,0,-1,0],[0,0,0,1]]);
+assert.equal(mating.usb.solder_plane_z,-9.05);
+assert.equal(mating.usb.pad_contact_checks.length,10);
+assert.ok(mating.usb.pad_contact_checks.every(pad=>pad.metal_volume_mm3>.005));
+assert.ok(Object.values(mating.usb.datasheet_wider_envelope_overlap_mm3).every(volume=>volume<1e-4));
+assert.equal(mating.latches.length,2);
+assert.ok(mating.latches.every(latch=>latch.bottom_overlap<1e-4));
+assert.ok(mating.holes.every(hole=>Math.abs(hole[0]-1)<1e-6));
 await page.screenshot({path:'output/review/preview-assembled.png',fullPage:true});
 await page.locator('#viewport').screenshot({path:'output/review/front-view.png'});
 async function settle(){await page.waitForTimeout(280)}
@@ -54,6 +67,14 @@ await page.locator('[data-view="iso"]').click();
 await page.locator('#explode-preset').click();await settle();assert.equal(await page.evaluate(()=>window.__viewer.getState().explode),1);await page.screenshot({path:'output/review/preview-exploded.png',fullPage:true});
 await page.locator('#reset').click();await page.locator('[data-view="usb"]').click();await shot('usb-opaque');
 await page.locator('#ghost').click();assert.equal(await page.evaluate(()=>window.__viewer.getState().ghost),true);await page.locator('[data-panel="usb-detail"]').click();await settle();await page.screenshot({path:'output/review/preview-usb.png',fullPage:true});
+await page.locator('[data-view="usb-fit"]').click();await shot('usb-end-fit');
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_top').visible),false);
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_bottom').visible),true);
+await page.locator('[data-group="pcb,highlight"]').uncheck();await shot('usb-end-sockets');
+await page.locator('[data-view="usb-latches"]').click();await shot('usb-end-top-latches');
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_top').visible),true);
+assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_bottom').visible),false);
+await page.locator('#reset').click();await page.locator('[data-view="usb"]').click();await page.locator('[data-group="shell"]').uncheck();await shot('usb-solder-face');
 await page.locator('#reset').click();await page.locator('[data-view="led"]').click();await page.locator('#ghost').click();await shot('led-transparent');
 await page.locator('#reset').click();await page.locator('[data-group="shell"]').uncheck();await page.locator('[data-group="buttons"]').uncheck();await settle();await page.screenshot({path:'output/review/preview-pcb.png',fullPage:true});
 assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_top').visible),false);
