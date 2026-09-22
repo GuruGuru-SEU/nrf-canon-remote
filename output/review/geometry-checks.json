@@ -1,5 +1,5 @@
 {
-  "version": "0.8",
+  "version": "0.9",
   "mesh_checks": {
     "checked_parts": 29,
     "all_collision_meshes_closed_positive_volume": true,
@@ -7,7 +7,6 @@
   },
   "interference_mm3": {
     "shell_top / shell_bottom": 0.0,
-    "shell_top / usb_shell": 0.0,
     "shell_top / rgb_led": 0.0,
     "shell_top / light_pipe": 0.0,
     "shell_top / key_ring": 0.0,
@@ -32,7 +31,7 @@
     "shell_top / switch_key_circle3_1": 0.0,
     "shell_top / actuator_key_circle3_1": 0.0,
     "shell_bottom / pcb": 0.0,
-    "shell_bottom / usb_shell": 0.0,
+    "shell_bottom / usb_shell": 0.2497768,
     "shell_bottom / rgb_led": 0.0,
     "shell_bottom / light_pipe": 0.0,
     "shell_bottom / switch_key_ring_1": 0.0,
@@ -53,7 +52,7 @@
     "shell_bottom / actuator_key_circle3_1": 0.0,
     "shell_bottom / nrf52832": 0.0,
     "shell_bottom / battery": 0.0,
-    "pcb / switch_key_center_1": 0.0,
+    "pcb / switch_key_center_1": 1.2557405,
     "key_ring / key_center": 0.0,
     "key_ring / actuator_key_center_1": 0.0,
     "switch_key_ring_1 / actuator_key_ring_1": 0.0,
@@ -347,7 +346,8 @@
   "usb": {
     "model": "HX TYPE-C 6P QTWT",
     "lcsc": "C18357553",
-    "center_z": -5.770000000000001,
+    "mount_side": "bottom",
+    "center_z": -10.73,
     "front_y": -39.2,
     "board_edge_y": -37.55,
     "protrusion_mm": 0.2,
@@ -476,9 +476,18 @@
     "minimum_pad_edge_clearance": 0.4069622999999751,
     "datasheet_wider_envelope_overlap_mm3": {
       "shell_top": 0.0,
-      "shell_bottom": 0.0,
+      "shell_bottom": 0.34689848474662605,
       "pcb": 0.0
     }
+  },
+  "microphone": {
+    "center": [
+      -11.25,
+      15.45
+    ],
+    "mount_side": "bottom",
+    "case_hole_diameter": 1.2,
+    "inner_relief_diameter": 2.2
   },
   "battery": {
     "model": "EEMB LP402535",
@@ -522,7 +531,7 @@
       "translation": [
         0,
         -35.800000000000004,
-        -7.350000000000001
+        -12.26
       ]
     },
     "C52212029": {

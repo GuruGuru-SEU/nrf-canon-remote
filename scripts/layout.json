@@ -1,5 +1,5 @@
 {
-  "version": "0.8",
+  "version": "0.9",
   "shell": {
     "width": 43,
     "length": 78,
@@ -57,6 +57,16 @@
     -11.43,
     29
   ],
+  "microphone": {
+    "center": [
+      -11.25,
+      15.45
+    ],
+    "case_hole_diameter": 1.2,
+    "inner_relief_diameter": 2.2,
+    "side": "bottom",
+    "source": "U600 SPH0641LM4H-1 bottom port; PCB position from EasyEDA layout"
+  },
   "ring_center": [
     0,
     9
@@ -106,7 +116,7 @@
         [
           0,
           18.92,
-          0
+          180
         ]
       ],
       "switch_type": "center"
@@ -196,11 +206,12 @@
       3.9
     ],
     "lead_in": [
-      11,
+      12.4,
       5.1
     ],
     "lcsc": "C18357553",
     "purchase": "淘宝自购",
+    "mount_side": "bottom",
     "center_height": 1.68,
     "datasheet_terminal_span": 11.8,
     "source": "reference/component-models/C18357553.obj"

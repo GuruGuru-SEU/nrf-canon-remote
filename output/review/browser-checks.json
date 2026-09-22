@@ -1,6 +1,6 @@
 {
   "contract": {
-    "version": "0.8",
+    "version": "0.9",
     "keys": 5,
     "switches": 8,
     "ring": true,
@@ -28,7 +28,17 @@
       "B9"
     ],
     "edge": 0.4069622999999751,
-    "ledHeight": 1.0200000000000005
+    "ledHeight": 1.0200000000000005,
+    "mountSide": "bottom",
+    "microphone": {
+      "center": [
+        -11.25,
+        15.45
+      ],
+      "mount_side": "bottom",
+      "case_hole_diameter": 1.2,
+      "inner_relief_diameter": 2.2
+    }
   },
   "reference_features": {
     "rear_taper_width_samples": {

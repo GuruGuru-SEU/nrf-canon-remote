@@ -10,8 +10,8 @@ await page.waitForFunction(()=>window.__viewer?.renderer.info.render.triangles>0
 const contract=await page.evaluate(()=>{
  const v=window.__viewer,d=v.data;return {version:d.config.version,keys:d.parts.filter(p=>p.group==='buttons').length,switches:d.parts.filter(p=>p.id.startsWith('switch_')).length,ring:!!v.objects.get('key_ring'),zeroInterference:d.report.interference_failures.length===0,oldLength:Math.max(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))-Math.min(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))};
 });
-assert.deepEqual(contract,{version:'0.8',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
-assert.match(await page.locator('h1').innerText(),/0\.8/);
+assert.deepEqual(contract,{version:'0.9',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
+assert.match(await page.locator('h1').innerText(),/0\.9/);
 const imported=await page.evaluate(()=>{
  const d=window.__viewer.data,u=d.parts.find(p=>p.id==='usb_shell');
  return {usb:u.source.part,code:d.config.usb.lcsc,usbFaces:u.indices.length/3,
@@ -19,13 +19,14 @@ const imported=await page.evaluate(()=>{
   ordinarySwitches:d.parts.filter(p=>p.id.startsWith('switch_')&&p.source?.part==='TS-1101-C-W').length,
   centerSource:d.parts.find(p=>p.id==='switch_key_center_1').source??null,
   pins:d.report.usb.pads.map(p=>p.number).sort(),edge:d.report.usb.minimum_pad_edge_clearance,
-  ledHeight:d.report.led.library_height};
+  ledHeight:d.report.led.library_height,mountSide:d.report.usb.mount_side,microphone:d.report.microphone};
 });
 assert.equal(imported.usb,'HX TYPE-C 6P QTWT');assert.equal(imported.code,'C18357553');
 assert.equal(imported.usbFaces,7114);assert.equal(imported.colors,7114*3);assert.equal(imported.oldUSB,false);
 assert.equal(imported.ordinarySwitches,7);assert.equal(imported.centerSource,null);
 assert.deepEqual(imported.pins,['17','18','19','20','A12','A5','A9','B12','B5','B9']);
 assert.ok(imported.edge>.4);assert.ok(Math.abs(imported.ledHeight-1.02)<1e-6);
+assert.equal(imported.mountSide,'bottom');assert.deepEqual(imported.microphone.center,[-11.25,15.45]);
 await page.screenshot({path:'output/review/preview-assembled.png',fullPage:true});
 await page.locator('#viewport').screenshot({path:'output/review/front-view.png'});
 async function settle(){await page.waitForTimeout(280)}
