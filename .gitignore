@@ -17,3 +17,6 @@ output/review/archive/
 .env
 .env.*
 !.env.example
+
+# Native electromagnetic solver and isolated Python environment.
+.tools/

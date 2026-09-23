@@ -14,6 +14,8 @@ ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output'; MODELS=OUT/'models'; REVIEW=OUT/'review'
 C=json.loads((ROOT/'scripts/layout.json').read_text())
 parts=[]; solids={}; print_ids=[]; library_checks={}
+assert C['mounts']==[hole['center'] for hole in C['pcb_source']['mount_holes']], 'Mounts differ from final PCB snapshot'
+assert all(hole['diameter']==2.3 for hole in C['pcb_source']['mount_holes'])
 
 def box(size,center):
  m=trimesh.creation.box(size);m.apply_translation(center);return m
@@ -94,7 +96,7 @@ for x,y in corner_centers:
  guide=inter(union(stem,entry,ledge),bottom_blank)
  assert volume(inter(bottom,guide))>1,('corner locator disconnected',x,y)
  corner_guides.append(guide);bottom=union(bottom,guide)
-# Reference-like three point mounting: upper middle and two lower screws.
+# Reference-like three point mounting: upper right and two lower screws.
 for x,y in C['mounts']:
  top=union(top,diff(cyl(2.65,pcb1,-1.1,x,y),cyl(.85,pcb1-.1,-1.65,x,y)))
  bottom=union(bottom,cyl(2.65,-16.25,pcb0,x,y))
@@ -135,7 +137,8 @@ bottom=diff(bottom,cyl(mic_r,-18,-5.0,mic_x,mic_y),cyl(mic_relief_r,-16.2,-14.8,
 # The longer tongue supports every SMT pad; a blind inner pocket keeps the front wall.
 pocket=box([P['tongue_width']+.5,7.5,P['thickness']+.4],[0,P['tongue_end']-.25+3.75,(pcb0+pcb1)/2])
 bottom=diff(bottom,pocket)
-for x in U['support_centers_x']:bottom=union(bottom,inter(box([1.0,5.0,6.95],[x,P['body_bottom']-1.4,-12.675]),bottom_blank))
+support_floor=-16.15;support_top=pcb0-.15
+for x in U['support_centers_x']:bottom=union(bottom,inter(box([1.0,5.0,support_top-support_floor],[x,P['body_bottom']-1.4,(support_top+support_floor)/2]),bottom_blank))
 end_latches=S['usb_end_latches'];latch_front,latch_back=end_latches['y_span']
 latch_profile=Polygon([(15.3,-1.1),(19.4479,-1.1),(19.5,-6.1),(19.5,-7.8958),(20.7021,-9.0979),(19.5,-10.3),(18.3,-10.3),(18.3,-4.2)])
 latch_checks=[]
@@ -153,7 +156,7 @@ for side in [-1,1]:
 for x in [B['center_xy'][0]-14.1,B['center_xy'][0]+14.1]:bottom=union(bottom,box([1.0,39,2.1],[x,B['center_xy'][1],-15.2]))
 for y in [B['center_xy'][1]-20.2,B['center_xy'][1]+20.2]:
  for x in [-8,8]:bottom=union(bottom,box([7,1.0,2.1],[x,y,-15.2]))
-add('shell_top','上盖 · 上中 / 下左右三点固定',top,'#d7d9d4','shell',26,True)
+add('shell_top','上盖 · 右上 / 下左右三点固定',top,'#d7d9d4','shell',26,True)
 add('shell_bottom','下盖 · 顶角圆弧定位台 / 参考梯形收底',bottom,'#343c3b','shell',-24,True)
 # Remove one quarter of a disk centered on each upper bounding-box corner.
 # These are concave cuts, not conventional convex corner fillets. Sidewalls stay straight.
@@ -185,7 +188,8 @@ usb.apply_transform(usb_rotation)
 usb_mount_z=pcb0 if usb_side=='bottom' else pcb1
 usb_source_plane=U['solder_plane_source_z']*usb_rotation[2,2]
 usb_origin_x,usb_origin_y=U['pcb_origin']
-usb_shift=[usb_origin_x,usb_origin_y,usb_mount_z-usb_source_plane]
+usb_dx,usb_dy=U['model_origin_offset_xy']
+usb_shift=[usb_origin_x+usb_dx,usb_origin_y+usb_dy,usb_mount_z-usb_source_plane]
 usb.apply_translation(usb_shift)
 add('usb_shell','HX TYPE-C 6P QTWT · 嘉立创 C18357553 原始模型',usb,'#bbc4c7','electronics',collision=solid_union(usb),source=usb_source)
 library_checks[U['lcsc']].update(translation=usb_shift,rotation_matrix=usb_rotation.tolist(),solder_plane_z=usb_mount_z)
@@ -199,6 +203,10 @@ for pad in footprint_pads(U['lcsc']):
  usb_pads.append(dict(pad,center=[x,y],board_edge_clearance=clearance))
  pad_z0,pad_z1=(pcb1+.001,pcb1+.025) if usb_side=='top' else (pcb0-.025,pcb0-.001)
  add('usb_pad_'+pad['number'],'USB-C 库焊盘 '+pad['number'],extrude(shape,pad_z0,pad_z1),'#cda761','electronics',decorative=True)
+# Independent check against pads read from the user's final PCB, not our own transform.
+actual_usb={p['number']:np.array(p['center']) for p in C['pcb_source']['usb_pads']}
+usb_xy_errors={p['number']:float(np.linalg.norm(np.array(p['center'])-actual_usb[p['number']])) for p in usb_pads}
+assert max(usb_xy_errors.values())<.004,('USB differs from final PCB pads',usb_xy_errors)
 usb_contact_checks=[]
 for pad in usb_pads:
  pad_x,pad_y=pad['center']
@@ -328,7 +336,8 @@ report['reference_features']={'rear_taper_width_samples':taper_check,'rear_face_
 report['led']={'center':C['led'],'ring_center_distance':float(np.linalg.norm(np.array(C['led'])-np.array(C['ring_center']))),'library_height':float(led.extents[2]),'light_pipe_bottom_z':light_bottom,'optical_gap':.45}
 report['reference_features']['usb_end_latches']=latch_checks
 report['center_switch']={'rotation_deg':center_switch['angle'],'locating_holes':center_holes}
-report['usb'].update(rotation_matrix=usb_rotation.tolist(),solder_plane_z=usb_mount_z,pad_contact_checks=usb_contact_checks)
+report['usb'].update(rotation_matrix=usb_rotation.tolist(),solder_plane_z=usb_mount_z,pad_contact_checks=usb_contact_checks,actual_pcb_pad_center_error_mm=usb_xy_errors)
+report['pcb_source']=C['pcb_source']
 REVIEW.mkdir(parents=True,exist_ok=True);(REVIEW/'geometry-checks.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
 if errors:raise RuntimeError('Mechanical interference:\n'+'\n'.join(errors))
 

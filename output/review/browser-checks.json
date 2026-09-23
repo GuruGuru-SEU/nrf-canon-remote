@@ -1,6 +1,6 @@
 {
   "contract": {
-    "version": "0.10",
+    "version": "0.11",
     "keys": 5,
     "switches": 8,
     "ring": true,
@@ -27,7 +27,7 @@
       "B5",
       "B9"
     ],
-    "edge": 0.9248914999999629,
+    "edge": 0.4069244999999739,
     "ledHeight": 1.0200000000000005,
     "mountSide": "bottom",
     "microphone": {
@@ -90,7 +90,7 @@
     "width_at_former_notches": 36.7574,
     "mounts": [
       [
-        0,
+        14,
         28
       ],
       [

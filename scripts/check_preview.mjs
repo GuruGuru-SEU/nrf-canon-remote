@@ -10,8 +10,8 @@ await page.waitForFunction(()=>window.__viewer?.renderer.info.render.triangles>0
 const contract=await page.evaluate(()=>{
  const v=window.__viewer,d=v.data;return {version:d.config.version,keys:d.parts.filter(p=>p.group==='buttons').length,switches:d.parts.filter(p=>p.id.startsWith('switch_')).length,ring:!!v.objects.get('key_ring'),zeroInterference:d.report.interference_failures.length===0,oldLength:Math.max(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))-Math.min(...d.parts.find(p=>p.id==='original_top').positions.filter((_,i)=>i%3===1))};
 });
-assert.deepEqual(contract,{version:'0.10',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
-assert.match(await page.locator('h1').innerText(),/0\.10/);
+assert.deepEqual(contract,{version:'0.11',keys:5,switches:8,ring:true,zeroInterference:true,oldLength:140});
+assert.match(await page.locator('h1').innerText(),/0\.11/);
 const imported=await page.evaluate(()=>{
  const d=window.__viewer.data,u=d.parts.find(p=>p.id==='usb_shell');
  return {usb:u.source.part,code:d.config.usb.lcsc,usbFaces:u.indices.length/3,
@@ -33,7 +33,7 @@ const mating=await page.evaluate(()=>{
 });
 assert.ok(mating.overlaps.every(volume=>volume<1e-4));
 assert.deepEqual(mating.usb.rotation_matrix,[[-1,0,0,0],[0,1,0,0],[0,0,-1,0],[0,0,0,1]]);
-assert.equal(mating.usb.solder_plane_z,-9.05);
+assert.equal(mating.usb.solder_plane_z,-8.45);
 assert.equal(mating.usb.pad_contact_checks.length,10);
 assert.ok(mating.usb.pad_contact_checks.every(pad=>pad.metal_volume_mm3>.005));
 assert.ok(Object.values(mating.usb.datasheet_wider_envelope_overlap_mm3).every(volume=>volume<1e-4));
@@ -50,7 +50,7 @@ const features=await page.evaluate(()=>{const v=window.__viewer;return {report:v
 assert.equal(features.report.corner_notch_type,'concave_quarter_circle');assert.equal(features.report.width_at_former_notches,36.7574);
 assert.equal(features.report.corner_fit.length,2);
 for(const fit of features.report.corner_fit){assert.equal(fit.notch_radius,5);assert.equal(fit.boss_radius,4.75);assert.ok(fit.minimum_polygon_clearance>.24);assert.ok(fit.minimum_polygon_clearance<.26);assert.equal(fit.overlap_pcb,0);assert.equal(fit.overlap_top,0)}
-assert.deepEqual(await page.evaluate(()=>window.__viewer.data.config.led),[-11.43,29]);assert.equal(features.report.rear_face_width,35);assert.equal(features.report.pcb_holes,5);assert.deepEqual(features.report.mounts,[[0,28],[-14,-27],[14,-27]]);assert.deepEqual(features.visible,['pcb','extension']);
+assert.deepEqual(await page.evaluate(()=>window.__viewer.data.config.led),[-11.43,29]);assert.equal(features.report.rear_face_width,35);assert.equal(features.report.pcb_holes,5);assert.deepEqual(features.report.mounts,[[14,28],[-14,-27],[14,-27]]);assert.deepEqual(features.visible,['pcb','extension']);
 await page.locator('[data-view="fit"]').click();await shot('corner-fit');
 assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_top').visible),false);
 assert.equal(await page.evaluate(()=>window.__viewer.objects.get('shell_bottom').visible),true);

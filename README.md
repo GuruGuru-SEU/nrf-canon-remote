@@ -1,4 +1,4 @@
-# nRF52832 Canon remote — mechanical study v0.10
+# nRF52832 Canon remote — mechanical study v0.11
 
 打开 **[在线 3D 预览](https://guruguru-seu.github.io/nrf-canon-remote/preview.html)**，可直接分享这个链接。
 
@@ -10,6 +10,8 @@ USB-C 选用淘宝自购的 **HX TYPE-C 6P QTWT（6Pin 全贴）**，对应立�
 
 v0.10 修正 USB-C 底面安装的翻转：焊脚朝 PCB，母座主体朝背盖，焊盘同步翻转。恢复参考外壳 USB 端两侧的上盖楔形卡扣和下盖凹槽，托筋避开固定焊耳。中心开关的两个定位孔也随 180° 方向旋转；模型碰撞检查不再豁免 USB / 外壳或开关 / PCB 穿插。预览新增“USB-C 端部配合”和“端部上盖卡扣”。
 
+v0.11 按 2026-09-23 Chrome 最终 PCB 将上方 Ø2.3 孔移至 (14,28)，上下盖螺柱与沉孔同步。按当前叠层采用 1.0 mm 板厚，保持按键面高度，相应调整底面 USB-C 和托台。USB 模型使用实际焊盘核验原点偏移。
+
 新增 **[文字原理图 v0.1](output/electrical/原理图-v0.1.md)**：包含 nRF52832 最小系统、9 路按键信号、RGB 驱动、USB／电池供电与充电、4Pin SWD、陶瓷天线、库存 BOM 和布局注释。依据见 [电气参考资料](reference/electrical/README.md)。目前为待转绘和验证的电路草案，不含 EDA 原理图工程、PCB 铜层布局或固件；新增电路器件尚未回填到 3D 模型。
 
 用于分享审阅的 HTML 页面：**[7 页原理图图纸](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-drawing-v0.1.html)**、**[原理图说明](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-v0.1.html)**、**[完整 BOM](https://guruguru-seu.github.io/nrf-canon-remote/electrical/bom-v0.1.html)**。图纸用 Schemdraw 绘制，支持切页、缩放、位号定位和 SVG 下载，每页附连接与 layout 注释；网站首页不增加文档入口。
@@ -20,7 +22,7 @@ v0.10 修正 USB-C 底面安装的翻转：焊脚朝 PCB，母座主体朝背盖
 
 按键采用 GPIO 直连触点到地，开启内部上拉并由固件去抖；删除 R300～R308、C300～C308 共 18 个元件，半按与全按各自保留独立输入。
 
-3D 预览为机械模型。参考键帽保留形状并平移、修改顶柱；下盖恢复参考工程的梯形截面（43 mm 收至背面 35 mm）；PCB 左上、右上角设 R5 四分之一圆凹口，下盖增加配合定位凸台和托台；采用上中、下左右三点固定。RGB 与导光结构整体下移 5 mm。原始 140 mm 参考模型保留在预览的“原型对照”中。
+3D 预览为机械模型。参考键帽保留形状并平移、修改顶柱；下盖恢复参考工程的梯形截面（43 mm 收至背面 35 mm）；PCB 左上、右上角设 R5 四分之一圆凹口，下盖增加配合定位凸台和托台；采用右上、下左右三点固定。RGB 与导光结构整体下移 5 mm。原始 140 mm 参考模型保留在预览的“原型对照”中。
 
 ## 输出
 

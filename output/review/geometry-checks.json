@@ -1,5 +1,5 @@
 {
-  "version": "0.10",
+  "version": "0.11",
   "mesh_checks": {
     "checked_parts": 29,
     "all_collision_meshes_closed_positive_volume": true,
@@ -202,12 +202,12 @@
     [
       -18.3787,
       -37.55,
-      -9.05
+      -8.45
     ],
     [
       18.3787,
       35.87870000000001,
-      -7.450000000000001
+      -7.449999999999999
     ]
   ],
   "shell_bounds": [
@@ -350,10 +350,10 @@
     "model": "HX TYPE-C 6P QTWT",
     "lcsc": "C18357553",
     "mount_side": "bottom",
-    "center_z": -10.73,
-    "front_y": -37.82,
+    "center_z": -10.129999999999999,
+    "front_y": -39.2,
     "board_edge_y": -37.55,
-    "protrusion_mm": -1.18,
+    "protrusion_mm": 0.2,
     "pads": [
       {
         "number": "20",
@@ -363,9 +363,9 @@
         "length": 1.499997,
         "center": [
           -5.325109999999921,
-          -35.011139200000024
+          -36.39307700000003
         ],
-        "board_edge_clearance": 0.9248915000000785
+        "board_edge_clearance": 0.4069244999999739
       },
       {
         "number": "18",
@@ -375,9 +375,9 @@
         "length": 1.1999976,
         "center": [
           -5.325109999999921,
-          -31.41094320000003
+          -32.79288100000003
         ],
-        "board_edge_clearance": 2.7675802326717327
+        "board_edge_clearance": 1.7904026431137117
       },
       {
         "number": "17",
@@ -387,9 +387,9 @@
         "length": 1.1999976,
         "center": [
           5.325110000000037,
-          -31.41094320000003
+          -32.79288100000003
         ],
-        "board_edge_clearance": 2.767580232671651
+        "board_edge_clearance": 1.79040264311363
       },
       {
         "number": "19",
@@ -399,9 +399,9 @@
         "length": 1.499997,
         "center": [
           5.325110000000037,
-          -35.011139200000024
+          -36.39307700000003
         ],
-        "board_edge_clearance": 0.9248914999999629
+        "board_edge_clearance": 0.4069244999999739
       },
       {
         "number": "B12",
@@ -411,9 +411,9 @@
         "length": 1.1999976,
         "center": [
           2.7500580000000574,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.058384952246683
+        "board_edge_clearance": 4.274217862123437
       },
       {
         "number": "B9",
@@ -423,9 +423,9 @@
         "length": 1.1999976,
         "center": [
           1.519936000000096,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.888815999999951
+        "board_edge_clearance": 4.506878199999952
       },
       {
         "number": "A5",
@@ -435,9 +435,9 @@
         "length": 1.1999976,
         "center": [
           0.4998720000000767,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.888815999999951
+        "board_edge_clearance": 4.506878199999952
       },
       {
         "number": "B5",
@@ -447,9 +447,9 @@
         "length": 1.1999976,
         "center": [
           -0.500126000000013,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.888815999999951
+        "board_edge_clearance": 4.506878199999952
       },
       {
         "number": "A9",
@@ -459,9 +459,9 @@
         "length": 1.1999976,
         "center": [
           -1.5199359999999806,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.888815999999951
+        "board_edge_clearance": 4.506878199999952
       },
       {
         "number": "A12",
@@ -471,12 +471,12 @@
         "length": 1.1999976,
         "center": [
           -2.750057999999942,
-          -31.061185200000043
+          -32.44312300000004
         ],
-        "board_edge_clearance": 5.05838495224677
+        "board_edge_clearance": 4.27421786212354
       }
     ],
-    "minimum_pad_edge_clearance": 0.9248914999999629,
+    "minimum_pad_edge_clearance": 0.4069244999999739,
     "datasheet_wider_envelope_overlap_mm3": {
       "shell_top": 0.0,
       "shell_bottom": 0.0,
@@ -508,27 +508,27 @@
         1
       ]
     ],
-    "solder_plane_z": -9.05,
+    "solder_plane_z": -8.45,
     "pad_contact_checks": [
       {
         "pad": "20",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.095857
+        "metal_volume_mm3": 0.095859
       },
       {
         "pad": "18",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.0638
+        "metal_volume_mm3": 0.063801
       },
       {
         "pad": "17",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.0638
+        "metal_volume_mm3": 0.063801
       },
       {
         "pad": "19",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.095857
+        "metal_volume_mm3": 0.095859
       },
       {
         "pad": "B12",
@@ -560,7 +560,19 @@
         "contact_region_depth": 0.15,
         "metal_volume_mm3": 0.051064
       }
-    ]
+    ],
+    "actual_pcb_pad_center_error_mm": {
+      "20": 0.0012707277441681049,
+      "18": 0.0016535963835641934,
+      "17": 0.0016535963835955718,
+      "19": 0.0012707277442089377,
+      "B12": 0.0008178343352319824,
+      "B9": 0.0010585201935570509,
+      "A5": 0.0005884496579100352,
+      "B5": 0.00039080046054964986,
+      "A9": 0.0010585201934462257,
+      "A12": 0.0008178343353395629
+    }
   },
   "microphone": {
     "center": [
@@ -612,8 +624,8 @@
       "source_watertight": true,
       "translation": [
         0,
-        -34.4181,
-        -9.15
+        -35.800037800000005,
+        -8.549999999999999
       ],
       "rotation_matrix": [
         [
@@ -641,7 +653,7 @@
           1
         ]
       ],
-      "solder_plane_z": -9.05
+      "solder_plane_z": -8.45
     },
     "C52212029": {
       "part": "NH-B1515RGBA-GF",
@@ -664,7 +676,7 @@
       "translation": [
         -11.43,
         29,
-        -6.830000000000001
+        -6.829999999999999
       ],
       "collision_method": "conservative_bounding_box",
       "height_above_pcb": 1.0200000000000005
@@ -687,7 +699,7 @@
       ],
       "source_faces": 2836,
       "source_watertight": true,
-      "mounting_z_shift": -6.856665000000001,
+      "mounting_z_shift": -6.856665,
       "height_above_pcb": 2.4977159999999996
     }
   },
@@ -741,7 +753,7 @@
     "width_at_former_notches": 36.7574,
     "mounts": [
       [
-        0,
+        14,
         28
       ],
       [
@@ -800,7 +812,7 @@
     ],
     "ring_center_distance": 23.035730941300734,
     "library_height": 1.0200000000000005,
-    "light_pipe_bottom_z": -5.98,
+    "light_pipe_bottom_z": -5.979999999999999,
     "optical_gap": 0.45
   },
   "center_switch": {
@@ -814,6 +826,112 @@
         0.9999999999999998,
         7.25
       ]
+    ]
+  },
+  "pcb_source": {
+    "captured_at": "2026-09-23T04:17:33.857Z",
+    "project_uuid": "7a1f59547fea4a7e9896ac418ab9f05b",
+    "pcb_uuid": "dec4907231543224",
+    "units": "mm",
+    "mount_holes": [
+      {
+        "center": [
+          14.0,
+          28.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "b8ac3cc1dccc08c2"
+      },
+      {
+        "center": [
+          -14.0,
+          -27.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "81d1608a5439e3c7"
+      },
+      {
+        "center": [
+          14.0,
+          -27.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "e1df8c67e7472294"
+      }
+    ],
+    "nominal_board_thickness_mm": 1.0,
+    "thickness_status": "From current EasyEDA stackup; awaiting confirmation of fabrication selection",
+    "usb_pads": [
+      {
+        "number": "20",
+        "center": [
+          -5.32384,
+          -36.393119999999996
+        ]
+      },
+      {
+        "number": "18",
+        "center": [
+          -5.32384,
+          -32.79394
+        ]
+      },
+      {
+        "number": "17",
+        "center": [
+          5.3263799999999994,
+          -32.79394
+        ]
+      },
+      {
+        "number": "19",
+        "center": [
+          5.3263799999999994,
+          -36.393119999999996
+        ]
+      },
+      {
+        "number": "B12",
+        "center": [
+          2.7508199999999996,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "B9",
+        "center": [
+          1.5189199999999998,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A5",
+        "center": [
+          0.5003799999999999,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "B5",
+        "center": [
+          -0.5003799999999999,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A9",
+        "center": [
+          -1.5189199999999998,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A12",
+        "center": [
+          -2.7508199999999996,
+          -32.443419999999996
+        ]
+      }
     ]
   }
 }

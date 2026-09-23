@@ -1,5 +1,5 @@
 {
-  "version": "0.10",
+  "version": "0.11",
   "shell": {
     "width": 43,
     "length": 78,
@@ -17,7 +17,10 @@
     },
     "usb_end_latches": {
       "source": "reference/enclosure/shell_top.3mf and shell_bottom.3mf, Y=-65 to -58",
-      "y_span": [-34, -27],
+      "y_span": [
+        -34,
+        -27
+      ],
       "socket_clearance": 0.15,
       "pcb_clearance": 0.25
     },
@@ -35,8 +38,8 @@
     "top": 35.8787,
     "tongue_end": -37.55,
     "tongue_width": 14,
-    "thickness": 1.6,
-    "z_bottom": -9.05,
+    "thickness": 1.0,
+    "z_bottom": -8.45,
     "corner_notches": {
       "radius": 5.0,
       "corners": [
@@ -47,7 +50,7 @@
   },
   "mounts": [
     [
-      0,
+      14,
       28
     ],
     [
@@ -206,7 +209,7 @@
       6.8,
       3.16
     ],
-    "front": -37.82,
+    "front": -39.2,
     "opening": [
       9.6,
       3.9
@@ -217,22 +220,32 @@
     ],
     "lead_in_depth": 0.3,
     "ear_relief_width": 12.4,
-    "support_centers_x": [-6.6, 6.6],
+    "support_centers_x": [
+      -6.6,
+      6.6
+    ],
     "solder_plane_source_z": -0.1,
     "rotation_y_deg": 180,
     "model_xy_compensation_deg": 180,
-    "pcb_origin": [0, -34.4181],
+    "pcb_origin": [
+      0,
+      -34.4181
+    ],
     "lcsc": "C18357553",
     "purchase": "淘宝自购",
     "mount_side": "bottom",
     "center_height": 1.68,
     "datasheet_terminal_span": 11.8,
-    "source": "reference/component-models/C18357553.obj"
+    "source": "reference/component-models/C18357553.obj",
+    "model_origin_offset_xy": [
+      0,
+      -1.3819378
+    ]
   },
   "mcu": {
     "center": [
-      0,
-      21
+      -3.09966,
+      20.74984
     ],
     "size": [
       6,
@@ -286,5 +299,111 @@
       "source": "http://omo-oss-file110.thefastfile.com/portal-saas/pg2026081913505947704/cms/file/k2-1831sl(3).pdf",
       "drawing_part": "K2-1831SL-A4SW-□□"
     }
+  },
+  "pcb_source": {
+    "captured_at": "2026-09-23T04:17:33.857Z",
+    "project_uuid": "7a1f59547fea4a7e9896ac418ab9f05b",
+    "pcb_uuid": "dec4907231543224",
+    "units": "mm",
+    "mount_holes": [
+      {
+        "center": [
+          14.0,
+          28.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "b8ac3cc1dccc08c2"
+      },
+      {
+        "center": [
+          -14.0,
+          -27.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "81d1608a5439e3c7"
+      },
+      {
+        "center": [
+          14.0,
+          -27.0
+        ],
+        "diameter": 2.3,
+        "primitive_id": "e1df8c67e7472294"
+      }
+    ],
+    "nominal_board_thickness_mm": 1.0,
+    "thickness_status": "From current EasyEDA stackup; awaiting confirmation of fabrication selection",
+    "usb_pads": [
+      {
+        "number": "20",
+        "center": [
+          -5.32384,
+          -36.393119999999996
+        ]
+      },
+      {
+        "number": "18",
+        "center": [
+          -5.32384,
+          -32.79394
+        ]
+      },
+      {
+        "number": "17",
+        "center": [
+          5.3263799999999994,
+          -32.79394
+        ]
+      },
+      {
+        "number": "19",
+        "center": [
+          5.3263799999999994,
+          -36.393119999999996
+        ]
+      },
+      {
+        "number": "B12",
+        "center": [
+          2.7508199999999996,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "B9",
+        "center": [
+          1.5189199999999998,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A5",
+        "center": [
+          0.5003799999999999,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "B5",
+        "center": [
+          -0.5003799999999999,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A9",
+        "center": [
+          -1.5189199999999998,
+          -32.443419999999996
+        ]
+      },
+      {
+        "number": "A12",
+        "center": [
+          -2.7508199999999996,
+          -32.443419999999996
+        ]
+      }
+    ]
   }
 }
