@@ -1,0 +1,70 @@
+{
+  "candidate": {
+    "series": {
+      "type": "L",
+      "value_si": 2.2000000000000003e-09,
+      "label": "2.2 nH"
+    },
+    "shunt_at_load": {
+      "type": "C",
+      "value_si": 1e-12,
+      "label": "1 pF"
+    },
+    "reference_plane": "L220 output pad, ideal additional 50-ohm L-network; not replacement of Nordic chip network",
+    "selected_against": "refined",
+    "qualification": "ideal candidate only, not a production BOM"
+  },
+  "runs": {
+    "nominal": {
+      "unmatched_worst_s11_db": -9.809022993023355,
+      "matched_worst_s11_db": -17.08524546874585,
+      "z_2441_ohm": [
+        55.02463911968322,
+        34.49883795822921
+      ]
+    },
+    "refined": {
+      "unmatched_worst_s11_db": -9.675996965138863,
+      "matched_worst_s11_db": -18.2665459976285,
+      "z_2441_ohm": [
+        57.052652075442836,
+        30.901783883123567
+      ]
+    },
+    "eps40": {
+      "unmatched_worst_s11_db": -9.456571583447197,
+      "matched_worst_s11_db": -10.972724953299958,
+      "z_2441_ohm": [
+        42.957606016892576,
+        25.143920333948547
+      ]
+    },
+    "housed": {
+      "unmatched_worst_s11_db": -1.9848423600677747,
+      "matched_worst_s11_db": -3.382966726716867,
+      "z_2441_ohm": [
+        30.05498036856722,
+        62.1433607565617
+      ]
+    }
+  },
+  "hypothetical_housed_candidate": {
+    "series": {
+      "type": "C",
+      "value_si": 8e-13,
+      "label": "0.8 pF"
+    },
+    "shunt_at_load": {
+      "type": "C",
+      "value_si": 2e-13,
+      "label": "0.2 pF"
+    },
+    "matched_worst_s11_db": -10.97077041603825,
+    "qualification": "sensitivity study only; assumed enclosure dielectric, coarse mesh, no parasitic models"
+  },
+  "mesh_comparison": {
+    "max_abs_z_delta_ohm_in_band": 6.8438555872502365,
+    "max_abs_gamma_delta_in_band": 0.06800361524530894,
+    "relative_z_delta_at_2441": 0.06364229180978594
+  }
+}

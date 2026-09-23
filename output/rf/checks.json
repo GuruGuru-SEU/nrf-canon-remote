@@ -1,0 +1,31 @@
+{
+  "passive_and_finite": true,
+  "csv_s1p_consistent": true,
+  "impedance_reflection_consistent": true,
+  "runs": {
+    "nominal": {
+      "timesteps": 71928,
+      "energy_db": -40.23,
+      "fdtd_cells": 1776840,
+      "iteration_runtime_seconds": 726.34
+    },
+    "refined": {
+      "timesteps": 95004,
+      "energy_db": -40.78,
+      "fdtd_cells": 2310880,
+      "iteration_runtime_seconds": 1306.7
+    },
+    "eps40": {
+      "timesteps": 73556,
+      "energy_db": -40.26,
+      "fdtd_cells": 1776840,
+      "iteration_runtime_seconds": 947.8
+    },
+    "housed": {
+      "timesteps": 67146,
+      "energy_db": -40.06,
+      "fdtd_cells": 2152710,
+      "iteration_runtime_seconds": 982.25
+    }
+  }
+}

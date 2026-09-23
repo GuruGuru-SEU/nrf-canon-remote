@@ -1,0 +1,67 @@
+{
+  "name": "housed",
+  "engine": "openEMS 0.37.0 / CSXCAD 0.7.0",
+  "eps_r": 4.3,
+  "tan_delta": 0.02,
+  "nominal_board_thickness_mm": 1.0,
+  "copper_plane_separation_mm": 0.945,
+  "mesh_fine_mm": 0.2,
+  "shell_eps": 2.8,
+  "mesh_cells": [
+    169,
+    200,
+    62
+  ],
+  "minimum_step_mm": {
+    "x": 0.1999999999999993,
+    "y": 0.19999999999999574,
+    "z": 0.18770751674705996
+  },
+  "source": {
+    "captured_at": "2026-09-23T04:17:33.857Z",
+    "pcb_uuid": "dec4907231543224",
+    "snapshot_sha256": "6a2e70ec3e76b106f612eefd47186bf1f6df56fa3b0e141aba2459a2f7a0b34f",
+    "antenna_footprint_uuid": "0d27b0b8c28874d1",
+    "antenna_copper_source": "2026-09-22 export of same footprint UUID; 2026-09-23 placement verified against both live pads",
+    "antenna_footprint_sha256": "d9a76761058b34454f33528f53e0accd586008e46d24586610f84bca0024718e",
+    "status": "preliminary; footprint copper not freshly exported, fabrication Dk/Df unconfirmed"
+  },
+  "reference_plane": "L220 output ($1N324), with L220 and C216 excluded and C217 DNP",
+  "port_start": [
+    -3.2512,
+    27.11958,
+    0.945
+  ],
+  "port_stop": [
+    -3.2512,
+    27.11958,
+    0
+  ],
+  "runtime_seconds": 1052.1183366249898,
+  "samples": [
+    {
+      "mhz": 2402,
+      "z_real": 46.0885662315882,
+      "z_imag": 54.29977313626368,
+      "s11_db": -6.1385626481099385
+    },
+    {
+      "mhz": 2441,
+      "z_real": 30.05498036856722,
+      "z_imag": 62.1433607565617,
+      "s11_db": -3.8222676578369064
+    },
+    {
+      "mhz": 2480,
+      "z_real": 19.90253930421983,
+      "z_imag": 77.23040182993962,
+      "s11_db": -1.9848423600677711
+    }
+  ],
+  "termination": {
+    "timesteps": 67146,
+    "energy_db": -40.06,
+    "fdtd_cells": 2152710,
+    "iteration_runtime_seconds": 982.25
+  }
+}

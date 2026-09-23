@@ -12,6 +12,8 @@ v0.10 修正 USB-C 底面安装的翻转：焊脚朝 PCB，母座主体朝背盖
 
 v0.11 按 2026-09-23 Chrome 最终 PCB 将上方 Ø2.3 孔移至 (14,28)，上下盖螺柱与沉孔同步。按当前叠层采用 1.0 mm 板厚，保持按键面高度，相应调整底面 USB-C 和托台。USB 模型使用实际焊盘核验原点偏移。
 
+2026-09-23 增加 **[openEMS 天线初步计算报告](https://guruguru-seu.github.io/nrf-canon-remote/rf/antenna-20260923.html)**，包含实际 PCB 地铜与印制 IFA、四组仿真、阻抗 / S11 和匹配候选。现 PCB 使用印制天线，下面 v0.1 电气草案中的陶瓷天线与部分元件值已不是最终 PCB 版本。RF 结果有材料、几何和端口近似，不能直接作为量产匹配 BOM；[复算方法](scripts/rf/README.md)与数据一并提供。
+
 新增 **[文字原理图 v0.1](output/electrical/原理图-v0.1.md)**：包含 nRF52832 最小系统、9 路按键信号、RGB 驱动、USB／电池供电与充电、4Pin SWD、陶瓷天线、库存 BOM 和布局注释。依据见 [电气参考资料](reference/electrical/README.md)。目前为待转绘和验证的电路草案，不含 EDA 原理图工程、PCB 铜层布局或固件；新增电路器件尚未回填到 3D 模型。
 
 用于分享审阅的 HTML 页面：**[7 页原理图图纸](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-drawing-v0.1.html)**、**[原理图说明](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-v0.1.html)**、**[完整 BOM](https://guruguru-seu.github.io/nrf-canon-remote/electrical/bom-v0.1.html)**。图纸用 Schemdraw 绘制，支持切页、缩放、位号定位和 SVG 下载，每页附连接与 layout 注释；网站首页不增加文档入口。

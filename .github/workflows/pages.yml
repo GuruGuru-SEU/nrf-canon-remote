@@ -8,6 +8,7 @@ on:
       - output/models/**
       - output/electrical/*.html
       - output/electrical/schematic-assets/**
+      - output/rf/**
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -44,6 +45,7 @@ jobs:
           mkdir -p _site/electrical
           cp output/electrical/*.html _site/electrical/
           cp -R output/electrical/schematic-assets _site/electrical/schematic-assets
+          cp -R output/rf _site/rf
           touch _site/.nojekyll
 
       - name: Upload Pages artifact
