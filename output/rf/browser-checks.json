@@ -4,13 +4,15 @@
     "width": 1440,
     "images": true,
     "overflow": false,
-    "jsErrors": []
+    "jsErrors": [],
+    "thickness_mm": 1.6
   },
   {
     "name": "mobile",
     "width": 390,
     "images": true,
     "overflow": false,
-    "jsErrors": []
+    "jsErrors": [],
+    "thickness_mm": 1.6
   }
 ]

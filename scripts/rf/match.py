@@ -38,10 +38,11 @@ f=np.array([2.45e9]);assert abs(reflection(network(np.array([50+0j]),f,('short',
 assert abs(network(np.array([50+20j]),f,('C',1/(2*np.pi*f[0]*20)),('open',0))[0]-50)<1e-10
 assert select(np.array([50+0j]),f)==(('short',0),('open',0))
 
-runs={name:np.loadtxt(OUT/(name+'.csv'),delimiter=',',skiprows=1) for name in ['nominal','refined','eps40','housed'] if (OUT/(name+'.csv')).exists()}
-base='refined' if 'refined' in runs else 'nominal';d=runs[base];f=d[:,0];band=(f>=2402e6)&(f<=2480e6);z=d[:,1]+1j*d[:,2];series,shunt=select(z[band],f[band]);chosen={'series':{'type':series[0],'value_si':series[1],'label':label(series)},'shunt_at_load':{'type':shunt[0],'value_si':shunt[1],'label':label(shunt)},'reference_plane':'L220 output pad, ideal additional 50-ohm L-network; not replacement of Nordic chip network','selected_against':base,'qualification':'ideal candidate only, not a production BOM'}
+runnames=['nominal-16','housed-16']
+runs={name:np.loadtxt(OUT/(name+'.csv'),delimiter=',',skiprows=1) for name in runnames if (OUT/(name+'.csv')).exists()}
+base='nominal-16' if 'nominal-16' in runs else ('refined' if 'refined' in runs else 'nominal');d=runs[base];f=d[:,0];band=(f>=2402e6)&(f<=2480e6);z=d[:,1]+1j*d[:,2];series,shunt=select(z[band],f[band]);chosen={'series':{'type':series[0],'value_si':series[1],'label':label(series)},'shunt_at_load':{'type':shunt[0],'value_si':shunt[1],'label':label(shunt)},'reference_plane':'L220 output pad, ideal additional 50-ohm L-network; not replacement of Nordic chip network','selected_against':base,'qualification':'ideal candidate only, not a production BOM'}
 summary={'candidate':chosen,'runs':{}}
-fig,axs=plt.subplots(2,1,figsize=(10,8),layout='constrained');colors=['#445d52','#b06038','#597fa0','#976a9b']
+fig,axs=plt.subplots(2,1,figsize=(10,8),layout='constrained');colors=['#445d52','#976a9b','#b06038','#597fa0','#8b6f47','#6e6e6e']
 for (name,data),color in zip(runs.items(),colors):
     f=data[:,0];z=data[:,1]+1j*data[:,2];matched=network(z,f,series,shunt);mask=(f>=2402e6)&(f<=2480e6)
     summary['runs'][name]={'unmatched_worst_s11_db':float(np.max(20*np.log10(abs(reflection(z[mask]))))),'matched_worst_s11_db':float(np.max(20*np.log10(abs(reflection(matched[mask]))))),'z_2441_ohm':[float(data[241,1]),float(data[241,2])]}
@@ -52,8 +53,8 @@ for ax in axs:
 axs[0].set_title('Preliminary openEMS: IFA + feed, 50 ohm port at L220 output')
 axs[1].set_title('Ideal candidate: series '+label(series)+'; shunt '+label(shunt)+' at load')
 fig.savefig(OUT/'comparison.png',dpi=160)
-if 'housed' in runs:
-    hd=runs['housed'];hf=hd[:,0];hz=hd[:,1]+1j*hd[:,2];hb=(hf>=2402e6)&(hf<=2480e6)
+if 'housed-16' in runs:
+    hd=runs['housed-16'];hf=hd[:,0];hz=hd[:,1]+1j*hd[:,2];hb=(hf>=2402e6)&(hf<=2480e6)
     hs,hh=select(hz[hb],hf[hb]);hm=network(hz,hf,hs,hh)
     summary['hypothetical_housed_candidate']={
         'series':{'type':hs[0],'value_si':hs[1],'label':label(hs)},

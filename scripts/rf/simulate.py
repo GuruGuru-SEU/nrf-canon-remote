@@ -6,7 +6,7 @@ from CSXCAD import ContinuousStructure
 from openEMS import openEMS
 from openEMS.physical_constants import EPS0
 ROOT=Path(__file__).resolve().parents[2]
-ap=argparse.ArgumentParser();ap.add_argument('--name',default='nominal');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.3);ap.add_argument('--thickness',type=float,default=1.0);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--post',action='store_true');a=ap.parse_args()
+ap=argparse.ArgumentParser();ap.add_argument('--name',default='nominal-16');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.3);ap.add_argument('--thickness',type=float,default=1.6);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--post',action='store_true');a=ap.parse_args()
 g=json.loads((ROOT/'reference/rf/pcb-20260923.json').read_text());run=ROOT/'tmp/rf'/a.name;run.mkdir(parents=True,exist_ok=True)
 out=ROOT/'output/rf';out.mkdir(exist_ok=True)
 h=a.thickness-.055 # Copper-sheet centre separation, after 2x10 um mask + 35 um copper allowance.
@@ -31,13 +31,17 @@ for p in g['antenna_and_feed']:
 for x,y,r in g['ground_vias']:
     ground.AddCylinder(start=[x,y,0],stop=[x,y,h],radius=r,priority=12)
 if a.shell_eps:
+    layout=json.loads((ROOT/'scripts/layout.json').read_text())
+    assert abs(layout['pcb']['thickness']-a.thickness)<1e-8, 'Rebuild enclosure for requested thickness first'
+    shift_z=-layout['pcb']['z_bottom']
     shell=csx.AddMaterial('enclosure_assumed',epsilon=a.shell_eps,kappa=2*np.pi*2.45e9*EPS0*a.shell_eps*.01)
     # Imported mechanical meshes are in mm. Translate actual PCB bottom to RF z=0.
     for name in ['shell_top','shell_bottom']:
         reader=shell.AddPolyhedronReader(str(ROOT/'output/models'/f'{name}.stl'),priority=2)
-        reader.ReadFile();reader.AddTransform('Translate',[0,0,8.45])
+        reader.ReadFile();reader.AddTransform('Translate',[0,0,shift_z])
     batt=csx.AddMetal('floating_battery_envelope')
-    batt.AddBox(start=[-12.75,-18,-6.95],stop=[12.75,18,-2.65],priority=15)
+    b=layout['battery'];bx,by=b['center_xy'];bw,bl,bt=b['size'];bz=b['z_bottom']+shift_z
+    batt.AddBox(start=[bx-bw/2,by-bl/2,bz],stop=[bx+bw/2,by+bl/2,bz+bt],priority=15)
 # Uniform fine mesh aligned to the port in RF region. Coarser graded cells elsewhere.
 px,py=g['port_xy'];res=a.mesh
 xcore=px+np.arange(np.floor((-8-px)/res),np.ceil((11-px)/res)+1)*res
@@ -54,6 +58,9 @@ port=fdtd.AddLumpedPort(1,50,start=[px,py,h],stop=[px,py,0],p_dir='z',excite=1,p
 lines={axis:grid.GetLines(axis) for axis in 'xyz'}
 meta={'name':a.name,'engine':'openEMS 0.37.0 / CSXCAD 0.7.0','eps_r':a.eps,'tan_delta':.02,'nominal_board_thickness_mm':a.thickness,'copper_plane_separation_mm':h,'mesh_fine_mm':res,'shell_eps':a.shell_eps,'mesh_cells':[len(x)-1 for x in lines.values()],'minimum_step_mm':{k:float(np.min(np.diff(v))) for k,v in lines.items()},'source':g['source'],'reference_plane':g['reference_plane'],'port_start':[px,py,h],'port_stop':[px,py,0]}
 csx.Write2XML(str(run/'model.xml'))
+if a.shell_eps:
+    meta['enclosure_shift_z_mm']=shift_z
+    meta['battery_rf_bounds_mm']=[[bx-bw/2,by-bl/2,bz],[bx+bw/2,by+bl/2,bz+bt]]
 (run/'metadata.json').write_text(json.dumps(meta,indent=2)+'\n')
 print(json.dumps(meta,indent=2),flush=True)
 if not a.post:

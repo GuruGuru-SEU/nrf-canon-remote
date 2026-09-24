@@ -1,0 +1,23 @@
+{
+  "thickness_mm": 1.6,
+  "passive_and_finite": true,
+  "csv_s1p_consistent": true,
+  "impedance_reflection_consistent": true,
+  "housing_coordinates_from_layout": true,
+  "runs": {
+    "nominal-16": {
+      "timesteps": 55709,
+      "energy_db": -40.24,
+      "fdtd_cells": 1811010,
+      "iteration_runtime_seconds": 703.93,
+      "source": "Final solver output captured in tool result; full stdout log not saved for this run"
+    },
+    "housed-16": {
+      "timesteps": 55550,
+      "energy_db": -40.33,
+      "fdtd_cells": 2016030,
+      "iteration_runtime_seconds": 484.93,
+      "source": "solver.log"
+    }
+  }
+}

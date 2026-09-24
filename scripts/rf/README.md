@@ -12,10 +12,10 @@ uv pip install --python .tools/openems/.venv/bin/python pip setuptools setuptool
 构建扩展时启用该 uv 环境，将 `PATH` 的首项设为其 `bin`，`VIRTUAL_ENV` 设为环境绝对路径，执行 `update_openEMS.sh <安装前缀> --disable-GUI --njobs=8 --python --python-venv-mode=disable`。
 
 ```sh
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name nominal --mesh .2
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name refined --mesh .15
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name eps40 --mesh .2 --eps 4.0
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name housed --mesh .2 --shell-eps 2.8
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name nominal-16 --mesh .2 --thickness 1.6
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name refined-16 --mesh .15 --thickness 1.6
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name eps40-16 --mesh .2 --eps 4.0 --thickness 1.6
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name housed-16 --mesh .2 --shell-eps 2.8 --thickness 1.6
 .tools/openems/.venv/bin/python scripts/rf/match.py
 node scripts/rf/build_report.mjs
 ```
@@ -27,5 +27,7 @@ node scripts/rf/build_report.mjs
 参考面在 **L220 的天线侧焊盘 `$1N324`**，C217 不装，C216/L220 及芯片侧铜不进入模型。端口从该焊盘跨板厚接到对面 GND。结果不代表 nRF52832 ANT 引脚阻抗，也不能据此删掉 Nordic 芯片端参考网络。直接按该结果综合的网络属于独立 50 Ω 天线匹配网络。
 
 `--shell-eps` 是可选的假设外壳/浮置电池包络敏感性实验，未给出实际材料与装配验证前不用于最终选值。
+
+当前默认板厚为用户确认的 1.6 mm；输出使用 `-16` 后缀。`refined-16` 和 `eps40-16` 是可进一步运行的验证命令，本次未运行。无后缀的四组数据为此前的 1.0 mm 研究。装壳坐标及电池尺寸从机械布局读取，必须先重建与目标板厚一致的 STL。
 
 完整说明见 [计算报告](../../output/rf/README.md)。`output/rf/solver-evidence.zip` 保留四组实际运行的日志与端口时域信号；`*.s1p` 是 50 Ω 参考的 Touchstone，`*.csv` 同时保存复阻抗与 S11。求解会产生小图元未使用的警告，已在报告中说明网格限制。`--post` 仅对本地已有运行的端口数据后处理，必须使用与原运行完全相同的几何 / 参数。
