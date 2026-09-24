@@ -1,5 +1,5 @@
 {
-  "version": "0.11",
+  "version": "0.12",
   "mesh_checks": {
     "checked_parts": 29,
     "all_collision_meshes_closed_positive_volume": true,
@@ -202,12 +202,12 @@
     [
       -18.3787,
       -37.55,
-      -8.45
+      -9.05
     ],
     [
       18.3787,
       35.87870000000001,
-      -7.449999999999999
+      -7.450000000000001
     ]
   ],
   "shell_bounds": [
@@ -350,7 +350,7 @@
     "model": "HX TYPE-C 6P QTWT",
     "lcsc": "C18357553",
     "mount_side": "bottom",
-    "center_z": -10.129999999999999,
+    "center_z": -10.73,
     "front_y": -39.2,
     "board_edge_y": -37.55,
     "protrusion_mm": 0.2,
@@ -508,27 +508,27 @@
         1
       ]
     ],
-    "solder_plane_z": -8.45,
+    "solder_plane_z": -9.05,
     "pad_contact_checks": [
       {
         "pad": "20",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.095859
+        "metal_volume_mm3": 0.095857
       },
       {
         "pad": "18",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.063801
+        "metal_volume_mm3": 0.0638
       },
       {
         "pad": "17",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.063801
+        "metal_volume_mm3": 0.0638
       },
       {
         "pad": "19",
         "contact_region_depth": 0.15,
-        "metal_volume_mm3": 0.095859
+        "metal_volume_mm3": 0.095857
       },
       {
         "pad": "B12",
@@ -625,7 +625,7 @@
       "translation": [
         0,
         -35.800037800000005,
-        -8.549999999999999
+        -9.15
       ],
       "rotation_matrix": [
         [
@@ -653,7 +653,7 @@
           1
         ]
       ],
-      "solder_plane_z": -8.45
+      "solder_plane_z": -9.05
     },
     "C52212029": {
       "part": "NH-B1515RGBA-GF",
@@ -676,7 +676,7 @@
       "translation": [
         -11.43,
         29,
-        -6.829999999999999
+        -6.830000000000001
       ],
       "collision_method": "conservative_bounding_box",
       "height_above_pcb": 1.0200000000000005
@@ -699,7 +699,7 @@
       ],
       "source_faces": 2836,
       "source_watertight": true,
-      "mounting_z_shift": -6.856665,
+      "mounting_z_shift": -6.856665000000001,
       "height_above_pcb": 2.4977159999999996
     }
   },
@@ -812,7 +812,7 @@
     ],
     "ring_center_distance": 23.035730941300734,
     "library_height": 1.0200000000000005,
-    "light_pipe_bottom_z": -5.979999999999999,
+    "light_pipe_bottom_z": -5.98,
     "optical_gap": 0.45
   },
   "center_switch": {
@@ -859,8 +859,8 @@
         "primitive_id": "e1df8c67e7472294"
       }
     ],
-    "nominal_board_thickness_mm": 1.0,
-    "thickness_status": "From current EasyEDA stackup; awaiting confirmation of fabrication selection",
+    "nominal_board_thickness_mm": 1.6,
+    "thickness_status": "Confirmed by user on 2026-09-24",
     "usb_pads": [
       {
         "number": "20",

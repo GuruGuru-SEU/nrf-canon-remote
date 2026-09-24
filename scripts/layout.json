@@ -1,5 +1,5 @@
 {
-  "version": "0.11",
+  "version": "0.12",
   "shell": {
     "width": 43,
     "length": 78,
@@ -38,8 +38,8 @@
     "top": 35.8787,
     "tongue_end": -37.55,
     "tongue_width": 14,
-    "thickness": 1.0,
-    "z_bottom": -8.45,
+    "thickness": 1.6,
+    "z_bottom": -9.05,
     "corner_notches": {
       "radius": 5.0,
       "corners": [
@@ -331,8 +331,8 @@
         "primitive_id": "e1df8c67e7472294"
       }
     ],
-    "nominal_board_thickness_mm": 1.0,
-    "thickness_status": "From current EasyEDA stackup; awaiting confirmation of fabrication selection",
+    "nominal_board_thickness_mm": 1.6,
+    "thickness_status": "Confirmed by user on 2026-09-24",
     "usb_pads": [
       {
         "number": "20",
