@@ -1,0 +1,267 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>nRF Canon Remote · 三种板材 RF 计算 · 2026-09-28</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f4f2ed;color:#26372f;font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}main{max-width:1120px;margin:40px auto;padding:48px 56px;background:#fff;border:1px solid #dfe3dc;border-radius:20px}h1{font-size:32px;line-height:1.45;margin:12px 0 22px}h2{font-size:23px;margin-top:44px;padding-top:20px;border-top:1px solid #dfe3dc}h3{font-size:18px;margin-top:26px}a{color:#246953;text-underline-offset:3px}p,li{overflow-wrap:anywhere}blockquote{margin:24px 0;padding:16px 22px;background:#fbf4e9;border-left:4px solid #b77d42;border-radius:4px}blockquote p{margin:0}img{display:block;max-width:100%;height:auto;margin:24px auto}pre{overflow:auto;background:#f3f5f1;border:1px solid #e2e6df;padding:18px;border-radius:8px;line-height:1.65;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.9em}.table-scroll{overflow-x:auto;margin:22px 0}table{border-collapse:collapse;min-width:720px;width:100%;font-size:14px}th,td{padding:11px 14px;text-align:left;border-bottom:1px solid #e4e8e1}th{background:#ecf1eb;white-space:nowrap}td{vertical-align:top}ul,ol{padding-left:24px}footer{font-size:13px;color:#697b70;margin-top:40px}@media(max-width:700px){main{margin:12px;padding:24px 20px;border-radius:12px}h1{font-size:26px}h2{font-size:21px}body{font-size:15px}}@media print{body{background:white}main{margin:0;border:0;padding:0;max-width:none}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit}h2,h3{break-after:avoid}img,table{break-inside:avoid}}
+</style></head><body><main><h1>三种 JLC 板材 · 最终 Gerber 天线计算</h1>
+<p><strong>2026-09-28。</strong> 本报告使用用户提供的三份 JLC 材料 PDF 和最终 Gerber，按材料分别建立 2.4 GHz 开放边界模型。NY2140 的 PDF 是 MSDS，不含 Dk/Df，因此额外引用制造商官方 1 GHz 表格，并按两种树脂含量分别计算。三份 PDF 对应四个条件工况。</p>
+<blockquote>
+<p>结论先说：板材变化会改变天线输入阻抗，装入外壳后变化更大。匹配网络必须保留调试位；下面的 L/π 扫描是理想元件的起始候选，不是最终 BOM。</p>
+</blockquote>
+<h2>材料参数与来源</h2>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>材料</th>
+<th>本次仿真参数</th>
+<th>处理状态</th>
+<th>PDF / 来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上海南亚 NY2140</td>
+<td>RC55: Dk 4.15 / Df 0.0166；RC70: Dk 3.70 / Df 0.0178</td>
+<td>1 GHz 两种树脂含量条件值</td>
+<td><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/materials/NY2140-MSDS.pdf">NY2140-MSDS.pdf</a></td>
+</tr>
+<tr>
+<td>台湾南亚 NP-140F</td>
+<td>Dk 4.10 / Df 0.0130</td>
+<td>1 GHz 典型范围中点</td>
+<td><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/materials/NP-140F.pdf">NP-140F.pdf</a></td>
+</tr>
+<tr>
+<td>航宇 HY-8101</td>
+<td>Dk 4.30 / Df 0.0220</td>
+<td>表中典型值，频率未明确</td>
+<td><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/materials/HY-8101.pdf">HY-8101.pdf</a></td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>NP-140F</strong>：PDF 第 1 页给出 1 GHz 典型 Dk 4.0–4.2、Df 0.012–0.014；本次取中点 Dk 4.10 / Df 0.0130，并保持到 2.4 GHz。这是频率外推，不是厂家 2.4 GHz 实测值。</li>
+<li><strong>HY-8101</strong>：PDF 第 1 页给出典型 Dk 4.3、Df 0.022，但没有明确测试频率；第 2 页曲线只覆盖低频范围。本次按 Dk 4.30 / Df 0.0220 作为 2.4 GHz 近似。</li>
+<li><strong>NY2140</strong>：用户 PDF 只有 MSDS；制造商 <a href="https://www.nouyatec.com/product/base-material/lead-free-compatible/12">NY2140/NY2140P 官方表格</a>在 1 GHz 给出 R/C 55% 为 Dk 4.15 / Df 0.0166、R/C 70% 为 Dk 3.70 / Df 0.0178。本次把两种构造都算了；实际 JLC 订单的玻纤布、树脂含量和叠层仍需向板厂确认。</li>
+</ul>
+<p>Dk 在模型中不随频率变化；损耗按 2.45 GHz 的 <code>σ = 2πf ε0 Dk·Df</code> 转成固定电导率输入 openEMS，因此等效 Df 在扫频中按 1/f 变化，BLE 频段内相对所填 Df 约偏差 −1.2% 到 +2.0%。这不是材料真实频散模型。Gerber 不包含板材牌号和频散数据。三份原始 PDF 已保存到仓库的 <code>reference/rf/materials/</code>。</p>
+<h2>仿真设置</h2>
+<ul>
+<li>几何：最终 Gerber <code>Gerber_nRF52832遥控器_2026-09-24.zip</code> 提取的全板双面铜、板框、PTH/NPTH；天线和馈线来自最终铜层。</li>
+<li>板厚：用户确认 <strong>1.6 mm</strong>；铜面中心近似间距 1.545 mm。射频区域 XY 网格 0.10 mm，频率 2.2–2.7 GHz，重点观察 2.402–2.480 GHz BLE 频段。</li>
+<li>参考面：L220 天线侧焊盘，50 Ω 集总端口；不是 nRF52832 的 ANT 引脚。</li>
+<li><code>bare</code> 为裸板，<code>housed</code> 加入当前外壳 STL（假设 εr 2.8、tanδ 0.01）和软包电池金属包络。按键、USB-C、螺钉、人体及完整器件寄生未加入。</li>
+<li>每个工况都实际执行 openEMS 时域求解，并检查 <code>-40 dB</code> 能量停止、端口数据有限、阻抗实部为正，以及 S1P 与 CSV 一致。</li>
+</ul>
+<h2>裸板结果</h2>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>材料工况</th>
+<th style="text-align:right">2.441 GHz 输入阻抗</th>
+<th style="text-align:right">未匹配频段最差 S11</th>
+<th>该工况 C-L-C π 候选（P1 / Zs / P2）</th>
+<th style="text-align:right">匹配后最差 S11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NP-140F</td>
+<td style="text-align:right">11.52 + j32.81 Ω</td>
+<td style="text-align:right">-2.24 dB</td>
+<td>C 1.1 pF / L 4.3 nH / C 2.7 pF</td>
+<td style="text-align:right">-8.77 dB</td>
+</tr>
+<tr>
+<td>HY-8101</td>
+<td style="text-align:right">11.94 + j39.40 Ω</td>
+<td style="text-align:right">-2.07 dB</td>
+<td>C 0.6 pF / L 5.1 nH / C 2.2 pF</td>
+<td style="text-align:right">-9.03 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC55%</td>
+<td style="text-align:right">11.77 + j34.52 Ω</td>
+<td style="text-align:right">-2.22 dB</td>
+<td>C 1.3 pF / L 4.3 nH / C 2.7 pF</td>
+<td style="text-align:right">-9.13 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC70%</td>
+<td style="text-align:right">14.36 + j18.52 Ω</td>
+<td style="text-align:right">-3.49 dB</td>
+<td>C 3 pF / L 2.2 nH / C 5.1 pF</td>
+<td style="text-align:right">-11.10 dB</td>
+</tr>
+</tbody>
+</table></div><h2>装壳结果</h2>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>材料工况</th>
+<th style="text-align:right">2.441 GHz 输入阻抗</th>
+<th style="text-align:right">未匹配频段最差 S11</th>
+<th>该工况 C-L-C π 候选（P1 / Zs / P2）</th>
+<th style="text-align:right">匹配后最差 S11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NP-140F</td>
+<td style="text-align:right">10.30 + j91.41 Ω</td>
+<td style="text-align:right">-0.67 dB</td>
+<td>C 0.3 pF / L 10 nH / C 1.1 pF</td>
+<td style="text-align:right">-6.06 dB</td>
+</tr>
+<tr>
+<td>HY-8101</td>
+<td style="text-align:right">11.38 + j99.25 Ω</td>
+<td style="text-align:right">-0.69 dB</td>
+<td>C 0.4 pF / L 12 nH / C 1 pF</td>
+<td style="text-align:right">-6.46 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC55%</td>
+<td style="text-align:right">10.81 + j93.47 Ω</td>
+<td style="text-align:right">-0.70 dB</td>
+<td>C 0.5 pF / L 10 nH / C 1.1 pF</td>
+<td style="text-align:right">-6.19 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC70%</td>
+<td style="text-align:right">11.88 + j75.89 Ω</td>
+<td style="text-align:right">-0.98 dB</td>
+<td>C 0.4 pF / L 8.2 nH / C 1.3 pF</td>
+<td style="text-align:right">-7.35 dB</td>
+</tr>
+</tbody>
+</table></div><p><img src="materials-comparison.png" alt="四种材料工况的未匹配与共同 C-L-C 匹配结果"></p>
+<h2>为什么专家说要看 L 型 / π 型</h2>
+<p>专家提醒补齐 <strong>L 型 / π 型</strong> 比较是有必要的。此前扫描也包含电感，但汇报只展示了选出的电容-电容候选，缺少含电感方案的对照；本次补齐了 LC 两元件和 π 三元件的各类组合。这里的 <strong>L 型</strong> 指一个串联支路加一个并联支路的拓扑：对本来呈感性的复数负载，两个电容也可能完成阻抗变换，但不能据此排除其他 LC 组合。</p>
+<p><strong>π 型</strong>有三个支路：输入侧并联 P1、串联 Zs、天线侧并联 P2。常见的低通形式是 <strong>C-L-C</strong>，但实际仍应由 VNA 和器件寄生决定。分支方向和元件位置见 <a href="matching-topologies.svg">matching-topologies.svg</a>。</p>
+<p>下表同时给出每种工况的含 L、C 两元件候选；<code>open</code> 表示该并联支路不装。以上和以下的“最佳”都只针对列明的有限离散值扫描，不代表全局最优。</p>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>材料 / 装配条件</th>
+<th>L 型候选（P1 / Zs / P2）</th>
+<th style="text-align:right">匹配后频段最差 S11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NP-140F / 裸板</td>
+<td>open / L 2.7 nH / C 2.2 pF</td>
+<td style="text-align:right">-8.63 dB</td>
+</tr>
+<tr>
+<td>NP-140F / 装壳</td>
+<td>open / L 9.1 nH / C 1.1 pF</td>
+<td style="text-align:right">-5.94 dB</td>
+</tr>
+<tr>
+<td>HY-8101 / 裸板</td>
+<td>open / L 3.3 nH / C 2 pF</td>
+<td style="text-align:right">-8.81 dB</td>
+</tr>
+<tr>
+<td>HY-8101 / 装壳</td>
+<td>open / L 10 nH / C 1 pF</td>
+<td style="text-align:right">-5.58 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC55% / 裸板</td>
+<td>open / L 3 nH / C 2.2 pF</td>
+<td style="text-align:right">-9.04 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC55% / 装壳</td>
+<td>open / L 8.2 nH / C 1.1 pF</td>
+<td style="text-align:right">-5.70 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC70% / 裸板</td>
+<td>L 2.4 nH / C 1.5 pF / open</td>
+<td style="text-align:right">-9.09 dB</td>
+</tr>
+<tr>
+<td>NY2140 / RC70% / 装壳</td>
+<td>open / L 6.8 nH / C 1.3 pF</td>
+<td style="text-align:right">-6.65 dB</td>
+</tr>
+</tbody>
+</table></div><h3>裸板共同候选</h3>
+<p>跨四个材料工况共同扫描的 <strong>C-L-C π 网络</strong>为 <code>C 1.5 pF / L 3.6 nH / C 2.7 pF</code>，最差频段 S11 为 <strong>-5.72 dB</strong>；同一拓扑在示例元件扰动中为 <strong>-4.75 dB</strong>（C：±max(5%, 0.05 pF)，L：±5%，27 种组合）。作为对照，包含电感的最佳混合 π 网络为 <code>C 1.5 pF / L 3.6 nH / C 2.7 pF</code>（-5.72 dB），包含电感的最佳 L 网络为 <code>open / L 1.8 nH / C 1.8 pF</code>（-5.43 dB）。</p>
+<h3>装壳共同候选</h3>
+<p>跨四个材料工况共同扫描的 <strong>C-L-C π 网络</strong>为 <code>C 0.6 pF / L 8.2 nH / C 1.2 pF</code>，最差频段 S11 为 <strong>-4.16 dB</strong>；同一拓扑在示例元件扰动中为 <strong>-2.67 dB</strong>（C：±max(5%, 0.05 pF)，L：±5%，27 种组合）。作为对照，包含电感的最佳混合 π 网络为 <code>C 1.8 pF / C 1.3 pF / L 27 nH</code>（-4.27 dB），包含电感的最佳 L 网络为 <code>L 6.8 nH / C 0.6 pF / open</code>（-3.83 dB）。</p>
+<p>这些匹配值是在 0.2–22 pF、0.5–47 nH 离散理想元件网格上，以 2.402–2.480 GHz 的最差反射为目标扫描得到的。没有计入 Q、ESR、SRF、焊盘和走线寄生，因此不能直接把它们替换成 L220/C216/C217 的生产值。建议 PCB 保留 π 网络三个 0402 调试位，并在裸板和最终装配两种状态下以同一参考面用 VNA 复测。</p>
+<p><img src="matching-topologies.svg" alt="π 网络的分支定义"></p>
+<h2>限制与建议</h2>
+<ol>
+<li>三份资料没有同时提供经过确认的 2.4 GHz、1.6 mm 成品叠层参数；因此材料之间的排序可以参考，绝对阻抗不能当成实测值。</li>
+<li>NY2140 的 RC55/RC70 是制造商示例构造，不是本订单的保证上下界。拿到 JLC 实际 stackup 后，应以板厂叠层和玻纤布含量重算。</li>
+<li>外壳组只近似了壳体和电池，USB-C 外壳、按键、螺钉、焊盘寄生和人体耦合仍会改变匹配。</li>
+<li>先前 Dk=4.5 裸板模型在 0.15→0.10 mm 网格细化时，中心阻抗仍变化约 5.77%；本轮统一使用 0.10 mm，但没有完成每种材料的独立网格收敛，也没有装壳组的收敛研究。过孔为实心金属柱近似、PEC 铜面不计铜损、阻焊介质未建模。日志中未被网格使用的小图元仍是误差来源。</li>
+<li>在真实样机上先测裸板，再测最终外壳/电池装配；按 VNA 的频点和参考面调整 π 网络，最后再确认射频输出和 BLE 灵敏度。共同候选只优化了本次四个条件点，不能保证所有材料公差与批次都覆盖；本轮也没有计算辐射效率或通信距离。</li>
+</ol>
+<h2>数值检查</h2>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>求解</th>
+<th style="text-align:right">停止时步数</th>
+<th style="text-align:right">停止能量</th>
+<th style="text-align:right">未使用图元警告数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>np140f-bare</td>
+<td style="text-align:right">44220</td>
+<td style="text-align:right">-41.24 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>np140f-housed</td>
+<td style="text-align:right">58800</td>
+<td style="text-align:right">-40.01 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>hy8101-bare</td>
+<td style="text-align:right">41808</td>
+<td style="text-align:right">-41.30 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>hy8101-housed</td>
+<td style="text-align:right">48020</td>
+<td style="text-align:right">-40.20 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>ny2140-rc55-bare</td>
+<td style="text-align:right">42880</td>
+<td style="text-align:right">-40.98 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>ny2140-rc55-housed</td>
+<td style="text-align:right">53410</td>
+<td style="text-align:right">-40.43 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>ny2140-rc70-bare</td>
+<td style="text-align:right">42880</td>
+<td style="text-align:right">-40.47 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>ny2140-rc70-housed</td>
+<td style="text-align:right">49980</td>
+<td style="text-align:right">-40.61 dB</td>
+<td style="text-align:right">19</td>
+</tr>
+</tbody>
+</table></div><p>每组时域求解与阻抗换算已校验；匹配公式通过独立 ABCD 矩阵级联和已知阻抗变换核对。时域停止判据不等于空间网格收敛，也不等于实物验证。</p>
+<h2>下载与复算</h2>
+<ul>
+<li><a href="materials-matching.json">材料对比与匹配数据 JSON</a></li>
+<li><a href="materials-comparison.png">材料对比图</a> · <a href="matching-topologies.svg">π/L 网络拓扑图</a></li>
+<li><a href="materials-solver-evidence.zip">八组 openEMS 求解证据</a></li>
+<li><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/tree/main/scripts/rf">复算脚本</a>：<code>simulate.py</code>、<code>match_networks.py</code>、<code>analyze_materials.py</code></li>
+</ul>
+<p>原始 Gerber SHA-256：<code>3fc97f87b7eec812915d751c0682821ee30cdcd28201358806b40dc6174ed5ac</code>。本次没有修改用户 PCB Layout。</p>
+<footer>openEMS 0.37.0 · CSXCAD 0.7.0 · 初步计算，非样机实测。</footer></main></body></html>

@@ -14,6 +14,8 @@ v0.12 按 2026-09-23 Chrome 最终 PCB 将上方 Ø2.3 孔移至 (14,28)，上�
 
 2026-09-28 更新 **[openEMS 天线初步计算报告](https://guruguru-seu.github.io/nrf-canon-remote/rf/antenna-20260923.html)**：使用 9 月 24 日最终 Gerber 的全部两面铜和钻孔、1.6 mm 板厚，以及立创公开 FR-4 参数；提供六组裸板 / 装壳 / 材料敏感性 / 网格细化结果及原始端口数据。此前 PCB 快照计算和匹配候选已被本轮取代。现 PCB 使用印制天线，下面 v0.1 电气草案中的陶瓷天线与部分元件值已不是最终 PCB 版本。RF 结果仍有材料、网格和端口近似，不能直接作为量产匹配 BOM；[复算方法](scripts/rf/README.md)与数据一并提供。
 
+2026-09-28 新增 **[三种候选板材分别计算的报告](https://guruguru-seu.github.io/nrf-canon-remote/rf/materials-20260928.html)**：NP-140F、HY-8101，以及按官方树脂含量表拆分的 NY2140 RC55/RC70。报告同时说明 L 型与 π 型匹配网络，并给出含电感的 C-L-C 候选、材料共用扫描和八组 openEMS 证据。
+
 新增 **[文字原理图 v0.1](output/electrical/原理图-v0.1.md)**：包含 nRF52832 最小系统、9 路按键信号、RGB 驱动、USB／电池供电与充电、4Pin SWD、陶瓷天线、库存 BOM 和布局注释。依据见 [电气参考资料](reference/electrical/README.md)。目前为待转绘和验证的电路草案，不含 EDA 原理图工程、PCB 铜层布局或固件；新增电路器件尚未回填到 3D 模型。
 
 用于分享审阅的 HTML 页面：**[7 页原理图图纸](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-drawing-v0.1.html)**、**[原理图说明](https://guruguru-seu.github.io/nrf-canon-remote/electrical/schematic-v0.1.html)**、**[完整 BOM](https://guruguru-seu.github.io/nrf-canon-remote/electrical/bom-v0.1.html)**。图纸用 Schemdraw 绘制，支持切页、缩放、位号定位和 SVG 下载，每页附连接与 layout 注释；网站首页不增加文档入口。

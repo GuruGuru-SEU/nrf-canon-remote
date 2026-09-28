@@ -1,0 +1,6101 @@
+{
+  "date": "2026-09-28",
+  "source_manifest": {
+    "created": "2026-09-28",
+    "source": "Three user-supplied PDFs, described by user as JLC official supply options; final grade randomly one of these three",
+    "materials": [
+      {
+        "id": "ny2140",
+        "name": "上海南亚 NY2140",
+        "original": "(A1级)上海南亚 NY2140.pdf",
+        "filename": "NY2140-MSDS.pdf",
+        "pages": 6,
+        "status": "official_1GHz_table_two_resin_contents",
+        "eps_r": 4.15,
+        "tan_delta": 0.0166,
+        "source_frequency_hz": 1000000000.0,
+        "explanation": "Provided PDF is only MSDS. Manufacturer official product table supplies Dk/Df for R/C 55% and 70%; actual JLC order construction unknown. Both values held constant for 2.4 GHz conditional simulations.",
+        "pdf_sha256": "8b56b91f3d6e60314b917ab2485b811c04099c60542f163846c3ff11fcf6865c",
+        "reference_file": "reference/rf/materials/NY2140-MSDS.pdf",
+        "supplement_url": "https://www.nouyatec.com/product/base-material/lead-free-compatible/12",
+        "supplement_retrieved": "2026-09-28",
+        "supplement_sha256": "d1b6b5f1711cbbc0e8697c02fb1ad7a000d26df76f3033042722c6d87f8d1abc",
+        "resin_cases": [
+          {
+            "id": "ny2140-rc55",
+            "resin_content_percent": 55,
+            "eps_r": 4.15,
+            "tan_delta": 0.0166
+          },
+          {
+            "id": "ny2140-rc70",
+            "resin_content_percent": 70,
+            "eps_r": 3.7,
+            "tan_delta": 0.0178
+          }
+        ]
+      },
+      {
+        "id": "np140f",
+        "name": "台湾南亚 NP-140F",
+        "original": "(A1级)台湾南亚NP140F.pdf",
+        "filename": "NP-140F.pdf",
+        "pages": 2,
+        "status": "frequency_extrapolation_assumed",
+        "eps_r": 4.1,
+        "tan_delta": 0.013,
+        "source_frequency_hz": 1000000000.0,
+        "source_eps_range": [
+          4.0,
+          4.2
+        ],
+        "source_loss_range": [
+          0.012,
+          0.014
+        ],
+        "source_page": 1,
+        "specimen": ".062 inch (about 1.575 mm), 1/1 copper",
+        "explanation": "Use midpoints of the 1 GHz typical ranges, held constant for 2.4 GHz calculation. Not a manufacturer-confirmed 2.4 GHz value. 1 MHz rows are not substituted for the 1 GHz rows.",
+        "pdf_sha256": "cccbcdbdc2a28a3936636a543e6adf67d1890957d50ba316ff1cb18df80a9396",
+        "reference_file": "reference/rf/materials/NP-140F.pdf"
+      },
+      {
+        "id": "hy8101",
+        "name": "航宇 HY-8101",
+        "original": "(A1级)航宇8101.pdf",
+        "filename": "HY-8101.pdf",
+        "pages": 2,
+        "status": "frequency_and_thickness_extrapolation_assumed",
+        "eps_r": 4.3,
+        "tan_delta": 0.022,
+        "source_frequency_hz": null,
+        "source_page": 1,
+        "specimen": "1.0 mm specimen",
+        "explanation": "Page1 typical Dk4.3, Df0.022; table does not explicitly state frequency. Page2 Dk plot covers only 1-100 MHz (RC42%), not GHz; no 2.4 GHz extrapolation formula supplied. Values held constant and applied to 1.6 mm PCB as an approximation.",
+        "pdf_sha256": "264873dd2371070c58c4bdf6f024dae11dd9820e48e5bf931a213ba8ed892922",
+        "reference_file": "reference/rf/materials/HY-8101.pdf"
+      }
+    ],
+    "simulation": {
+      "thickness_mm": 1.6,
+      "xy_mesh_mm": 0.1,
+      "shell_eps": 2.8,
+      "shell_loss": 0.01,
+      "loss_model": "Dk constant; conductivity fixed using 2*pi*2.45GHz*EPS0*Dk*Df. Effective tan(delta) varies inversely with frequency, not a fitted material dispersion model.",
+      "states": [
+        "bare",
+        "housed"
+      ],
+      "reference_plane": "L220 antenna-side pad; 50 ohm port, not chip ANT",
+      "same_model_as": "reference/rf/gerber-20260924.json"
+    },
+    "known_gaps": [
+      "NY2140 actual resin content and glass-cloth construction for JLC 1.6 mm boards unknown; two manufacturer R/C examples are not guaranteed extrema",
+      "No supplied PDF gives measured parameters at 2.4 GHz",
+      "Neither material ranges nor lot-to-lot variation have been exhaustively bounded",
+      "Actual shell dielectric and fully populated assembly remain unverified"
+    ]
+  },
+  "reference_plane": "L220 antenna-side pad, 50 ohm; not chip ANT",
+  "branch_order": [
+    "input shunt P1",
+    "series Zs",
+    "load shunt P2"
+  ],
+  "search": {
+    "capacitors_pf": [
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1,
+      1.1,
+      1.2,
+      1.3,
+      1.5,
+      1.6,
+      1.8,
+      2,
+      2.2,
+      2.4,
+      2.7,
+      3,
+      3.3,
+      3.6,
+      3.9,
+      4.3,
+      4.7,
+      5.1,
+      5.6,
+      6.2,
+      6.8,
+      7.5,
+      8.2,
+      9.1,
+      10,
+      12,
+      15,
+      18,
+      22
+    ],
+    "inductors_nh": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1,
+      1.1,
+      1.2,
+      1.3,
+      1.5,
+      1.6,
+      1.8,
+      2,
+      2.2,
+      2.4,
+      2.7,
+      3,
+      3.3,
+      3.6,
+      3.9,
+      4.3,
+      4.7,
+      5.1,
+      5.6,
+      6.2,
+      6.8,
+      7.5,
+      8.2,
+      9.1,
+      10,
+      12,
+      15,
+      18,
+      22,
+      27,
+      33,
+      39,
+      47
+    ],
+    "frequency_hz": [
+      2402000000.0,
+      2480000000.0
+    ],
+    "frequency_step_hz": 1000000.0,
+    "objective": "minimax absolute reflection over frequency and, for common networks, all four material cases",
+    "component_model": "ideal; no loss or SRF, not a production BOM"
+  },
+  "cases": {
+    "np140f": {
+      "label": "NP-140F",
+      "eps_r": 4.1,
+      "tan_delta": 0.013,
+      "bare": {
+        "z2441": [
+          11.521671830957565,
+          32.80895039731015
+        ],
+        "raw_worst_s11_db": -2.235935295958677,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                1.8e-12
+              ],
+              [
+                "C",
+                6.799999999999999e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 1.8 pF",
+            "series": "C 6.8 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -8.730568017805853,
+            "per_case_worst_s11_db": [
+              -8.730568017805853
+            ],
+            "contains_L_and_C": false
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                2.7e-09
+              ],
+              [
+                "C",
+                2.2000000000000003e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 2.7 nH",
+            "load_shunt": "C 2.2 pF",
+            "worst_s11_db": -8.63357612914539,
+            "per_case_worst_s11_db": [
+              -8.63357612914539
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:C-C-C",
+            "parts": [
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "C",
+                4.3e-12
+              ],
+              [
+                "C",
+                5e-13
+              ]
+            ],
+            "input_shunt": "C 1.2 pF",
+            "series": "C 4.3 pF",
+            "load_shunt": "C 0.5 pF",
+            "worst_s11_db": -8.855481328705014,
+            "per_case_worst_s11_db": [
+              -8.855481328705014
+            ],
+            "contains_L_and_C": false
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:L-L-C",
+            "parts": [
+              [
+                "L",
+                4.7000000000000004e-08
+              ],
+              [
+                "L",
+                2.4e-09
+              ],
+              [
+                "C",
+                2.2000000000000003e-12
+              ]
+            ],
+            "input_shunt": "L 47 nH",
+            "series": "L 2.4 nH",
+            "load_shunt": "C 2.2 pF",
+            "worst_s11_db": -8.790395328147401,
+            "per_case_worst_s11_db": [
+              -8.790395328147401
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                1.1000000000000002e-12
+              ],
+              [
+                "L",
+                4.3000000000000005e-09
+              ],
+              [
+                "C",
+                2.7000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 1.1 pF",
+            "series": "L 4.3 nH",
+            "load_shunt": "C 2.7 pF",
+            "worst_s11_db": -8.769463680454793,
+            "per_case_worst_s11_db": [
+              -8.769463680454793
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "L 2 nH",
+            "series": "C 1.2 pF",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -8.183487831879967,
+            "per_case_worst_s11_db": [
+              -8.183487831879967
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "C",
+                  4.3e-12
+                ],
+                [
+                  "C",
+                  5e-13
+                ]
+              ],
+              "input_shunt": "C 1.2 pF",
+              "series": "C 4.3 pF",
+              "load_shunt": "C 0.5 pF",
+              "worst_s11_db": -8.855481328705014,
+              "per_case_worst_s11_db": [
+                -8.855481328705014
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  2.4e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 2.4 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -8.790395328147401,
+              "per_case_worst_s11_db": [
+                -8.790395328147401
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ],
+                [
+                  "C",
+                  6.799999999999999e-12
+                ],
+                [
+                  "L",
+                  3.3000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 2.2 pF",
+              "series": "C 6.8 pF",
+              "load_shunt": "L 33 nH",
+              "worst_s11_db": -8.778847683083745,
+              "per_case_worst_s11_db": [
+                -8.778847683083745
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "L",
+                  4.3000000000000005e-09
+                ],
+                [
+                  "C",
+                  2.7000000000000002e-12
+                ]
+              ],
+              "input_shunt": "C 1.1 pF",
+              "series": "L 4.3 nH",
+              "load_shunt": "C 2.7 pF",
+              "worst_s11_db": -8.769463680454793,
+              "per_case_worst_s11_db": [
+                -8.769463680454793
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  3.3000000000000004e-08
+                ],
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ],
+                [
+                  "C",
+                  1e-12
+                ]
+              ],
+              "input_shunt": "L 33 nH",
+              "series": "C 1.3 pF",
+              "load_shunt": "C 1 pF",
+              "worst_s11_db": -8.75847182241703,
+              "per_case_worst_s11_db": [
+                -8.75847182241703
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  1.8e-12
+                ],
+                [
+                  "C",
+                  6.799999999999999e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.8 pF",
+              "series": "C 6.8 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -8.730568017805853,
+              "per_case_worst_s11_db": [
+                -8.730568017805853
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "C",
+                  1e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.5 pF",
+              "load_shunt": "C 1 pF",
+              "worst_s11_db": -8.70100877846238,
+              "per_case_worst_s11_db": [
+                -8.70100877846238
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  2.7e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 2.7 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -8.63357612914539,
+              "per_case_worst_s11_db": [
+                -8.63357612914539
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2e-09
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 2 nH",
+              "series": "C 1.2 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -8.183487831879967,
+              "per_case_worst_s11_db": [
+                -8.183487831879967
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  2e-09
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 2 nH",
+              "series": "C 1.2 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -7.662491431841648,
+              "per_case_worst_s11_db": [
+                -7.662491431841648
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.2 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -3.7485641836926007,
+              "per_case_worst_s11_db": [
+                -3.7485641836926007
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 1.3 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.681618448681061,
+              "per_case_worst_s11_db": [
+                -3.681618448681061
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.6 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.474305176980255,
+              "per_case_worst_s11_db": [
+                -3.474305176980255
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.7875244653151046,
+              "per_case_worst_s11_db": [
+                -1.7875244653151046
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -1.7843708568199348,
+              "per_case_worst_s11_db": [
+                -1.7843708568199348
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.6690405565651023,
+              "per_case_worst_s11_db": [
+                -1.6690405565651023
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 44220,
+          "energy_db": -41.24,
+          "cells": 3637284,
+          "iteration_seconds": 1094.77,
+          "unused_primitive_warnings": 19
+        }
+      },
+      "housed": {
+        "z2441": [
+          10.303826605161909,
+          91.40648866442277
+        ],
+        "raw_worst_s11_db": -0.670825992650369,
+        "networks": {
+          "best_L_any": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                9.1e-09
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 9.1 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -5.938837642283437,
+            "per_case_worst_s11_db": [
+              -5.938837642283437
+            ],
+            "contains_L_and_C": true
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                9.1e-09
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 9.1 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -5.938837642283437,
+            "per_case_worst_s11_db": [
+              -5.938837642283437
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                1.5000000000000002e-08
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "L 15 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -6.820312296922152,
+            "per_case_worst_s11_db": [
+              -6.820312296922152
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                1.5000000000000002e-08
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "L 15 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -6.820312296922152,
+            "per_case_worst_s11_db": [
+              -6.820312296922152
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                3e-13
+              ],
+              [
+                "L",
+                1e-08
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 0.3 pF",
+            "series": "L 10 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -6.061045702292526,
+            "per_case_worst_s11_db": [
+              -6.061045702292526
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                1.8000000000000002e-09
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "L",
+                2.2000000000000002e-08
+              ]
+            ],
+            "input_shunt": "L 1.8 nH",
+            "series": "C 0.7 pF",
+            "load_shunt": "L 22 nH",
+            "worst_s11_db": -5.680303173952625,
+            "per_case_worst_s11_db": [
+              -5.680303173952625
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  1.5000000000000002e-08
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "L 15 nH",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -6.820312296922152,
+              "per_case_worst_s11_db": [
+                -6.820312296922152
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.4e-12
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  2.7e-08
+                ]
+              ],
+              "input_shunt": "C 2.4 pF",
+              "series": "C 1.2 pF",
+              "load_shunt": "L 27 nH",
+              "worst_s11_db": -6.498568862011895,
+              "per_case_worst_s11_db": [
+                -6.498568862011895
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  8e-13
+                ],
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "C 0.8 pF",
+              "series": "C 0.5 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -6.223789959746197,
+              "per_case_worst_s11_db": [
+                -6.223789959746197
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  3e-13
+                ],
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ]
+              ],
+              "input_shunt": "C 0.3 pF",
+              "series": "L 10 nH",
+              "load_shunt": "C 1.1 pF",
+              "worst_s11_db": -6.061045702292526,
+              "per_case_worst_s11_db": [
+                -6.061045702292526
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  3.9e-09
+                ],
+                [
+                  "L",
+                  6.200000000000001e-09
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ]
+              ],
+              "input_shunt": "L 3.9 nH",
+              "series": "L 6.2 nH",
+              "load_shunt": "C 1.2 pF",
+              "worst_s11_db": -6.0261312578388635,
+              "per_case_worst_s11_db": [
+                -6.0261312578388635
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  9.1e-09
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 9.1 nH",
+              "load_shunt": "C 1.1 pF",
+              "worst_s11_db": -5.938837642283437,
+              "per_case_worst_s11_db": [
+                -5.938837642283437
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "C",
+                  1e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.6 pF",
+              "series": "C 1 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -5.937377980156667,
+              "per_case_worst_s11_db": [
+                -5.937377980156667
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  1.8000000000000002e-09
+                ],
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  2.2000000000000002e-08
+                ]
+              ],
+              "input_shunt": "L 1.8 nH",
+              "series": "C 0.7 pF",
+              "load_shunt": "L 22 nH",
+              "worst_s11_db": -5.680303173952625,
+              "per_case_worst_s11_db": [
+                -5.680303173952625
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -5.402214849648352,
+              "per_case_worst_s11_db": [
+                -5.402214849648352
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  1.6000000000000003e-09
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 1.6 nH",
+              "series": "C 0.6 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -4.477919037609807,
+              "per_case_worst_s11_db": [
+                -4.477919037609807
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  8e-13
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.8 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -2.605319678535887,
+              "per_case_worst_s11_db": [
+                -2.605319678535887
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.716810137690445,
+              "per_case_worst_s11_db": [
+                -0.716810137690445
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 0.7 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.7021408826113712,
+              "per_case_worst_s11_db": [
+                -0.7021408826113712
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.5638345541922539,
+              "per_case_worst_s11_db": [
+                -0.5638345541922539
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.5573121700412053,
+              "per_case_worst_s11_db": [
+                -0.5573121700412053
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.526220773644356,
+              "per_case_worst_s11_db": [
+                -0.526220773644356
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 58800,
+          "energy_db": -40.01,
+          "cells": 4049052,
+          "iteration_seconds": 1495.68,
+          "unused_primitive_warnings": 19
+        }
+      }
+    },
+    "hy8101": {
+      "label": "HY-8101",
+      "eps_r": 4.3,
+      "tan_delta": 0.022,
+      "bare": {
+        "z2441": [
+          11.936390106860955,
+          39.396568211705414
+        ],
+        "raw_worst_s11_db": -2.0689320684036314,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                2e-12
+              ],
+              [
+                "C",
+                3.9e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 2 pF",
+            "series": "C 3.9 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -9.214034845880203,
+            "per_case_worst_s11_db": [
+              -9.214034845880203
+            ],
+            "contains_L_and_C": false
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                3.3e-09
+              ],
+              [
+                "C",
+                2e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 3.3 nH",
+            "load_shunt": "C 2 pF",
+            "worst_s11_db": -8.805891410682563,
+            "per_case_worst_s11_db": [
+              -8.805891410682563
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:C-C-C",
+            "parts": [
+              [
+                "C",
+                1e-12
+              ],
+              [
+                "C",
+                2.4e-12
+              ],
+              [
+                "C",
+                5e-13
+              ]
+            ],
+            "input_shunt": "C 1 pF",
+            "series": "C 2.4 pF",
+            "load_shunt": "C 0.5 pF",
+            "worst_s11_db": -9.189630074479357,
+            "per_case_worst_s11_db": [
+              -9.189630074479357
+            ],
+            "contains_L_and_C": false
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:C-C-L",
+            "parts": [
+              [
+                "C",
+                2.2000000000000003e-12
+              ],
+              [
+                "C",
+                4.3e-12
+              ],
+              [
+                "L",
+                3.3000000000000004e-08
+              ]
+            ],
+            "input_shunt": "C 2.2 pF",
+            "series": "C 4.3 pF",
+            "load_shunt": "L 33 nH",
+            "worst_s11_db": -9.16488648128054,
+            "per_case_worst_s11_db": [
+              -9.16488648128054
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "L",
+                5.1e-09
+              ],
+              [
+                "C",
+                2.2000000000000003e-12
+              ]
+            ],
+            "input_shunt": "C 0.6 pF",
+            "series": "L 5.1 nH",
+            "load_shunt": "C 2.2 pF",
+            "worst_s11_db": -9.029613299313679,
+            "per_case_worst_s11_db": [
+              -9.029613299313679
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2e-09
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ],
+              [
+                "L",
+                3.3000000000000004e-08
+              ]
+            ],
+            "input_shunt": "L 2 nH",
+            "series": "C 1.1 pF",
+            "load_shunt": "L 33 nH",
+            "worst_s11_db": -8.465011636455651,
+            "per_case_worst_s11_db": [
+              -8.465011636455651
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  2e-12
+                ],
+                [
+                  "C",
+                  3.9e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 2 pF",
+              "series": "C 3.9 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -9.214034845880203,
+              "per_case_worst_s11_db": [
+                -9.214034845880203
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  1e-12
+                ],
+                [
+                  "C",
+                  2.4e-12
+                ],
+                [
+                  "C",
+                  5e-13
+                ]
+              ],
+              "input_shunt": "C 1 pF",
+              "series": "C 2.4 pF",
+              "load_shunt": "C 0.5 pF",
+              "worst_s11_db": -9.189630074479357,
+              "per_case_worst_s11_db": [
+                -9.189630074479357
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ],
+                [
+                  "C",
+                  4.3e-12
+                ],
+                [
+                  "L",
+                  3.3000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 2.2 pF",
+              "series": "C 4.3 pF",
+              "load_shunt": "L 33 nH",
+              "worst_s11_db": -9.16488648128054,
+              "per_case_worst_s11_db": [
+                -9.16488648128054
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "C",
+                  8e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.1 pF",
+              "load_shunt": "C 0.8 pF",
+              "worst_s11_db": -9.146058722061678,
+              "per_case_worst_s11_db": [
+                -9.146058722061678
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  2.7e-08
+                ],
+                [
+                  "C",
+                  1e-12
+                ],
+                [
+                  "C",
+                  8e-13
+                ]
+              ],
+              "input_shunt": "L 27 nH",
+              "series": "C 1 pF",
+              "load_shunt": "C 0.8 pF",
+              "worst_s11_db": -9.07175603493984,
+              "per_case_worst_s11_db": [
+                -9.07175603493984
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  5.1e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "L 5.1 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -9.029613299313679,
+              "per_case_worst_s11_db": [
+                -9.029613299313679
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  6.8000000000000005e-09
+                ],
+                [
+                  "L",
+                  2.4e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "L 6.8 nH",
+              "series": "L 2.4 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -8.925524918307083,
+              "per_case_worst_s11_db": [
+                -8.925524918307083
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  3.3e-09
+                ],
+                [
+                  "C",
+                  2e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 3.3 nH",
+              "load_shunt": "C 2 pF",
+              "worst_s11_db": -8.805891410682563,
+              "per_case_worst_s11_db": [
+                -8.805891410682563
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2e-09
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "L",
+                  3.3000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 2 nH",
+              "series": "C 1.1 pF",
+              "load_shunt": "L 33 nH",
+              "worst_s11_db": -8.465011636455651,
+              "per_case_worst_s11_db": [
+                -8.465011636455651
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  2.7e-09
+                ],
+                [
+                  "C",
+                  1e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 2.7 nH",
+              "series": "C 1 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -8.011425579361996,
+              "per_case_worst_s11_db": [
+                -8.011425579361996
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.5 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.5913606557147792,
+              "per_case_worst_s11_db": [
+                -3.5913606557147792
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.1 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -3.1062632622687176,
+              "per_case_worst_s11_db": [
+                -3.1062632622687176
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 1.2 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.045768565909623,
+              "per_case_worst_s11_db": [
+                -3.045768565909623
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -1.6521768803034913,
+              "per_case_worst_s11_db": [
+                -1.6521768803034913
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.6511220536841105,
+              "per_case_worst_s11_db": [
+                -1.6511220536841105
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.541703561764046,
+              "per_case_worst_s11_db": [
+                -1.541703561764046
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 41808,
+          "energy_db": -41.3,
+          "cells": 3637284,
+          "iteration_seconds": 1026.89,
+          "unused_primitive_warnings": 19
+        }
+      },
+      "housed": {
+        "z2441": [
+          11.379708221021415,
+          99.24559727933934
+        ],
+        "raw_worst_s11_db": -0.6892643714290811,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                1.5e-12
+              ],
+              [
+                "C",
+                9e-13
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 1.5 pF",
+            "series": "C 0.9 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -6.523947870775215,
+            "per_case_worst_s11_db": [
+              -6.523947870775215
+            ],
+            "contains_L_and_C": false
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                1e-08
+              ],
+              [
+                "C",
+                1e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 10 nH",
+            "load_shunt": "C 1 pF",
+            "worst_s11_db": -5.583432097090957,
+            "per_case_worst_s11_db": [
+              -5.583432097090957
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                4.700000000000001e-09
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                2e-13
+              ]
+            ],
+            "input_shunt": "L 4.7 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.2 pF",
+            "worst_s11_db": -7.208198917773165,
+            "per_case_worst_s11_db": [
+              -7.208198917773165
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                4.700000000000001e-09
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                2e-13
+              ]
+            ],
+            "input_shunt": "L 4.7 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.2 pF",
+            "worst_s11_db": -7.208198917773165,
+            "per_case_worst_s11_db": [
+              -7.208198917773165
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "L",
+                1.2000000000000002e-08
+              ],
+              [
+                "C",
+                1e-12
+              ]
+            ],
+            "input_shunt": "C 0.4 pF",
+            "series": "L 12 nH",
+            "load_shunt": "C 1 pF",
+            "worst_s11_db": -6.456338034731099,
+            "per_case_worst_s11_db": [
+              -6.456338034731099
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2.2000000000000003e-09
+              ],
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "L",
+                3.9000000000000005e-08
+              ]
+            ],
+            "input_shunt": "L 2.2 nH",
+            "series": "C 0.6 pF",
+            "load_shunt": "L 39 nH",
+            "worst_s11_db": -6.474536746459755,
+            "per_case_worst_s11_db": [
+              -6.474536746459755
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  4.700000000000001e-09
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  2e-13
+                ]
+              ],
+              "input_shunt": "L 4.7 nH",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.2 pF",
+              "worst_s11_db": -7.208198917773165,
+              "per_case_worst_s11_db": [
+                -7.208198917773165
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "C 0.4 pF",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -7.087321914521475,
+              "per_case_worst_s11_db": [
+                -7.087321914521475
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ],
+                [
+                  "C",
+                  1e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 2.2 pF",
+              "series": "C 1 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -7.062454865587449,
+              "per_case_worst_s11_db": [
+                -7.062454865587449
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "C",
+                  9e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.5 pF",
+              "series": "C 0.9 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -6.523947870775215,
+              "per_case_worst_s11_db": [
+                -6.523947870775215
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2.2000000000000003e-09
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  3.9000000000000005e-08
+                ]
+              ],
+              "input_shunt": "L 2.2 nH",
+              "series": "C 0.6 pF",
+              "load_shunt": "L 39 nH",
+              "worst_s11_db": -6.474536746459755,
+              "per_case_worst_s11_db": [
+                -6.474536746459755
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "L",
+                  1.2000000000000002e-08
+                ],
+                [
+                  "C",
+                  1e-12
+                ]
+              ],
+              "input_shunt": "C 0.4 pF",
+              "series": "L 12 nH",
+              "load_shunt": "C 1 pF",
+              "worst_s11_db": -6.456338034731099,
+              "per_case_worst_s11_db": [
+                -6.456338034731099
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "C",
+                  1e-12
+                ]
+              ],
+              "input_shunt": "L 10 nH",
+              "series": "L 10 nH",
+              "load_shunt": "C 1 pF",
+              "worst_s11_db": -6.2495875309149795,
+              "per_case_worst_s11_db": [
+                -6.2495875309149795
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "C",
+                  2e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.5 pF",
+              "load_shunt": "C 0.2 pF",
+              "worst_s11_db": -5.791058527202311,
+              "per_case_worst_s11_db": [
+                -5.791058527202311
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "C",
+                  1e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 10 nH",
+              "load_shunt": "C 1 pF",
+              "worst_s11_db": -5.583432097090957,
+              "per_case_worst_s11_db": [
+                -5.583432097090957
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  3.0000000000000004e-09
+                ],
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 3 nH",
+              "series": "C 0.5 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -4.872386224081117,
+              "per_case_worst_s11_db": [
+                -4.872386224081117
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.7 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -2.8314895134539504,
+              "per_case_worst_s11_db": [
+                -2.8314895134539504
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 0.5 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.7233299887282186,
+              "per_case_worst_s11_db": [
+                -0.7233299887282186
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.709732620511849,
+              "per_case_worst_s11_db": [
+                -0.709732620511849
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.5839745557121439,
+              "per_case_worst_s11_db": [
+                -0.5839745557121439
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.5767111229537278,
+              "per_case_worst_s11_db": [
+                -0.5767111229537278
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.5455415775487006,
+              "per_case_worst_s11_db": [
+                -0.5455415775487006
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 48020,
+          "energy_db": -40.2,
+          "cells": 4049052,
+          "iteration_seconds": 1226.03,
+          "unused_primitive_warnings": 19
+        }
+      }
+    },
+    "ny2140-rc55": {
+      "label": "NY2140 / RC55%",
+      "eps_r": 4.15,
+      "tan_delta": 0.0166,
+      "bare": {
+        "z2441": [
+          11.76756517027504,
+          34.52103821921412
+        ],
+        "raw_worst_s11_db": -2.2172586077322043,
+        "networks": {
+          "best_L_any": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                3.0000000000000004e-09
+              ],
+              [
+                "C",
+                2.2000000000000003e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 3 nH",
+            "load_shunt": "C 2.2 pF",
+            "worst_s11_db": -9.04149897822654,
+            "per_case_worst_s11_db": [
+              -9.04149897822654
+            ],
+            "contains_L_and_C": true
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                3.0000000000000004e-09
+              ],
+              [
+                "C",
+                2.2000000000000003e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 3 nH",
+            "load_shunt": "C 2.2 pF",
+            "worst_s11_db": -9.04149897822654,
+            "per_case_worst_s11_db": [
+              -9.04149897822654
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                1.3000000000000001e-12
+              ],
+              [
+                "L",
+                4.3000000000000005e-09
+              ],
+              [
+                "C",
+                2.7000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 1.3 pF",
+            "series": "L 4.3 nH",
+            "load_shunt": "C 2.7 pF",
+            "worst_s11_db": -9.13376628705899,
+            "per_case_worst_s11_db": [
+              -9.13376628705899
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                1.3000000000000001e-12
+              ],
+              [
+                "L",
+                4.3000000000000005e-09
+              ],
+              [
+                "C",
+                2.7000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 1.3 pF",
+            "series": "L 4.3 nH",
+            "load_shunt": "C 2.7 pF",
+            "worst_s11_db": -9.13376628705899,
+            "per_case_worst_s11_db": [
+              -9.13376628705899
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                1.3000000000000001e-12
+              ],
+              [
+                "L",
+                4.3000000000000005e-09
+              ],
+              [
+                "C",
+                2.7000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 1.3 pF",
+            "series": "L 4.3 nH",
+            "load_shunt": "C 2.7 pF",
+            "worst_s11_db": -9.13376628705899,
+            "per_case_worst_s11_db": [
+              -9.13376628705899
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "L",
+                2.2000000000000002e-08
+              ]
+            ],
+            "input_shunt": "L 2 nH",
+            "series": "C 1.2 pF",
+            "load_shunt": "L 22 nH",
+            "worst_s11_db": -8.213242794641125,
+            "per_case_worst_s11_db": [
+              -8.213242794641125
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ],
+                [
+                  "L",
+                  4.3000000000000005e-09
+                ],
+                [
+                  "C",
+                  2.7000000000000002e-12
+                ]
+              ],
+              "input_shunt": "C 1.3 pF",
+              "series": "L 4.3 nH",
+              "load_shunt": "C 2.7 pF",
+              "worst_s11_db": -9.13376628705899,
+              "per_case_worst_s11_db": [
+                -9.13376628705899
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  3.0000000000000004e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 3 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -9.04149897822654,
+              "per_case_worst_s11_db": [
+                -9.04149897822654
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "C",
+                  3.6e-12
+                ],
+                [
+                  "C",
+                  5e-13
+                ]
+              ],
+              "input_shunt": "C 1.1 pF",
+              "series": "C 3.6 pF",
+              "load_shunt": "C 0.5 pF",
+              "worst_s11_db": -9.028715035675148,
+              "per_case_worst_s11_db": [
+                -9.028715035675148
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  2.2000000000000002e-08
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "C",
+                  9e-13
+                ]
+              ],
+              "input_shunt": "L 22 nH",
+              "series": "C 1.2 pF",
+              "load_shunt": "C 0.9 pF",
+              "worst_s11_db": -9.010141120592092,
+              "per_case_worst_s11_db": [
+                -9.010141120592092
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  3.9000000000000005e-08
+                ],
+                [
+                  "L",
+                  2.7e-09
+                ],
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ]
+              ],
+              "input_shunt": "L 39 nH",
+              "series": "L 2.7 nH",
+              "load_shunt": "C 2.2 pF",
+              "worst_s11_db": -8.977129148595312,
+              "per_case_worst_s11_db": [
+                -8.977129148595312
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2e-12
+                ],
+                [
+                  "C",
+                  6.2e-12
+                ],
+                [
+                  "L",
+                  3.9000000000000005e-08
+                ]
+              ],
+              "input_shunt": "C 2 pF",
+              "series": "C 6.2 pF",
+              "load_shunt": "L 39 nH",
+              "worst_s11_db": -8.962917463973811,
+              "per_case_worst_s11_db": [
+                -8.962917463973811
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  2e-12
+                ],
+                [
+                  "C",
+                  5.5999999999999996e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 2 pF",
+              "series": "C 5.6 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -8.832295023948959,
+              "per_case_worst_s11_db": [
+                -8.832295023948959
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "C",
+                  9e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.5 pF",
+              "load_shunt": "C 0.9 pF",
+              "worst_s11_db": -8.577541494006656,
+              "per_case_worst_s11_db": [
+                -8.577541494006656
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  2.4e-09
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 2.4 nH",
+              "series": "C 1.1 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -8.260442058803244,
+              "per_case_worst_s11_db": [
+                -8.260442058803244
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2e-09
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  2.2000000000000002e-08
+                ]
+              ],
+              "input_shunt": "L 2 nH",
+              "series": "C 1.2 pF",
+              "load_shunt": "L 22 nH",
+              "worst_s11_db": -8.213242794641125,
+              "per_case_worst_s11_db": [
+                -8.213242794641125
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.2 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -3.599643866476878,
+              "per_case_worst_s11_db": [
+                -3.599643866476878
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 1.6 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.548527158040418,
+              "per_case_worst_s11_db": [
+                -3.548527158040418
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 1.3 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.5285992718468724,
+              "per_case_worst_s11_db": [
+                -3.5285992718468724
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.7710108300483114,
+              "per_case_worst_s11_db": [
+                -1.7710108300483114
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -1.769072696658835,
+              "per_case_worst_s11_db": [
+                -1.769072696658835
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.6534788941285679,
+              "per_case_worst_s11_db": [
+                -1.6534788941285679
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 42880,
+          "energy_db": -40.98,
+          "cells": 3637284,
+          "iteration_seconds": 990.14,
+          "unused_primitive_warnings": 19
+        }
+      },
+      "housed": {
+        "z2441": [
+          10.810562505098885,
+          93.47129841871673
+        ],
+        "raw_worst_s11_db": -0.6961753064263796,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                2.4e-12
+              ],
+              [
+                "C",
+                9e-13
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 2.4 pF",
+            "series": "C 0.9 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -6.518283620106531,
+            "per_case_worst_s11_db": [
+              -6.518283620106531
+            ],
+            "contains_L_and_C": false
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                8.199999999999999e-09
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 8.2 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -5.697755042580321,
+            "per_case_worst_s11_db": [
+              -5.697755042580321
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                2.7e-08
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "L 27 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -7.0402339589633245,
+            "per_case_worst_s11_db": [
+              -7.0402339589633245
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                2.7e-08
+              ],
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "L 27 nH",
+            "series": "C 0.4 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -7.0402339589633245,
+            "per_case_worst_s11_db": [
+              -7.0402339589633245
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                5e-13
+              ],
+              [
+                "L",
+                1e-08
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 0.5 pF",
+            "series": "L 10 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -6.189901982060951,
+            "per_case_worst_s11_db": [
+              -6.189901982060951
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                1.6000000000000003e-09
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "L",
+                2.2000000000000002e-08
+              ]
+            ],
+            "input_shunt": "L 1.6 nH",
+            "series": "C 0.7 pF",
+            "load_shunt": "L 22 nH",
+            "worst_s11_db": -6.210542444502899,
+            "per_case_worst_s11_db": [
+              -6.210542444502899
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  2.7e-08
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "L 27 nH",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -7.0402339589633245,
+              "per_case_worst_s11_db": [
+                -7.0402339589633245
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ],
+                [
+                  "L",
+                  3.9000000000000005e-08
+                ]
+              ],
+              "input_shunt": "C 2.2 pF",
+              "series": "C 1.1 pF",
+              "load_shunt": "L 39 nH",
+              "worst_s11_db": -6.900279155722123,
+              "per_case_worst_s11_db": [
+                -6.900279155722123
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "C",
+                  2e-13
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "C 0.6 pF",
+              "load_shunt": "C 0.2 pF",
+              "worst_s11_db": -6.714391747626807,
+              "per_case_worst_s11_db": [
+                -6.714391747626807
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  2.4e-12
+                ],
+                [
+                  "C",
+                  9e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 2.4 pF",
+              "series": "C 0.9 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -6.518283620106531,
+              "per_case_worst_s11_db": [
+                -6.518283620106531
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.4 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -6.283625402689824,
+              "per_case_worst_s11_db": [
+                -6.283625402689824
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  1.6000000000000003e-09
+                ],
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  2.2000000000000002e-08
+                ]
+              ],
+              "input_shunt": "L 1.6 nH",
+              "series": "C 0.7 pF",
+              "load_shunt": "L 22 nH",
+              "worst_s11_db": -6.210542444502899,
+              "per_case_worst_s11_db": [
+                -6.210542444502899
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ]
+              ],
+              "input_shunt": "C 0.5 pF",
+              "series": "L 10 nH",
+              "load_shunt": "C 1.1 pF",
+              "worst_s11_db": -6.189901982060951,
+              "per_case_worst_s11_db": [
+                -6.189901982060951
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  1.2000000000000002e-08
+                ],
+                [
+                  "L",
+                  8.199999999999999e-09
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ]
+              ],
+              "input_shunt": "L 12 nH",
+              "series": "L 8.2 nH",
+              "load_shunt": "C 1.1 pF",
+              "worst_s11_db": -6.096733442516679,
+              "per_case_worst_s11_db": [
+                -6.096733442516679
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  8.199999999999999e-09
+                ],
+                [
+                  "C",
+                  1.1000000000000002e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 8.2 nH",
+              "load_shunt": "C 1.1 pF",
+              "worst_s11_db": -5.697755042580321,
+              "per_case_worst_s11_db": [
+                -5.697755042580321
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  2.4e-09
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 2.4 nH",
+              "series": "C 0.6 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -4.122213569503001,
+              "per_case_worst_s11_db": [
+                -4.122213569503001
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  8e-13
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.8 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -2.745479445858385,
+              "per_case_worst_s11_db": [
+                -2.745479445858385
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.7401951180454898,
+              "per_case_worst_s11_db": [
+                -0.7401951180454898
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 0.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.7252337375740439,
+              "per_case_worst_s11_db": [
+                -0.7252337375740439
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.5863150509715661,
+              "per_case_worst_s11_db": [
+                -0.5863150509715661
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.5793990778353355,
+              "per_case_worst_s11_db": [
+                -0.5793990778353355
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.5473272740222579,
+              "per_case_worst_s11_db": [
+                -0.5473272740222579
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 53410,
+          "energy_db": -40.43,
+          "cells": 4049052,
+          "iteration_seconds": 1228.14,
+          "unused_primitive_warnings": 19
+        }
+      }
+    },
+    "ny2140-rc70": {
+      "label": "NY2140 / RC70%",
+      "eps_r": 3.7,
+      "tan_delta": 0.0178,
+      "bare": {
+        "z2441": [
+          14.359368665654424,
+          18.522539211044595
+        ],
+        "raw_worst_s11_db": -3.487306873031021,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:L-C-open",
+            "parts": [
+              [
+                "L",
+                2.4e-09
+              ],
+              [
+                "C",
+                1.5e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 2.4 nH",
+            "series": "C 1.5 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -9.086158187700459,
+            "per_case_worst_s11_db": [
+              -9.086158187700459
+            ],
+            "contains_L_and_C": true
+          },
+          "best_L_mixed_LC": {
+            "family": "L-input:L-C-open",
+            "parts": [
+              [
+                "L",
+                2.4e-09
+              ],
+              [
+                "C",
+                1.5e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 2.4 nH",
+            "series": "C 1.5 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -9.086158187700459,
+            "per_case_worst_s11_db": [
+              -9.086158187700459
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                3e-12
+              ],
+              [
+                "L",
+                2.2000000000000003e-09
+              ],
+              [
+                "C",
+                5.1e-12
+              ]
+            ],
+            "input_shunt": "C 3 pF",
+            "series": "L 2.2 nH",
+            "load_shunt": "C 5.1 pF",
+            "worst_s11_db": -11.097025658749743,
+            "per_case_worst_s11_db": [
+              -11.097025658749743
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                3e-12
+              ],
+              [
+                "L",
+                2.2000000000000003e-09
+              ],
+              [
+                "C",
+                5.1e-12
+              ]
+            ],
+            "input_shunt": "C 3 pF",
+            "series": "L 2.2 nH",
+            "load_shunt": "C 5.1 pF",
+            "worst_s11_db": -11.097025658749743,
+            "per_case_worst_s11_db": [
+              -11.097025658749743
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                3e-12
+              ],
+              [
+                "L",
+                2.2000000000000003e-09
+              ],
+              [
+                "C",
+                5.1e-12
+              ]
+            ],
+            "input_shunt": "C 3 pF",
+            "series": "L 2.2 nH",
+            "load_shunt": "C 5.1 pF",
+            "worst_s11_db": -11.097025658749743,
+            "per_case_worst_s11_db": [
+              -11.097025658749743
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2e-09
+              ],
+              [
+                "C",
+                1.6e-12
+              ],
+              [
+                "L",
+                7.500000000000001e-09
+              ]
+            ],
+            "input_shunt": "L 2 nH",
+            "series": "C 1.6 pF",
+            "load_shunt": "L 7.5 nH",
+            "worst_s11_db": -9.19772785555035,
+            "per_case_worst_s11_db": [
+              -9.19772785555035
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  3e-12
+                ],
+                [
+                  "L",
+                  2.2000000000000003e-09
+                ],
+                [
+                  "C",
+                  5.1e-12
+                ]
+              ],
+              "input_shunt": "C 3 pF",
+              "series": "L 2.2 nH",
+              "load_shunt": "C 5.1 pF",
+              "worst_s11_db": -11.097025658749743,
+              "per_case_worst_s11_db": [
+                -11.097025658749743
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  2.2000000000000003e-09
+                ],
+                [
+                  "C",
+                  1.5e-11
+                ],
+                [
+                  "C",
+                  3.9e-12
+                ]
+              ],
+              "input_shunt": "L 2.2 nH",
+              "series": "C 15 pF",
+              "load_shunt": "C 3.9 pF",
+              "worst_s11_db": -10.072294174202128,
+              "per_case_worst_s11_db": [
+                -10.072294174202128
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2e-09
+                ],
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "L",
+                  7.500000000000001e-09
+                ]
+              ],
+              "input_shunt": "L 2 nH",
+              "series": "C 1.6 pF",
+              "load_shunt": "L 7.5 nH",
+              "worst_s11_db": -9.19772785555035,
+              "per_case_worst_s11_db": [
+                -9.19772785555035
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  2.4e-09
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 2.4 nH",
+              "series": "C 1.5 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -9.086158187700459,
+              "per_case_worst_s11_db": [
+                -9.086158187700459
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -8.358623371199501,
+              "per_case_worst_s11_db": [
+                -8.358623371199501
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  1.6e-12
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 1.6 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -8.199532754454598,
+              "per_case_worst_s11_db": [
+                -8.199532754454598
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  2.1999999999999998e-11
+                ],
+                [
+                  "C",
+                  1.6e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 22 pF",
+              "load_shunt": "C 1.6 pF",
+              "worst_s11_db": -7.32760598389044,
+              "per_case_worst_s11_db": [
+                -7.32760598389044
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  2e-13
+                ],
+                [
+                  "C",
+                  2.1999999999999998e-11
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ]
+              ],
+              "input_shunt": "C 0.2 pF",
+              "series": "C 22 pF",
+              "load_shunt": "C 1.5 pF",
+              "worst_s11_db": -7.174239569796999,
+              "per_case_worst_s11_db": [
+                -7.174239569796999
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "C",
+                  1.8e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "C 1.8 pF",
+              "worst_s11_db": -7.168326365613776,
+              "per_case_worst_s11_db": [
+                -7.168326365613776
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "C",
+                  2e-12
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "C 2 pF",
+              "worst_s11_db": -7.009657464793362,
+              "per_case_worst_s11_db": [
+                -7.009657464793362
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "C",
+                  2.1999999999999998e-11
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 1.2 pF",
+              "series": "C 22 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -6.348586670094142,
+              "per_case_worst_s11_db": [
+                -6.348586670094142
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ],
+                [
+                  "C",
+                  2.1999999999999998e-11
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 1.3 pF",
+              "series": "C 22 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -6.286715341458983,
+              "per_case_worst_s11_db": [
+                -6.286715341458983
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  2.4e-12
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 2.4 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -4.3582509381638115,
+              "per_case_worst_s11_db": [
+                -4.3582509381638115
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -2.8362375293496243,
+              "per_case_worst_s11_db": [
+                -2.8362375293496243
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -2.814787536666168,
+              "per_case_worst_s11_db": [
+                -2.814787536666168
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -2.6557390806957133,
+              "per_case_worst_s11_db": [
+                -2.6557390806957133
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 42880,
+          "energy_db": -40.47,
+          "cells": 3637284,
+          "iteration_seconds": 976.49,
+          "unused_primitive_warnings": 19
+        }
+      },
+      "housed": {
+        "z2441": [
+          11.880187094475273,
+          75.89277929510145
+        ],
+        "raw_worst_s11_db": -0.9759185497700964,
+        "networks": {
+          "best_L_any": {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                2e-12
+              ],
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 2 pF",
+            "series": "C 1.2 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -7.600440061830247,
+            "per_case_worst_s11_db": [
+              -7.600440061830247
+            ],
+            "contains_L_and_C": false
+          },
+          "best_L_mixed_LC": {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                6.8000000000000005e-09
+              ],
+              [
+                "C",
+                1.3000000000000001e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 6.8 nH",
+            "load_shunt": "C 1.3 pF",
+            "worst_s11_db": -6.652713005108608,
+            "per_case_worst_s11_db": [
+              -6.652713005108608
+            ],
+            "contains_L_and_C": true
+          },
+          "best_pi_any": {
+            "family": "pi:C-C-C",
+            "parts": [
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "C 0.7 pF",
+            "series": "C 0.7 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -8.009233147650027,
+            "per_case_worst_s11_db": [
+              -8.009233147650027
+            ],
+            "contains_L_and_C": false
+          },
+          "best_pi_mixed_LC": {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                8.199999999999999e-09
+              ],
+              [
+                "C",
+                5e-13
+              ],
+              [
+                "C",
+                3e-13
+              ]
+            ],
+            "input_shunt": "L 8.2 nH",
+            "series": "C 0.5 pF",
+            "load_shunt": "C 0.3 pF",
+            "worst_s11_db": -7.816270060676715,
+            "per_case_worst_s11_db": [
+              -7.816270060676715
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_CLC": {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                4e-13
+              ],
+              [
+                "L",
+                8.199999999999999e-09
+              ],
+              [
+                "C",
+                1.3000000000000001e-12
+              ]
+            ],
+            "input_shunt": "C 0.4 pF",
+            "series": "L 8.2 nH",
+            "load_shunt": "C 1.3 pF",
+            "worst_s11_db": -7.352188475937776,
+            "per_case_worst_s11_db": [
+              -7.352188475937776
+            ],
+            "contains_L_and_C": true
+          },
+          "pi_LCL": {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2.2000000000000003e-09
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "L 2.2 nH",
+            "series": "C 0.7 pF",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -7.3164869042694,
+            "per_case_worst_s11_db": [
+              -7.3164869042694
+            ],
+            "contains_L_and_C": true
+          },
+          "family_results": [
+            {
+              "family": "pi:C-C-C",
+              "parts": [
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "C 0.7 pF",
+              "series": "C 0.7 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -8.009233147650027,
+              "per_case_worst_s11_db": [
+                -8.009233147650027
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-C-C",
+              "parts": [
+                [
+                  "L",
+                  8.199999999999999e-09
+                ],
+                [
+                  "C",
+                  5e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "L 8.2 nH",
+              "series": "C 0.5 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -7.816270060676715,
+              "per_case_worst_s11_db": [
+                -7.816270060676715
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-C-L",
+              "parts": [
+                [
+                  "C",
+                  2.2000000000000003e-12
+                ],
+                [
+                  "C",
+                  1.5e-12
+                ],
+                [
+                  "L",
+                  2.7e-08
+                ]
+              ],
+              "input_shunt": "C 2.2 pF",
+              "series": "C 1.5 pF",
+              "load_shunt": "L 27 nH",
+              "worst_s11_db": -7.671784146510438,
+              "per_case_worst_s11_db": [
+                -7.671784146510438
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-C-open",
+              "parts": [
+                [
+                  "C",
+                  2e-12
+                ],
+                [
+                  "C",
+                  1.2e-12
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 2 pF",
+              "series": "C 1.2 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -7.600440061830247,
+              "per_case_worst_s11_db": [
+                -7.600440061830247
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:C-L-C",
+              "parts": [
+                [
+                  "C",
+                  4e-13
+                ],
+                [
+                  "L",
+                  8.199999999999999e-09
+                ],
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ]
+              ],
+              "input_shunt": "C 0.4 pF",
+              "series": "L 8.2 nH",
+              "load_shunt": "C 1.3 pF",
+              "worst_s11_db": -7.352188475937776,
+              "per_case_worst_s11_db": [
+                -7.352188475937776
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-C-L",
+              "parts": [
+                [
+                  "L",
+                  2.2000000000000003e-09
+                ],
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 2.2 nH",
+              "series": "C 0.7 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -7.3164869042694,
+              "per_case_worst_s11_db": [
+                -7.3164869042694
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:L-L-C",
+              "parts": [
+                [
+                  "L",
+                  1e-08
+                ],
+                [
+                  "L",
+                  6.200000000000001e-09
+                ],
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ]
+              ],
+              "input_shunt": "L 10 nH",
+              "series": "L 6.2 nH",
+              "load_shunt": "C 1.3 pF",
+              "worst_s11_db": -7.262199605242653,
+              "per_case_worst_s11_db": [
+                -7.262199605242653
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "C",
+                  3e-13
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.6 pF",
+              "load_shunt": "C 0.3 pF",
+              "worst_s11_db": -6.989837605294296,
+              "per_case_worst_s11_db": [
+                -6.989837605294296
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-C",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  6.8000000000000005e-09
+                ],
+                [
+                  "C",
+                  1.3000000000000001e-12
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 6.8 nH",
+              "load_shunt": "C 1.3 pF",
+              "worst_s11_db": -6.652713005108608,
+              "per_case_worst_s11_db": [
+                -6.652713005108608
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-C-open",
+              "parts": [
+                [
+                  "L",
+                  3.3e-09
+                ],
+                [
+                  "C",
+                  6e-13
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 3.3 nH",
+              "series": "C 0.6 pF",
+              "load_shunt": "open",
+              "worst_s11_db": -5.284412018191693,
+              "per_case_worst_s11_db": [
+                -5.284412018191693
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-load:open-C-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "C",
+                  9e-13
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "C 0.9 pF",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -3.122981299485805,
+              "per_case_worst_s11_db": [
+                -3.122981299485805
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:C-L-open",
+              "parts": [
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "C 0.7 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -1.0908971771327636,
+              "per_case_worst_s11_db": [
+                -1.0908971771327636
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "pi:C-L-L",
+              "parts": [
+                [
+                  "C",
+                  6.999999999999999e-13
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "C 0.7 pF",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -1.0690230958478864,
+              "per_case_worst_s11_db": [
+                -1.0690230958478864
+              ],
+              "contains_L_and_C": true
+            },
+            {
+              "family": "L-input:L-L-open",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "open",
+                  0
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "open",
+              "worst_s11_db": -0.8072628364238617,
+              "per_case_worst_s11_db": [
+                -0.8072628364238617
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "L-load:open-L-L",
+              "parts": [
+                [
+                  "open",
+                  0
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "open",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.7995468621440174,
+              "per_case_worst_s11_db": [
+                -0.7995468621440174
+              ],
+              "contains_L_and_C": false
+            },
+            {
+              "family": "pi:L-L-L",
+              "parts": [
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ],
+                [
+                  "L",
+                  5e-10
+                ],
+                [
+                  "L",
+                  4.7000000000000004e-08
+                ]
+              ],
+              "input_shunt": "L 47 nH",
+              "series": "L 0.5 nH",
+              "load_shunt": "L 47 nH",
+              "worst_s11_db": -0.7522042261011412,
+              "per_case_worst_s11_db": [
+                -0.7522042261011412
+              ],
+              "contains_L_and_C": false
+            }
+          ]
+        },
+        "termination": {
+          "timesteps": 49980,
+          "energy_db": -40.61,
+          "cells": 4049052,
+          "iteration_seconds": 1307.99,
+          "unused_primitive_warnings": 19
+        }
+      }
+    }
+  },
+  "common": {
+    "bare": {
+      "case_order": [
+        "np140f",
+        "hy8101",
+        "ny2140-rc55",
+        "ny2140-rc70"
+      ],
+      "networks": {
+        "best_L_any": {
+          "family": "L-input:C-C-open",
+          "parts": [
+            [
+              "C",
+              1.3000000000000001e-12
+            ],
+            [
+              "C",
+              1e-11
+            ],
+            [
+              "open",
+              0
+            ]
+          ],
+          "input_shunt": "C 1.3 pF",
+          "series": "C 10 pF",
+          "load_shunt": "open",
+          "worst_s11_db": -5.446692454118388,
+          "per_case_worst_s11_db": [
+            -6.691364730623422,
+            -5.457257321559744,
+            -6.449275341754004,
+            -5.446692454118388
+          ],
+          "contains_L_and_C": false
+        },
+        "best_L_mixed_LC": {
+          "family": "L-load:open-L-C",
+          "parts": [
+            [
+              "open",
+              0
+            ],
+            [
+              "L",
+              1.8000000000000002e-09
+            ],
+            [
+              "C",
+              1.8e-12
+            ]
+          ],
+          "input_shunt": "open",
+          "series": "L 1.8 nH",
+          "load_shunt": "C 1.8 pF",
+          "worst_s11_db": -5.430466233980102,
+          "per_case_worst_s11_db": [
+            -6.770721737821606,
+            -5.5536643214756065,
+            -6.5392971815068135,
+            -5.430466233980102
+          ],
+          "contains_L_and_C": true
+        },
+        "best_pi_any": {
+          "family": "pi:C-L-C",
+          "parts": [
+            [
+              "C",
+              1.5e-12
+            ],
+            [
+              "L",
+              3.6000000000000004e-09
+            ],
+            [
+              "C",
+              2.7000000000000002e-12
+            ]
+          ],
+          "input_shunt": "C 1.5 pF",
+          "series": "L 3.6 nH",
+          "load_shunt": "C 2.7 pF",
+          "worst_s11_db": -5.724308514459987,
+          "per_case_worst_s11_db": [
+            -7.1117948069707095,
+            -5.7280287790602795,
+            -6.836261806021816,
+            -5.724308514459987
+          ],
+          "contains_L_and_C": true
+        },
+        "best_pi_mixed_LC": {
+          "family": "pi:C-L-C",
+          "parts": [
+            [
+              "C",
+              1.5e-12
+            ],
+            [
+              "L",
+              3.6000000000000004e-09
+            ],
+            [
+              "C",
+              2.7000000000000002e-12
+            ]
+          ],
+          "input_shunt": "C 1.5 pF",
+          "series": "L 3.6 nH",
+          "load_shunt": "C 2.7 pF",
+          "worst_s11_db": -5.724308514459987,
+          "per_case_worst_s11_db": [
+            -7.1117948069707095,
+            -5.7280287790602795,
+            -6.836261806021816,
+            -5.724308514459987
+          ],
+          "contains_L_and_C": true
+        },
+        "pi_CLC": {
+          "family": "pi:C-L-C",
+          "parts": [
+            [
+              "C",
+              1.5e-12
+            ],
+            [
+              "L",
+              3.6000000000000004e-09
+            ],
+            [
+              "C",
+              2.7000000000000002e-12
+            ]
+          ],
+          "input_shunt": "C 1.5 pF",
+          "series": "L 3.6 nH",
+          "load_shunt": "C 2.7 pF",
+          "worst_s11_db": -5.724308514459987,
+          "per_case_worst_s11_db": [
+            -7.1117948069707095,
+            -5.7280287790602795,
+            -6.836261806021816,
+            -5.724308514459987
+          ],
+          "contains_L_and_C": true
+        },
+        "pi_LCL": {
+          "family": "pi:L-C-L",
+          "parts": [
+            [
+              "L",
+              2.7e-09
+            ],
+            [
+              "C",
+              1.2e-12
+            ],
+            [
+              "L",
+              1.8000000000000002e-08
+            ]
+          ],
+          "input_shunt": "L 2.7 nH",
+          "series": "C 1.2 pF",
+          "load_shunt": "L 18 nH",
+          "worst_s11_db": -5.116583573614479,
+          "per_case_worst_s11_db": [
+            -6.231283057669347,
+            -5.116583573614479,
+            -6.0105077666608375,
+            -5.228523418532369
+          ],
+          "contains_L_and_C": true
+        },
+        "family_results": [
+          {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                1.5e-12
+              ],
+              [
+                "L",
+                3.6000000000000004e-09
+              ],
+              [
+                "C",
+                2.7000000000000002e-12
+              ]
+            ],
+            "input_shunt": "C 1.5 pF",
+            "series": "L 3.6 nH",
+            "load_shunt": "C 2.7 pF",
+            "worst_s11_db": -5.724308514459987,
+            "per_case_worst_s11_db": [
+              -7.1117948069707095,
+              -5.7280287790602795,
+              -6.836261806021816,
+              -5.724308514459987
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:L-L-C",
+            "parts": [
+              [
+                "L",
+                3.9000000000000005e-08
+              ],
+              [
+                "L",
+                1.5000000000000002e-09
+              ],
+              [
+                "C",
+                1.8e-12
+              ]
+            ],
+            "input_shunt": "L 39 nH",
+            "series": "L 1.5 nH",
+            "load_shunt": "C 1.8 pF",
+            "worst_s11_db": -5.473603585348373,
+            "per_case_worst_s11_db": [
+              -6.679985657876074,
+              -5.473603585348373,
+              -6.4476947231664,
+              -5.482151788767724
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                1.3000000000000001e-12
+              ],
+              [
+                "C",
+                1e-11
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 1.3 pF",
+            "series": "C 10 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -5.446692454118388,
+            "per_case_worst_s11_db": [
+              -6.691364730623422,
+              -5.457257321559744,
+              -6.449275341754004,
+              -5.446692454118388
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "pi:C-C-L",
+            "parts": [
+              [
+                "C",
+                1.6e-12
+              ],
+              [
+                "C",
+                1.2e-11
+              ],
+              [
+                "L",
+                2.2000000000000002e-08
+              ]
+            ],
+            "input_shunt": "C 1.6 pF",
+            "series": "C 12 pF",
+            "load_shunt": "L 22 nH",
+            "worst_s11_db": -5.443449414295342,
+            "per_case_worst_s11_db": [
+              -6.837761592134179,
+              -5.443449414295342,
+              -6.542334327000692,
+              -5.455703965309592
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                1.8000000000000002e-09
+              ],
+              [
+                "C",
+                1.8e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 1.8 nH",
+            "load_shunt": "C 1.8 pF",
+            "worst_s11_db": -5.430466233980102,
+            "per_case_worst_s11_db": [
+              -6.770721737821606,
+              -5.5536643214756065,
+              -6.5392971815068135,
+              -5.430466233980102
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:C-C-C",
+            "parts": [
+              [
+                "C",
+                5e-13
+              ],
+              [
+                "C",
+                4.7e-12
+              ],
+              [
+                "C",
+                6e-13
+              ]
+            ],
+            "input_shunt": "C 0.5 pF",
+            "series": "C 4.7 pF",
+            "load_shunt": "C 0.6 pF",
+            "worst_s11_db": -5.424463742446836,
+            "per_case_worst_s11_db": [
+              -6.804793359312315,
+              -5.470717025301706,
+              -6.530835399295477,
+              -5.424463742446836
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "L-load:open-C-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "C",
+                2.4e-12
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "C 2.4 pF",
+            "load_shunt": "C 0.7 pF",
+            "worst_s11_db": -5.395842711840696,
+            "per_case_worst_s11_db": [
+              -6.565613380499501,
+              -5.4214486869874525,
+              -6.35048268097237,
+              -5.395842711840696
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                3.3000000000000004e-08
+              ],
+              [
+                "C",
+                2e-12
+              ],
+              [
+                "C",
+                8e-13
+              ]
+            ],
+            "input_shunt": "L 33 nH",
+            "series": "C 2 pF",
+            "load_shunt": "C 0.8 pF",
+            "worst_s11_db": -5.392616896018931,
+            "per_case_worst_s11_db": [
+              -6.860779942511198,
+              -5.392616896018931,
+              -6.537659320328769,
+              -5.419598163943851
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2.7e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "L",
+                1.8000000000000002e-08
+              ]
+            ],
+            "input_shunt": "L 2.7 nH",
+            "series": "C 1.2 pF",
+            "load_shunt": "L 18 nH",
+            "worst_s11_db": -5.116583573614479,
+            "per_case_worst_s11_db": [
+              -6.231283057669347,
+              -5.116583573614479,
+              -6.0105077666608375,
+              -5.228523418532369
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:L-C-open",
+            "parts": [
+              [
+                "L",
+                2.7e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 2.7 nH",
+            "series": "C 1.2 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -4.8917209194266995,
+            "per_case_worst_s11_db": [
+              -6.48149407422866,
+              -4.8917209194266995,
+              -6.088265908038171,
+              -5.30719215366311
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-load:open-C-L",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "C",
+                1.6e-12
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "C 1.6 pF",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -3.474305176980255,
+            "per_case_worst_s11_db": [
+              -3.474305176980255,
+              -3.5585086850434466,
+              -3.548527158040418,
+              -3.7279634621067483
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:C-L-open",
+            "parts": [
+              [
+                "C",
+                1.1000000000000002e-12
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 1.1 pF",
+            "series": "L 0.5 nH",
+            "load_shunt": "open",
+            "worst_s11_db": -3.1062632622687176,
+            "per_case_worst_s11_db": [
+              -3.7097241413576443,
+              -3.1062632622687176,
+              -3.58058908772352,
+              -7.077425385372477
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:C-L-L",
+            "parts": [
+              [
+                "C",
+                1.2e-12
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "C 1.2 pF",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -3.045768565909623,
+            "per_case_worst_s11_db": [
+              -3.661186618424282,
+              -3.045768565909623,
+              -3.5266317428884513,
+              -7.138872894384164
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:L-L-open",
+            "parts": [
+              [
+                "L",
+                4.7000000000000004e-08
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 47 nH",
+            "series": "L 0.5 nH",
+            "load_shunt": "open",
+            "worst_s11_db": -1.6521768803034913,
+            "per_case_worst_s11_db": [
+              -1.7843708568199348,
+              -1.6521768803034913,
+              -1.769072696658835,
+              -2.814787536666168
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "L-load:open-L-L",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -1.6511220536841105,
+            "per_case_worst_s11_db": [
+              -1.7875244653151046,
+              -1.6511220536841105,
+              -1.7710108300483114,
+              -2.8362375293496243
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "pi:L-L-L",
+            "parts": [
+              [
+                "L",
+                4.7000000000000004e-08
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "L 47 nH",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -1.541703561764046,
+            "per_case_worst_s11_db": [
+              -1.6690405565651023,
+              -1.541703561764046,
+              -1.6534788941285679,
+              -2.6557390806957133
+            ],
+            "contains_L_and_C": false
+          }
+        ]
+      },
+      "individual_CLC_cross_evaluation": [
+        {
+          "selected_for": "np140f",
+          "worst_s11_per_case_db": [
+            -8.769463680454793,
+            -5.541740415452592,
+            -7.7736134463831785,
+            -4.187265551668315
+          ]
+        },
+        {
+          "selected_for": "hy8101",
+          "worst_s11_per_case_db": [
+            -5.446545831824549,
+            -9.029613299313679,
+            -6.214007750669052,
+            -2.831689490192364
+          ]
+        },
+        {
+          "selected_for": "ny2140-rc55",
+          "worst_s11_per_case_db": [
+            -7.979214583510349,
+            -6.552597981962839,
+            -9.13376628705899,
+            -4.007947880081696
+          ]
+        },
+        {
+          "selected_for": "ny2140-rc70",
+          "worst_s11_per_case_db": [
+            -3.972188907453291,
+            -2.9458074672627226,
+            -3.694524538269402,
+            -11.097025658749743
+          ]
+        }
+      ],
+      "CLC_illustrative_tolerance": {
+        "assumption": "C: +/-max(5%,0.05pF); L: +/-5%; 27 combinations; ideal components only",
+        "worst_s11_db": -4.749615747685282
+      }
+    },
+    "housed": {
+      "case_order": [
+        "np140f",
+        "hy8101",
+        "ny2140-rc55",
+        "ny2140-rc70"
+      ],
+      "networks": {
+        "best_L_any": {
+          "family": "L-input:C-C-open",
+          "parts": [
+            [
+              "C",
+              1e-12
+            ],
+            [
+              "C",
+              1e-12
+            ],
+            [
+              "open",
+              0
+            ]
+          ],
+          "input_shunt": "C 1 pF",
+          "series": "C 1 pF",
+          "load_shunt": "open",
+          "worst_s11_db": -4.288012365923039,
+          "per_case_worst_s11_db": [
+            -4.752714944553999,
+            -4.358024843384197,
+            -4.831196151246215,
+            -4.288012365923039
+          ],
+          "contains_L_and_C": false
+        },
+        "best_L_mixed_LC": {
+          "family": "L-input:L-C-open",
+          "parts": [
+            [
+              "L",
+              6.8000000000000005e-09
+            ],
+            [
+              "C",
+              6e-13
+            ],
+            [
+              "open",
+              0
+            ]
+          ],
+          "input_shunt": "L 6.8 nH",
+          "series": "C 0.6 pF",
+          "load_shunt": "open",
+          "worst_s11_db": -3.825163273173904,
+          "per_case_worst_s11_db": [
+            -3.8296511416214023,
+            -3.825163273173904,
+            -3.9710108056662277,
+            -3.961985292195399
+          ],
+          "contains_L_and_C": true
+        },
+        "best_pi_any": {
+          "family": "pi:C-C-C",
+          "parts": [
+            [
+              "C",
+              2e-13
+            ],
+            [
+              "C",
+              6e-13
+            ],
+            [
+              "C",
+              2e-13
+            ]
+          ],
+          "input_shunt": "C 0.2 pF",
+          "series": "C 0.6 pF",
+          "load_shunt": "C 0.2 pF",
+          "worst_s11_db": -4.312795104842144,
+          "per_case_worst_s11_db": [
+            -5.077997463350366,
+            -4.312795104842144,
+            -5.0540563852589795,
+            -4.4193287603031415
+          ],
+          "contains_L_and_C": false
+        },
+        "best_pi_mixed_LC": {
+          "family": "pi:C-C-L",
+          "parts": [
+            [
+              "C",
+              1.8e-12
+            ],
+            [
+              "C",
+              1.3000000000000001e-12
+            ],
+            [
+              "L",
+              2.7e-08
+            ]
+          ],
+          "input_shunt": "C 1.8 pF",
+          "series": "C 1.3 pF",
+          "load_shunt": "L 27 nH",
+          "worst_s11_db": -4.272821039356777,
+          "per_case_worst_s11_db": [
+            -5.170519381726929,
+            -4.272821039356777,
+            -5.105389179847818,
+            -4.3291421210114684
+          ],
+          "contains_L_and_C": true
+        },
+        "pi_CLC": {
+          "family": "pi:C-L-C",
+          "parts": [
+            [
+              "C",
+              6e-13
+            ],
+            [
+              "L",
+              8.199999999999999e-09
+            ],
+            [
+              "C",
+              1.2e-12
+            ]
+          ],
+          "input_shunt": "C 0.6 pF",
+          "series": "L 8.2 nH",
+          "load_shunt": "C 1.2 pF",
+          "worst_s11_db": -4.164002117221326,
+          "per_case_worst_s11_db": [
+            -5.096220323889269,
+            -4.226809492008739,
+            -5.036032406899783,
+            -4.164002117221326
+          ],
+          "contains_L_and_C": true
+        },
+        "pi_LCL": {
+          "family": "pi:L-C-L",
+          "parts": [
+            [
+              "L",
+              2e-09
+            ],
+            [
+              "C",
+              6.999999999999999e-13
+            ],
+            [
+              "L",
+              2.2000000000000002e-08
+            ]
+          ],
+          "input_shunt": "L 2 nH",
+          "series": "C 0.7 pF",
+          "load_shunt": "L 22 nH",
+          "worst_s11_db": -3.933581110821272,
+          "per_case_worst_s11_db": [
+            -5.004000951594961,
+            -3.9348705542263387,
+            -4.861488754815275,
+            -3.933581110821272
+          ],
+          "contains_L_and_C": true
+        },
+        "family_results": [
+          {
+            "family": "pi:C-C-C",
+            "parts": [
+              [
+                "C",
+                2e-13
+              ],
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "C",
+                2e-13
+              ]
+            ],
+            "input_shunt": "C 0.2 pF",
+            "series": "C 0.6 pF",
+            "load_shunt": "C 0.2 pF",
+            "worst_s11_db": -4.312795104842144,
+            "per_case_worst_s11_db": [
+              -5.077997463350366,
+              -4.312795104842144,
+              -5.0540563852589795,
+              -4.4193287603031415
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "L-input:C-C-open",
+            "parts": [
+              [
+                "C",
+                1e-12
+              ],
+              [
+                "C",
+                1e-12
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 1 pF",
+            "series": "C 1 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -4.288012365923039,
+            "per_case_worst_s11_db": [
+              -4.752714944553999,
+              -4.358024843384197,
+              -4.831196151246215,
+              -4.288012365923039
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "pi:C-C-L",
+            "parts": [
+              [
+                "C",
+                1.8e-12
+              ],
+              [
+                "C",
+                1.3000000000000001e-12
+              ],
+              [
+                "L",
+                2.7e-08
+              ]
+            ],
+            "input_shunt": "C 1.8 pF",
+            "series": "C 1.3 pF",
+            "load_shunt": "L 27 nH",
+            "worst_s11_db": -4.272821039356777,
+            "per_case_worst_s11_db": [
+              -5.170519381726929,
+              -4.272821039356777,
+              -5.105389179847818,
+              -4.3291421210114684
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:L-C-C",
+            "parts": [
+              [
+                "L",
+                1.2000000000000002e-08
+              ],
+              [
+                "C",
+                5e-13
+              ],
+              [
+                "C",
+                2e-13
+              ]
+            ],
+            "input_shunt": "L 12 nH",
+            "series": "C 0.5 pF",
+            "load_shunt": "C 0.2 pF",
+            "worst_s11_db": -4.270015227687683,
+            "per_case_worst_s11_db": [
+              -5.280381393454676,
+              -4.393873869194965,
+              -5.227582992567402,
+              -4.270015227687683
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:C-L-C",
+            "parts": [
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "L",
+                8.199999999999999e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ]
+            ],
+            "input_shunt": "C 0.6 pF",
+            "series": "L 8.2 nH",
+            "load_shunt": "C 1.2 pF",
+            "worst_s11_db": -4.164002117221326,
+            "per_case_worst_s11_db": [
+              -5.096220323889269,
+              -4.226809492008739,
+              -5.036032406899783,
+              -4.164002117221326
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:L-L-C",
+            "parts": [
+              [
+                "L",
+                7.500000000000001e-09
+              ],
+              [
+                "L",
+                5.6e-09
+              ],
+              [
+                "C",
+                1.2e-12
+              ]
+            ],
+            "input_shunt": "L 7.5 nH",
+            "series": "L 5.6 nH",
+            "load_shunt": "C 1.2 pF",
+            "worst_s11_db": -4.150534533086034,
+            "per_case_worst_s11_db": [
+              -4.875069494796,
+              -4.18453585671381,
+              -4.863229767068466,
+              -4.150534533086034
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:L-C-L",
+            "parts": [
+              [
+                "L",
+                2e-09
+              ],
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "L",
+                2.2000000000000002e-08
+              ]
+            ],
+            "input_shunt": "L 2 nH",
+            "series": "C 0.7 pF",
+            "load_shunt": "L 22 nH",
+            "worst_s11_db": -3.933581110821272,
+            "per_case_worst_s11_db": [
+              -5.004000951594961,
+              -3.9348705542263387,
+              -4.861488754815275,
+              -3.933581110821272
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:L-C-open",
+            "parts": [
+              [
+                "L",
+                6.8000000000000005e-09
+              ],
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 6.8 nH",
+            "series": "C 0.6 pF",
+            "load_shunt": "open",
+            "worst_s11_db": -3.825163273173904,
+            "per_case_worst_s11_db": [
+              -3.8296511416214023,
+              -3.825163273173904,
+              -3.9710108056662277,
+              -3.961985292195399
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-load:open-C-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "C",
+                2e-13
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "C 0.6 pF",
+            "load_shunt": "C 0.2 pF",
+            "worst_s11_db": -3.714054843129586,
+            "per_case_worst_s11_db": [
+              -4.3127652000060674,
+              -3.714054843129586,
+              -4.296795674981774,
+              -5.1026975112953235
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "L-load:open-L-C",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                9.1e-09
+              ],
+              [
+                "C",
+                1.1000000000000002e-12
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 9.1 nH",
+            "load_shunt": "C 1.1 pF",
+            "worst_s11_db": -3.6295793844989133,
+            "per_case_worst_s11_db": [
+              -5.938837642283437,
+              -4.259188710048439,
+              -5.618915174880872,
+              -3.6295793844989133
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-load:open-C-L",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "C",
+                8e-13
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "C 0.8 pF",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -2.605319678535887,
+            "per_case_worst_s11_db": [
+              -2.605319678535887,
+              -2.8096654898299294,
+              -2.745479445858385,
+              -3.1123801764191477
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:C-L-open",
+            "parts": [
+              [
+                "C",
+                6e-13
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "C 0.6 pF",
+            "series": "L 0.5 nH",
+            "load_shunt": "open",
+            "worst_s11_db": -0.716810137690445,
+            "per_case_worst_s11_db": [
+              -0.716810137690445,
+              -0.7224685205899026,
+              -0.7401951180454898,
+              -1.0879870404178154
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "pi:C-L-L",
+            "parts": [
+              [
+                "C",
+                6.999999999999999e-13
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "C 0.7 pF",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -0.7021408826113712,
+            "per_case_worst_s11_db": [
+              -0.7021408826113712,
+              -0.7068032492435318,
+              -0.7248041417628525,
+              -1.0690230958478864
+            ],
+            "contains_L_and_C": true
+          },
+          {
+            "family": "L-input:L-L-open",
+            "parts": [
+              [
+                "L",
+                4.7000000000000004e-08
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "open",
+                0
+              ]
+            ],
+            "input_shunt": "L 47 nH",
+            "series": "L 0.5 nH",
+            "load_shunt": "open",
+            "worst_s11_db": -0.5638345541922539,
+            "per_case_worst_s11_db": [
+              -0.5638345541922539,
+              -0.5839745557121439,
+              -0.5863150509715661,
+              -0.8072628364238617
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "L-load:open-L-L",
+            "parts": [
+              [
+                "open",
+                0
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "open",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -0.5573121700412053,
+            "per_case_worst_s11_db": [
+              -0.5573121700412053,
+              -0.5767111229537278,
+              -0.5793990778353355,
+              -0.7995468621440174
+            ],
+            "contains_L_and_C": false
+          },
+          {
+            "family": "pi:L-L-L",
+            "parts": [
+              [
+                "L",
+                4.7000000000000004e-08
+              ],
+              [
+                "L",
+                5e-10
+              ],
+              [
+                "L",
+                4.7000000000000004e-08
+              ]
+            ],
+            "input_shunt": "L 47 nH",
+            "series": "L 0.5 nH",
+            "load_shunt": "L 47 nH",
+            "worst_s11_db": -0.526220773644356,
+            "per_case_worst_s11_db": [
+              -0.526220773644356,
+              -0.5455415775487006,
+              -0.5473272740222579,
+              -0.7522042261011412
+            ],
+            "contains_L_and_C": false
+          }
+        ]
+      },
+      "individual_CLC_cross_evaluation": [
+        {
+          "selected_for": "np140f",
+          "worst_s11_per_case_db": [
+            -6.061045702292526,
+            -4.193943295109562,
+            -5.66693920985956,
+            -3.456101573152436
+          ]
+        },
+        {
+          "selected_for": "hy8101",
+          "worst_s11_per_case_db": [
+            -3.8513549484904126,
+            -6.456338034731099,
+            -4.421400442292049,
+            -2.090626881577119
+          ]
+        },
+        {
+          "selected_for": "ny2140-rc55",
+          "worst_s11_per_case_db": [
+            -5.479109913028962,
+            -4.934676099486204,
+            -6.189901982060951,
+            -3.1581766537465708
+          ]
+        },
+        {
+          "selected_for": "ny2140-rc70",
+          "worst_s11_per_case_db": [
+            -2.7652154146160477,
+            -2.177099534753186,
+            -2.6703185363730793,
+            -7.352188475937776
+          ]
+        }
+      ],
+      "CLC_illustrative_tolerance": {
+        "assumption": "C: +/-max(5%,0.05pF); L: +/-5%; 27 combinations; ideal components only",
+        "worst_s11_db": -2.670952045308408
+      }
+    }
+  }
+}

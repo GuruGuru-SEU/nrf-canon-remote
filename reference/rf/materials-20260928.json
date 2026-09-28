@@ -1,0 +1,96 @@
+{
+  "created": "2026-09-28",
+  "source": "Three user-supplied PDFs, described by user as JLC official supply options; final grade randomly one of these three",
+  "materials": [
+    {
+      "id": "ny2140",
+      "name": "上海南亚 NY2140",
+      "original": "(A1级)上海南亚 NY2140.pdf",
+      "filename": "NY2140-MSDS.pdf",
+      "pages": 6,
+      "status": "official_1GHz_table_two_resin_contents",
+      "eps_r": 4.15,
+      "tan_delta": 0.0166,
+      "source_frequency_hz": 1000000000.0,
+      "explanation": "Provided PDF is only MSDS. Manufacturer official product table supplies Dk/Df for R/C 55% and 70%; actual JLC order construction unknown. Both values held constant for 2.4 GHz conditional simulations.",
+      "pdf_sha256": "8b56b91f3d6e60314b917ab2485b811c04099c60542f163846c3ff11fcf6865c",
+      "reference_file": "reference/rf/materials/NY2140-MSDS.pdf",
+      "supplement_url": "https://www.nouyatec.com/product/base-material/lead-free-compatible/12",
+      "supplement_retrieved": "2026-09-28",
+      "supplement_sha256": "d1b6b5f1711cbbc0e8697c02fb1ad7a000d26df76f3033042722c6d87f8d1abc",
+      "resin_cases": [
+        {
+          "id": "ny2140-rc55",
+          "resin_content_percent": 55,
+          "eps_r": 4.15,
+          "tan_delta": 0.0166
+        },
+        {
+          "id": "ny2140-rc70",
+          "resin_content_percent": 70,
+          "eps_r": 3.7,
+          "tan_delta": 0.0178
+        }
+      ]
+    },
+    {
+      "id": "np140f",
+      "name": "台湾南亚 NP-140F",
+      "original": "(A1级)台湾南亚NP140F.pdf",
+      "filename": "NP-140F.pdf",
+      "pages": 2,
+      "status": "frequency_extrapolation_assumed",
+      "eps_r": 4.1,
+      "tan_delta": 0.013,
+      "source_frequency_hz": 1000000000.0,
+      "source_eps_range": [
+        4.0,
+        4.2
+      ],
+      "source_loss_range": [
+        0.012,
+        0.014
+      ],
+      "source_page": 1,
+      "specimen": ".062 inch (about 1.575 mm), 1/1 copper",
+      "explanation": "Use midpoints of the 1 GHz typical ranges, held constant for 2.4 GHz calculation. Not a manufacturer-confirmed 2.4 GHz value. 1 MHz rows are not substituted for the 1 GHz rows.",
+      "pdf_sha256": "cccbcdbdc2a28a3936636a543e6adf67d1890957d50ba316ff1cb18df80a9396",
+      "reference_file": "reference/rf/materials/NP-140F.pdf"
+    },
+    {
+      "id": "hy8101",
+      "name": "航宇 HY-8101",
+      "original": "(A1级)航宇8101.pdf",
+      "filename": "HY-8101.pdf",
+      "pages": 2,
+      "status": "frequency_and_thickness_extrapolation_assumed",
+      "eps_r": 4.3,
+      "tan_delta": 0.022,
+      "source_frequency_hz": null,
+      "source_page": 1,
+      "specimen": "1.0 mm specimen",
+      "explanation": "Page1 typical Dk4.3, Df0.022; table does not explicitly state frequency. Page2 Dk plot covers only 1-100 MHz (RC42%), not GHz; no 2.4 GHz extrapolation formula supplied. Values held constant and applied to 1.6 mm PCB as an approximation.",
+      "pdf_sha256": "264873dd2371070c58c4bdf6f024dae11dd9820e48e5bf931a213ba8ed892922",
+      "reference_file": "reference/rf/materials/HY-8101.pdf"
+    }
+  ],
+  "simulation": {
+    "thickness_mm": 1.6,
+    "xy_mesh_mm": 0.1,
+    "shell_eps": 2.8,
+    "shell_loss": 0.01,
+    "loss_model": "Dk constant; conductivity fixed using 2*pi*2.45GHz*EPS0*Dk*Df. Effective tan(delta) varies inversely with frequency, not a fitted material dispersion model.",
+    "states": [
+      "bare",
+      "housed"
+    ],
+    "reference_plane": "L220 antenna-side pad; 50 ohm port, not chip ANT",
+    "same_model_as": "reference/rf/gerber-20260924.json"
+  },
+  "known_gaps": [
+    "NY2140 actual resin content and glass-cloth construction for JLC 1.6 mm boards unknown; two manufacturer R/C examples are not guaranteed extrema",
+    "No supplied PDF gives measured parameters at 2.4 GHz",
+    "Neither material ranges nor lot-to-lot variation have been exhaustively bounded",
+    "Actual shell dielectric and fully populated assembly remain unverified"
+  ]
+}

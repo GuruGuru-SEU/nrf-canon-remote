@@ -6,7 +6,7 @@ from CSXCAD import ContinuousStructure
 from openEMS import openEMS
 from openEMS.physical_constants import EPS0
 ROOT=Path(__file__).resolve().parents[2]
-ap=argparse.ArgumentParser();ap.add_argument('--name',default='gerber-bare');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.5);ap.add_argument('--loss',type=float,default=.02);ap.add_argument('--geometry',default='reference/rf/gerber-20260924.json');ap.add_argument('--thickness',type=float,default=1.6);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--post',action='store_true');a=ap.parse_args()
+ap=argparse.ArgumentParser();ap.add_argument('--name',default='gerber-bare');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.5);ap.add_argument('--loss',type=float,default=.02);ap.add_argument('--geometry',default='reference/rf/gerber-20260924.json');ap.add_argument('--thickness',type=float,default=1.6);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--threads',type=int,default=8);ap.add_argument('--material-note',default='JLCPCB generic baseline; see material records');ap.add_argument('--post',action='store_true');a=ap.parse_args()
 geometry_path=ROOT/a.geometry
 g=json.loads(geometry_path.read_text());run=ROOT/'tmp/rf'/a.name;run.mkdir(parents=True,exist_ok=True)
 out=ROOT/'output/rf';out.mkdir(exist_ok=True)
@@ -72,6 +72,8 @@ grid.SmoothMeshLines('all',2.5,1.3)
 port=fdtd.AddLumpedPort(1,50,start=[px,py,h],stop=[px,py,0],p_dir='z',excite=1,priority=50)
 lines={axis:grid.GetLines(axis) for axis in 'xyz'}
 meta={'name':a.name,'engine':'openEMS 0.37.0 / CSXCAD 0.7.0','eps_r':a.eps,'tan_delta':a.loss,'nominal_board_thickness_mm':a.thickness,'copper_plane_separation_mm':h,'mesh_fine_mm':res,'shell_eps':a.shell_eps,'mesh_cells':[len(x)-1 for x in lines.values()],'minimum_step_mm':{k:float(np.min(np.diff(v))) for k,v in lines.items()},'source':g['source'],'geometry_sha256':hashlib.sha256(geometry_path.read_bytes()).hexdigest(),'reference_plane':g['reference_plane'],'port_start':[px,py,h],'port_stop':[px,py,0]}
+meta['material_note']=a.material_note
+meta['solver_threads']=a.threads
 csx.Write2XML(str(run/'model.xml'))
 if a.shell_eps:
     meta['enclosure_shift_z_mm']=shift_z
@@ -79,7 +81,7 @@ if a.shell_eps:
 (run/'metadata.json').write_text(json.dumps(meta,indent=2)+'\n')
 print(json.dumps(meta,indent=2),flush=True)
 if not a.post:
-    started=time.monotonic();fdtd.Run(str(run),cleanup=False,verbose=0,numThreads=8);meta['runtime_seconds']=time.monotonic()-started
+    started=time.monotonic();fdtd.Run(str(run),cleanup=False,verbose=0,numThreads=a.threads);meta['runtime_seconds']=time.monotonic()-started
 f=np.linspace(2.2e9,2.7e9,501);port.CalcPort(str(run),f)
 s11=port.uf_ref/port.uf_inc;zin=port.uf_tot/port.if_tot
 assert np.all(np.isfinite(zin)) and np.all(np.real(zin)>0),'Invalid passive impedance'

@@ -25,6 +25,20 @@ mkdir -p tmp
 node scripts/rf/build_report.mjs
 ```
 
+三份板材的独立计算与汇总：
+
+```sh
+.tools/openems/.venv/bin/python scripts/rf/run_materials.py --threads 4
+.tools/openems/.venv/bin/python scripts/rf/analyze_materials.py
+python3 scripts/rf/build_material_report.py
+node scripts/rf/build_material_report.mjs
+```
+
+`analyze_materials.py` 会校验八组实际求解、扫描 L/π 理想匹配网络，并生成
+`output/rf/materials-matching.json`、对比图和求解证据 ZIP。NY2140 按制造商
+R/C 55% 与 70% 两个官方表格工况分别计算；三份输入 PDF 和参数清单在
+`reference/rf/materials/` 与 `reference/rf/materials-20260928.json`。
+
 运行名唯一对应几何和参数，不要对仍在运行的目录再次执行。`--post` 只后处理已有时域数据，必须使用相同参数。
 
 默认板厚 1.6 mm，Dk=4.5，Df=0.02。材料来源及频率限制见 `reference/rf/materials-20260924.json`。Dk=4.5 是立创双层板公开典型值；Df=0.02 是其 1 MHz 通用值，不能声称为此订单 2.4 GHz 实测值。低损耗对照 Df=0.013 来自建滔 KB-6160 厚芯板 2 GHz 参数，未断言订单使用此料号。
