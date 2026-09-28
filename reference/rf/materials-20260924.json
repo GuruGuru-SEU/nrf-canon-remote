@@ -1,0 +1,45 @@
+{
+  "retrieved": "2026-09-24",
+  "base_model": {
+    "eps_r": 4.5,
+    "tan_delta": 0.02,
+    "thickness_mm": 1.6,
+    "classification": "JLCPCB general nominal, not measured at 2.4 GHz"
+  },
+  "sources": [
+    {
+      "url": "https://jlcpcb.com/capabilities/pcb-capabilities",
+      "claim": "Two-layer FR-4 Dk 4.5; solder mask Dk 3.8; mask ink thickness >=10 um",
+      "frequency": "not specified for two-layer Dk",
+      "download_sha256": "34e507dbef70bcf10822f327962999db6067daba12e5954d6bd3f23d852d68d7"
+    },
+    {
+      "url": "https://jlcpcb.com/pcb-fabrication/fr4-pcb",
+      "claim": "Typical Dk about4.5 and loss tangent about0.02",
+      "frequency": "1 MHz",
+      "download_sha256": "218d412c56444311b460c0c532590e932a727e4470308371a42d305e4ff9910c"
+    },
+    {
+      "url": "https://www.kblaminates.com/upload/ueditor/20220525/KB-6160-0831.pdf",
+      "claim": "KB-6160 1.499mm 7628x8: Dk4.5 at2/5GHz; Df0.013 at2GHz and0.014 at5GHz; Dk tolerance0.2",
+      "applicability": "example GHz-range supplier data; not evidence of actual material used in this order",
+      "download_sha256": "2ee13a54634742a90f90862427e4121f143533cdb7c428bdcb4fb3909ab69641"
+    }
+  ],
+  "sensitivity_model": {
+    "eps_r": 4.5,
+    "tan_delta": 0.013,
+    "classification": "KB-6160 7628x8 2GHz nominal used only as loss sensitivity; actual material unconfirmed"
+  },
+  "dk_sensitivity_model": {
+    "eps_r": 4.3,
+    "tan_delta": 0.02,
+    "classification": "Lower-Dk sensitivity case, motivated by the supplier example Dk tolerance of +/-0.2; not a tolerance guarantee for the actual JLCPCB order"
+  },
+  "limitations": [
+    "No supplied order sheet identifies actual laminate manufacturer or grade",
+    "Gerber defines geometry, not dielectric constants or thickness",
+    "Solder mask parsed for audit but omitted as dielectric; exact finished copper thickness and mask thickness unknown",
+    "No statement that general1MHz value is precise at2.4GHz"
+  ]
+}

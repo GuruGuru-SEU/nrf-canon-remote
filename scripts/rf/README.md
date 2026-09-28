@@ -1,33 +1,36 @@
-# openEMS 初步射频计算
+# Gerber 驱动的 openEMS 计算（2026-09-24）
 
-本目录独立使用 uv 创建的 Python 3.13 环境，避免影响机械建模的 Python 3.14 环境。
+当前几何来自用户提供的 `Gerber_nRF52832遥控器_2026-09-24.zip`，SHA-256 为 `3fc97f87b7eec812915d751c0682821ee30cdcd28201358806b40dc6174ed5ac`。不再使用前一天封装拼接天线。几何包含全部两面铜、PTH/NPTH；飞针文件只用于识别 L220 焊盘位置。原始 ZIP 保留本地，提取的 JSON 足以复算。没有原始 ZIP 时跳过下方 `extract_gerber.py`，直接使用仓库中的 JSON 运行求解。
+
+独立 uv 环境使用 Python 3.13：
 
 ```sh
 uv venv --python 3.13 .tools/openems/.venv
-uv pip install --python .tools/openems/.venv/bin/python pip setuptools setuptools-scm wheel cython numpy h5py matplotlib shapely scipy
+uv pip install --python .tools/openems/.venv/bin/python pip setuptools setuptools-scm wheel cython numpy h5py matplotlib shapely scipy gerbonara==1.6.3
 ```
 
-本机按 [openEMS 官方源码安装指南](https://docs.openems.de/en/latest/install/clone-build-install.html) 编译 openEMS 0.37.0 / CSXCAD 0.7.0，安装前缀 `.tools/openems`。系统依赖使用 Homebrew 官方仓库的 cmake、boost、hdf5、cgal、vtk；TinyXML 使用上游安装脚本下载并校验的源码及补丁。原生安装目录不提交 Git。
-
-构建扩展时启用该 uv 环境，将 `PATH` 的首项设为其 `bin`，`VIRTUAL_ENV` 设为环境绝对路径，执行 `update_openEMS.sh <安装前缀> --disable-GUI --njobs=8 --python --python-venv-mode=disable`。
+本机按 [openEMS 官方指南](https://docs.openems.de/en/latest/install/clone-build-install.html) 编译 openEMS 0.37.0 / CSXCAD 0.7.0，安装前缀 `.tools/openems`。系统依赖为 Homebrew 的 cmake、boost、hdf5、cgal、vtk；原生安装不提交 Git。构建扩展时将该 uv 环境加入 PATH，设置 VIRTUAL_ENV，执行 `update_openEMS.sh <安装前缀> --disable-GUI --njobs=8 --python --python-venv-mode=disable`。
 
 ```sh
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name nominal-16 --mesh .2 --thickness 1.6
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name refined-16 --mesh .15 --thickness 1.6
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name eps40-16 --mesh .2 --eps 4.0 --thickness 1.6
-.tools/openems/.venv/bin/python scripts/rf/simulate.py --name housed-16 --mesh .2 --shell-eps 2.8 --thickness 1.6
-.tools/openems/.venv/bin/python scripts/rf/match.py
+set -o pipefail
+mkdir -p tmp
+.tools/openems/.venv/bin/python scripts/rf/extract_gerber.py
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-bare --mesh .2 2>&1 | tee tmp/rf-gerber-bare.log
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-fine --mesh .15 2>&1 | tee tmp/rf-gerber-fine.log
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-finer --mesh .1 2>&1 | tee tmp/rf-gerber-finer.log
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-low-loss --mesh .15 --loss .013 2>&1 | tee tmp/rf-gerber-low-loss.log
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-dk43 --mesh .15 --eps 4.3 2>&1 | tee tmp/rf-gerber-dk43.log
+.tools/openems/.venv/bin/python scripts/rf/simulate.py --name gerber-housed --mesh .15 --shell-eps 2.8 2>&1 | tee tmp/rf-gerber-housed.log
+.tools/openems/.venv/bin/python scripts/rf/analyze_gerber.py
 node scripts/rf/build_report.mjs
 ```
 
-仿真几何为 `reference/rf/pcb-20260923.json`。来源、坐标单位、材料假设和参考面写入该文件及每次运行的 metadata。`extract_geometry.py` 是原始快照提取脚本，原始工程快照只保留本地 `tmp`，不公开；已提取的几何足以重跑 `simulate.py`。
+运行名唯一对应几何和参数，不要对仍在运行的目录再次执行。`--post` 只后处理已有时域数据，必须使用相同参数。
 
-**模型边界**：提取两面实际 GND 铺铜、GND 焊盘/线/过孔、板框/安装孔、天线和天线侧馈线。过孔以实心导体近似；铜用 PEC 薄片；省略其他信号铜、阻焊和器件。天线形状来自同一 UUID 的前一天封装导出，放置位置与当日两焊盘核验。未经 Gerber 再次复核，不能称为最终制造模型。FR-4 Dk/Df 是假设值，不是 EDA 中未填写的 0。零件属性里的既有“仿真”备注不作为本次计算证据。
+默认板厚 1.6 mm，Dk=4.5，Df=0.02。材料来源及频率限制见 `reference/rf/materials-20260924.json`。Dk=4.5 是立创双层板公开典型值；Df=0.02 是其 1 MHz 通用值，不能声称为此订单 2.4 GHz 实测值。低损耗对照 Df=0.013 来自建滔 KB-6160 厚芯板 2 GHz 参数，未断言订单使用此料号。
 
-参考面在 **L220 的天线侧焊盘 `$1N324`**，C217 不装，C216/L220 及芯片侧铜不进入模型。端口从该焊盘跨板厚接到对面 GND。结果不代表 nRF52832 ANT 引脚阻抗，也不能据此删掉 Nordic 芯片端参考网络。直接按该结果综合的网络属于独立 50 Ω 天线匹配网络。
+50 Ω 集总端口位于 **L220 天线侧焊盘**，跨板厚连接对面地铜。电路元件不装，不包含射频芯片阻抗。C216/L220/C217 数值未嵌入 EM 模型。匹配综合同时扫描并联支路在负载端 / 输入端的两种理想 L 网络，仅适用于这个端口。不能直接套用到现板位号。
 
-`--shell-eps` 是可选的假设外壳/浮置电池包络敏感性实验，未给出实际材料与装配验证前不用于最终选值。
+模型保留 Gerber 中细小铜间隙及独立焊盘的嵌套关系，但 FDTD 网格可能遗漏小图元，日志会记录警告。过孔按孔半径 + 25 µm 的实心导体近似，铜采用 PEC 片，阻焊开窗已解析但介质本身未纳入。省略元件负载、铜损、USB 金属、螺钉、人体；装壳组仅假设上下盖 εr=2.8、tanδ=0.01，并加入机械布局对应的浮置电池导体包络。
 
-当前默认板厚为用户确认的 1.6 mm；输出使用 `-16` 后缀。`refined-16` 和 `eps40-16` 是可进一步运行的验证命令，本次未运行。无后缀的四组数据为此前的 1.0 mm 研究。装壳坐标及电池尺寸从机械布局读取，必须先重建与目标板厚一致的 STL。
-
-完整说明见 [计算报告](../../output/rf/README.md)。`output/rf/solver-evidence.zip` 保留四组实际运行的日志与端口时域信号；`*.s1p` 是 50 Ω 参考的 Touchstone，`*.csv` 同时保存复阻抗与 S11。求解会产生小图元未使用的警告，已在报告中说明网格限制。`--post` 仅对本地已有运行的端口数据后处理，必须使用与原运行完全相同的几何 / 参数。
+`gerber-solver-evidence.zip` 保存本轮所有求解日志、端口时域数据和参数。历史 `*-16` 及无后缀输出保留对照；它们不是最新 Gerber 结果。旧快照提取脚本 / 旧匹配脚本仅供历史复现，默认主流程以上述命令为准。

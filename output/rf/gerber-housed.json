@@ -1,0 +1,97 @@
+{
+  "name": "gerber-housed",
+  "engine": "openEMS 0.37.0 / CSXCAD 0.7.0",
+  "eps_r": 4.5,
+  "tan_delta": 0.02,
+  "nominal_board_thickness_mm": 1.6,
+  "copper_plane_separation_mm": 1.5450000000000002,
+  "mesh_fine_mm": 0.15,
+  "shell_eps": 2.8,
+  "mesh_cells": [
+    201,
+    219,
+    58
+  ],
+  "minimum_step_mm": {
+    "x": 0.14999999999999858,
+    "y": 0.14999999999999858,
+    "z": 0.30899999999999994
+  },
+  "source": {
+    "kind": "manufacturing Gerber + Excellon + FlyingProbeTesting",
+    "zip_sha256": "3fc97f87b7eec812915d751c0682821ee30cdcd28201358806b40dc6174ed5ac",
+    "exported_at": "2026-09-24 14:07:48",
+    "files_sha256": {
+      "Drill_NPTH_Through.DRL": "31aa79f4c7ce65f632c8ee10556ec65fad75a21ba3fc9930557f565681653cee",
+      "Drill_PTH_Through.DRL": "e7b02650d2af73d9e219330bb231e0b280e345953f2032b8bb4ff1aca635b16d",
+      "Drill_PTH_Through_Via.DRL": "5993717dde591c2a2cd9b2d8f2e1f073c860357855a9baf7332738d0a939e4d7",
+      "FlyingProbeTesting.json": "8174fa7168a0f32310f4778082dd15bba70c0ebc2123f94bbb005919430920dc",
+      "Gerber_BoardOutlineLayer.GKO": "cf4b8635a878bc848a8fa85b7dd26b6020d55fd55eb08c3f2da948f78b4af69b",
+      "Gerber_BottomLayer.GBL": "cfbfc4b613f734075c9c3e5d6d2f50fabaedd1fae6c73004b9953927f46738eb",
+      "Gerber_BottomPasteMaskLayer.GBP": "56bf7344cb1fe86cbadf06fa75553776b2791e11e780b7345852bcb1e1b5b5c1",
+      "Gerber_BottomSilkscreenLayer.GBO": "8cba63f79be43cf823ef9576d96bb0df89f4213c351c9d52ab93c3cbb586d708",
+      "Gerber_BottomSolderMaskLayer.GBS": "6380fff1c839ea4745a5a3ff8aaaf42bf16ce36163f58a32a97346c4c20968da",
+      "Gerber_DocumentLayer.GDL": "d92a36e74b950d8f27a4de38099d6530348f0d3bd57586830464d8c2a4ff1af3",
+      "Gerber_DrillDrawingLayer.GDD": "36f3c32a4d87f9d973d0b1f8ea0d1c681a232987caa4006897c95d99144b5952",
+      "Gerber_TopLayer.GTL": "16194b28ea245c8a5ca7cbbf07b947db2b8d7dcb09f6c7b587ad1494d3409d07",
+      "Gerber_TopPasteMaskLayer.GTP": "0dc43874d96fbfd4fc99213da190c7bc0fa2b8dfb6696bba629b5aa30585917e",
+      "Gerber_TopSilkscreenLayer.GTO": "e26064d89e2d8e8d73446c57f95e6af913b943b5efa9847ef8f51c4988f5ff9b",
+      "Gerber_TopSolderMaskLayer.GTS": "4a485fe41ea523511333000d925dc4674fbdb06605ffa0c70581af5383a5af5a",
+      "PCB\u4e0b\u5355\u5fc5\u8bfb.txt": "dcb3ee1c645c17a009d70726ad9ab708b68a074556fabcf75a4a059d3b43ec59"
+    },
+    "antenna_source": "Gerber_BottomLayer.GBL; no previous footprint used"
+  },
+  "geometry_sha256": "cc7ddd132c7540051b8b4840151a9a3606650d2da8aebbd58dddd69ba59bf212",
+  "reference_plane": "L220 output ($1N324); all Gerber copper, components omitted (C216/L220/C217 not populated)",
+  "port_start": [
+    -3.25000112,
+    27.119988940000002,
+    1.5450000000000002
+  ],
+  "port_stop": [
+    -3.25000112,
+    27.119988940000002,
+    0
+  ],
+  "enclosure_shift_z_mm": 9.05,
+  "battery_rf_bounds_mm": [
+    [
+      -12.75,
+      -18.0,
+      -6.35
+    ],
+    [
+      12.75,
+      18.0,
+      -2.05
+    ]
+  ],
+  "runtime_seconds": 706.8659020840423,
+  "samples": [
+    {
+      "mhz": 2402,
+      "z_real": 11.695813845509711,
+      "z_imag": 105.91499831418918,
+      "s11_db": -0.734987554706438
+    },
+    {
+      "mhz": 2441,
+      "z_real": 12.046987866035229,
+      "z_imag": 118.81617915910081,
+      "s11_db": -0.6253247535951706
+    },
+    {
+      "mhz": 2480,
+      "z_real": 12.975793939323388,
+      "z_imag": 132.02414024471534,
+      "s11_db": -0.561543993312164
+    }
+  ],
+  "termination": {
+    "timesteps": 26026,
+    "energy_db": -41.92,
+    "cells": 2621960,
+    "iteration_seconds": 611.98,
+    "unused_primitive_warnings": 21
+  }
+}

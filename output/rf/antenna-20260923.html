@@ -1,54 +1,160 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>nRF Canon Remote · openEMS 天线计算 · 2026-09-24</title><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>nRF Canon Remote · Gerber 天线计算 · 2026-09-28</title><style>
 :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f4f2ed;color:#26372f;font:16px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}main{max-width:1080px;margin:40px auto;padding:48px 56px;background:#fff;border:1px solid #dfe3dc;border-radius:20px}header{font-size:12px;letter-spacing:.12em;color:#697b70}h1{font-size:32px;line-height:1.45;margin:12px 0 22px}h2{font-size:23px;margin-top:44px;padding-top:20px;border-top:1px solid #dfe3dc}h3{font-size:18px;margin-top:26px}a{color:#246953;text-underline-offset:3px}p,li{overflow-wrap:anywhere}blockquote{margin:24px 0;padding:16px 22px;background:#fbf4e9;border-left:4px solid #b77d42;border-radius:4px}blockquote p{margin:0}img{display:block;max-width:100%;height:auto;margin:24px auto}pre{overflow:auto;background:#f3f5f1;border:1px solid #e2e6df;padding:18px;border-radius:8px;line-height:1.65;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.9em}.table-scroll{overflow-x:auto;margin:22px 0}table{border-collapse:collapse;min-width:640px;width:100%;font-size:14px}th,td{padding:11px 14px;text-align:left;border-bottom:1px solid #e4e8e1}th{background:#ecf1eb;white-space:nowrap}td{vertical-align:top}ul,ol{padding-left:24px}footer{font-size:13px;color:#697b70;margin-top:40px}@media(max-width:700px){main{margin:12px;padding:24px 20px;border-radius:12px}h1{font-size:26px}h2{font-size:21px}body{font-size:15px}}@media print{body{background:white}main{margin:0;border:0;padding:0;max-width:none}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit}h2,h3{break-after:avoid}img,table{break-inside:avoid}}
-</style></head><body><main><header>NRF CANON REMOTE / RF STUDY / 2026-09-24</header><h1>nRF Canon Remote · 1.6 mm PCB / openEMS 简洁报告</h1>
-<p><strong>状态：初步计算，不能替代 VNA 实测。</strong> 2026-09-24 已按用户确认的 <strong>PCB 厚度 1.6 mm</strong> 重建外壳，并重新计算裸板与装壳敏感性。</p>
-<h2>机械更新</h2>
-<ul>
-<li>PCB 厚度：<code>1.6 mm</code>。</li>
-<li>为保持按键面位置不变，PCB 上表面保持 <code>Z=-7.45 mm</code>，底面由 <code>-8.45</code> 改为 <strong><code>-9.05 mm</code></strong>。</li>
-<li>底面 USB-C、USB 开孔、托台和底盖配合随底面下移 <code>0.60 mm</code>。</li>
-<li>上方安装孔仍是 <code>(14,28) mm</code>，下方为 <code>(-14,-27)</code>、<code>(14,-27) mm</code>。</li>
-</ul>
-<p><a href="../preview.html?rev=0.12">在线 3D 预览</a> · <a href="../models/remote_assembly.3mf">下载 3MF</a></p>
-<h2>openEMS 设置</h2>
-<p>模型使用 Chrome 中导出的最终 PCB 的板框、两面 GND、GND 过孔、IFA 天线和馈线。50 Ω 端口在 <strong>L220 的天线侧焊盘 <code>$1N324</code></strong>，不是 nRF52832 ANT 引脚。FR-4 暂用 <code>εr=4.3</code>、<code>tanδ=0.02</code>；铜按 PEC 薄片，省略阻焊、器件、USB 金属壳、螺钉和人体。天线封装内部铜采用同 UUID 的前一天导出，并以当天两个焊盘核对位置，尚未用最终 Gerber 再核验。外壳和电池从 v0.12 机械布局转换到 RF 坐标，PCB 底面为 Z=0。</p>
-<h2>结果（BLE 2.402–2.480 GHz）</h2>
+</style></head><body><main><header>NRF CANON REMOTE / GERBER RF STUDY / 2026-09-28</header><h1>最终 Gerber · 1.6 mm PCB 天线计算</h1>
+<p><strong>2026-09-28 整理完成。</strong> 已按用户提供的 <code>Gerber_nRF52832遥控器_2026-09-24.zip</code> 重建电磁几何，完成六组 openEMS 仿真。本文替代此前基于 PCB 快照的报告；旧的 <code>42.1 + j47.4 Ω</code> 裸板结果及其匹配候选不再作为当前版本的依据。</p>
+<blockquote>
+<p>初步结论：当前模型的天线馈点偏感性，装壳和电池影响明显。计算可以提供调试起点，但尚不足以确定最终匹配 BOM。以下均为仿真结果，非样机实测。</p>
+</blockquote>
+<h2>简报</h2>
 <div class="table-scroll"><table><thead>
 <tr>
 <th>条件</th>
-<th style="text-align:right">2441 MHz 阻抗</th>
-<th style="text-align:right">频段内最差未匹配 S11</th>
+<th style="text-align:right">2.441 GHz 输入阻抗</th>
+<th style="text-align:right">BLE 频段最差未匹配 S11</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>1.6 mm 裸板</strong>，0.20 mm 射频网格</td>
-<td style="text-align:right"><strong>42.1 + j47.4 Ω</strong></td>
-<td style="text-align:right"><strong>−5.38 dB</strong></td>
+<td>裸板，最细 0.10 mm 射频 XY 网格</td>
+<td style="text-align:right"><strong>11.10 + j45.44 Ω</strong></td>
+<td style="text-align:right"><strong>−1.74 dB</strong></td>
 </tr>
 <tr>
-<td>1.6 mm + 假设外壳 εr=2.8 + 浮置电池包络</td>
-<td style="text-align:right"><strong>13.3 + j100.5 Ω</strong></td>
-<td style="text-align:right"><strong>−0.54 dB</strong></td>
+<td>裸板，0.15 mm 网格（装壳组对照）</td>
+<td style="text-align:right">11.72 + j48.07 Ω</td>
+<td style="text-align:right">−1.75 dB</td>
+</tr>
+<tr>
+<td>装壳 + 浮置电池包络，0.15 mm 网格</td>
+<td style="text-align:right"><strong>12.05 + j118.82 Ω</strong></td>
+<td style="text-align:right"><strong>−0.56 dB</strong></td>
 </tr>
 </tbody>
-</table></div><p>1.6 mm 裸板的离散理想网络扫描给出一个候选：<strong>串联 1.5 pF，负载侧并联 0.2 pF</strong>（此量级对焊盘和器件寄生非常敏感），在当前理想模型中频段最差 S11 约 <strong>−19.6 dB</strong>。装壳假设下，裸板候选只达到约 <strong>−0.97 dB</strong>；重新扫描得到 <strong>串联 0.4 pF + 并联 0.2 pF</strong>，也只有约 <strong>−6.37 dB</strong>（本次有限取值集合与拓扑的扫描结果，不代表所有网络的最优值）。这说明外壳、电池和板材参数对匹配影响很大。</p>
-<p><strong>不要直接把这组数值替换到现有 L220/C217。</strong> 它们是以 L220 天线侧焊盘为参考面的理想集中网络；没有计入器件 Q、ESR、SRF、焊盘寄生和实际去嵌。应保留调试焊盘，装上最终电池、外壳和螺钉后，用 VNA 在该参考面校准，再调实际器件。</p>
-<h2>简短结论</h2>
-<ol>
-<li>机械模型已经按 1.6 mm 修正，USB-C 位置和底盖配合同步下移 0.60 mm。</li>
-<li>1.6 mm 裸板在 2.4 GHz 频段的初步匹配比 1.0 mm 结果差异明显，不能沿用旧的 <code>2.2 nH + 1.0 pF</code> 作为本板厚的定值建议。</li>
-<li>当前仿真只能给出调试起点：可保留通用 π 型调谐焊盘，按需要装配其中的串联和并联支路；最终值必须以装壳实测为准。</li>
-</ol>
-<h2>文件</h2>
+</table></div><p>频段为 <strong>2.402–2.480 GHz</strong>，阻抗参考面位于 <strong>L220 天线侧焊盘 <code>$1N324</code></strong>。正虚部表示感性。这里测的是该焊盘看向馈线与天线的输入阻抗，不是 nRF52832 ANT 引脚阻抗，也不是完整装配电路的输入阻抗。</p>
+<p>有限取值的理想两元件匹配扫描得到：裸板可用<strong>输入侧并联 1.8 pF + 串联 3.0 pF</strong>作为计算候选，频段最差 S11 约 <strong>−8.58 dB</strong>；装壳假设下另行扫描的候选为<strong>输入侧并联 1.5 pF + 串联 0.7 pF</strong>，约 <strong>−6.55 dB</strong>。这两组在本次扫描中均未覆盖全频段 −10 dB 目标，不能据此宣称天线已经调好，也不代表所有网络都无法达到目标。</p>
+<h2>立创 FR-4 参数依据</h2>
 <ul>
-<li><a href="nominal-16.s1p">1.6 mm 裸板 Touchstone</a> · <a href="nominal-16.csv">CSV</a> · <a href="nominal-16.json">参数</a></li>
-<li><a href="housed-16.s1p">1.6 mm 装壳敏感性 Touchstone</a> · <a href="housed-16.csv">CSV</a> · <a href="housed-16.json">参数</a></li>
-<li><a href="solver-evidence-16.zip">1.6 mm 原始端口数据与装壳求解日志</a> · <a href="checks-16.json">数值检查记录</a></li>
-<li><a href="matching.json">匹配扫描结果</a> · <a href="comparison.png">S11 对比图</a> · <a href="housed-comparison.png">装壳对比图</a></li>
-<li><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/pcb-20260923.json">提取的 PCB 几何</a> · <a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/tree/main/scripts/rf">复算脚本</a></li>
+<li><a href="https://jlcpcb.com/capabilities/pcb-capabilities">立创官方 PCB 能力表</a>给出的双层 FR-4 介电常数为 <strong>Dk = 4.5</strong>，此项没有标明频率。本轮采用它作为名义基准。</li>
+<li><a href="https://jlcpcb.com/pcb-fabrication/fr4-pcb">立创官方 FR-4 页面</a>给出典型 <strong>Df ≈ 0.02（1 MHz）</strong>。它不是本订单在 2.4 GHz 的已知实测值；本轮仅用作基准假设。</li>
+<li><a href="https://www.kblaminates.com/upload/ueditor/20220525/KB-6160-0831.pdf">建滔 KB-6160 官方材料表</a>中，59 mil / 7628×8 一行在 2 GHz 给出 Dk = 4.5、Df = 0.013，Dk 公差 ±0.2。本轮增加 <strong>Df = 0.013</strong> 和 <strong>Dk = 4.3</strong> 两组独立敏感性计算；这不表示已确认订单使用 KB-6160，也不是该订单的公差承诺。</li>
 </ul>
-<p>两组均达到 −40 dB 时域能量停止阈值。裸板求解 55,709 步，修正装壳组 55,550 步。</p>
-<p>本轮两组均采用 0.20 mm 射频区 XY 网格，板厚方向 5 个网格单元，尚未做 1.6 mm 的网格细化收敛检查。旧的 1.0 mm 网格比较和求解日志只适用于旧数据。S11 是反射指标，本次未计算辐射效率或遥控距离。</p>
-<p>旧的 1.0 mm 计算文件仍保留用于对照，但不再代表当前板厚。</p>
+<p>板厚采用用户确认的 <strong>1.6 mm</strong>。Gerber 本身不包含板材牌号和介电参数。源网页查阅日期为 2026-09-24；<a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/materials-20260924.json">参数记录与来源校验值</a>可供追溯。</p>
+<h2>实际建模内容</h2>
+<p>本次直接解析最终制造文件中的两面全部铜、板框、101 个 PTH 和 6 个 NPTH。<code>Drill_PTH_Through_Via.DRL</code> 的过孔已包含在总 PTH 文件内，没有重复建模。飞针数据用于识别 L220 馈点；Gerber 铜几何已核对天线馈点、IFA 短路端以及 L220 两焊盘的分离关系。</p>
+<p>天线直接来自最终底层 Gerber，没有用旧封装拼接。天线顶部区域与前一版快照基本一致；但本次纳入全部网络铜、完整钻孔和新的材料参数，因此两版模型不等价，不能把全部阻抗差异归因于 Dk 的变化。</p>
+<p><img src="gerber-geometry.png" alt="最终 Gerber 铜层、钻孔及 L220 馈点"></p>
+<p>图中底层铜为深绿、顶层铜为灰蓝，橙点为仿真端口。左图全板，右图放大天线区域。</p>
+<ul>
+<li>铜采用 PEC 薄片；板厚换算为 <strong>1.545 mm 铜面间距</strong>，扣除名义铜厚及阻焊余量。这是近似叠层，不是板厂确认的实际叠层。</li>
+<li>PTH 采用孔半径 + 25 µm 的实心导体近似，不是空心孔壁模型。阻焊开窗已提取供核查，阻焊介质未纳入求解。</li>
+<li>50 Ω 集总端口沿板厚连接底面 RF 焊盘与正对的顶面地铜，未做实际同轴探针和测试夹具去嵌。</li>
+<li>器件不装配；C216、L220、C217 数值和芯片阻抗未嵌入模型。其他网络保留铜，但没有器件负载；这与完整 PCBA 有区别。</li>
+<li>装壳组使用 v0.12 上下盖 STL，假设壳体 εr = 2.8、tanδ = 0.01，并加入机械布局对应的浮置导体电池包络。电池引线、USB 金属壳、按键、螺钉和人体均未包含。</li>
+<li>FR-4 损耗通过 2.45 GHz 处的等效电导率实现，在该频率对应所设 Df；没有模拟完整的材料频散。</li>
+</ul>
+<h2>六组结果与数值检查</h2>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>计算组</th>
+<th style="text-align:right">射频 XY 网格</th>
+<th style="text-align:right">Dk / Df</th>
+<th style="text-align:right">2.441 GHz 阻抗</th>
+<th style="text-align:right">频段最差 S11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>裸板基准 <code>gerber-bare</code></td>
+<td style="text-align:right">0.20 mm</td>
+<td style="text-align:right">4.5 / 0.020</td>
+<td style="text-align:right">11.14 + j53.32 Ω</td>
+<td style="text-align:right">−1.52 dB</td>
+</tr>
+<tr>
+<td>裸板细化 <code>gerber-fine</code></td>
+<td style="text-align:right">0.15 mm</td>
+<td style="text-align:right">4.5 / 0.020</td>
+<td style="text-align:right">11.72 + j48.07 Ω</td>
+<td style="text-align:right">−1.75 dB</td>
+</tr>
+<tr>
+<td>裸板再细化 <code>gerber-finer</code></td>
+<td style="text-align:right">0.10 mm</td>
+<td style="text-align:right">4.5 / 0.020</td>
+<td style="text-align:right">11.10 + j45.44 Ω</td>
+<td style="text-align:right">−1.74 dB</td>
+</tr>
+<tr>
+<td>较低损耗 <code>gerber-low-loss</code></td>
+<td style="text-align:right">0.15 mm</td>
+<td style="text-align:right">4.5 / 0.013</td>
+<td style="text-align:right">10.73 + j48.02 Ω</td>
+<td style="text-align:right">−1.61 dB</td>
+</tr>
+<tr>
+<td>较低介电常数 <code>gerber-dk43</code></td>
+<td style="text-align:right">0.15 mm</td>
+<td style="text-align:right">4.3 / 0.020</td>
+<td style="text-align:right">12.05 + j41.64 Ω</td>
+<td style="text-align:right">−2.00 dB</td>
+</tr>
+<tr>
+<td>壳体与电池 <code>gerber-housed</code></td>
+<td style="text-align:right">0.15 mm</td>
+<td style="text-align:right">4.5 / 0.020</td>
+<td style="text-align:right">12.05 + j118.82 Ω</td>
+<td style="text-align:right">−0.56 dB</td>
+</tr>
+</tbody>
+</table></div><p>六组均达到 <strong>−40 dB 时域能量停止阈值</strong>。已经检查端口数据有限、实部为正，并核对阻抗换算 S11 与导出的 Touchstone 一致。这是基本数值检查，不等于与实物一致。</p>
+<p>裸板射频区 XY 网格从 0.20 → 0.15 mm 时，中心频率阻抗变化 <strong>10.68%</strong>；0.15 → 0.10 mm 时仍变化 <strong>5.77%</strong>，频段内最大阻抗差 <strong>3.28 Ω</strong>。板厚方向保持 5 个单元，外围网格较粗，装壳组未继续细化。最细组还有 19 条未被网格使用的图元警告，涉及小铜片、空隙和部分孔柱。<strong>因此不能声称严格网格收敛，也不应把上述小数位理解为实际精度。</strong></p>
+<h2>匹配候选怎么理解</h2>
+<p>下图仅表示在该参考面前接入理想网络后的电路关系，不是现有 PCB 的元件位号替换图：</p>
+<pre><code class="language-text">理想 50 Ω 输入 ──●──── Cs ──── 原始 Gerber 负载
+                 │               ↑ L220 天线侧参考面
+                 Cp
+                 │
+                GND
+</code></pre>
+<div class="table-scroll"><table><thead>
+<tr>
+<th>针对条件</th>
+<th style="text-align:right">输入侧并联 Cp</th>
+<th style="text-align:right">串联 Cs</th>
+<th style="text-align:right">匹配后频段最差 S11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>裸板，0.10 mm 网格</td>
+<td style="text-align:right">1.8 pF</td>
+<td style="text-align:right">3.0 pF</td>
+<td style="text-align:right">−8.58 dB</td>
+</tr>
+<tr>
+<td>装壳假设，0.15 mm 网格</td>
+<td style="text-align:right">1.5 pF</td>
+<td style="text-align:right">0.7 pF</td>
+<td style="text-align:right">−6.55 dB</td>
+</tr>
+</tbody>
+</table></div><p>将同一组裸板候选用于 0.15 mm 裸板时，最差 S11 为 −7.34 dB；用于装壳组仅为 <strong>−0.47 dB</strong>。这说明当前误差和装配环境足以改变匹配值。0.15 mm 与 0.10 mm 两组裸板各自扫描得到的串联电容也分别为 2.7 pF 和 3.0 pF。</p>
+<p>扫描同时考虑输入侧、负载侧并联的两种 L 网络，候选包含电容 0.2–10 pF、电感 0.5–22 nH 中的离散值及开路 / 短路；目标是降低 BLE 频段最差 S11。元件为理想集中参数，未计入 Q、ESR、SRF、焊盘和走线寄生。上述数值不能直接替换现有 L220 / C216 / C217，也不取代芯片端的 Nordic 参考网络。</p>
+<p><img src="gerber-comparison.png" alt="未匹配与同一裸板候选作用下的 S11 对比"></p>
+<p>上图为各条件原始 S11，下图统一使用裸板候选 Cp = 1.8 pF、Cs = 3.0 pF，绿色阴影表示 BLE 频段。下图没有对各曲线单独重新优化。</p>
+<p><strong>建议下一步：</strong> 保留天线端调试焊盘，先确认实际板材及叠层，再用最终电池与外壳装配样机，在一致的参考面通过 VNA 测量后选定元件。当前结果支持“需要调谐且装壳影响大”这一判断；本次没有计算辐射效率或遥控距离。</p>
+<h2>下载与复算</h2>
+<ul>
+<li><a href="gerber-finer.s1p">0.10 mm 裸板 S1P</a> · <a href="gerber-finer.csv">CSV</a> · <a href="gerber-finer.json">参数</a></li>
+<li><a href="gerber-fine.s1p">0.15 mm 裸板 S1P</a> · <a href="gerber-fine.csv">CSV</a> · <a href="gerber-fine.json">参数</a></li>
+<li><a href="gerber-bare.s1p">0.20 mm 裸板 S1P</a> · <a href="gerber-bare.csv">CSV</a> · <a href="gerber-bare.json">参数</a></li>
+<li><a href="gerber-housed.s1p">装壳与电池 S1P</a> · <a href="gerber-housed.csv">CSV</a> · <a href="gerber-housed.json">参数</a></li>
+<li><a href="gerber-low-loss.s1p">Df = 0.013 对照 S1P</a> · <a href="gerber-low-loss.csv">CSV</a> · <a href="gerber-low-loss.json">参数</a></li>
+<li><a href="gerber-dk43.s1p">Dk = 4.3 对照 S1P</a> · <a href="gerber-dk43.csv">CSV</a> · <a href="gerber-dk43.json">参数</a></li>
+<li><a href="gerber-matching.json">匹配扫描与数值检查</a> · <a href="gerber-audit.json">Gerber 几何核查</a></li>
+<li><a href="gerber-solver-evidence.zip">六组求解日志、端口时域数据与参数 ZIP</a></li>
+<li><a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/blob/main/reference/rf/gerber-20260924.json">提取的制造几何</a> · <a href="https://github.com/GuruGuru-SEU/nrf-canon-remote/tree/main/scripts/rf">复算步骤与脚本</a></li>
+<li><a href="../preview.html?rev=0.12">机械 3D 预览</a> · <a href="../models/remote_assembly.3mf">装配 3MF</a></li>
+</ul>
+<p>原始 ZIP 的 SHA-256：<code>3fc97f87b7eec812915d751c0682821ee30cdcd28201358806b40dc6174ed5ac</code>。源文件导出时间为 2026-09-24 14:07:48。本轮没有修改用户 PCB Layout。旧计算文件保留供历史比较，均不代表本次最终 Gerber 结果。</p>
 <footer>openEMS 0.37.0 · CSXCAD 0.7.0 · 初步计算，非样机实测。</footer></main></body></html>

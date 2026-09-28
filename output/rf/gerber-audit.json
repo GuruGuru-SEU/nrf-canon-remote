@@ -1,0 +1,44 @@
+{
+  "zip_sha256": "3fc97f87b7eec812915d751c0682821ee30cdcd28201358806b40dc6174ed5ac",
+  "outline_bounds_mm": [
+    -18.3787,
+    -37.55,
+    18.3787,
+    35.8787
+  ],
+  "npth_count": 6,
+  "pth_count": 101,
+  "mounts": [
+    [
+      -14.0,
+      -27.0,
+      1.15
+    ],
+    [
+      14.0,
+      -27.0,
+      1.15
+    ],
+    [
+      14.0,
+      28.0,
+      1.15
+    ]
+  ],
+  "port_xy": [
+    -3.25000112,
+    27.119988940000002
+  ],
+  "port_both_copper_layers": true,
+  "ifa_feed_ground_connected": true,
+  "chip_side_isolated": true,
+  "copper_area_mm2": {
+    "1": 2052.4056115998465,
+    "2": 1979.773347861919
+  },
+  "comparison": {
+    "antenna_region_y_gt_30_6_symmetric_difference_mm2": 0.0005912187344584167,
+    "old_antenna_region_area_mm2": 20.786163649580914,
+    "gerber_antenna_region_area_mm2": 20.786539091299886
+  }
+}

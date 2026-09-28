@@ -1,18 +1,19 @@
 """openEMS preliminary one-port model. See output/rf/README.md for limits and reference plane."""
 from pathlib import Path
-import argparse,json,time
+import argparse,json,time,hashlib
 import numpy as np
 from CSXCAD import ContinuousStructure
 from openEMS import openEMS
 from openEMS.physical_constants import EPS0
 ROOT=Path(__file__).resolve().parents[2]
-ap=argparse.ArgumentParser();ap.add_argument('--name',default='nominal-16');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.3);ap.add_argument('--thickness',type=float,default=1.6);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--post',action='store_true');a=ap.parse_args()
-g=json.loads((ROOT/'reference/rf/pcb-20260923.json').read_text());run=ROOT/'tmp/rf'/a.name;run.mkdir(parents=True,exist_ok=True)
+ap=argparse.ArgumentParser();ap.add_argument('--name',default='gerber-bare');ap.add_argument('--mesh',type=float,default=.2);ap.add_argument('--eps',type=float,default=4.5);ap.add_argument('--loss',type=float,default=.02);ap.add_argument('--geometry',default='reference/rf/gerber-20260924.json');ap.add_argument('--thickness',type=float,default=1.6);ap.add_argument('--shell-eps',type=float,default=0);ap.add_argument('--post',action='store_true');a=ap.parse_args()
+geometry_path=ROOT/a.geometry
+g=json.loads(geometry_path.read_text());run=ROOT/'tmp/rf'/a.name;run.mkdir(parents=True,exist_ok=True)
 out=ROOT/'output/rf';out.mkdir(exist_ok=True)
 h=a.thickness-.055 # Copper-sheet centre separation, after 2x10 um mask + 35 um copper allowance.
 fdtd=openEMS(NrTS=120000,EndCriteria=1e-4);fdtd.SetGaussExcite(2.45e9,.8e9);fdtd.SetBoundaryCond(['PML_8']*6)
 csx=ContinuousStructure();fdtd.SetCSX(csx);grid=csx.GetGrid();grid.SetDeltaUnit(1e-3)
-fr4=csx.AddMaterial('FR4_assumed',epsilon=a.eps,kappa=2*np.pi*2.45e9*EPS0*a.eps*.02)
+fr4=csx.AddMaterial('FR4_JLC_nominal',epsilon=a.eps,kappa=2*np.pi*2.45e9*EPS0*a.eps*a.loss)
 air=csx.AddMaterial('air_cutouts',epsilon=1)
 ground=csx.AddMetal('GND');antenna=csx.AddMetal('IFA_and_feed')
 
@@ -21,15 +22,29 @@ def poly(prop,ring,z,priority):
 for p in g['board']:
     fr4.AddLinPoly(points=np.asarray(p['outer'][:-1]).T,norm_dir='z',elevation=0,length=h,priority=0)
     for hole in p['holes']:air.AddLinPoly(points=np.asarray(hole[:-1]).T,norm_dir='z',elevation=-.02,length=h+.04,priority=5)
-for layer,z in [('1',h),('2',0)]:
-    for p in g['ground'][layer]:
-        poly(ground,p['outer'],z,10)
-        for hole in p['holes']:poly(air,hole,z,11)
-for p in g['antenna_and_feed']:
-    poly(antenna,p['outer'],0,30)
-    for hole in p['holes']:poly(air,hole,0,31)
-for x,y,r in g['ground_vias']:
-    ground.AddCylinder(start=[x,y,0],stop=[x,y,h],radius=r,priority=12)
+if 'copper' in g:
+    from shapely.geometry import Polygon
+    # Nesting priorities preserve isolated copper pads inside another polygon's void.
+    for layer,z in [('1',h),('2',0)]:
+        rings=[Polygon(p['outer']) for p in g['copper'][layer]]
+        for i,p in enumerate(g['copper'][layer]):
+            rp=Polygon(p['outer'],p['holes']).representative_point()
+            depth=sum(r.contains(rp) for j,r in enumerate(rings) if j!=i)
+            priority=10+2*depth
+            poly(ground,p['outer'],z,priority)
+            for hole in p['holes']:poly(air,hole,z,priority+1)
+    for x,y,r in g['plated_drills']:
+        ground.AddCylinder(start=[x,y,0],stop=[x,y,h],radius=r+.025,priority=40)
+else:
+    for layer,z in [('1',h),('2',0)]:
+        for p in g['ground'][layer]:
+            poly(ground,p['outer'],z,10)
+            for hole in p['holes']:poly(air,hole,z,11)
+    for p in g['antenna_and_feed']:
+        poly(antenna,p['outer'],0,30)
+        for hole in p['holes']:poly(air,hole,0,31)
+    for x,y,r in g['ground_vias']:
+        ground.AddCylinder(start=[x,y,0],stop=[x,y,h],radius=r,priority=12)
 if a.shell_eps:
     layout=json.loads((ROOT/'scripts/layout.json').read_text())
     assert abs(layout['pcb']['thickness']-a.thickness)<1e-8, 'Rebuild enclosure for requested thickness first'
@@ -56,7 +71,7 @@ grid.SmoothMeshLines('all',2.5,1.3)
 # Vertical 50-ohm test port from top-layer ground to the bottom RF pad, not the nRF ANT pin.
 port=fdtd.AddLumpedPort(1,50,start=[px,py,h],stop=[px,py,0],p_dir='z',excite=1,priority=50)
 lines={axis:grid.GetLines(axis) for axis in 'xyz'}
-meta={'name':a.name,'engine':'openEMS 0.37.0 / CSXCAD 0.7.0','eps_r':a.eps,'tan_delta':.02,'nominal_board_thickness_mm':a.thickness,'copper_plane_separation_mm':h,'mesh_fine_mm':res,'shell_eps':a.shell_eps,'mesh_cells':[len(x)-1 for x in lines.values()],'minimum_step_mm':{k:float(np.min(np.diff(v))) for k,v in lines.items()},'source':g['source'],'reference_plane':g['reference_plane'],'port_start':[px,py,h],'port_stop':[px,py,0]}
+meta={'name':a.name,'engine':'openEMS 0.37.0 / CSXCAD 0.7.0','eps_r':a.eps,'tan_delta':a.loss,'nominal_board_thickness_mm':a.thickness,'copper_plane_separation_mm':h,'mesh_fine_mm':res,'shell_eps':a.shell_eps,'mesh_cells':[len(x)-1 for x in lines.values()],'minimum_step_mm':{k:float(np.min(np.diff(v))) for k,v in lines.items()},'source':g['source'],'geometry_sha256':hashlib.sha256(geometry_path.read_bytes()).hexdigest(),'reference_plane':g['reference_plane'],'port_start':[px,py,h],'port_stop':[px,py,0]}
 csx.Write2XML(str(run/'model.xml'))
 if a.shell_eps:
     meta['enclosure_shift_z_mm']=shift_z
